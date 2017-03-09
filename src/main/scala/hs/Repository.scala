@@ -1,7 +1,7 @@
 package hs
 
-import java.sql.Timestamp
-import java.time.LocalDateTime
+import java.sql.{Date, Timestamp}
+import java.time.{LocalDate, LocalDateTime}
 
 import slick.basic.DatabaseConfig
 import slick.jdbc.JdbcProfile
@@ -12,6 +12,7 @@ import scala.concurrent.{Await, Future}
 class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfile, val awaitDuration: Duration = 1 second) {
   import profile.api._
 
+  implicit val dateMapper = MappedColumnType.base[LocalDate, Date](ld => Date.valueOf(ld),d => d.toLocalDate)
   implicit val dateTimeMapper = MappedColumnType.base[LocalDateTime, Timestamp](ldt => Timestamp.valueOf(ldt), ts => ts.toLocalDateTime)
   val schema = students.schema ++ grades.schema ++ schools.schema ++ categories.schema ++ courses.schema ++ assignments.schema
   val db = config.db
@@ -24,12 +25,12 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
   def createSchema() = await(DBIO.seq(schema.create))
   def dropSchema() = await(DBIO.seq(schema.drop))
 
-  case class Student(id: Int = 0, name: String, email: String, born: LocalDateTime)
+  case class Student(id: Int = 0, name: String, email: String, born: LocalDate)
   class Students(tag: Tag) extends Table[Student](tag, "students") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def name = column[String]("name")
     def email = column[String]("email", O.Unique)
-    def born = column[LocalDateTime]("born")
+    def born = column[LocalDate]("born")
     def * = (id, name, email, born) <> (Student.tupled, Student.unapply)
   }
   object students extends TableQuery(new Students(_)) {
@@ -38,13 +39,13 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def list() = compiledList.result
   }
 
-  case class Grade(id: Int = 0, studentId: Int, grade: Int, started: LocalDateTime = LocalDateTime.now, completed: LocalDateTime = LocalDateTime.now.plusMonths(6))
+  case class Grade(id: Int = 0, studentId: Int, grade: Int, started: LocalDate = LocalDate.now, completed: LocalDate = LocalDate.now.plusMonths(6))
   class Grades(tag: Tag) extends Table[Grade](tag, "grades") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def studentId = column[Int]("student_id")
     def grade = column[Int]("grade")
-    def started = column[LocalDateTime]("started")
-    def completed = column[LocalDateTime]("completed")
+    def started = column[LocalDate]("started")
+    def completed = column[LocalDate]("completed")
     def * = (id, studentId, grade, started, completed) <> (Grade.tupled, Grade.unapply)
     def studentFk = foreignKey("student_fk", studentId, TableQuery[Students])(_.id)
   }
