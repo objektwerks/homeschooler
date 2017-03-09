@@ -1,9 +1,9 @@
-create table "students" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"name" VARCHAR NOT NULL,"email" VARCHAR NOT NULL UNIQUE,"born" TIMESTAMP NOT NULL,"timestamp" TIMESTAMP NOT NULL)
-create table "grades" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"student_id" INTEGER NOT NULL,"grade" INTEGER NOT NULL,"started" TIMESTAMP NOT NULL,"completed" TIMESTAMP NOT NULL,"timestamp" TIMESTAMP NOT NULL)
-create table "schools" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"name" VARCHAR NOT NULL UNIQUE,"website" VARCHAR,"timestamp" TIMESTAMP NOT NULL)
-create table "categories" ("name" VARCHAR NOT NULL PRIMARY KEY,"timestamp" TIMESTAMP NOT NULL)
-create table "courses" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"school_id" INTEGER NOT NULL,"category" VARCHAR NOT NULL,"name" VARCHAR NOT NULL,"website" VARCHAR,"timestamp" TIMESTAMP NOT NULL)
-create table "assignments" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"student_id" INTEGER NOT NULL,"grade_id" INTEGER NOT NULL,"course_id" INTEGER NOT NULL,"description" VARCHAR NOT NULL,"assigned" TIMESTAMP NOT NULL,"completed" TIMESTAMP NOT NULL,"score" DOUBLE NOT NULL,"timestamp" TIMESTAMP NOT NULL)
+create table "students" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"name" VARCHAR NOT NULL,"email" VARCHAR NOT NULL UNIQUE,"born" TIMESTAMP NOT NULL)
+create table "grades" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"student_id" INTEGER NOT NULL,"grade" INTEGER NOT NULL,"started" TIMESTAMP NOT NULL,"completed" TIMESTAMP NOT NULL)
+create table "schools" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"name" VARCHAR NOT NULL UNIQUE,"website" VARCHAR)
+create table "categories" ("name" VARCHAR NOT NULL PRIMARY KEY)
+create table "courses" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"school_id" INTEGER NOT NULL,"category" VARCHAR NOT NULL,"name" VARCHAR NOT NULL,"website" VARCHAR)
+create table "assignments" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"student_id" INTEGER NOT NULL,"grade_id" INTEGER NOT NULL,"course_id" INTEGER NOT NULL,"description" VARCHAR NOT NULL,"assigned" TIMESTAMP NOT NULL,"completed" TIMESTAMP NOT NULL,"score" DOUBLE NOT NULL)
 alter table "grades" add constraint "student_fk" foreign key("student_id") references "students"("id") on update NO ACTION on delete NO ACTION
 alter table "courses" add constraint "category_fk" foreign key("category") references "categories"("name") on update NO ACTION on delete NO ACTION
 alter table "courses" add constraint "school_fk" foreign key("school_id") references "schools"("id") on update NO ACTION on delete NO ACTION

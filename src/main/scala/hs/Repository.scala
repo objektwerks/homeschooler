@@ -24,14 +24,13 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
   def createSchema() = await(DBIO.seq(schema.create))
   def dropSchema() = await(DBIO.seq(schema.drop))
 
-  case class Student(id: Int = 0, name: String, email: String, born: LocalDateTime, timestamp: LocalDateTime = LocalDateTime.now)
+  case class Student(id: Int = 0, name: String, email: String, born: LocalDateTime)
   class Students(tag: Tag) extends Table[Student](tag, "students") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def name = column[String]("name")
     def email = column[String]("email", O.Unique)
     def born = column[LocalDateTime]("born")
-    def timestamp = column[LocalDateTime]("timestamp")
-    def * = (id, name, email, born, timestamp) <> (Student.tupled, Student.unapply)
+    def * = (id, name, email, born) <> (Student.tupled, Student.unapply)
   }
   object students extends TableQuery(new Students(_)) {
     val compiledList = Compiled { sortBy(_.name.asc) }
@@ -39,15 +38,14 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def list() = compiledList.result
   }
 
-  case class Grade(id: Int = 0, studentId: Int, grade: Int, started: LocalDateTime = LocalDateTime.now, completed: LocalDateTime = LocalDateTime.now.plusMonths(6), timestamp: LocalDateTime = LocalDateTime.now)
+  case class Grade(id: Int = 0, studentId: Int, grade: Int, started: LocalDateTime = LocalDateTime.now, completed: LocalDateTime = LocalDateTime.now.plusMonths(6))
   class Grades(tag: Tag) extends Table[Grade](tag, "grades") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def studentId = column[Int]("student_id")
     def grade = column[Int]("grade")
     def started = column[LocalDateTime]("started")
     def completed = column[LocalDateTime]("completed")
-    def timestamp = column[LocalDateTime]("timestamp")
-    def * = (id, studentId, grade, started, completed, timestamp) <> (Grade.tupled, Grade.unapply)
+    def * = (id, studentId, grade, started, completed) <> (Grade.tupled, Grade.unapply)
     def studentFk = foreignKey("student_fk", studentId, TableQuery[Students])(_.id)
   }
   object grades extends TableQuery(new Grades(_)) {
@@ -56,13 +54,12 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def list(studentId: Int) = compiledListByStudent(studentId).result
   }
 
-  case class School(id: Int = 0, name: String, website: Option[String] = None, timestamp: LocalDateTime = LocalDateTime.now)
+  case class School(id: Int = 0, name: String, website: Option[String] = None)
   class Schools(tag: Tag) extends Table[School](tag, "schools") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def name = column[String]("name", O.Unique)
     def website = column[Option[String]]("website")
-    def timestamp = column[LocalDateTime]("timestamp")
-    def * = (id, name, website, timestamp) <> (School.tupled, School.unapply)
+    def * = (id, name, website) <> (School.tupled, School.unapply)
   }
   object schools extends TableQuery(new Schools(_)) {
     val compiledList = Compiled { sortBy(_.name.asc) }
@@ -70,11 +67,10 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def list() = compiledList.result
   }
 
-  case class Category(name: String, timestamp: LocalDateTime = LocalDateTime.now)
+  case class Category(name: String)
   class Categories(tag: Tag) extends Table[Category](tag, "categories") {
     def name = column[String]("name", O.PrimaryKey)
-    def timestamp = column[LocalDateTime]("timestamp")
-    def * = (name, timestamp) <> (Category.tupled, Category.unapply)
+    def * = name <> (Category.apply, Category.unapply)
   }
   object categories extends TableQuery(new Categories(_)) {
     val compiledFindByName = Compiled { name: Rep[String] => filter(_.name === name) }
@@ -84,15 +80,14 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def list() = compiledList.result
   }
 
-  case class Course(id: Int = 0, schoolId: Int, category: String, name: String, website: Option[String] = None, timestamp: LocalDateTime = LocalDateTime.now)
+  case class Course(id: Int = 0, schoolId: Int, category: String, name: String, website: Option[String] = None)
   class Courses(tag: Tag) extends Table[Course](tag, "courses") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def schoolId = column[Int]("school_id")
     def category = column[String]("category")
     def name = column[String]("name")
     def website = column[Option[String]]("website")
-    def timestamp = column[LocalDateTime]("timestamp")
-    def * = (id, schoolId, category, name, website, timestamp) <> (Course.tupled, Course.unapply)
+    def * = (id, schoolId, category, name, website) <> (Course.tupled, Course.unapply)
     def schoolFk = foreignKey("school_fk", schoolId, TableQuery[Schools])(_.id)
     def categoryFk = foreignKey("category_fk", category, TableQuery[Categories])(_.name)
   }
@@ -106,7 +101,7 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
                         description: String,
                         assigned: LocalDateTime = LocalDateTime.now,
                         completed: LocalDateTime = LocalDateTime.now.plusHours(4),
-                        score: Double = 0.0, timestamp: LocalDateTime = LocalDateTime.now)
+                        score: Double = 0.0)
   class Assignments(tag: Tag) extends Table[Assignment](tag, "assignments") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def studentId = column[Int]("student_id")
@@ -116,8 +111,7 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def assigned = column[LocalDateTime]("assigned")
     def completed = column[LocalDateTime]("completed")
     def score = column[Double]("score")
-    def timestamp = column[LocalDateTime]("timestamp")
-    def * = (id, studentId, gradeId, courseId, description, assigned, completed, score, timestamp) <> (Assignment.tupled, Assignment.unapply)
+    def * = (id, studentId, gradeId, courseId, description, assigned, completed, score) <> (Assignment.tupled, Assignment.unapply)
     def studentFk = foreignKey("student_assignment_fk", studentId, TableQuery[Students])(_.id)
     def gradeFk = foreignKey("grade_assignment_fk", gradeId, TableQuery[Grades])(_.id)
     def courseFK = foreignKey("course_assignment_fk", courseId, TableQuery[Courses])(_.id)
