@@ -13,7 +13,7 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
   import profile.api._
 
   implicit val dateTimeMapper = MappedColumnType.base[LocalDateTime, Timestamp](ldt => Timestamp.valueOf(ldt), ts => ts.toLocalDateTime)
-  val schema = teachers.schema ++ students.schema ++ grades.schema ++ schools.schema ++ categories.schema ++ courses.schema ++ assignments.schema
+  val schema = students.schema ++ grades.schema ++ schools.schema ++ categories.schema ++ courses.schema ++ assignments.schema
   val db = config.db
 
   def await[T](action: DBIO[T]): T = Await.result(db.run(action), awaitDuration)
@@ -23,22 +23,6 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
 
   def createSchema() = await(DBIO.seq(schema.create))
   def dropSchema() = await(DBIO.seq(schema.drop))
-
-  case class Teacher(id: Int = 0, name: String, email: String, timestamp: LocalDateTime = LocalDateTime.now)
-  class Teachers(tag: Tag) extends Table[Teacher](tag, "teachers") {
-    def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
-    def name = column[String]("name")
-    def email = column[String]("email", O.Unique)
-    def timestamp = column[LocalDateTime]("timestamp")
-    def * = (id, name, email, timestamp) <> (Teacher.tupled, Teacher.unapply)
-  }
-  object teachers extends TableQuery(new Teachers(_)) {
-    val compiledFind = Compiled { name: Rep[String] => filter(_.name === name) }
-    val compiledList = Compiled { sortBy(_.name.asc) }
-    def save(teacher: Teacher) = (this returning this.map(_.id)).insertOrUpdate(teacher)
-    def find(name: String) = compiledFind(name).result.headOption
-    def list() = compiledList.result
-  }
 
   case class Student(id: Int = 0, name: String, email: String, born: LocalDateTime, timestamp: LocalDateTime = LocalDateTime.now)
   class Students(tag: Tag) extends Table[Student](tag, "students") {
@@ -50,10 +34,8 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def * = (id, name, email, born, timestamp) <> (Student.tupled, Student.unapply)
   }
   object students extends TableQuery(new Students(_)) {
-    val compiledFind = Compiled { name: Rep[String] => filter(_.name === name) }
     val compiledList = Compiled { sortBy(_.name.asc) }
     def save(student: Student) = (this returning this.map(_.id)).insertOrUpdate(student)
-    def find(name: String) = compiledFind(name).result.headOption
     def list() = compiledList.result
   }
 

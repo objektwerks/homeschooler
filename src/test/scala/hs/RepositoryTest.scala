@@ -24,8 +24,6 @@ class RepositoryTest extends FunSuite with BeforeAndAfterAll with Matchers {
   }
 
   test("repository") {
-    await(teachers.save(Teacher(name = "dudley", email = "dudley@em.com"))).get shouldBe 1
-
     val barneyStudentId = await(students.save(Student(name = "barney", email = "barney@em.com", born = LocalDateTime.now.minusYears(7)))).get
     val fredStudentId = await(students.save(Student(name = "fred", email = "fred@em.com", born = LocalDateTime.now.minusYears(7)))).get
 
@@ -45,10 +43,6 @@ class RepositoryTest extends FunSuite with BeforeAndAfterAll with Matchers {
 
     await(assignments.save(Assignment(studentId = barneyStudentId, gradeId = barneyGradeId, courseId = basicMathCourseId, description = "addition", score = 100.00)))
     await(assignments.save(Assignment(studentId = fredStudentId, gradeId = fredGradeId, courseId = basicScienceCourseId, description = "atoms", score = 60.00)))
-
-    val teacher = await(teachers.find("dudley")).get
-    await(teachers.save(teacher.copy(name = "dudley dooright", email = "canadian mounty")))
-    await(teachers.list()).length shouldBe 1
 
     await(students.list()).length shouldBe 2
 

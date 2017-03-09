@@ -4,7 +4,6 @@ Homeschool
 
 Object Model
 ------------
-* Teacher (id, name, email, timestamp)
 * Student (id, name, email, born, timestamp)
 * Grade (id, studentId, grade, started, completed, timestamp)
 * School (id, name, website?, timestamp)
@@ -14,7 +13,6 @@ Object Model
 
 Relational Model
 ----------------
-* Teacher
 * Student 1 ---> * Grade
 * School 1 ---> * Course 1 ---> 1 Category
 * Assignement 1 ---> 1 Student | Grade | Course
