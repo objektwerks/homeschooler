@@ -47,7 +47,7 @@ class RepositoryTest extends FunSuite with BeforeAndAfterAll with Matchers {
     await(assignments.list(mathCourseId)).length shouldBe 1
     await(assignments.list(scienceCourseId)).length shouldBe 1
 
-    await(assignments.calculateScore(mathCourseId)).get shouldBe 100.0
-    await(assignments.calculateScore(scienceCourseId)).get shouldBe 75.0
+    await(assignments.score(mathCourseId)).get shouldBe 100.0
+    await(assignments.score(scienceCourseId)).get shouldBe 75.0
   }
 }
