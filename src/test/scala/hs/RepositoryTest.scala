@@ -33,8 +33,8 @@ class RepositoryTest extends FunSuite with BeforeAndAfterAll with Matchers {
     val mathCourseId = await(courses.save(Course(gradeid = barneyGradeId, name = "basic math"))).get
     val scienceCourseId = await(courses.save(Course(gradeid = fredGradeId, name = "basic science"))).get
 
-    await(assignments.save(Assignment(courseid = mathCourseId, task = "add numbers", score = 100.00)))
-    await(assignments.save(Assignment(courseid = scienceCourseId, task = "study atoms", score = 75.00)))
+    await(assignments.save(Assignment(courseid = mathCourseId, task = "ch 1", score = 100.00)))
+    await(assignments.save(Assignment(courseid = scienceCourseId, task = "ch 1", score = 75.00)))
 
     await(students.list()).length shouldBe 2
 

@@ -54,13 +54,12 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def list(studentid: Int) = compiledList(studentid).result
   }
 
-  case class Course(id: Int = 0, gradeid: Int, name: String, website: Option[String] = None)
+  case class Course(id: Int = 0, gradeid: Int, name: String)
   class Courses(tag: Tag) extends Table[Course](tag, "courses") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def gradeid = column[Int]("grade_id")
     def name = column[String]("name")
-    def website = column[Option[String]]("website")
-    def * = (id, gradeid, name, website) <> (Course.tupled, Course.unapply)
+    def * = (id, gradeid, name) <> (Course.tupled, Course.unapply)
     def gradeFk = foreignKey("grade_fk", gradeid, TableQuery[Grades])(_.id)
   }
   object courses extends TableQuery(new Courses(_)) {

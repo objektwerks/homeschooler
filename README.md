@@ -6,7 +6,7 @@ Object Model
 ------------
 * Student (id, name, born)
 * Grade (id, studentid, grade, started, completed)
-* Course (id, gradeid, name, website?)
+* Course (id, gradeid, name)
 * Assignment (id, courseid, task, assigned, completed, score)
 
 Relational Model
