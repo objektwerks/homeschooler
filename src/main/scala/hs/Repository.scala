@@ -68,13 +68,13 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def list(gradeid: Int) = compiledList(gradeid).result
   }
 
-  case class Assignment(id: Int = 0, courseid: Int, task: String, assigned: LocalDateTime = LocalDateTime.now, completed: Option[LocalDateTime] = None, score: Double = 0.0)
+  case class Assignment(id: Int = 0, courseid: Int, task: String, assigned: LocalDateTime = LocalDateTime.now, completed: LocalDateTime = LocalDateTime.now.plusDays(1), score: Double = 0.0)
   class Assignments(tag: Tag) extends Table[Assignment](tag, "assignments") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def courseid = column[Int]("course_id")
     def task = column[String]("task")
     def assigned = column[LocalDateTime]("assigned")
-    def completed = column[Option[LocalDateTime]]("completed")
+    def completed = column[LocalDateTime]("completed")
     def score = column[Double]("score")
     def * = (id, courseid, task, assigned, completed, score) <> (Assignment.tupled, Assignment.unapply)
     def courseFK = foreignKey("course_fk", courseid, TableQuery[Courses])(_.id)
