@@ -5,10 +5,10 @@ Homeschool
 Object Model
 ------------
 * School (id, name, website?)
-* Course (id, schoolId, name, website?)
+* Course (id, schoolid, name, website?)
 * Student (id, name, born)
-* Grade (id, studentId, grade, started, completed)
-* Assignment (id, gradeId, courseId, task, assigned, completed, score)
+* Grade (id, studentid, grade, started, completed)
+* Assignment (id, gradeid, courseid, task, assigned, completed, score)
 
 Relational Model
 ----------------

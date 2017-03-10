@@ -27,17 +27,17 @@ class RepositoryTest extends FunSuite with BeforeAndAfterAll with Matchers {
     val giftedSchoolId = await(schools.save(School(name = "gifted"))).get
     val commonSchoolId = await(schools.save(School(name = "common"))).get
 
-    val mathCourseId = await(courses.save(Course(schoolId = giftedSchoolId, name = "basic math"))).get
-    val scienceCourseId = await(courses.save(Course(schoolId = commonSchoolId, name = "basic science"))).get
+    val mathCourseId = await(courses.save(Course(schoolid = giftedSchoolId, name = "basic math"))).get
+    val scienceCourseId = await(courses.save(Course(schoolid = commonSchoolId, name = "basic science"))).get
 
     val barneyStudentId = await(students.save(Student(name = "barney", born = LocalDate.now.minusYears(7)))).get
     val fredStudentId = await(students.save(Student(name = "fred", born = LocalDate.now.minusYears(7)))).get
 
-    val barneyGradeId = await(grades.save(Grade(studentId = barneyStudentId, grade = 1))).get
-    val fredGradeId = await(grades.save(Grade(studentId = fredStudentId, grade = 1))).get
+    val barneyGradeId = await(grades.save(Grade(studentid = barneyStudentId, grade = 1))).get
+    val fredGradeId = await(grades.save(Grade(studentid = fredStudentId, grade = 1))).get
 
-    await(assignments.save(Assignment(gradeId = barneyGradeId, courseId = mathCourseId, task = "add numbers", score = 100.00)))
-    await(assignments.save(Assignment(gradeId = fredGradeId, courseId = scienceCourseId, task = "study atoms", score = 60.00)))
+    await(assignments.save(Assignment(gradeid = barneyGradeId, courseid = mathCourseId, task = "add numbers", score = 100.00)))
+    await(assignments.save(Assignment(gradeid = fredGradeId, courseid = scienceCourseId, task = "study atoms", score = 60.00)))
 
     await(schools.list()).length shouldBe 2
 
