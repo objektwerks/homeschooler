@@ -24,35 +24,30 @@ class RepositoryTest extends FunSuite with BeforeAndAfterAll with Matchers {
   }
 
   test("repository") {
-    val giftedSchoolId = await(schools.save(School(name = "gifted"))).get
-    val commonSchoolId = await(schools.save(School(name = "common"))).get
-
-    val mathCourseId = await(courses.save(Course(schoolid = giftedSchoolId, name = "basic math"))).get
-    val scienceCourseId = await(courses.save(Course(schoolid = commonSchoolId, name = "basic science"))).get
-
     val barneyStudentId = await(students.save(Student(name = "barney", born = LocalDate.now.minusYears(7)))).get
     val fredStudentId = await(students.save(Student(name = "fred", born = LocalDate.now.minusYears(7)))).get
 
     val barneyGradeId = await(grades.save(Grade(studentid = barneyStudentId, grade = 1))).get
     val fredGradeId = await(grades.save(Grade(studentid = fredStudentId, grade = 1))).get
 
-    await(assignments.save(Assignment(gradeid = barneyGradeId, courseid = mathCourseId, task = "add numbers", score = 100.00)))
-    await(assignments.save(Assignment(gradeid = fredGradeId, courseid = scienceCourseId, task = "study atoms", score = 60.00)))
+    val mathCourseId = await(courses.save(Course(gradeid = barneyGradeId, name = "basic math"))).get
+    val scienceCourseId = await(courses.save(Course(gradeid = fredGradeId, name = "basic science"))).get
 
-    await(schools.list()).length shouldBe 2
-
-    await(courses.list(giftedSchoolId)).length shouldBe 1
-    await(courses.list(commonSchoolId)).length shouldBe 1
+    await(assignments.save(Assignment(courseid = mathCourseId, task = "add numbers", score = 100.00)))
+    await(assignments.save(Assignment(courseid = scienceCourseId, task = "study atoms", score = 60.00)))
 
     await(students.list()).length shouldBe 2
 
     await(grades.list(barneyStudentId)).length shouldBe 1
     await(grades.list(fredStudentId)).length shouldBe 1
 
-    await(assignments.list(barneyGradeId, mathCourseId)).length shouldBe 1
-    await(assignments.list(fredGradeId, scienceCourseId)).length shouldBe 1
+    await(courses.list(barneyGradeId)).length shouldBe 1
+    await(courses.list(fredGradeId)).length shouldBe 1
 
-    await(assignments.calculateScore(barneyGradeId, mathCourseId)).get shouldBe 100.0
-    await(assignments.calculateScore(fredGradeId, scienceCourseId)).get shouldBe 60.0
+    await(assignments.list(mathCourseId)).length shouldBe 1
+    await(assignments.list(scienceCourseId)).length shouldBe 1
+
+    await(assignments.calculateScore(mathCourseId)).get shouldBe 100.0
+    await(assignments.calculateScore(scienceCourseId)).get shouldBe 60.0
   }
 }

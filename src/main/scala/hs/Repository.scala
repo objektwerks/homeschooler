@@ -14,7 +14,7 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
 
   implicit val dateMapper = MappedColumnType.base[LocalDate, Date](ld => Date.valueOf(ld),d => d.toLocalDate)
   implicit val dateTimeMapper = MappedColumnType.base[LocalDateTime, Timestamp](ldt => Timestamp.valueOf(ldt), ts => ts.toLocalDateTime)
-  val schema = schools.schema ++ courses.schema ++ students.schema ++ grades.schema ++ assignments.schema
+  val schema = students.schema ++ grades.schema ++ courses.schema ++ assignments.schema
   val db = config.db
 
   def await[T](action: DBIO[T]): T = Await.result(db.run(action), awaitDuration)
@@ -24,34 +24,6 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
 
   def createSchema() = await(DBIO.seq(schema.create))
   def dropSchema() = await(DBIO.seq(schema.drop))
-
-  case class School(id: Int = 0, name: String, website: Option[String] = None)
-  class Schools(tag: Tag) extends Table[School](tag, "schools") {
-    def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
-    def name = column[String]("name", O.Unique)
-    def website = column[Option[String]]("website")
-    def * = (id, name, website) <> (School.tupled, School.unapply)
-  }
-  object schools extends TableQuery(new Schools(_)) {
-    val compiledList = Compiled { sortBy(_.name.asc) }
-    def save(school: School) = (this returning this.map(_.id)).insertOrUpdate(school)
-    def list() = compiledList.result
-  }
-
-  case class Course(id: Int = 0, schoolid: Int, name: String, website: Option[String] = None)
-  class Courses(tag: Tag) extends Table[Course](tag, "courses") {
-    def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
-    def schoolid = column[Int]("school_id")
-    def name = column[String]("name")
-    def website = column[Option[String]]("website")
-    def * = (id, schoolid, name, website) <> (Course.tupled, Course.unapply)
-    def schoolFk = foreignKey("school_fk", schoolid, TableQuery[Schools])(_.id)
-  }
-  object courses extends TableQuery(new Courses(_)) {
-    val compiledList = Compiled { schoolId: Rep[Int] => filter(_.schoolid === schoolId).sortBy(_.name.asc) }
-    def save(course: Course) = (this returning this.map(_.id)).insertOrUpdate(course)
-    def list(schoolId: Int) = compiledList(schoolId).result
-  }
 
   case class Student(id: Int = 0, name: String, born: LocalDate)
   class Students(tag: Tag) extends Table[Student](tag, "students") {
@@ -82,24 +54,37 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def list(studentid: Int) = compiledList(studentid).result
   }
 
-  case class Assignment(id: Int = 0, gradeid: Int, courseid: Int, task: String, assigned: LocalDateTime = LocalDateTime.now, completed: Option[LocalDateTime] = None, score: Double = 0.0)
-  class Assignments(tag: Tag) extends Table[Assignment](tag, "assignments") {
+  case class Course(id: Int = 0, gradeid: Int, name: String, website: Option[String] = None)
+  class Courses(tag: Tag) extends Table[Course](tag, "courses") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def gradeid = column[Int]("grade_id")
+    def name = column[String]("name")
+    def website = column[Option[String]]("website")
+    def * = (id, gradeid, name, website) <> (Course.tupled, Course.unapply)
+    def gradeFk = foreignKey("grade_fk", gradeid, TableQuery[Grades])(_.id)
+  }
+  object courses extends TableQuery(new Courses(_)) {
+    val compiledList = Compiled { schoolId: Rep[Int] => filter(_.gradeid === schoolId).sortBy(_.name.asc) }
+    def save(course: Course) = (this returning this.map(_.id)).insertOrUpdate(course)
+    def list(schoolId: Int) = compiledList(schoolId).result
+  }
+
+  case class Assignment(id: Int = 0, courseid: Int, task: String, assigned: LocalDateTime = LocalDateTime.now, completed: Option[LocalDateTime] = None, score: Double = 0.0)
+  class Assignments(tag: Tag) extends Table[Assignment](tag, "assignments") {
+    def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def courseid = column[Int]("course_id")
     def task = column[String]("task")
     def assigned = column[LocalDateTime]("assigned")
     def completed = column[Option[LocalDateTime]]("completed")
     def score = column[Double]("score")
-    def * = (id, gradeid, courseid, task, assigned, completed, score) <> (Assignment.tupled, Assignment.unapply)
-    def gradeFk = foreignKey("grade_assignment_fk", gradeid, TableQuery[Grades])(_.id)
-    def courseFK = foreignKey("course_assignment_fk", courseid, TableQuery[Courses])(_.id)
+    def * = (id, courseid, task, assigned, completed, score) <> (Assignment.tupled, Assignment.unapply)
+    def courseFK = foreignKey("course_fk", courseid, TableQuery[Courses])(_.id)
   }
   object assignments extends TableQuery(new Assignments(_)) {
-    val compiledList = Compiled { (gradeid: Rep[Int], courseid: Rep[Int]) => filter(a => a.gradeid === gradeid && a.courseid === courseid).sortBy(_.assigned.asc) }
-    val compiledCalculateScore = Compiled { (gradeid: Rep[Int], courseid: Rep[Int]) => filter(a => a.gradeid === gradeid && a.courseid === courseid).map(_.score).sum }
+    val compiledList = Compiled { courseid: Rep[Int] => filter(a => a.courseid === courseid).sortBy(_.assigned.asc) }
+    val compiledCalculateScore = Compiled { courseid: Rep[Int] => filter(a => a.courseid === courseid).map(_.score).sum }
     def save(assignment: Assignment) = (this returning this.map(_.id)).insertOrUpdate(assignment)
-    def list(gradeid: Int, courseid: Int) = compiledList( (gradeid, courseid) ).result
-    def calculateScore(gradeid: Int, courseid: Int) = compiledCalculateScore( (gradeid, courseid) ).result
+    def list(courseid: Int) = compiledList(courseid).result
+    def calculateScore(courseid: Int) = compiledCalculateScore(courseid).result
   }
 }

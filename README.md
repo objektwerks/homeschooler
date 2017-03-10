@@ -4,16 +4,14 @@ Homeschool
 
 Object Model
 ------------
-* School (id, name, website?)
-* Course (id, schoolid, name, website?)
 * Student (id, name, born)
 * Grade (id, studentid, grade, started, completed)
-* Assignment (id, gradeid, courseid, task, assigned, completed, score)
+* Course (id, gradid, name, website?)
+* Assignment (id, courseid, task, assigned, completed, score)
 
 Relational Model
 ----------------
-* School 1 ---> * Course
-* Student 1 ---> * Grade 1 ---> * Assignement 1 ---> 1 Course
+* Student 1 ---> * Grade 1 ---> * Course 1 ---> * Assignement
 
 Commands
 --------
