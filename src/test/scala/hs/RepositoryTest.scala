@@ -30,8 +30,8 @@ class RepositoryTest extends FunSuite with BeforeAndAfterAll with Matchers {
     val mathCourseId = await(courses.save(Course(schoolId = giftedSchoolId, name = "basic math"))).get
     val scienceCourseId = await(courses.save(Course(schoolId = commonSchoolId, name = "basic science"))).get
 
-    val barneyStudentId = await(students.save(Student(name = "barney", email = "barney@em.com", born = LocalDate.now.minusYears(7)))).get
-    val fredStudentId = await(students.save(Student(name = "fred", email = "fred@em.com", born = LocalDate.now.minusYears(7)))).get
+    val barneyStudentId = await(students.save(Student(name = "barney", born = LocalDate.now.minusYears(7)))).get
+    val fredStudentId = await(students.save(Student(name = "fred", born = LocalDate.now.minusYears(7)))).get
 
     val barneyGradeId = await(grades.save(Grade(studentId = barneyStudentId, grade = 1))).get
     val fredGradeId = await(grades.save(Grade(studentId = fredStudentId, grade = 1))).get

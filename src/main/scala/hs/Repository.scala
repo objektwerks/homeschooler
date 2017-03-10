@@ -53,13 +53,12 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def list(schoolId: Int) = compiledListBySchool(schoolId).result
   }
 
-  case class Student(id: Int = 0, name: String, email: String, born: LocalDate)
+  case class Student(id: Int = 0, name: String, born: LocalDate)
   class Students(tag: Tag) extends Table[Student](tag, "students") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def name = column[String]("name")
-    def email = column[String]("email", O.Unique)
     def born = column[LocalDate]("born")
-    def * = (id, name, email, born) <> (Student.tupled, Student.unapply)
+    def * = (id, name, born) <> (Student.tupled, Student.unapply)
   }
   object students extends TableQuery(new Students(_)) {
     val compiledList = Compiled { sortBy(_.name.asc) }

@@ -1,6 +1,6 @@
 create table "schools" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"name" VARCHAR NOT NULL UNIQUE,"website" VARCHAR)
 create table "courses" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"school_id" INTEGER NOT NULL,"name" VARCHAR NOT NULL,"website" VARCHAR)
-create table "students" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"name" VARCHAR NOT NULL,"email" VARCHAR NOT NULL UNIQUE,"born" DATE NOT NULL)
+create table "students" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"name" VARCHAR NOT NULL,"born" DATE NOT NULL)
 create table "grades" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"student_id" INTEGER NOT NULL,"grade" INTEGER NOT NULL,"started" DATE NOT NULL,"completed" DATE NOT NULL)
 create table "assignments" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"grade_id" INTEGER NOT NULL,"course_id" INTEGER NOT NULL,"task" VARCHAR NOT NULL,"assigned" TIMESTAMP NOT NULL,"completed" TIMESTAMP,"score" DOUBLE NOT NULL)
 alter table "courses" add constraint "school_fk" foreign key("school_id") references "schools"("id") on update NO ACTION on delete NO ACTION
