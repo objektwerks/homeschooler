@@ -24,7 +24,7 @@ Events
 Queries
 -------
 1. List[T]
-2. Calculate Course Assignments Score
+2. Calculate Course Score
 
 Test
 ----
