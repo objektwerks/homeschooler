@@ -24,42 +24,35 @@ class RepositoryTest extends FunSuite with BeforeAndAfterAll with Matchers {
   }
 
   test("repository") {
+    val giftedSchoolId = await(schools.save(School(name = "gifted"))).get
+    val commonSchoolId = await(schools.save(School(name = "common"))).get
+
+    val mathCourseId = await(courses.save(Course(schoolId = giftedSchoolId, name = "basic math"))).get
+    val scienceCourseId = await(courses.save(Course(schoolId = commonSchoolId, name = "basic science"))).get
+
     val barneyStudentId = await(students.save(Student(name = "barney", email = "barney@em.com", born = LocalDate.now.minusYears(7)))).get
     val fredStudentId = await(students.save(Student(name = "fred", email = "fred@em.com", born = LocalDate.now.minusYears(7)))).get
 
     val barneyGradeId = await(grades.save(Grade(studentId = barneyStudentId, grade = 1))).get
     val fredGradeId = await(grades.save(Grade(studentId = fredStudentId, grade = 1))).get
 
-    val giftedSchoolId = await(schools.save(School(name = "gifted"))).get
-    val idiotSchoolId = await(schools.save(School(name = "idiot"))).get
+    await(assignments.save(Assignment(gradeId = barneyGradeId, courseId = mathCourseId, task = "add numbers", score = 100.00)))
+    await(assignments.save(Assignment(gradeId = fredGradeId, courseId = scienceCourseId, task = "study atoms", score = 60.00)))
 
-    val mathCategory = Category("math")
-    val scienceCategory = Category("science")
-    await(categories.add(mathCategory))
-    await(categories.add(scienceCategory))
+    await(schools.list()).length shouldBe 2
 
-    val basicMathCourseId = await(courses.save(Course(schoolId = giftedSchoolId, category = mathCategory.name, name = "basic math"))).get
-    val basicScienceCourseId = await(courses.save(Course(schoolId = idiotSchoolId, category = scienceCategory.name, name = "basic science"))).get
-
-    await(assignments.save(Assignment(studentId = barneyStudentId, gradeId = barneyGradeId, courseId = basicMathCourseId, description = "addition", score = 100.00)))
-    await(assignments.save(Assignment(studentId = fredStudentId, gradeId = fredGradeId, courseId = basicScienceCourseId, description = "atoms", score = 60.00)))
+    await(courses.list(giftedSchoolId)).length shouldBe 1
+    await(courses.list(commonSchoolId)).length shouldBe 1
 
     await(students.list()).length shouldBe 2
 
     await(grades.list(barneyStudentId)).length shouldBe 1
     await(grades.list(fredStudentId)).length shouldBe 1
 
-    await(schools.list()).length shouldBe 2
+    await(assignments.list(barneyGradeId, mathCourseId)).length shouldBe 1
+    await(assignments.list(fredGradeId, scienceCourseId)).length shouldBe 1
 
-    await(categories.list()).length shouldBe 2
-
-    await(courses.list(giftedSchoolId)).length shouldBe 1
-    await(courses.list(idiotSchoolId)).length shouldBe 1
-
-    await(assignments.list(barneyStudentId, barneyGradeId, basicMathCourseId)).length shouldBe 1
-    await(assignments.list(fredStudentId, fredGradeId, basicScienceCourseId)).length shouldBe 1
-
-    await(assignments.calculateScore(barneyStudentId, barneyGradeId, basicMathCourseId)).get shouldBe 100.0
-    await(assignments.calculateScore(fredStudentId, fredGradeId, basicScienceCourseId)).get shouldBe 60.0
+    await(assignments.calculateScore(barneyGradeId, mathCourseId)).get shouldBe 100.0
+    await(assignments.calculateScore(fredGradeId, scienceCourseId)).get shouldBe 60.0
   }
 }
