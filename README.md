@@ -23,8 +23,9 @@ Events
 
 Queries
 -------
-1. List[T]
-2. Calculate Course Score
+1. Save[T]
+2. List[T]
+3. Score Course
 
 Test
 ----
