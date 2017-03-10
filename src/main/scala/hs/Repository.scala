@@ -1,7 +1,7 @@
 package hs
 
-import java.sql.{Date, Timestamp}
-import java.time.{LocalDate, LocalDateTime}
+import java.sql.Date
+import java.time.LocalDate
 
 import slick.basic.DatabaseConfig
 import slick.jdbc.JdbcProfile
@@ -13,7 +13,6 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
   import profile.api._
 
   implicit val dateMapper = MappedColumnType.base[LocalDate, Date](ld => Date.valueOf(ld),d => d.toLocalDate)
-  implicit val dateTimeMapper = MappedColumnType.base[LocalDateTime, Timestamp](ldt => Timestamp.valueOf(ldt), ts => ts.toLocalDateTime)
   val schema = students.schema ++ grades.schema ++ courses.schema ++ assignments.schema
   val db = config.db
 
@@ -68,13 +67,13 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def list(gradeid: Int) = compiledList(gradeid).result
   }
 
-  case class Assignment(id: Int = 0, courseid: Int, task: String, assigned: LocalDateTime = LocalDateTime.now, completed: LocalDateTime = LocalDateTime.now.plusDays(1), score: Double = 0.0)
+  case class Assignment(id: Int = 0, courseid: Int, task: String, assigned: LocalDate = LocalDate.now, completed: LocalDate = LocalDate.now, score: Double = 0.0)
   class Assignments(tag: Tag) extends Table[Assignment](tag, "assignments") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def courseid = column[Int]("course_id")
     def task = column[String]("task")
-    def assigned = column[LocalDateTime]("assigned")
-    def completed = column[LocalDateTime]("completed")
+    def assigned = column[LocalDate]("assigned")
+    def completed = column[LocalDate]("completed")
     def score = column[Double]("score")
     def * = (id, courseid, task, assigned, completed, score) <> (Assignment.tupled, Assignment.unapply)
     def courseFK = foreignKey("course_fk", courseid, TableQuery[Courses])(_.id)
