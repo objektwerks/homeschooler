@@ -64,9 +64,9 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def gradeFk = foreignKey("grade_fk", gradeid, TableQuery[Grades])(_.id)
   }
   object courses extends TableQuery(new Courses(_)) {
-    val compiledList = Compiled { schoolId: Rep[Int] => filter(_.gradeid === schoolId).sortBy(_.name.asc) }
+    val compiledList = Compiled { gradeid: Rep[Int] => filter(_.gradeid === gradeid).sortBy(_.name.asc) }
     def save(course: Course) = (this returning this.map(_.id)).insertOrUpdate(course)
-    def list(schoolId: Int) = compiledList(schoolId).result
+    def list(gradeid: Int) = compiledList(gradeid).result
   }
 
   case class Assignment(id: Int = 0, courseid: Int, task: String, assigned: LocalDateTime = LocalDateTime.now, completed: Option[LocalDateTime] = None, score: Double = 0.0)
@@ -81,8 +81,8 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def courseFK = foreignKey("course_fk", courseid, TableQuery[Courses])(_.id)
   }
   object assignments extends TableQuery(new Assignments(_)) {
-    val compiledList = Compiled { courseid: Rep[Int] => filter(a => a.courseid === courseid).sortBy(_.assigned.asc) }
-    val compiledCalculateScore = Compiled { courseid: Rep[Int] => filter(a => a.courseid === courseid).map(_.score).sum }
+    val compiledList = Compiled { courseid: Rep[Int] => filter(_.courseid === courseid).sortBy(_.assigned.asc) }
+    val compiledCalculateScore = Compiled { courseid: Rep[Int] => filter(_.courseid === courseid).map(_.score).sum }
     def save(assignment: Assignment) = (this returning this.map(_.id)).insertOrUpdate(assignment)
     def list(courseid: Int) = compiledList(courseid).result
     def calculateScore(courseid: Int) = compiledCalculateScore(courseid).result
