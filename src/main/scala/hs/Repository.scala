@@ -24,7 +24,6 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
   def createSchema() = await(DBIO.seq(schema.create))
   def dropSchema() = await(DBIO.seq(schema.drop))
 
-  case class Student(id: Int = 0, name: String, born: LocalDate)
   class Students(tag: Tag) extends Table[Student](tag, "students") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def name = column[String]("name")
@@ -37,7 +36,6 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def list() = compiledList.result
   }
 
-  case class Grade(id: Int = 0, studentid: Int, grade: Int, started: LocalDate = LocalDate.now, completed: LocalDate = LocalDate.now.plusMonths(6))
   class Grades(tag: Tag) extends Table[Grade](tag, "grades") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def studentid = column[Int]("student_id")
@@ -53,7 +51,6 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def list(studentid: Int) = compiledList(studentid).result
   }
 
-  case class Course(id: Int = 0, gradeid: Int, name: String)
   class Courses(tag: Tag) extends Table[Course](tag, "courses") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def gradeid = column[Int]("grade_id")
@@ -67,7 +64,6 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def list(gradeid: Int) = compiledList(gradeid).result
   }
 
-  case class Assignment(id: Int = 0, courseid: Int, task: String, assigned: LocalDate = LocalDate.now, completed: LocalDate = LocalDate.now, score: Double = 0.0)
   class Assignments(tag: Tag) extends Table[Assignment](tag, "assignments") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def courseid = column[Int]("course_id")
