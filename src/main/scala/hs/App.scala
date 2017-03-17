@@ -6,7 +6,7 @@ import slick.jdbc.{H2Profile, JdbcProfile}
 
 import scalafx.application.{JFXApp, Platform}
 import scalafx.collections.ObservableBuffer
-import scalafx.geometry.Insets
+import scalafx.geometry.{Insets, Orientation}
 import scalafx.scene.Scene
 import scalafx.scene.control._
 import scalafx.scene.layout.{HBox, VBox}
@@ -25,28 +25,26 @@ object App extends JFXApp {
   val menuBar = new MenuBar { menus = List(fileMenu); useSystemMenuBar = true }
 
   val studentLabel = new Label { text = "Student:" }
-  val studentComboBox = new ComboBox[Student] { prefHeight = 25; prefWidth = 210; items = ObservableBuffer[Student]() }
+  val studentComboBox = new ComboBox[String] { prefHeight = 25; prefWidth = 203; items = ObservableBuffer[String]() }
   val studentPropsButton = new Button { text = "*"; prefHeight = 25 }
   val studentAddButton = new Button { text = "+"; prefHeight = 25 }
   val studentPane = new HBox { spacing = 6; children = List(studentLabel, studentComboBox, studentPropsButton, studentAddButton) }
 
   val gradeLabel = new Label { text = "Grade:" }
-  val gradeComboBox = new ComboBox[Grade] { prefHeight = 25; prefWidth = 60; items = ObservableBuffer[Grade]() }
+  val gradeComboBox = new ComboBox[Int] { prefHeight = 25; prefWidth = 60; items = ObservableBuffer[Int]() }
   val gradePropsButton = new Button { text = "*"; prefHeight = 25 }
   val gradeAddButton = new Button { text = "+"; prefHeight = 25 }
   val gradePane = new HBox { spacing = 6; children = List(gradeLabel, gradeComboBox, gradePropsButton, gradeAddButton) }
 
-  val studentGradePane = new HBox { spacing = 6; children = List(studentPane, gradePane) }
-
   val coursesLabel = new Label { text = "Courses:" }
-  val coursesList = new ListView[Course] { prefWidth = 333; items = ObservableBuffer[Course]() }
+  val coursesList = new ListView[String] { prefWidth = 333; items = ObservableBuffer[String]() }
   val coursesPropsButton = new Button { text = "*" }
   val coursesAddButton = new Button { text = "+" }
   val coursesToolBar = new HBox { spacing = 6; children = List(coursesPropsButton, coursesAddButton)}
   val coursesPane = new VBox { spacing = 6; children = List(coursesLabel, coursesList, coursesToolBar) }
 
   val assignmentsLabel = new Label { text = "Assignments:" }
-  val assignmentsList = new ListView[Assignment] { prefWidth = 333; items = ObservableBuffer[Assignment]() }
+  val assignmentsList = new ListView[String] { prefWidth = 333; items = ObservableBuffer[String]() }
   val assignedDate = new Label { text = "00/00/0000" }
   val toLabel = new Label { text = " - " }
   val completedDate = new Label { text = "00/00/0000" }
@@ -59,10 +57,9 @@ object App extends JFXApp {
   val assignmentsDetailsPane = new HBox { spacing = 6; children = List(assignedDate, toLabel, completedDate, scoreLabel, splitLabel, totalLabel, assignmentsToolBar) }
   val assignmentsPane = new VBox { spacing = 6; children = List(assignmentsLabel, assignmentsList, assignmentsDetailsPane) }
 
-  val northPane = new HBox { spacing = 6; children = List(studentGradePane) }
-  val separatorPane = new Separator()
+  val northPane = new HBox { spacing = 6; children = List(studentPane, new Separator { orientation = Orientation.Vertical }, gradePane) }
   val southPane = new HBox { spacing = 6; children = List(coursesPane, assignmentsPane) }
-  val contentPane = new VBox { spacing = 6; padding = Insets(6); children = List(menuBar, northPane, separatorPane, southPane)}
+  val contentPane = new VBox { spacing = 6; padding = Insets(6); children = List(menuBar, northPane, new Separator(), southPane)}
 
   stage = new JFXApp.PrimaryStage { scene = new Scene { root = contentPane }; title = "Homeschool"; minHeight = 516; maxHeight = 516; minWidth = 684; maxWidth = 684 }
 }
