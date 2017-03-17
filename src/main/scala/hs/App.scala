@@ -25,7 +25,8 @@ object App extends JFXApp {
   val northPane = new HBox { spacing = 6; children = List(studentPane, new Separator { orientation = Orientation.Vertical }, gradePane) }
   val southPane = new HBox { spacing = 6; children = List(coursesPane, assignmentsPane) }
   val contentPane = new VBox { spacing = 6; padding = Insets(6); children = List(menuBar, northPane, new Separator(), southPane)}
-  stage = new JFXApp.PrimaryStage { scene = new Scene { root = contentPane }; title = "Homeschool"; minHeight = 516; maxHeight = 516; minWidth = 684; maxWidth = 684 }
+  val sceneGraph = new Scene { root = contentPane }
+  stage = new JFXApp.PrimaryStage { scene = sceneGraph; title = "Homeschool"; minHeight = 516; maxHeight = 516; minWidth = 684; maxWidth = 684 }
 
   sys.addShutdownHook { closeRepository() }
 }
