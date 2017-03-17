@@ -64,5 +64,5 @@ object App extends JFXApp {
   val southPane = new HBox { spacing = 6; children = List(coursesPane, assignmentsPane) }
   val contentPane = new VBox { spacing = 6; padding = Insets(6); children = List(menuBar, northPane, separatorPane, southPane)}
 
-  stage = new JFXApp.PrimaryStage { scene = new Scene { root = contentPane; title = "Homeschool"} }
+  stage = new JFXApp.PrimaryStage { scene = new Scene { root = contentPane }; title = "Homeschool"; minHeight = 516; maxHeight = 516; minWidth = 684; maxWidth = 684 }
 }
