@@ -55,5 +55,5 @@ object App extends JFXApp {
   val separatorPane = new Separator()
   val southPane = new HBox { spacing = 6; children = List(coursesPane, assignmentsPane) }
   val contentPane = new VBox { spacing = 6; padding = Insets(6); prefWidth = 600; children = List(northPane, separatorPane, southPane) }
-  stage = new JFXApp.PrimaryStage { scene = new Scene { root = contentPane } }
+  stage = new JFXApp.PrimaryStage { scene = new Scene { root = contentPane; title = "Homeschool"} }
 }
