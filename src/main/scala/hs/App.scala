@@ -19,8 +19,9 @@ object App extends JFXApp {
   sys.addShutdownHook { closeRepository() }
 
   val loadTestDataMenuItem = new MenuItem("Load Test Data")
+  val separatorMenuItem = new SeparatorMenuItem()
   val exitMenuItem = new MenuItem("Exit") { onAction = { _ => Platform.exit() } }
-  val fileMenu = new Menu("File") { items = List(loadTestDataMenuItem, exitMenuItem) }
+  val fileMenu = new Menu("File") { items = List(loadTestDataMenuItem, separatorMenuItem, exitMenuItem) }
   val menuBar = new MenuBar { menus = List(fileMenu); useSystemMenuBar = true }
 
   val studentLabel = new Label { text = "Student:" }
