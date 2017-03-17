@@ -1,4 +1,4 @@
-package hs
+package hs.domain
 
 import java.time.LocalDate
 

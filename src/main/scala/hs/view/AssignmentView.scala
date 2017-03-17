@@ -1,4 +1,6 @@
-package hs
+package hs.view
+
+import hs.domain.Assignment
 
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.control.{Button, Label, ListView}

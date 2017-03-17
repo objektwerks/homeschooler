@@ -1,4 +1,6 @@
-package hs
+package hs.view
+
+import hs.domain.Student
 
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.control.{Button, ComboBox, Label}

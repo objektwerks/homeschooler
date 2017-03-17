@@ -1,4 +1,4 @@
-package hs
+package hs.view
 
 import scalafx.application.Platform
 import scalafx.scene.control.{Menu, MenuBar, MenuItem, SeparatorMenuItem}

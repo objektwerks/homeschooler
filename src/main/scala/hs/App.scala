@@ -1,6 +1,8 @@
 package hs
 
 import com.typesafe.config.ConfigFactory
+import hs.domain.Repository
+import hs.view._
 import slick.basic.DatabaseConfig
 import slick.jdbc.{H2Profile, JdbcProfile}
 
