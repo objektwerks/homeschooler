@@ -25,26 +25,26 @@ object App extends JFXApp {
   val menuBar = new MenuBar { menus = List(fileMenu); useSystemMenuBar = true }
 
   val studentLabel = new Label { text = "Student:" }
-  val studentComboBox = new ComboBox[String] { prefHeight = 25; prefWidth = 203; items = ObservableBuffer[String]() }
+  val studentComboBox = new ComboBox[Student] { prefHeight = 25; prefWidth = 203; items = ObservableBuffer[Student]() }
   val studentPropsButton = new Button { text = "*"; prefHeight = 25 }
   val studentAddButton = new Button { text = "+"; prefHeight = 25 }
   val studentPane = new HBox { spacing = 6; children = List(studentLabel, studentComboBox, studentPropsButton, studentAddButton) }
 
   val gradeLabel = new Label { text = "Grade:" }
-  val gradeComboBox = new ComboBox[Int] { prefHeight = 25; prefWidth = 60; items = ObservableBuffer[Int]() }
+  val gradeComboBox = new ComboBox[Grade] { prefHeight = 25; prefWidth = 60; items = ObservableBuffer[Grade]() }
   val gradePropsButton = new Button { text = "*"; prefHeight = 25 }
   val gradeAddButton = new Button { text = "+"; prefHeight = 25 }
   val gradePane = new HBox { spacing = 6; children = List(gradeLabel, gradeComboBox, gradePropsButton, gradeAddButton) }
 
   val coursesLabel = new Label { text = "Courses:" }
-  val coursesList = new ListView[String] { prefWidth = 333; items = ObservableBuffer[String]() }
+  val coursesList = new ListView[Course] { prefWidth = 333; items = ObservableBuffer[Course]() }
   val coursesPropsButton = new Button { text = "*" }
   val coursesAddButton = new Button { text = "+" }
   val coursesToolBar = new HBox { spacing = 6; children = List(coursesPropsButton, coursesAddButton)}
   val coursesPane = new VBox { spacing = 6; children = List(coursesLabel, coursesList, coursesToolBar) }
 
   val assignmentsLabel = new Label { text = "Assignments:" }
-  val assignmentsList = new ListView[String] { prefWidth = 333; items = ObservableBuffer[String]() }
+  val assignmentsList = new ListView[Assignment] { prefWidth = 333; items = ObservableBuffer[Assignment]() }
   val assignedDate = new Label { text = "00/00/0000" }
   val toLabel = new Label { text = " - " }
   val completedDate = new Label { text = "00/00/0000" }
