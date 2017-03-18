@@ -10,7 +10,7 @@ import scalafx.util.StringConverter
 
 object StudentView {
   val studentLabel = new Label { text = "Student:" }
-  val studentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Student]( { s => s.name } ) )
+  val studentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Student](s => s.name ) )
   val studentComboBox = new ComboBox[Student] { prefHeight = 25; prefWidth = 203; items = ObservableBuffer[Student](); cellFactory = studentCellFactory }
   val studentPropsButton = new Button { text = "*"; prefHeight = 25 }
   val studentAddButton = new Button { text = "+"; prefHeight = 25 }
