@@ -3,12 +3,15 @@ package hs.view
 import hs.domain.Assignment
 
 import scalafx.collections.ObservableBuffer
+import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, Label, ListView}
 import scalafx.scene.layout.{HBox, VBox}
+import scalafx.util.StringConverter
 
 object AssignmentView {
   val assignmentsLabel = new Label { text = "Assignments:" }
-  val assignmentsList = new ListView[Assignment] { prefWidth = 333; items = ObservableBuffer[Assignment]() }
+  val assignmentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Assignment](a => a.task) )
+  val assignmentsList = new ListView[Assignment] { prefWidth = 333; items = ObservableBuffer[Assignment](); cellFactory = assignmentCellFactory }
   val assignedDate = new Label { text = "00/00/0000" }
   val toLabel = new Label { text = " - " }
   val completedDate = new Label { text = "00/00/0000" }
