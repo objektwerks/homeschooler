@@ -39,14 +39,14 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
   class Grades(tag: Tag) extends Table[Grade](tag, "grades") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def studentid = column[Int]("student_id")
-    def grade = column[Int]("grade")
+    def year = column[String]("grade")
     def started = column[LocalDate]("started")
     def completed = column[LocalDate]("completed")
-    def * = (id, studentid, grade, started, completed) <> (Grade.tupled, Grade.unapply)
+    def * = (id, studentid, year, started, completed) <> (Grade.tupled, Grade.unapply)
     def studentFk = foreignKey("student_fk", studentid, TableQuery[Students])(_.id)
   }
   object grades extends TableQuery(new Grades(_)) {
-    val compiledList = Compiled { studentid: Rep[Int] => filter(_.studentid === studentid).sortBy(_.grade.asc) }
+    val compiledList = Compiled { studentid: Rep[Int] => filter(_.studentid === studentid).sortBy(_.year.asc) }
     def save(grade: Grade) = (this returning this.map(_.id)).insertOrUpdate(grade)
     def list(studentid: Int) = compiledList(studentid).result
   }
