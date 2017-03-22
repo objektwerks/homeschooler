@@ -11,4 +11,4 @@ alter table "courses" add constraint "grade_fk" foreign key("grade_id") referenc
 alter table "assignments" add constraint "course_fk" foreign key("course_id") references "courses"("id") on update NO ACTION on delete NO ACTION
 alter table "assignments" drop constraint "course_fk"
 alter table "courses" drop constraint "grade_fk"
-alter table "grades" drop constraint "student_fk"[
+alter table "grades" drop constraint "student_fk"
