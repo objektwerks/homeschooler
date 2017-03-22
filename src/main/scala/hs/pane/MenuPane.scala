@@ -1,9 +1,9 @@
-package hs.view
+package hs.pane
 
 import scalafx.application.Platform
 import scalafx.scene.control.{Menu, MenuBar, MenuItem, SeparatorMenuItem}
 
-class MenuView extends MenuBar {
+class MenuPane extends MenuBar {
   val loadTestDataMenuItem = new MenuItem("Load Test Data")
   val separatorMenuItem = new SeparatorMenuItem()
   val exitMenuItem = new MenuItem("Exit") { onAction = { _ => Platform.exit() } }

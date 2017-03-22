@@ -1,4 +1,4 @@
-package hs.view
+package hs.pane
 
 import hs.domain.Course
 
@@ -8,7 +8,7 @@ import scalafx.scene.control.{Button, Label, ListView}
 import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
-class CourseView extends VBox {
+class CoursePane extends VBox {
   val coursesLabel = new Label { text = "Courses:" }
   val courseCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Course](c => c.name) )
   val coursesList = new ListView[Course] { prefWidth = 333; items = ObservableBuffer[Course](); cellFactory = courseCellFactory }

@@ -1,4 +1,4 @@
-package hs.view
+package hs.pane
 
 import hs.domain.Student
 
@@ -8,7 +8,7 @@ import scalafx.scene.control.{Button, ComboBox, Label}
 import scalafx.scene.layout.HBox
 import scalafx.util.StringConverter
 
-class StudentView extends HBox {
+class StudentPane extends HBox {
   val studentLabel = new Label { text = "Student:" }
   val studentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Student](s => s.name) )
   val studentComboBox = new ComboBox[Student] { prefHeight = 25; prefWidth = 203; items = ObservableBuffer[Student](); cellFactory = studentCellFactory }

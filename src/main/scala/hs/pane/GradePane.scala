@@ -1,4 +1,4 @@
-package hs.view
+package hs.pane
 
 import hs.domain.Grade
 
@@ -8,7 +8,7 @@ import scalafx.scene.control.{Button, ComboBox, Label}
 import scalafx.scene.layout.HBox
 import scalafx.util.StringConverter
 
-class GradeView extends HBox {
+class GradePane extends HBox {
   val gradeLabel = new Label { text = "Grade:" }
   val gradeCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Grade](g => g.year) )
   val gradeComboBox = new ComboBox[Grade] { prefHeight = 25; prefWidth = 203; items = ObservableBuffer[Grade](); cellFactory = gradeCellFactory }

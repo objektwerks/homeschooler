@@ -1,4 +1,4 @@
-package hs.view
+package hs.pane
 
 import hs.domain.Assignment
 
@@ -8,7 +8,7 @@ import scalafx.scene.control.{Button, Label, ListView}
 import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
-class AssignmentView extends VBox {
+class AssignmentPane extends VBox {
   val assignmentsLabel = new Label { text = "Assignments:" }
   val assignmentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Assignment](a => a.task) )
   val assignmentsList = new ListView[Assignment] { prefWidth = 333; items = ObservableBuffer[Assignment](); cellFactory = assignmentCellFactory }
