@@ -1,6 +1,6 @@
 package hs.pane
 
-import hs.domain.Grade
+import hs.entity.Grade
 
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.control.cell.TextFieldListCell

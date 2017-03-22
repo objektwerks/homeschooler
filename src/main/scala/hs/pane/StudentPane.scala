@@ -1,6 +1,6 @@
 package hs.pane
 
-import hs.domain.Student
+import hs.entity.Student
 
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.control.cell.TextFieldListCell
