@@ -1,9 +1,11 @@
 package hs.dialog
 
+import hs.domain.Grade
+
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.control.Dialog
 
-class GradeDialog[Grade](stage: PrimaryStage) extends Dialog[Grade]() {
+class GradeDialog(grade: Grade, stage: PrimaryStage) extends Dialog[Grade]() {
   initOwner(stage)
   title = "Grade"
   headerText = "Save Grade"
