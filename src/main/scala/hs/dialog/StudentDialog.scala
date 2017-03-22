@@ -21,12 +21,16 @@ class StudentDialog(student: Student, stage: PrimaryStage) extends Dialog[Studen
     add(new Label("Born:"), 0, 1)
     add(bornDatePicker, 1, 1)
   }
-  resultConverter = dialogButton =>
-    if (dialogButton == saveButtonType) student.copy(name = nameTextField.text.value, born = bornDatePicker.value.value) else student
 
   dialogPane().getButtonTypes.addAll(saveButtonType, ButtonType.Cancel)
   dialogPane().contentProperty().set(grid)
   initOwner(stage)
   title = "Student"
   headerText = "Save Student"
+
+  resultConverter = dialogButton => {
+    if (dialogButton == saveButtonType)
+      student.copy(name = nameTextField.text.value, born = bornDatePicker.value.value)
+    else null
+  }
 }
