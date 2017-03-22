@@ -1,12 +1,12 @@
 package hs.dialog
 
+import hs.App
 import hs.repository.Course
 
-import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.control.Dialog
 
-class CourseDialog(course: Course, stage: PrimaryStage) extends Dialog[Course]() {
-  initOwner(stage)
+class CourseDialog(course: Course) extends Dialog[Course]() {
+  initOwner(App.stage)
   title = "Course"
   headerText = "Save Course"
 }
