@@ -1,29 +1,21 @@
 package hs.dialog
 
+import hs.pane.DialogGridPane
 import hs.repository.Student
 
 import scalafx.application.JFXApp.PrimaryStage
-import scalafx.geometry.Insets
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
-import scalafx.scene.layout.GridPane
 
 class StudentDialog(student: Student, stage: PrimaryStage) extends Dialog[Student]() {
   val saveButtonType = new ButtonType("Save", ButtonData.OKDone)
   val nameTextField = new TextField { promptText = "Name:"}
   val bornDatePicker = new DatePicker { promptText = "Born:"}
-  val grid = new GridPane() {
-    hgap = 10
-    vgap = 10
-    padding = Insets(20, 100, 10, 10)
-    add(new Label("Name:"), 0, 0)
-    add(nameTextField, 1, 0)
-    add(new Label("Born:"), 0, 1)
-    add(bornDatePicker, 1, 1)
-  }
+  val controls = Map[String, Control]("Name:" -> nameTextField, "Born:" -> bornDatePicker)
+  val gridPane = new DialogGridPane(controls)
 
   dialogPane().getButtonTypes.addAll(saveButtonType, ButtonType.Cancel)
-  dialogPane().contentProperty().set(grid)
+  dialogPane().contentProperty().set(gridPane)
   initOwner(stage)
   title = "Student"
   headerText = "Save Student"
