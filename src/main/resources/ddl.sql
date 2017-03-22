@@ -1,3 +1,7 @@
+drop if exists table "assignments"
+drop if exists table "courses"
+drop if exists table "grades"
+drop if exists table "students"
 create table "students" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"name" VARCHAR NOT NULL,"born" DATE NOT NULL)
 create table "grades" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"student_id" INTEGER NOT NULL,"grade" VARCHAR NOT NULL,"started" DATE NOT NULL,"completed" DATE NOT NULL)
 create table "courses" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"grade_id" INTEGER NOT NULL,"name" VARCHAR NOT NULL)
@@ -7,4 +11,4 @@ alter table "courses" add constraint "grade_fk" foreign key("grade_id") referenc
 alter table "assignments" add constraint "course_fk" foreign key("course_id") references "courses"("id") on update NO ACTION on delete NO ACTION
 alter table "assignments" drop constraint "course_fk"
 alter table "courses" drop constraint "grade_fk"
-alter table "grades" drop constraint "student_fk"
+alter table "grades" drop constraint "student_fk"[
