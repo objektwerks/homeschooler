@@ -29,8 +29,7 @@ class StudentDialog(student: Student, stage: PrimaryStage) extends Dialog[Studen
   headerText = "Save Student"
 
   resultConverter = dialogButton => {
-    if (dialogButton == saveButtonType)
-      student.copy(name = nameTextField.text.value, born = bornDatePicker.value.value)
+    if (dialogButton == saveButtonType) student.copy(name = nameTextField.text.value, born = bornDatePicker.value.value)
     else null
   }
 }
