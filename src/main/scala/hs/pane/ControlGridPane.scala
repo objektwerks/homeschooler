@@ -4,7 +4,7 @@ import scalafx.geometry.Insets
 import scalafx.scene.control.{Control, Label}
 import scalafx.scene.layout.GridPane
 
-class DialogGridPane(controls: Map[String, Control]) extends GridPane {
+class ControlGridPane(controls: Map[String, Control]) extends GridPane {
   hgap = 6
   vgap = 6
   padding = Insets(6, 100, 6, 6)
