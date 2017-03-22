@@ -15,12 +15,11 @@ import scalafx.scene.layout.{HBox, VBox}
 object App extends JFXApp {
   val config = DatabaseConfig.forConfig[JdbcProfile]("app", ConfigFactory.load("app.conf"))
   val repository = new Repository(config = config, profile = H2Profile)
-  import repository._
-  import MenuView._
-  import StudentView._
-  import GradeView._
-  import CourseView._
-  import AssignmentView._
+  val menuView = new MenuView()
+  val studentView = new StudentView()
+  val gradeView = new GradeView()
+  val courseView = new CourseView()
+  val assignmentView = new AssignmentView()
 
   val northPane = new HBox { spacing = 6; children = List(studentPane, new Separator { orientation = Orientation.Vertical }, gradePane) }
   val southPane = new HBox { spacing = 6; children = List(coursesPane, assignmentsPane) }
@@ -28,5 +27,5 @@ object App extends JFXApp {
   val sceneGraph = new Scene { root = contentPane }
   stage = new JFXApp.PrimaryStage { scene = sceneGraph; title = "Homeschool"; minHeight = 516; maxHeight = 516; minWidth = 684; maxWidth = 684 }
 
-  sys.addShutdownHook { closeRepository() }
+  sys.addShutdownHook { repository.close() }
 }

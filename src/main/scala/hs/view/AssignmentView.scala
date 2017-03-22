@@ -8,7 +8,7 @@ import scalafx.scene.control.{Button, Label, ListView}
 import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
-object AssignmentView {
+class AssignmentView extends VBox {
   val assignmentsLabel = new Label { text = "Assignments:" }
   val assignmentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Assignment](a => a.task) )
   val assignmentsList = new ListView[Assignment] { prefWidth = 333; items = ObservableBuffer[Assignment](); cellFactory = assignmentCellFactory }
@@ -22,5 +22,6 @@ object AssignmentView {
   val assignmentsAddButton = new Button { text = "+" }
   val assignmentsToolBar = new HBox { spacing = 6; children = List(assignmentsPropsButton, assignmentsAddButton) }
   val assignmentsDetailsPane = new HBox { spacing = 6; children = List(assignedDate, toLabel, completedDate, scoreLabel, splitLabel, totalLabel, assignmentsToolBar) }
-  val assignmentsPane = new VBox { spacing = 6; children = List(assignmentsLabel, assignmentsList, assignmentsDetailsPane) }
+  spacing = 6
+  children = List(assignmentsLabel, assignmentsList, assignmentsDetailsPane)
 }

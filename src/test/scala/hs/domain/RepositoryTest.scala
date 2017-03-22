@@ -20,7 +20,7 @@ class RepositoryTest extends FunSuite with BeforeAndAfterAll with Matchers {
 
   override protected def afterAll(): Unit = {
     dropSchema()
-    closeRepository()
+    close()
   }
 
   test("repository") {
