@@ -1,4 +1,4 @@
-package hs.entity
+package hs.repository
 
 import java.time.LocalDate
 

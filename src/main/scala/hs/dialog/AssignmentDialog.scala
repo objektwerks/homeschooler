@@ -1,6 +1,6 @@
 package hs.dialog
 
-import hs.entity.Assignment
+import hs.repository.Assignment
 
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.control.Dialog

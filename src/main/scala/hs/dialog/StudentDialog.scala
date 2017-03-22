@@ -1,6 +1,6 @@
 package hs.dialog
 
-import hs.entity.Student
+import hs.repository.Student
 
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.geometry.Insets

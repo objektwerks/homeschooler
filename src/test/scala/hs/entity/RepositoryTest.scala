@@ -3,7 +3,7 @@ package hs.entity
 import java.time.LocalDate
 
 import com.typesafe.config.ConfigFactory
-import hs.repository.Repository
+import hs.repository._
 import org.scalatest.{BeforeAndAfterAll, FunSuite, Matchers}
 import slick.basic.DatabaseConfig
 import slick.jdbc.{H2Profile, JdbcProfile}

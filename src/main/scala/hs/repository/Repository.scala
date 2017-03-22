@@ -3,7 +3,6 @@ package hs.repository
 import java.sql.Date
 import java.time.LocalDate
 
-import hs.entity.{Assignment, Course, Grade, Student}
 import slick.basic.DatabaseConfig
 import slick.jdbc.JdbcProfile
 

@@ -1,6 +1,6 @@
 package hs.dialog
 
-import hs.entity.Grade
+import hs.repository.Grade
 
 import scalafx.application.JFXApp.PrimaryStage
 import scalafx.scene.control.Dialog
