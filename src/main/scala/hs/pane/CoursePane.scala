@@ -1,5 +1,6 @@
 package hs.pane
 
+import hs.Model
 import hs.dialog.CourseDialog
 import hs.repository.Course
 
@@ -23,10 +24,10 @@ class CoursePane extends VBox {
 
   courseList.selectionModel().selectedItemProperty().onChange { (_, _, selectedCourse) =>
     coursePropsButton.disable = false
-    println(selectedCourse)
+    Model.courseid = selectedCourse.id
   }
   coursePropsButton.onAction = { _ => handleAction(courseList.selectionModel().getSelectedItem) }
-  courseAddButton.onAction = { _ => handleAction(Course(gradeid = 1)) } // TODO
+  courseAddButton.onAction = { _ => handleAction(Course(gradeid = Model.gradeid)) }
 
   def handleAction(course: Course): Unit = {
     val result = new CourseDialog(course).showAndWait()

@@ -1,5 +1,6 @@
 package hs.pane
 
+import hs.Model
 import hs.dialog.AssignmentDialog
 import hs.repository.Assignment
 
@@ -30,10 +31,10 @@ class AssignmentPane extends VBox {
 
   assignmentList.selectionModel().selectedItemProperty().onChange { (_, _, selectedAssignment) =>
     assignmentPropsButton.disable = false
-    println(selectedAssignment)
+    Model.assignmentid = selectedAssignment.id
   }
   assignmentPropsButton.onAction = { _ => handleAction(assignmentList.selectionModel().getSelectedItem) }
-  assignmentAddButton.onAction = { _ => handleAction(Assignment(courseid = 1)) } // TODO
+  assignmentAddButton.onAction = { _ => handleAction(Assignment(courseid = Model.courseid)) }
 
   def handleAction(assignment: Assignment): Unit = {
     val result = new AssignmentDialog(assignment).showAndWait()

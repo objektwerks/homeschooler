@@ -1,5 +1,6 @@
 package hs.pane
 
+import hs.Model
 import hs.dialog.GradeDialog
 import hs.repository.Grade
 
@@ -22,10 +23,10 @@ class GradePane extends HBox {
 
   gradeComboBox.selectionModel().selectedItemProperty().onChange { (_, _, selectedGrade) =>
     gradePropsButton.disable = false
-    println(selectedGrade)
+    Model.gradeid = selectedGrade.id
   }
   gradePropsButton.onAction = { _ => handleAction(gradeComboBox.value.value) }
-  gradeAddButton.onAction = { _ => handleAction(Grade(studentid = 1)) } // TODO
+  gradeAddButton.onAction = { _ => handleAction(Grade(studentid = Model.studentid)) }
 
   def handleAction(grade: Grade): Unit = {
     val result = new GradeDialog(grade).showAndWait()

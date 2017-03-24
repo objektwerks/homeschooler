@@ -1,5 +1,6 @@
 package hs.pane
 
+import hs.Model
 import hs.dialog.StudentDialog
 import hs.repository.Student
 
@@ -22,7 +23,7 @@ class StudentPane extends HBox {
 
   studentComboBox.selectionModel().selectedItemProperty().onChange { (_, _, selectedStudent) =>
     studentPropsButton.disable = false
-    println(selectedStudent)
+    Model.studentid = selectedStudent.id
   }
   studentPropsButton.onAction = { _ => handleAction(studentComboBox.value.value) }
   studentAddButton.onAction = { _ => handleAction(Student()) }
