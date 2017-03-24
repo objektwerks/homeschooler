@@ -32,7 +32,7 @@ class StudentPane extends HBox {
     import Store.repository._
     val result = new StudentDialog(student).showAndWait()
     result match {
-      case Some(Student(id, name, born)) => students.save(Student(id, name, born))
+      case Some(Student(id, name, born)) => await(students.save(Student(id, name, born)))
       case _ => println("Student dialog failed!")
     }
   }

@@ -8,8 +8,10 @@ class ControlGridPane(controls: Map[String, Control]) extends GridPane {
   hgap = 6
   vgap = 6
   padding = Insets(top = 6, right = 100, bottom = 6, left = 6)
-  for(row <- 0 until controls.size; (label, control) <- controls) {
+  var row = 0
+  for((label, control) <- controls) {
     add(new Label { text = label }, columnIndex = 0, rowIndex = row)
-    add(child = control, columnIndex = 1, rowIndex = row)
+    add(control, columnIndex = 1, rowIndex = row)
+    row = row + 1
   }
 }
