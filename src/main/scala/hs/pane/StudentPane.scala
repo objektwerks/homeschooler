@@ -2,7 +2,9 @@ package hs.pane
 
 import hs.repository.Student
 
+import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
+import scalafx.event.ActionEvent
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, ComboBox, Label}
 import scalafx.scene.layout.HBox
@@ -14,6 +16,11 @@ class StudentPane extends HBox {
   val studentComboBox = new ComboBox[Student] { prefHeight = 25; prefWidth = 203; items = ObservableBuffer[Student](); cellFactory = studentCellFactory }
   val studentPropsButton = new Button { text = "*"; prefHeight = 25 }
   val studentAddButton = new Button { text = "+"; prefHeight = 25 }
+
   spacing = 6
   children = List(studentLabel, studentComboBox, studentPropsButton, studentAddButton)
+
+  studentComboBox.selectionModel().selectedItemProperty().onChange { (_, _, selectedStudent) => println(selectedStudent) }
+  studentPropsButton.onAction = { ae: ActionEvent => println(ae) }
+  studentAddButton.onAction = { ae: ActionEvent => println(ae) }
 }

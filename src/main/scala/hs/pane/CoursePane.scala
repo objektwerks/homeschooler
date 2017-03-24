@@ -2,19 +2,26 @@ package hs.pane
 
 import hs.repository.Course
 
+import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
+import scalafx.event.ActionEvent
 import scalafx.scene.control.cell.TextFieldListCell
-import scalafx.scene.control.{Button, Label, ListView}
+import scalafx.scene.control.{Button, Label, ListView, SelectionMode}
 import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
 class CoursePane extends VBox {
-  val coursesLabel = new Label { text = "Courses:" }
+  val courseLabel = new Label { text = "Courses:" }
   val courseCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Course](c => c.name) )
-  val coursesList = new ListView[Course] { prefWidth = 333; items = ObservableBuffer[Course](); cellFactory = courseCellFactory }
-  val coursesPropsButton = new Button { text = "*" }
-  val coursesAddButton = new Button { text = "+" }
-  val coursesToolBar = new HBox { spacing = 6; children = List(coursesPropsButton, coursesAddButton)}
+  val courseList = new ListView[Course] { prefWidth = 333; items = ObservableBuffer[Course](); cellFactory = courseCellFactory; selectionModel().selectionMode = SelectionMode.Single }
+  val coursePropsButton = new Button { text = "*"; prefHeight = 25 }
+  val courseAddButton = new Button { text = "+"; prefHeight = 25 }
+  val courseToolBar = new HBox { spacing = 6; children = List(coursePropsButton, courseAddButton) }
+
   spacing = 6
-  children = List(coursesLabel, coursesList, coursesToolBar)
+  children = List(courseLabel, courseList, courseToolBar)
+
+  courseList.selectionModel().selectedItemProperty().onChange { (_, _, selectedCourse) => println(selectedCourse) }
+  coursePropsButton.onAction = { ae: ActionEvent => println(ae) }
+  courseAddButton.onAction = { ae: ActionEvent => println(ae) }
 }
