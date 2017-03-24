@@ -1,6 +1,6 @@
 package hs.pane
 
-import hs.Model
+import hs.{Model, Store}
 import hs.dialog.AssignmentDialog
 import hs.repository.Assignment
 
@@ -37,9 +37,10 @@ class AssignmentPane extends VBox {
   assignmentAddButton.onAction = { _ => handleAction(Assignment(courseid = Model.courseid)) }
 
   def handleAction(assignment: Assignment): Unit = {
+    import Store.repository._
     val result = new AssignmentDialog(assignment).showAndWait()
     result match {
-      case Some(Assignment(id, courseid, task, assigned, completed, score)) => println(Assignment(id, courseid, task, assigned, completed, score))
+      case Some(Assignment(id, courseid, task, assigned, completed, score)) => assignments.save(Assignment(id, courseid, task, assigned, completed, score))
       case _ => println("Assignment dialog failed!")
     }
   }

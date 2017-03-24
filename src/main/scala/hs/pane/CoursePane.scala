@@ -1,6 +1,6 @@
 package hs.pane
 
-import hs.Model
+import hs.{Model, Store}
 import hs.dialog.CourseDialog
 import hs.repository.Course
 
@@ -30,9 +30,10 @@ class CoursePane extends VBox {
   courseAddButton.onAction = { _ => handleAction(Course(gradeid = Model.gradeid)) }
 
   def handleAction(course: Course): Unit = {
+    import Store.repository._
     val result = new CourseDialog(course).showAndWait()
     result match {
-      case Some(Course(id, gradeid, name)) => println(Course(id, gradeid, name))
+      case Some(Course(id, gradeid, name)) => courses.save(Course(id, gradeid, name))
       case _ => println("Course dialog failed!")
     }
   }

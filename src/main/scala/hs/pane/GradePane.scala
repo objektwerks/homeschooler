@@ -1,6 +1,6 @@
 package hs.pane
 
-import hs.Model
+import hs.{Model, Store}
 import hs.dialog.GradeDialog
 import hs.repository.Grade
 
@@ -29,9 +29,10 @@ class GradePane extends HBox {
   gradeAddButton.onAction = { _ => handleAction(Grade(studentid = Model.studentid)) }
 
   def handleAction(grade: Grade): Unit = {
+    import Store.repository._
     val result = new GradeDialog(grade).showAndWait()
     result match {
-      case Some(Grade(id, studentid, year, started, completed)) => println(Grade(id, studentid, year, started, completed))
+      case Some(Grade(id, studentid, year, started, completed)) => grades.save(Grade(id, studentid, year, started, completed))
       case _ => println("Grade dialog failed!")
     }
   }

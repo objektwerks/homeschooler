@@ -1,6 +1,6 @@
 package hs.pane
 
-import hs.Model
+import hs.{Model, Store}
 import hs.dialog.StudentDialog
 import hs.repository.Student
 
@@ -29,9 +29,10 @@ class StudentPane extends HBox {
   studentAddButton.onAction = { _ => handleAction(Student()) }
 
   def handleAction(student: Student): Unit = {
+    import Store.repository._
     val result = new StudentDialog(student).showAndWait()
     result match {
-      case Some(Student(id, name, born)) => println(Student(id, name, born))
+      case Some(Student(id, name, born)) => students.save(Student(id, name, born))
       case _ => println("Student dialog failed!")
     }
   }
