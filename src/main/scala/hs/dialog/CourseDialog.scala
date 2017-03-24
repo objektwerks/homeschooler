@@ -4,6 +4,7 @@ import hs.App
 import hs.pane.ControlGridPane
 import hs.repository.Course
 
+import scalafx.Includes._
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
 
@@ -13,8 +14,9 @@ class CourseDialog(course: Course) extends Dialog[Course]() {
   val gridPaneControls = Map[String, Control]("Name:" -> nameTextField)
   val gridPane = new ControlGridPane(gridPaneControls)
 
-  dialogPane().getButtonTypes.addAll(saveButtonType, ButtonType.Cancel)
-  dialogPane().contentProperty().set(gridPane)
+  val dialog = dialogPane()
+  dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
+  dialog.content = gridPane
   initOwner(App.stage)
   title = "Course"
   headerText = "Save Course"

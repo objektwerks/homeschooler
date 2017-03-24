@@ -4,6 +4,7 @@ import hs.App
 import hs.pane.ControlGridPane
 import hs.repository.Assignment
 
+import scalafx.Includes._
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
 
@@ -20,8 +21,9 @@ class AssignmentDialog(assignment: Assignment) extends Dialog[Assignment]() {
     "Score:" -> scoreSlider)
   val gridPane = new ControlGridPane(gridPaneControls)
 
-  dialogPane().getButtonTypes.addAll(saveButtonType, ButtonType.Cancel)
-  dialogPane().contentProperty().set(gridPane)
+  val dialog = dialogPane()
+  dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
+  dialog.content = gridPane
   initOwner(App.stage)
   title = "Assignment"
   headerText = "Save Assignment"
