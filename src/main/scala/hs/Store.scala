@@ -6,6 +6,6 @@ import slick.basic.DatabaseConfig
 import slick.jdbc.{H2Profile, JdbcProfile}
 
 object Store {
-  val config = DatabaseConfig.forConfig[JdbcProfile]("store", ConfigFactory.load("store.conf"))
-  val repository = new Repository(config = config, profile = H2Profile)
+  val conf = DatabaseConfig.forConfig[JdbcProfile]("store", ConfigFactory.load("store.conf"))
+  val repository = new Repository(config = conf, profile = H2Profile)
 }
