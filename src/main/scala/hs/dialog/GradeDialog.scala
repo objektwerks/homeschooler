@@ -12,7 +12,10 @@ class GradeDialog(grade: Grade) extends Dialog[Grade]() {
   val yearTextField = new TextField { text = grade.year }
   val startedDatePicker = new DatePicker { value = grade.started }
   val completedDatePicker = new DatePicker { value = grade.completed }
-  val gridPaneControls = Map[String, Control]("Year:" -> yearTextField, "Started:" -> startedDatePicker, "Completed:" -> completedDatePicker)
+  val gridPaneControls = Map[String, Control](
+    "Year:" -> yearTextField,
+    "Started:" -> startedDatePicker,
+    "Completed:" -> completedDatePicker)
   val gridPane = new ControlGridPane(gridPaneControls)
 
   dialogPane().getButtonTypes.addAll(saveButtonType, ButtonType.Cancel)
@@ -23,7 +26,10 @@ class GradeDialog(grade: Grade) extends Dialog[Grade]() {
 
   resultConverter = dialogButton => {
     if (dialogButton == saveButtonType)
-      grade.copy(year = yearTextField.text.value, started = startedDatePicker.value.value, completed = completedDatePicker.value.value)
+      grade.copy(
+        year = yearTextField.text.value,
+        started = startedDatePicker.value.value,
+        completed = completedDatePicker.value.value)
     else null
   }
 }
