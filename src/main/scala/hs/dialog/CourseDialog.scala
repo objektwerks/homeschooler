@@ -22,7 +22,7 @@ class CourseDialog(course: Course) extends Dialog[Course]() {
   headerText = "Save Course"
 
   val saveButton = dialog.lookupButton(saveButtonType)
-  saveButton.disable = true
+  saveButton.disable = nameTextField.text.value.isEmpty
   nameTextField.text.onChange { (_, _, newValue) =>
     saveButton.disable = newValue.trim.isEmpty
   }
