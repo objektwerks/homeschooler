@@ -23,7 +23,7 @@ class StudentDialog(student: Student) extends Dialog[Student]() {
   headerText = "Save Student"
 
   val saveButton = dialog.lookupButton(saveButtonType)
-  saveButton.disable = nameTextField.text.value.isEmpty
+  saveButton.disable = nameTextField.text.value.trim.isEmpty
   nameTextField.text.onChange { (_, _, newValue) =>
     saveButton.disable = newValue.trim.isEmpty
   }

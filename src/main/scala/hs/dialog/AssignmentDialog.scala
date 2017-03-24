@@ -29,7 +29,7 @@ class AssignmentDialog(assignment: Assignment) extends Dialog[Assignment]() {
   headerText = "Save Assignment"
 
   val saveButton = dialog.lookupButton(saveButtonType)
-  saveButton.disable = taskTextField.text.value.isEmpty
+  saveButton.disable = taskTextField.text.value.trim.isEmpty
   taskTextField.text.onChange { (_, _, newValue) =>
     saveButton.disable = newValue.trim.isEmpty
   }
