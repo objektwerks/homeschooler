@@ -28,6 +28,12 @@ class AssignmentDialog(assignment: Assignment) extends Dialog[Assignment]() {
   title = "Assignment"
   headerText = "Save Assignment"
 
+  val saveButton = dialog.lookupButton(saveButtonType)
+  saveButton.disable = true
+  taskTextField.text.onChange { (_, _, newValue) =>
+    saveButton.disable = newValue.trim.isEmpty
+  }
+
   resultConverter = dialogButton => {
     if (dialogButton == saveButtonType)
       assignment.copy(

@@ -26,6 +26,12 @@ class GradeDialog(grade: Grade) extends Dialog[Grade]() {
   title = "Grade"
   headerText = "Save Grade"
 
+  val saveButton = dialog.lookupButton(saveButtonType)
+  saveButton.disable = true
+  yearTextField.text.onChange { (_, _, newValue) =>
+    saveButton.disable = newValue.trim.isEmpty
+  }
+
   resultConverter = dialogButton => {
     if (dialogButton == saveButtonType)
       grade.copy(

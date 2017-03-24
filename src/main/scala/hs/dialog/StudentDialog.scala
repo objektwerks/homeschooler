@@ -22,6 +22,12 @@ class StudentDialog(student: Student) extends Dialog[Student]() {
   title = "Student"
   headerText = "Save Student"
 
+  val saveButton = dialog.lookupButton(saveButtonType)
+  saveButton.disable = true
+  nameTextField.text.onChange { (_, _, newValue) =>
+    saveButton.disable = newValue.trim.isEmpty
+  }
+
   resultConverter = dialogButton => {
     if (dialogButton == saveButtonType)
       student.copy(name = nameTextField.text.value, born = bornDatePicker.value.value)

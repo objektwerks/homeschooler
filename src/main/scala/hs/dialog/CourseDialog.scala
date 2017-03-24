@@ -21,6 +21,12 @@ class CourseDialog(course: Course) extends Dialog[Course]() {
   title = "Course"
   headerText = "Save Course"
 
+  val saveButton = dialog.lookupButton(saveButtonType)
+  saveButton.disable = true
+  nameTextField.text.onChange { (_, _, newValue) =>
+    saveButton.disable = newValue.trim.isEmpty
+  }
+
   resultConverter = dialogButton => {
     if (dialogButton == saveButtonType)
       course.copy(name = nameTextField.text.value)
