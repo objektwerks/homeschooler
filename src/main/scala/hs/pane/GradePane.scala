@@ -26,10 +26,10 @@ class GradePane() extends HBox {
     gradeAddButton.disable = false
     println(selectedGrade)
   }
-  gradePropsButton.onAction = { _ => handleAction(gradeComboBox.value.value) }
-  gradeAddButton.onAction = { _ => handleAction(Grade(studentid = 1)) }
+  gradePropsButton.onAction = { _ => save(gradeComboBox.value.value) }
+  gradeAddButton.onAction = { _ => save(Grade(studentid = 1)) }
 
-  def handleAction(grade: Grade): Unit = {
+  def save(grade: Grade): Unit = {
     import Store.repository._
     val result = new GradeDialog(grade).showAndWait()
     result match {

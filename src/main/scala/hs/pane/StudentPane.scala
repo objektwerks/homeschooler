@@ -25,10 +25,10 @@ class StudentPane extends HBox {
     studentPropsButton.disable = false
     println(selectedStudent)
   }
-  studentPropsButton.onAction = { _ => handleAction(studentComboBox.value.value) }
-  studentAddButton.onAction = { _ => handleAction(Student()) }
+  studentPropsButton.onAction = { _ => save(studentComboBox.value.value) }
+  studentAddButton.onAction = { _ => save(Student()) }
 
-  def handleAction(student: Student): Unit = {
+  def save(student: Student): Unit = {
     import Store.repository._
     val result = new StudentDialog(student).showAndWait()
     result match {

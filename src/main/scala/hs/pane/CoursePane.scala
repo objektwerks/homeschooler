@@ -27,10 +27,10 @@ class CoursePane() extends VBox {
     courseAddButton.disable = false
     println(selectedCourse)
   }
-  coursePropsButton.onAction = { _ => handleAction(courseList.selectionModel().getSelectedItem) }
-  courseAddButton.onAction = { _ => handleAction(Course(gradeid = 1)) }
+  coursePropsButton.onAction = { _ => save(courseList.selectionModel().getSelectedItem) }
+  courseAddButton.onAction = { _ => save(Course(gradeid = 1)) }
 
-  def handleAction(course: Course): Unit = {
+  def save(course: Course): Unit = {
     import Store.repository._
     val result = new CourseDialog(course).showAndWait()
     result match {

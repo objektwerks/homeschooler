@@ -34,10 +34,10 @@ class AssignmentPane() extends VBox {
     assignmentAddButton.disable = false
     println(selectedAssignment)
   }
-  assignmentPropsButton.onAction = { _ => handleAction(assignmentList.selectionModel().getSelectedItem) }
-  assignmentAddButton.onAction = { _ => handleAction(Assignment(courseid = 1)) }
+  assignmentPropsButton.onAction = { _ => save(assignmentList.selectionModel().getSelectedItem) }
+  assignmentAddButton.onAction = { _ => save(Assignment(courseid = 1)) }
 
-  def handleAction(assignment: Assignment): Unit = {
+  def save(assignment: Assignment): Unit = {
     import Store.repository._
     val result = new AssignmentDialog(assignment).showAndWait()
     result match {
