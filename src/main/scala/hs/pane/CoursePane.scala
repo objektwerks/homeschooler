@@ -11,7 +11,7 @@ import scalafx.scene.control.{Button, Label, ListView, SelectionMode}
 import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
-class CoursePane(gradePane: GradePane) extends VBox {
+class CoursePane() extends VBox {
   val courseLabel = new Label { text = "Courses:" }
   val courseCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Course](c => c.name) )
   val courseList = new ListView[Course] { prefWidth = 333; items = ObservableBuffer[Course](); cellFactory = courseCellFactory; selectionModel().selectionMode = SelectionMode.Single }

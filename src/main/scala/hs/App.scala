@@ -13,9 +13,9 @@ object App extends JFXApp {
   val conf = ConfigFactory.load("app.conf")
   val menuPane = new MenuPane()
   val studentPane = new StudentPane()
-  val gradePane = new GradePane(studentPane)
-  val coursePane = new CoursePane(gradePane)
-  val assignmentPane = new AssignmentPane(coursePane)
+  val gradePane = new GradePane()
+  val coursePane = new CoursePane()
+  val assignmentPane = new AssignmentPane()
 
   val northPane = new HBox { spacing = 6; children = List(studentPane, new Separator { orientation = Orientation.Vertical }, gradePane) }
   val southPane = new HBox { spacing = 6; children = List(coursePane, assignmentPane) }
