@@ -1,6 +1,6 @@
 package hs.pane
 
-import hs.{Model, Store}
+import hs.Store
 import hs.dialog.AssignmentDialog
 import hs.repository.Assignment
 
@@ -11,7 +11,7 @@ import scalafx.scene.control.{Button, Label, ListView, SelectionMode}
 import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
-class AssignmentPane extends VBox {
+class AssignmentPane(coursePane: CoursePane) extends VBox {
   val assignmentLabel = new Label { text = "Assignments:" }
   val assignmentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Assignment](a => a.task) )
   val assignmentList = new ListView[Assignment] { prefWidth = 333; items = ObservableBuffer[Assignment](); cellFactory = assignmentCellFactory; selectionModel().selectionMode = SelectionMode.Single }
@@ -22,7 +22,7 @@ class AssignmentPane extends VBox {
   val splitLabel = new Label { text = " / " }
   val totalLabel = new Label { text = "0.0" }
   val assignmentPropsButton = new Button { text = "*"; prefHeight = 25; disable = true }
-  val assignmentAddButton = new Button { text = "+"; prefHeight = 25 }
+  val assignmentAddButton = new Button { text = "+"; prefHeight = 25; disable = true }
   val assignmentToolBar = new HBox { spacing = 6; children = List(assignmentPropsButton, assignmentAddButton) }
   val assignmentDetailsPane = new HBox { spacing = 6; children = List(assignedDate, toLabel, completedDate, scoreLabel, splitLabel, totalLabel, assignmentToolBar) }
 
@@ -31,10 +31,11 @@ class AssignmentPane extends VBox {
 
   assignmentList.selectionModel().selectedItemProperty().onChange { (_, _, selectedAssignment) =>
     assignmentPropsButton.disable = false
-    Model.assignmentid = selectedAssignment.id
+    assignmentAddButton.disable = false
+    println(selectedAssignment)
   }
   assignmentPropsButton.onAction = { _ => handleAction(assignmentList.selectionModel().getSelectedItem) }
-  assignmentAddButton.onAction = { _ => handleAction(Assignment(courseid = Model.courseid)) }
+  assignmentAddButton.onAction = { _ => handleAction(Assignment(courseid = 1)) }
 
   def handleAction(assignment: Assignment): Unit = {
     import Store.repository._

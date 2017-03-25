@@ -1,6 +1,6 @@
 package hs.pane
 
-import hs.{Model, Store}
+import hs.Store
 import hs.dialog.GradeDialog
 import hs.repository.Grade
 
@@ -11,22 +11,23 @@ import scalafx.scene.control.{Button, ComboBox, Label}
 import scalafx.scene.layout.HBox
 import scalafx.util.StringConverter
 
-class GradePane extends HBox {
+class GradePane(studentPane: StudentPane) extends HBox {
   val gradeLabel = new Label { text = "Grade:" }
   val gradeCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Grade](g => g.year) )
   val gradeComboBox = new ComboBox[Grade] { prefHeight = 25; prefWidth = 203; items = ObservableBuffer[Grade](); cellFactory = gradeCellFactory }
   val gradePropsButton = new Button { text = "*"; prefHeight = 25; disable = true }
-  val gradeAddButton = new Button { text = "+"; prefHeight = 25 }
+  val gradeAddButton = new Button { text = "+"; prefHeight = 25; disable = true }
 
   spacing = 6
   children = List(gradeLabel, gradeComboBox, gradePropsButton, gradeAddButton)
 
   gradeComboBox.selectionModel().selectedItemProperty().onChange { (_, _, selectedGrade) =>
     gradePropsButton.disable = false
-    Model.gradeid = selectedGrade.id
+    gradeAddButton.disable = false
+    println(selectedGrade)
   }
   gradePropsButton.onAction = { _ => handleAction(gradeComboBox.value.value) }
-  gradeAddButton.onAction = { _ => handleAction(Grade(studentid = Model.studentid)) }
+  gradeAddButton.onAction = { _ => handleAction(Grade(studentid = 1)) }
 
   def handleAction(grade: Grade): Unit = {
     import Store.repository._
