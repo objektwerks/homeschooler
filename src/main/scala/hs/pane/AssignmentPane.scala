@@ -41,7 +41,7 @@ class AssignmentPane() extends VBox {
     import Store.repository._
     val result = new AssignmentDialog(assignment).showAndWait()
     result match {
-      case Some(Assignment(id, courseid, task, assigned, completed, score)) => assignments.save(Assignment(id, courseid, task, assigned, completed, score))
+      case Some(Assignment(id, courseid, task, assigned, completed, score)) => await(assignments.save(Assignment(id, courseid, task, assigned, completed, score)))
       case _ => println("Assignment dialog failed!")
     }
   }

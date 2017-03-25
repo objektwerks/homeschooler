@@ -34,7 +34,7 @@ class CoursePane() extends VBox {
     import Store.repository._
     val result = new CourseDialog(course).showAndWait()
     result match {
-      case Some(Course(id, gradeid, name)) => courses.save(Course(id, gradeid, name))
+      case Some(Course(id, gradeid, name)) => await(courses.save(Course(id, gradeid, name)))
       case _ => println("Course dialog failed!")
     }
   }
