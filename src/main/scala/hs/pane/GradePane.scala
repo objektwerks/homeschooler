@@ -20,7 +20,7 @@ class GradePane() extends HBox {
   spacing = 6
   children = List(gradeLabel, gradeComboBox, gradePropsButton, gradeAddButton)
 
-  Model.selectedGrade <== gradeComboBox.value
+  Model.selectedGrade <== gradeComboBox.selectionModel().selectedItemProperty()
   gradeComboBox.selectionModel().selectedItemProperty().onChange { (_, _, _) =>
     gradePropsButton.disable = false
     gradeAddButton.disable = false
@@ -38,7 +38,7 @@ class GradePane() extends HBox {
         val persistedGrade = grade.copy(id = gradeId.get)
         if (id == 0) {
           Model.grades += persistedGrade
-          gradeComboBox.value = persistedGrade
+          gradeComboBox.selectionModel().select(persistedGrade)
         }
       case _ => println("Grade dialog failed!")
     }

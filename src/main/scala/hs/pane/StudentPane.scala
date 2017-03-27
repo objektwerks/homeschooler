@@ -20,7 +20,7 @@ class StudentPane extends HBox {
   spacing = 6
   children = List(studentLabel, studentComboBox, studentPropsButton, studentAddButton)
 
-  Model.selectedStudent <== studentComboBox.value
+  Model.selectedStudent <== studentComboBox.selectionModel().selectedItemProperty()
   studentComboBox.selectionModel().selectedItemProperty().onChange { (_, _, _) => studentPropsButton.disable = false }
   studentPropsButton.onAction = { _ => save(studentComboBox.value.value) }
   studentAddButton.onAction = { _ => save(Student()) }
@@ -35,7 +35,7 @@ class StudentPane extends HBox {
         val persistedStudent = student.copy(id = studentId.get)
         if (id == 0) {
           Model.students += persistedStudent
-          studentComboBox.value = persistedStudent
+          studentComboBox.selectionModel().select(persistedStudent)
         }
       case _ => println("Student dialog failed!")
     }
