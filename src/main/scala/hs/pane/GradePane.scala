@@ -20,10 +20,9 @@ class GradePane() extends HBox {
   spacing = 6
   children = List(gradeLabel, gradeComboBox, gradePropsButton, gradeAddButton)
 
-  gradeComboBox.selectionModel().selectedItemProperty().onChange { (_, _, selectedGrade) =>
+  gradeComboBox.selectionModel().selectedItemProperty().onChange { (_, _, _) =>
     gradePropsButton.disable = false
     gradeAddButton.disable = false
-    println(selectedGrade)
   }
   gradePropsButton.onAction = { _ => save(gradeComboBox.value.value) }
   gradeAddButton.onAction = { _ => save(Grade(studentid = 1)) }

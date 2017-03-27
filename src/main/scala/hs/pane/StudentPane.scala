@@ -20,10 +20,7 @@ class StudentPane extends HBox {
   spacing = 6
   children = List(studentLabel, studentComboBox, studentPropsButton, studentAddButton)
 
-  studentComboBox.selectionModel().selectedItemProperty().onChange { (_, _, selectedStudent) =>
-    studentPropsButton.disable = false
-    println(selectedStudent)
-  }
+  studentComboBox.selectionModel().selectedItemProperty().onChange { (_, _, _) => studentPropsButton.disable = false }
   studentPropsButton.onAction = { _ => save(studentComboBox.value.value) }
   studentAddButton.onAction = { _ => save(Student()) }
 

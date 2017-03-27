@@ -21,10 +21,9 @@ class CoursePane() extends VBox {
   spacing = 6
   children = List(courseLabel, courseList, courseToolBar)
 
-  courseList.selectionModel().selectedItemProperty().onChange { (_, _, selectedCourse) =>
+  courseList.selectionModel().selectedItemProperty().onChange { (_, _, _) =>
     coursePropsButton.disable = false
     courseAddButton.disable = false
-    println(selectedCourse)
   }
   coursePropsButton.onAction = { _ => save(courseList.selectionModel().getSelectedItem) }
   courseAddButton.onAction = { _ => save(Course(gradeid = 1)) }
