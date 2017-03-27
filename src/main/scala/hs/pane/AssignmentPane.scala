@@ -31,7 +31,7 @@ class AssignmentPane() extends VBox {
   assignmentList.selectionModel().selectedItemProperty().onChange { (_, _, selectedAssignment) =>
     assignmentPropsButton.disable = false
     assignmentAddButton.disable = false
-    println(selectedAssignment)
+    Model.selectedAssignment.value = selectedAssignment
   }
   assignmentPropsButton.onAction = { _ => save(assignmentList.selectionModel().getSelectedItem) }
   assignmentAddButton.onAction = { _ => save(Assignment(courseid = 1)) }
@@ -40,7 +40,13 @@ class AssignmentPane() extends VBox {
     import Store.repository._
     val result = new AssignmentDialog(assignment).showAndWait()
     result match {
-      case Some(Assignment(id, courseid, task, assigned, completed, score)) => await(assignments.save(Assignment(id, courseid, task, assigned, completed, score)))
+      case Some(Assignment(id, courseid, task, assigned, completed, score)) =>
+        val assignment = Assignment(id, courseid, task, assigned, completed, score)
+        await(assignments.save(assignment))
+        if (id == 0) {
+          Model.assignments += assignment
+          Model.selectedAssignment.value = assignment
+        }
       case _ => println("Assignment dialog failed!")
     }
   }

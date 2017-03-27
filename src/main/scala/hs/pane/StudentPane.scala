@@ -20,7 +20,10 @@ class StudentPane extends HBox {
   spacing = 6
   children = List(studentLabel, studentComboBox, studentPropsButton, studentAddButton)
 
-  studentComboBox.selectionModel().selectedItemProperty().onChange { (_, _, _) => studentPropsButton.disable = false }
+  studentComboBox.selectionModel().selectedItemProperty().onChange { (_, _, selectedStudent) =>
+    studentPropsButton.disable = false
+    Model.selectedStudent.value = selectedStudent
+  }
   studentPropsButton.onAction = { _ => save(studentComboBox.value.value) }
   studentAddButton.onAction = { _ => save(Student()) }
 
@@ -28,7 +31,13 @@ class StudentPane extends HBox {
     import Store.repository._
     val result = new StudentDialog(student).showAndWait()
     result match {
-      case Some(Student(id, name, born)) => await(students.save(Student(id, name, born)))
+      case Some(Student(id, name, born)) =>
+        val student = Student(id, name, born)
+        await(students.save(student))
+        if (id == 0) {
+          Model.students += student
+          Model.selectedStudent.value = student
+        }
       case _ => println("Student dialog failed!")
     }
   }
