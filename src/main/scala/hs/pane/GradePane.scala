@@ -26,7 +26,7 @@ class GradePane() extends HBox {
     Model.selectedGrade.value = selectedGrade
   }
   gradePropsButton.onAction = { _ => save(gradeComboBox.value.value) }
-  gradeAddButton.onAction = { _ => save(Grade(studentid = 1)) }
+  gradeAddButton.onAction = { _ => save(Grade(studentid = Model.selectedStudent.value.id)) }
 
   def save(grade: Grade): Unit = {
     import Store.repository._

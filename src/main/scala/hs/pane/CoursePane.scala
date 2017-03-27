@@ -27,7 +27,7 @@ class CoursePane() extends VBox {
     Model.selectedCourse.value = selectedCourse
   }
   coursePropsButton.onAction = { _ => save(courseList.selectionModel().getSelectedItem) }
-  courseAddButton.onAction = { _ => save(Course(gradeid = 1)) }
+  courseAddButton.onAction = { _ => save(Course(gradeid = Model.selectedGrade.value.id)) }
 
   def save(course: Course): Unit = {
     import Store.repository._

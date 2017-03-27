@@ -34,7 +34,7 @@ class AssignmentPane() extends VBox {
     Model.selectedAssignment.value = selectedAssignment
   }
   assignmentPropsButton.onAction = { _ => save(assignmentList.selectionModel().getSelectedItem) }
-  assignmentAddButton.onAction = { _ => save(Assignment(courseid = 1)) }
+  assignmentAddButton.onAction = { _ => save(Assignment(courseid = Model.selectedCourse.value.id)) }
 
   def save(assignment: Assignment): Unit = {
     import Store.repository._
