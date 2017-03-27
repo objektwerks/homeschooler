@@ -1,8 +1,8 @@
 package hs.pane
 
-import hs.{Model, Store}
 import hs.dialog.CourseDialog
 import hs.repository.Course
+import hs.{Model, Store}
 
 import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
@@ -21,8 +21,9 @@ class CoursePane() extends VBox {
   spacing = 6
   children = List(courseLabel, courseList, courseToolBar)
 
+
   Model.selectedCourse <== courseList.selectionModel().selectedItemProperty()
-  courseList.selectionModel().selectedItemProperty().onChange { (_, _, _) =>
+  Model.selectedCourse.onChange {
     coursePropsButton.disable = false
     courseAddButton.disable = false
   }

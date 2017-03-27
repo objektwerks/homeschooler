@@ -1,10 +1,9 @@
 package hs.pane
 
-import hs.{Model, Store}
 import hs.dialog.StudentDialog
 import hs.repository.Student
+import hs.{Model, Store}
 
-import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, ComboBox, Label}
 import scalafx.scene.layout.HBox
@@ -21,7 +20,7 @@ class StudentPane extends HBox {
   children = List(studentLabel, studentComboBox, studentPropsButton, studentAddButton)
 
   Model.selectedStudent <== studentComboBox.selectionModel().selectedItemProperty()
-  studentComboBox.selectionModel().selectedItemProperty().onChange { (_, _, _) => studentPropsButton.disable = false }
+  Model.selectedStudent.onChange { studentPropsButton.disable = false }
   studentPropsButton.onAction = { _ => save(studentComboBox.selectionModel().getSelectedItem) }
   studentAddButton.onAction = { _ => save(Student()) }
 

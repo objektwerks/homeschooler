@@ -1,10 +1,9 @@
 package hs.pane
 
-import hs.{Model, Store}
 import hs.dialog.GradeDialog
 import hs.repository.Grade
+import hs.{Model, Store}
 
-import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, ComboBox, Label}
 import scalafx.scene.layout.HBox
@@ -21,7 +20,7 @@ class GradePane() extends HBox {
   children = List(gradeLabel, gradeComboBox, gradePropsButton, gradeAddButton)
 
   Model.selectedGrade <== gradeComboBox.selectionModel().selectedItemProperty()
-  gradeComboBox.selectionModel().selectedItemProperty().onChange { (_, _, _) =>
+  Model.selectedGrade.onChange {
     gradePropsButton.disable = false
     gradeAddButton.disable = false
   }

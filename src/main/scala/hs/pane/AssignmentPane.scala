@@ -1,8 +1,8 @@
 package hs.pane
 
-import hs.{Model, Store}
 import hs.dialog.AssignmentDialog
 import hs.repository.Assignment
+import hs.{Model, Store}
 
 import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
@@ -29,7 +29,7 @@ class AssignmentPane() extends VBox {
   children = List(assignmentLabel, assignmentList, assignmentDetailsPane)
 
   Model.selectedAssignment <== assignmentList.selectionModel().selectedItemProperty()
-  assignmentList.selectionModel().selectedItemProperty().onChange { (_, _, _) =>
+  Model.selectedAssignment.onChange {
     assignmentPropsButton.disable = false
     assignmentAddButton.disable = false
   }
