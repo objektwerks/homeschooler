@@ -34,11 +34,8 @@ class GradePane() extends HBox {
     result match {
       case Some(Grade(id, studentid, year, started, completed)) =>
         val grade = Grade(id, studentid, year, started, completed)
-        await(grades.save(grade))
-        if (id == 0) {
-          Model.grades += grade
-          Model.selectedGrade.value = grade
-        }
+        val gradeId = await(grades.save(grade))
+        if (id == 0) Model.grades += grade.copy(id = gradeId.get)
       case _ => println("Grade dialog failed!")
     }
   }

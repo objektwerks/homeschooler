@@ -35,11 +35,8 @@ class CoursePane() extends VBox {
     result match {
       case Some(Course(id, gradeid, name)) =>
         val course = Course(id, gradeid, name)
-        await(courses.save(course))
-        if (id == 0) {
-          Model.courses += course
-          Model.selectedCourse.value = course
-        }
+        val courseId = await(courses.save(course))
+        if (id == 0) Model.courses += course.copy(id = courseId.get)
       case _ => println("Course dialog failed!")
     }
   }

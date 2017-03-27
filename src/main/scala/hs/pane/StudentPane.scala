@@ -33,11 +33,8 @@ class StudentPane extends HBox {
     result match {
       case Some(Student(id, name, born)) =>
         val student = Student(id, name, born)
-        await(students.save(student))
-        if (id == 0) {
-          Model.students += student
-          Model.selectedStudent.value = student
-        }
+        val studentId = await(students.save(student))
+        if (id == 0) Model.students += student.copy(id = studentId.get)
       case _ => println("Student dialog failed!")
     }
   }

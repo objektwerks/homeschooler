@@ -42,11 +42,8 @@ class AssignmentPane() extends VBox {
     result match {
       case Some(Assignment(id, courseid, task, assigned, completed, score)) =>
         val assignment = Assignment(id, courseid, task, assigned, completed, score)
-        await(assignments.save(assignment))
-        if (id == 0) {
-          Model.assignments += assignment
-          Model.selectedAssignment.value = assignment
-        }
+        val assignmentId = await(assignments.save(assignment))
+        if (id == 0) Model.assignments += assignment.copy(id = assignmentId.get)
       case _ => println("Assignment dialog failed!")
     }
   }
