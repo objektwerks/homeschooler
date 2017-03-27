@@ -1,11 +1,10 @@
 package hs.pane
 
-import hs.Store
+import hs.{Model, Store}
 import hs.dialog.StudentDialog
 import hs.repository.Student
 
 import scalafx.Includes._
-import scalafx.collections.ObservableBuffer
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, ComboBox, Label}
 import scalafx.scene.layout.HBox
@@ -14,7 +13,7 @@ import scalafx.util.StringConverter
 class StudentPane extends HBox {
   val studentLabel = new Label { text = "Student:" }
   val studentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Student](s => s.name) )
-  val studentComboBox = new ComboBox[Student] { prefHeight = 25; prefWidth = 203; items = ObservableBuffer[Student](); cellFactory = studentCellFactory }
+  val studentComboBox = new ComboBox[Student] { prefHeight = 25; prefWidth = 203; items = Model.students; cellFactory = studentCellFactory }
   val studentPropsButton = new Button { text = "*"; prefHeight = 25; disable = true }
   val studentAddButton = new Button { text = "+"; prefHeight = 25 }
 
