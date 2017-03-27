@@ -22,7 +22,7 @@ class StudentPane extends HBox {
 
   Model.selectedStudent <== studentComboBox.selectionModel().selectedItemProperty()
   studentComboBox.selectionModel().selectedItemProperty().onChange { (_, _, _) => studentPropsButton.disable = false }
-  studentPropsButton.onAction = { _ => save(studentComboBox.value.value) }
+  studentPropsButton.onAction = { _ => save(studentComboBox.selectionModel().getSelectedItem) }
   studentAddButton.onAction = { _ => save(Student()) }
 
   def save(student: Student): Unit = {
