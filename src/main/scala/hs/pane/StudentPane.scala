@@ -20,21 +20,23 @@ class StudentPane extends HBox {
   spacing = 6
   children = List(studentLabel, studentComboBox, studentPropsButton, studentAddButton)
 
-  studentComboBox.selectionModel().selectedItemProperty().onChange { (_, _, selectedStudent) =>
-    studentPropsButton.disable = false
-    Model.selectedStudent.value = selectedStudent
-  }
+  Model.selectedStudent <== studentComboBox.value
+  studentComboBox.selectionModel().selectedItemProperty().onChange { (_, _, _) => studentPropsButton.disable = false }
   studentPropsButton.onAction = { _ => save(studentComboBox.value.value) }
   studentAddButton.onAction = { _ => save(Student()) }
 
   def save(student: Student): Unit = {
-    import Store.repository._
     val result = new StudentDialog(student).showAndWait()
     result match {
       case Some(Student(id, name, born)) =>
+        import Store.repository._
         val student = Student(id, name, born)
         val studentId = await(students.save(student))
-        if (id == 0) Model.students += student.copy(id = studentId.get)
+        val persistedStudent = student.copy(id = studentId.get)
+        if (id == 0) {
+          Model.students += persistedStudent
+          studentComboBox.value = persistedStudent
+        }
       case _ => println("Student dialog failed!")
     }
   }

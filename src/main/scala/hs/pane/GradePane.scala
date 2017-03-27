@@ -20,22 +20,26 @@ class GradePane() extends HBox {
   spacing = 6
   children = List(gradeLabel, gradeComboBox, gradePropsButton, gradeAddButton)
 
-  gradeComboBox.selectionModel().selectedItemProperty().onChange { (_, _, selectedGrade) =>
+  Model.selectedGrade <== gradeComboBox.value
+  gradeComboBox.selectionModel().selectedItemProperty().onChange { (_, _, _) =>
     gradePropsButton.disable = false
     gradeAddButton.disable = false
-    Model.selectedGrade.value = selectedGrade
   }
   gradePropsButton.onAction = { _ => save(gradeComboBox.value.value) }
   gradeAddButton.onAction = { _ => save(Grade(studentid = Model.selectedStudent.value.id)) }
 
   def save(grade: Grade): Unit = {
-    import Store.repository._
     val result = new GradeDialog(grade).showAndWait()
     result match {
       case Some(Grade(id, studentid, year, started, completed)) =>
+        import Store.repository._
         val grade = Grade(id, studentid, year, started, completed)
         val gradeId = await(grades.save(grade))
-        if (id == 0) Model.grades += grade.copy(id = gradeId.get)
+        val persistedGrade = grade.copy(id = gradeId.get)
+        if (id == 0) {
+          Model.grades += persistedGrade
+          gradeComboBox.value = persistedGrade
+        }
       case _ => println("Grade dialog failed!")
     }
   }

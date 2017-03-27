@@ -21,22 +21,26 @@ class CoursePane() extends VBox {
   spacing = 6
   children = List(courseLabel, courseList, courseToolBar)
 
-  courseList.selectionModel().selectedItemProperty().onChange { (_, _, selectedCourse) =>
+  Model.selectedCourse <== courseList.selectionModel().selectedItemProperty()
+  courseList.selectionModel().selectedItemProperty().onChange { (_, _, _) =>
     coursePropsButton.disable = false
     courseAddButton.disable = false
-    Model.selectedCourse.value = selectedCourse
   }
   coursePropsButton.onAction = { _ => save(courseList.selectionModel().getSelectedItem) }
   courseAddButton.onAction = { _ => save(Course(gradeid = Model.selectedGrade.value.id)) }
 
   def save(course: Course): Unit = {
-    import Store.repository._
     val result = new CourseDialog(course).showAndWait()
     result match {
       case Some(Course(id, gradeid, name)) =>
+        import Store.repository._
         val course = Course(id, gradeid, name)
         val courseId = await(courses.save(course))
-        if (id == 0) Model.courses += course.copy(id = courseId.get)
+        val persistedCourse = course.copy(id = courseId.get)
+        if (id == 0) {
+          Model.courses += persistedCourse
+          courseList.selectionModel().select(persistedCourse)
+        }
       case _ => println("Course dialog failed!")
     }
   }
