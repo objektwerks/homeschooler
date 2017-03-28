@@ -1,5 +1,6 @@
 package hs.pane
 
+import com.typesafe.config.Config
 import hs.dialog.GradeDialog
 import hs.entity.Grade
 import hs.model.Model
@@ -9,7 +10,7 @@ import scalafx.scene.control.{Button, ComboBox, Label}
 import scalafx.scene.layout.HBox
 import scalafx.util.StringConverter
 
-class GradePane(model: Model) extends HBox {
+class GradePane(conf: Config, model: Model) extends HBox {
   val gradeLabel = new Label { text = "Grade:" }
   val gradeCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Grade](g => g.year) )
   val gradeComboBox = new ComboBox[Grade] { prefHeight = 25; prefWidth = 203; items = model.gradeList; cellFactory = gradeCellFactory }

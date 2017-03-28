@@ -1,5 +1,6 @@
 package hs.pane
 
+import com.typesafe.config.Config
 import hs.dialog.AssignmentDialog
 import hs.entity.Assignment
 import hs.model.Model
@@ -10,7 +11,7 @@ import scalafx.scene.control.{Button, Label, ListView, SelectionMode}
 import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
-class AssignmentPane(model: Model) extends VBox {
+class AssignmentPane(conf: Config, model: Model) extends VBox {
   val assignmentLabel = new Label { text = "Assignments:" }
   val assignmentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Assignment](a => a.task) )
   val assignmentList = new ListView[Assignment] { prefWidth = 333; items = model.assignmentList; cellFactory = assignmentCellFactory; selectionModel().selectionMode = SelectionMode.Single }

@@ -1,5 +1,6 @@
 package hs.pane
 
+import com.typesafe.config.Config
 import hs.dialog.CourseDialog
 import hs.entity.Course
 import hs.model.Model
@@ -10,7 +11,7 @@ import scalafx.scene.control.{Button, Label, ListView, SelectionMode}
 import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
-class CoursePane(model: Model) extends VBox {
+class CoursePane(conf: Config, model: Model) extends VBox {
   val courseLabel = new Label { text = "Courses:" }
   val courseCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Course](c => c.name) )
   val courseList = new ListView[Course] { prefWidth = 333; items = model.courseList; cellFactory = courseCellFactory; selectionModel().selectionMode = SelectionMode.Single }
