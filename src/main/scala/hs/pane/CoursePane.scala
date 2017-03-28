@@ -1,8 +1,8 @@
 package hs.pane
 
+import hs.Model
 import hs.dialog.CourseDialog
 import hs.repository.Course
-import hs.{Model, Store}
 
 import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
@@ -21,28 +21,29 @@ class CoursePane() extends VBox {
   spacing = 6
   children = List(courseLabel, courseList, courseToolBar)
 
-
   Model.selectedCourse <== courseList.selectionModel().selectedItemProperty()
-  Model.selectedCourse.onChange {
+
+  Model.selectedCourse.onChange { (_, _, selectedCourse) =>
     coursePropsButton.disable = false
     courseAddButton.disable = false
+    courseList.selectionModel().select(selectedCourse)
   }
-  coursePropsButton.onAction = { _ => save(courseList.selectionModel().getSelectedItem) }
-  courseAddButton.onAction = { _ => save(Course(gradeid = Model.selectedGrade.value.id)) }
 
-  def save(course: Course): Unit = {
-    val result = new CourseDialog(course).showAndWait()
-    result match {
-      case Some(Course(id, gradeid, name)) =>
-        import Store.repository._
-        val course = Course(id, gradeid, name)
-        val courseId = await(courses.save(course))
-        val persistedCourse = course.copy(id = courseId.get)
-        if (id == 0) {
-          Model.courseList += persistedCourse
-          courseList.selectionModel().select(persistedCourse)
-        }
-      case _ => println("Course dialog failed!")
+  coursePropsButton.onAction = { _ => update(courseList.selectionModel().getSelectedIndex, courseList.selectionModel().getSelectedItem) }
+
+  courseAddButton.onAction = { _ => add(Course(gradeid = Model.selectedGrade.value.id)) }
+
+  def update(selectedIndex: Int, course: Course): Unit = {
+    new CourseDialog(course).showAndWait() match {
+      case Some(Course(id, gradeid, name)) => Model.update(selectedIndex, Course(id, gradeid, name))
+      case _ =>
+    }
+  }
+
+  def add(course: Course): Unit = {
+    new CourseDialog(course).showAndWait() match {
+      case Some(Course(id, gradeid, name)) => Model.add(Course(id, gradeid, name))
+      case _ =>
     }
   }
 }

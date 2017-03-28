@@ -1,8 +1,8 @@
 package hs.pane
 
+import hs.Model
 import hs.dialog.AssignmentDialog
 import hs.repository.Assignment
-import hs.{Model, Store}
 
 import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
@@ -29,26 +29,28 @@ class AssignmentPane() extends VBox {
   children = List(assignmentLabel, assignmentList, assignmentDetailsPane)
 
   Model.selectedAssignment <== assignmentList.selectionModel().selectedItemProperty()
-  Model.selectedAssignment.onChange {
+
+  Model.selectedAssignment.onChange { (_, _, selectedAssignment) =>
     assignmentPropsButton.disable = false
     assignmentAddButton.disable = false
+    assignmentList.selectionModel().select(selectedAssignment)
   }
-  assignmentPropsButton.onAction = { _ => save(assignmentList.selectionModel().getSelectedItem) }
-  assignmentAddButton.onAction = { _ => save(Assignment(courseid = Model.selectedCourse.value.id)) }
 
-  def save(assignment: Assignment): Unit = {
-    val result = new AssignmentDialog(assignment).showAndWait()
-    result match {
-      case Some(Assignment(id, courseid, task, assigned, completed, score)) =>
-        import Store.repository._
-        val assignment = Assignment(id, courseid, task, assigned, completed, score)
-        val assignmentId = await(assignments.save(assignment))
-        val persistedAssignment = assignment.copy(id = assignmentId.get)
-        if (id == 0) {
-          Model.assignmentList += persistedAssignment
-          assignmentList.selectionModel().select(persistedAssignment)
-        }
-      case _ => println("Assignment dialog failed!")
+  assignmentPropsButton.onAction = { _ => update(assignmentList.selectionModel().getSelectedIndex, assignmentList.selectionModel().getSelectedItem) }
+
+  assignmentAddButton.onAction = { _ => add(Assignment(courseid = Model.selectedCourse.value.id)) }
+
+  def update(selectedIndex: Int, assignment: Assignment): Unit = {
+    new AssignmentDialog(assignment).showAndWait() match {
+      case Some(Assignment(id, courseid, task, assigned, completed, score)) => Model.update(selectedIndex, Assignment(id, courseid, task, assigned, completed, score))
+      case _ =>
+    }
+  }
+
+  def add(assignment: Assignment): Unit = {
+    new AssignmentDialog(assignment).showAndWait() match {
+      case Some(Assignment(id, courseid, task, assigned, completed, score)) => Model.add(Assignment(id, courseid, task, assigned, completed, score))
+      case _ =>
     }
   }
 }
