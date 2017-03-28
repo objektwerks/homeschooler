@@ -1,12 +1,14 @@
 package hs.model
 
-import hs.Store.repository._
+import hs.repository.Repository
 import hs.entity.{Assignment, Course, Grade, Student}
 
 import scalafx.beans.property.ObjectProperty
 import scalafx.collections.ObservableBuffer
 
-object Model {
+class Model(repository: Repository) {
+  import repository._
+
   val studentList = ObservableBuffer[Student]()
   val selectedStudent = new ObjectProperty[Student]()
 
