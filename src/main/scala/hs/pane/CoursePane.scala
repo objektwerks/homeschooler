@@ -13,7 +13,7 @@ import scalafx.util.StringConverter
 class CoursePane() extends VBox {
   val courseLabel = new Label { text = "Courses:" }
   val courseCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Course](c => c.name) )
-  val courseList = new ListView[Course] { prefWidth = 333; items = Model.courses; cellFactory = courseCellFactory; selectionModel().selectionMode = SelectionMode.Single }
+  val courseList = new ListView[Course] { prefWidth = 333; items = Model.courseList; cellFactory = courseCellFactory; selectionModel().selectionMode = SelectionMode.Single }
   val coursePropsButton = new Button { text = "*"; prefHeight = 25; disable = true }
   val courseAddButton = new Button { text = "+"; prefHeight = 25; disable = true }
   val courseToolBar = new HBox { spacing = 6; children = List(coursePropsButton, courseAddButton) }
@@ -39,7 +39,7 @@ class CoursePane() extends VBox {
         val courseId = await(courses.save(course))
         val persistedCourse = course.copy(id = courseId.get)
         if (id == 0) {
-          Model.courses += persistedCourse
+          Model.courseList += persistedCourse
           courseList.selectionModel().select(persistedCourse)
         }
       case _ => println("Course dialog failed!")

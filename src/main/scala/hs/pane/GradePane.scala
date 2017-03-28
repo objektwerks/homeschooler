@@ -12,7 +12,7 @@ import scalafx.util.StringConverter
 class GradePane() extends HBox {
   val gradeLabel = new Label { text = "Grade:" }
   val gradeCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Grade](g => g.year) )
-  val gradeComboBox = new ComboBox[Grade] { prefHeight = 25; prefWidth = 203; items = Model.grades; cellFactory = gradeCellFactory }
+  val gradeComboBox = new ComboBox[Grade] { prefHeight = 25; prefWidth = 203; items = Model.gradeList; cellFactory = gradeCellFactory }
   val gradePropsButton = new Button { text = "*"; prefHeight = 25; disable = true }
   val gradeAddButton = new Button { text = "+"; prefHeight = 25; disable = true }
 
@@ -36,7 +36,7 @@ class GradePane() extends HBox {
         val gradeId = await(grades.save(grade))
         val persistedGrade = grade.copy(id = gradeId.get)
         if (id == 0) {
-          Model.grades += persistedGrade
+          Model.gradeList += persistedGrade
           gradeComboBox.selectionModel().select(persistedGrade)
         }
       case _ => println("Grade dialog failed!")

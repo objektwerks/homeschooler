@@ -13,7 +13,7 @@ import scalafx.util.StringConverter
 class AssignmentPane() extends VBox {
   val assignmentLabel = new Label { text = "Assignments:" }
   val assignmentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Assignment](a => a.task) )
-  val assignmentList = new ListView[Assignment] { prefWidth = 333; items = Model.assignments; cellFactory = assignmentCellFactory; selectionModel().selectionMode = SelectionMode.Single }
+  val assignmentList = new ListView[Assignment] { prefWidth = 333; items = Model.assignmentList; cellFactory = assignmentCellFactory; selectionModel().selectionMode = SelectionMode.Single }
   val assignedDate = new Label { text = "00/00/0000" }
   val toLabel = new Label { text = " - " }
   val completedDate = new Label { text = "00/00/0000" }
@@ -45,7 +45,7 @@ class AssignmentPane() extends VBox {
         val assignmentId = await(assignments.save(assignment))
         val persistedAssignment = assignment.copy(id = assignmentId.get)
         if (id == 0) {
-          Model.assignments += persistedAssignment
+          Model.assignmentList += persistedAssignment
           assignmentList.selectionModel().select(persistedAssignment)
         }
       case _ => println("Assignment dialog failed!")
