@@ -3,12 +3,19 @@ package hs.repository
 import java.sql.Date
 import java.time.LocalDate
 
+import com.typesafe.config.ConfigFactory
 import hs.entity.{Assignment, Course, Grade, Student}
 import slick.basic.DatabaseConfig
-import slick.jdbc.JdbcProfile
+import slick.jdbc.{H2Profile, JdbcProfile}
 
 import scala.concurrent.duration._
 import scala.concurrent.{Await, Future}
+
+object Repository {
+  def newInstance(configFile: String): Repository = {
+    new Repository(config = DatabaseConfig.forConfig[JdbcProfile]("repository", ConfigFactory.load(configFile)), profile = H2Profile)
+  }
+}
 
 class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfile, val awaitDuration: Duration = 1 second) {
   import profile.api._

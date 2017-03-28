@@ -2,15 +2,11 @@ package hs.entity
 
 import java.time.LocalDate
 
-import com.typesafe.config.ConfigFactory
 import hs.repository._
 import org.scalatest.{BeforeAndAfterAll, FunSuite, Matchers}
-import slick.basic.DatabaseConfig
-import slick.jdbc.{H2Profile, JdbcProfile}
 
 class RepositoryTest extends FunSuite with BeforeAndAfterAll with Matchers {
-  val config = DatabaseConfig.forConfig[JdbcProfile]("test", ConfigFactory.load("test.conf"))
-  val repository = new Repository(config, H2Profile)
+  val repository = Repository.newInstance("test.conf")
   import repository._
 
   override protected def beforeAll(): Unit = {
