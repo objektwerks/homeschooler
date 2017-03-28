@@ -25,6 +25,7 @@ class StudentPane extends HBox {
     studentPropsButton.disable = false
     studentComboBox.selectionModel().select(selectedStudent)
   }
+
   studentPropsButton.onAction = { _ => update(studentComboBox.selectionModel().getSelectedIndex, studentComboBox.selectionModel().getSelectedItem) }
 
   studentAddButton.onAction = { _ => add(Student()) }
