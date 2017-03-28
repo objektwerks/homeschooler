@@ -1,8 +1,8 @@
 package hs.pane
 
+import hs.Model
 import hs.dialog.GradeDialog
 import hs.repository.Grade
-import hs.{Model, Store}
 
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, ComboBox, Label}
@@ -20,26 +20,28 @@ class GradePane() extends HBox {
   children = List(gradeLabel, gradeComboBox, gradePropsButton, gradeAddButton)
 
   Model.selectedGrade <== gradeComboBox.selectionModel().selectedItemProperty()
-  Model.selectedGrade.onChange {
+
+  Model.selectedGrade.onChange { (_, _, selectedGrade) =>
     gradePropsButton.disable = false
     gradeAddButton.disable = false
+    gradeComboBox.selectionModel().select(selectedGrade)
   }
-  gradePropsButton.onAction = { _ => save(gradeComboBox.selectionModel().getSelectedItem) }
-  gradeAddButton.onAction = { _ => save(Grade(studentid = Model.selectedStudent.value.id)) }
 
-  def save(grade: Grade): Unit = {
-    val result = new GradeDialog(grade).showAndWait()
-    result match {
-      case Some(Grade(id, studentid, year, started, completed)) =>
-        import Store.repository._
-        val grade = Grade(id, studentid, year, started, completed)
-        val gradeId = await(grades.save(grade))
-        val persistedGrade = grade.copy(id = gradeId.get)
-        if (id == 0) {
-          Model.gradeList += persistedGrade
-          gradeComboBox.selectionModel().select(persistedGrade)
-        }
-      case _ => println("Grade dialog failed!")
+  gradePropsButton.onAction = { _ => update(gradeComboBox.selectionModel().getSelectedIndex, gradeComboBox.selectionModel().getSelectedItem) }
+
+  gradeAddButton.onAction = { _ => add(Grade(studentid = Model.selectedStudent.value.id)) }
+
+  def update(selectedIndex: Int, grade: Grade): Unit = {
+    new GradeDialog(grade).showAndWait() match {
+      case Some(Grade(id, studentid, year, started, completed)) => Model.update(selectedIndex, Grade(id, studentid, year, started, completed))
+      case _ =>
+    }
+  }
+
+  def add(grade: Grade): Unit = {
+    new GradeDialog(grade).showAndWait() match {
+      case Some(Grade(id, studentid, year, started, completed)) => Model.add(Grade(id, studentid, year, started, completed))
+      case _ =>
     }
   }
 }
