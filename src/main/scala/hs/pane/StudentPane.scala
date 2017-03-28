@@ -1,8 +1,8 @@
 package hs.pane
 
-import hs.Model
 import hs.dialog.StudentDialog
-import hs.repository.Student
+import hs.entity.Student
+import hs.model.Model
 
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, ComboBox, Label}

@@ -1,8 +1,8 @@
 package hs.dialog
 
 import hs.App
+import hs.entity.Grade
 import hs.pane.ControlGridPane
-import hs.repository.Grade
 
 import scalafx.Includes._
 import scalafx.scene.control.ButtonBar.ButtonData

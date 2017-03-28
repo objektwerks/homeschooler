@@ -1,8 +1,8 @@
 package hs.dialog
 
 import hs.App
+import hs.entity.Assignment
 import hs.pane.ControlGridPane
-import hs.repository.Assignment
 
 import scalafx.Includes._
 import scalafx.scene.control.ButtonBar.ButtonData

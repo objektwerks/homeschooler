@@ -1,8 +1,8 @@
 package hs.pane
 
-import hs.Model
 import hs.dialog.GradeDialog
-import hs.repository.Grade
+import hs.entity.Grade
+import hs.model.Model
 
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, ComboBox, Label}

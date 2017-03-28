@@ -1,8 +1,8 @@
 package hs.pane
 
-import hs.Model
 import hs.dialog.CourseDialog
-import hs.repository.Course
+import hs.entity.Course
+import hs.model.Model
 
 import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell

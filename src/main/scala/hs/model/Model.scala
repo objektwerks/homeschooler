@@ -1,7 +1,7 @@
-package hs
+package hs.model
 
-import hs.repository.{Assignment, Course, Grade, Student}
 import hs.Store.repository._
+import hs.entity.{Assignment, Course, Grade, Student}
 
 import scalafx.beans.property.ObjectProperty
 import scalafx.collections.ObservableBuffer

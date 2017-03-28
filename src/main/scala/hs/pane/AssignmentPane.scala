@@ -1,8 +1,8 @@
 package hs.pane
 
-import hs.Model
 import hs.dialog.AssignmentDialog
-import hs.repository.Assignment
+import hs.entity.Assignment
+import hs.model.Model
 
 import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
