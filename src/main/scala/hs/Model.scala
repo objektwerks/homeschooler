@@ -40,6 +40,30 @@ object Model {
   val courseList = ObservableBuffer[Course]()
   val selectedCourse = new ObjectProperty[Course]()
 
+  def update(selectedIndex: Int, course: Course): Unit = {
+    await(courses.save(course))
+    courseList.update(selectedIndex, course)
+  }
+
+  def add(course: Course): Unit = {
+    val newId = await(courses.save(course))
+    val newCourse = course.copy(id = newId.get)
+    courseList += newCourse
+    selectedCourse.value = newCourse
+  }
+
   val assignmentList = ObservableBuffer[Assignment]()
   val selectedAssignment = new ObjectProperty[Assignment]()
+
+  def update(selectedIndex: Int, assignment: Assignment): Unit = {
+    await(assignments.save(assignment))
+    assignmentList.update(selectedIndex, assignment)
+  }
+
+  def add(assignment: Assignment): Unit = {
+    val newId = await(assignments.save(assignment))
+    val newAssignment = assignment.copy(id = newId.get)
+    assignmentList += newAssignment
+    selectedAssignment.value = newAssignment
+  }
 }
