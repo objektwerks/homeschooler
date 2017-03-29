@@ -25,9 +25,10 @@ class GradePane(conf: Config, model: Model) extends HBox {
 
   model.selectedStudent.onChange { (_, _, selectedStudent) =>
     model.listGrades(selectedStudent.id)
-    gradePropsButton.disable = false
     gradeAddButton.disable = false
   }
+
+  gradeListView.selectionModel().selectedItemProperty().onChange { gradePropsButton.disable = false }
 
   gradePropsButton.onAction = { _ => update(gradeListView.selectionModel().getSelectedIndex,
                                             gradeListView.selectionModel().getSelectedItem) }
