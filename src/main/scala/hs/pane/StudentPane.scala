@@ -22,10 +22,7 @@ class StudentPane(conf: Config, model: Model) extends HBox {
 
   model.selectedStudent <== studentComboBox.selectionModel().selectedItemProperty()
 
-  model.selectedStudent.onChange { (_, _, selectedStudent) =>
-    studentPropsButton.disable = false
-    studentComboBox.selectionModel().select(selectedStudent)
-  }
+  model.selectedStudent.onChange { studentPropsButton.disable = false }
 
   studentPropsButton.onAction = { _ => update(studentComboBox.selectionModel().getSelectedIndex, studentComboBox.selectionModel().getSelectedItem) }
 

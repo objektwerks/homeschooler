@@ -37,10 +37,9 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
 
   model.selectedAssignment <== assignmentList.selectionModel().selectedItemProperty()
 
-  model.selectedAssignment.onChange { (_, _, selectedAssignment) =>
+  model.selectedAssignment.onChange {
     assignmentPropsButton.disable = false
     assignmentAddButton.disable = false
-    assignmentList.selectionModel().select(selectedAssignment)
   }
 
   assignmentPropsButton.onAction = { _ => update(assignmentList.selectionModel().getSelectedIndex,
