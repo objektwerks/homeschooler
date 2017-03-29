@@ -31,7 +31,6 @@ class Model(repository: Repository) {
     val newId = await(students.save(student))
     val newStudent = student.copy(id = newId.get)
     studentList += newStudent
-    selectedStudent.value = newStudent
   }
 
   val gradeList = ObservableBuffer[Grade]()
@@ -53,7 +52,6 @@ class Model(repository: Repository) {
     val newId = await(grades.save(grade))
     val newGrade = grade.copy(id = newId.get)
     gradeList += newGrade
-    selectedGrade.value = newGrade
   }
 
   val courseList = ObservableBuffer[Course]()
@@ -74,7 +72,6 @@ class Model(repository: Repository) {
     val newId = await(courses.save(course))
     val newCourse = course.copy(id = newId.get)
     courseList += newCourse
-    selectedCourse.value = newCourse
   }
 
   val assignmentList = ObservableBuffer[Assignment]()
@@ -94,7 +91,6 @@ class Model(repository: Repository) {
     val newId = await(assignments.save(assignment))
     val newAssignment = assignment.copy(id = newId.get)
     assignmentList += newAssignment
-    selectedAssignment.value = newAssignment
   }
 
   def scoreAssignments(courseId: Int): Double = await(assignments.score(courseId)).getOrElse(0.0)

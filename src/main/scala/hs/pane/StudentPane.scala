@@ -29,14 +29,14 @@ class StudentPane(conf: Config, model: Model) extends HBox {
   studentAddButton.onAction = { _ => add(Student()) }
 
   def update(selectedIndex: Int, student: Student): Unit = {
-    new StudentDialog(student).showAndWait() match {
+    new StudentDialog(conf, student).showAndWait() match {
       case Some(Student(id, name, born)) => model.updateStudent(selectedIndex, Student(id, name, born))
       case _ =>
     }
   }
 
   def add(student: Student): Unit = {
-    new StudentDialog(student).showAndWait() match {
+    new StudentDialog(conf, student).showAndWait() match {
       case Some(Student(id, name, born)) => model.addStudent(Student(id, name, born))
       case _ =>
     }

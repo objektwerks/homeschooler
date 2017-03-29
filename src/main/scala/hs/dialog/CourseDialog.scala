@@ -1,5 +1,6 @@
 package hs.dialog
 
+import com.typesafe.config.Config
 import hs.App
 import hs.entity.Course
 import hs.pane.ControlGridPane
@@ -8,7 +9,7 @@ import scalafx.Includes._
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
 
-class CourseDialog(course: Course) extends Dialog[Course]() {
+class CourseDialog(conf: Config, course: Course) extends Dialog[Course]() {
   val saveButtonType = new ButtonType("Save", ButtonData.OKDone)
   val nameTextField = new TextField { text = course.name}
   val gridPaneControls = Map[String, Control]("Name:" -> nameTextField)
