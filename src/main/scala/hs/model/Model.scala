@@ -16,6 +16,9 @@ class Model(repository: Repository) {
 
   def listStudents(): Unit = {
     studentList.clear()
+    gradeList.clear()
+    courseList.clear()
+    assignmentList.clear()
     studentList.addAll( await(students.list()).asJava )
   }
 
@@ -35,7 +38,9 @@ class Model(repository: Repository) {
   val selectedGrade = new ObjectProperty[Grade]()
 
   def listGrades(studentId: Int): Unit = {
-    gradeList.clear
+    gradeList.clear()
+    courseList.clear()
+    assignmentList.clear()
     gradeList.addAll( await(grades.list(studentId)).asJava )
   }
 
@@ -55,7 +60,8 @@ class Model(repository: Repository) {
   val selectedCourse = new ObjectProperty[Course]()
 
   def listCourses(gradeId: Int): Unit = {
-    courseList.clear
+    courseList.clear()
+    assignmentList.clear()
     courseList.addAll( await(courses.list(gradeId)).asJava )
   }
 
@@ -75,7 +81,7 @@ class Model(repository: Repository) {
   val selectedAssignment = new ObjectProperty[Assignment]()
 
   def listAssignments(courseId: Int): Unit = {
-    assignmentList.clear
+    assignmentList.clear()
     assignmentList.addAll( await(assignments.list(courseId)).asJava )
   }
 
