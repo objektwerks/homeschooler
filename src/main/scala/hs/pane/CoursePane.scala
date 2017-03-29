@@ -28,9 +28,9 @@ class CoursePane(conf: Config, model: Model) extends VBox {
 
   model.selectedCourse <== courseList.selectionModel().selectedItemProperty()
 
-  model.selectedCourse.onChange {
-    coursePropsButton.disable = false
-    courseAddButton.disable = false
+  model.courseList.onChange {
+    coursePropsButton.disable = model.courseList.isEmpty
+    courseAddButton.disable = model.courseList.isEmpty
   }
 
   coursePropsButton.onAction = { _ => update(courseList.selectionModel().getSelectedIndex, courseList.selectionModel().getSelectedItem) }
