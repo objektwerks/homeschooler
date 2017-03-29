@@ -1,12 +1,11 @@
 package hs.model
 
-import hs.repository.Repository
 import hs.entity.{Assignment, Course, Grade, Student}
-
-import scalafx.beans.property.ObjectProperty
-import scalafx.collections.ObservableBuffer
+import hs.repository.Repository
 
 import scala.collection.JavaConverters._
+import scalafx.beans.property.ObjectProperty
+import scalafx.collections.ObservableBuffer
 
 class Model(repository: Repository) {
   import repository._
