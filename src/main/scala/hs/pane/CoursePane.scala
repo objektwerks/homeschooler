@@ -36,14 +36,14 @@ class CoursePane(conf: Config, model: Model) extends VBox {
 
   def update(selectedIndex: Int, course: Course): Unit = {
     new CourseDialog(course).showAndWait() match {
-      case Some(Course(id, gradeid, name)) => model.update(selectedIndex, Course(id, gradeid, name))
+      case Some(Course(id, gradeid, name)) => model.updateCourse(selectedIndex, Course(id, gradeid, name))
       case _ =>
     }
   }
 
   def add(course: Course): Unit = {
     new CourseDialog(course).showAndWait() match {
-      case Some(Course(id, gradeid, name)) => model.add(Course(id, gradeid, name))
+      case Some(Course(id, gradeid, name)) => model.addCourse(Course(id, gradeid, name))
       case _ =>
     }
   }

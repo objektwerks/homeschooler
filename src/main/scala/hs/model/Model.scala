@@ -12,12 +12,14 @@ class Model(repository: Repository) {
   val studentList = ObservableBuffer[Student]()
   val selectedStudent = new ObjectProperty[Student]()
 
-  def update(selectedIndex: Int, student: Student): Unit = {
+  def listStudents: Seq[Student] = await(students.list())
+
+  def updateStudent(selectedIndex: Int, student: Student): Unit = {
     await(students.save(student))
     studentList.update(selectedIndex, student)
   }
 
-  def add(student: Student): Unit = {
+  def addStudent(student: Student): Unit = {
     val newId = await(students.save(student))
     val newStudent = student.copy(id = newId.get)
     studentList += newStudent
@@ -27,12 +29,14 @@ class Model(repository: Repository) {
   val gradeList = ObservableBuffer[Grade]()
   val selectedGrade = new ObjectProperty[Grade]()
 
-  def update(selectedIndex: Int, grade: Grade): Unit = {
+  def listGrades(studentId: Int): Seq[Grade] = await(grades.list(studentId))
+
+  def updateGrade(selectedIndex: Int, grade: Grade): Unit = {
     await(grades.save(grade))
     gradeList.update(selectedIndex, grade)
   }
 
-  def add(grade: Grade): Unit = {
+  def addGrade(grade: Grade): Unit = {
     val newId = await(grades.save(grade))
     val newGrade = grade.copy(id = newId.get)
     gradeList += newGrade
@@ -42,12 +46,14 @@ class Model(repository: Repository) {
   val courseList = ObservableBuffer[Course]()
   val selectedCourse = new ObjectProperty[Course]()
 
-  def update(selectedIndex: Int, course: Course): Unit = {
+  def listCourses(gradeId: Int): Seq[Course] = await(courses.list(gradeId))
+
+  def updateCourse(selectedIndex: Int, course: Course): Unit = {
     await(courses.save(course))
     courseList.update(selectedIndex, course)
   }
 
-  def add(course: Course): Unit = {
+  def addCourse(course: Course): Unit = {
     val newId = await(courses.save(course))
     val newCourse = course.copy(id = newId.get)
     courseList += newCourse
@@ -57,12 +63,14 @@ class Model(repository: Repository) {
   val assignmentList = ObservableBuffer[Assignment]()
   val selectedAssignment = new ObjectProperty[Assignment]()
 
-  def update(selectedIndex: Int, assignment: Assignment): Unit = {
+  def listAssignments(courseId: Int): Seq[Assignment] = await(assignments.list(courseId))
+
+  def updateAssignment(selectedIndex: Int, assignment: Assignment): Unit = {
     await(assignments.save(assignment))
     assignmentList.update(selectedIndex, assignment)
   }
 
-  def add(assignment: Assignment): Unit = {
+  def addAssignment(assignment: Assignment): Unit = {
     val newId = await(assignments.save(assignment))
     val newAssignment = assignment.copy(id = newId.get)
     assignmentList += newAssignment

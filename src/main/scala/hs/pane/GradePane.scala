@@ -34,14 +34,14 @@ class GradePane(conf: Config, model: Model) extends HBox {
 
   def update(selectedIndex: Int, grade: Grade): Unit = {
     new GradeDialog(grade).showAndWait() match {
-      case Some(Grade(id, studentid, year, started, completed)) => model.update(selectedIndex, Grade(id, studentid, year, started, completed))
+      case Some(Grade(id, studentid, year, started, completed)) => model.updateGrade(selectedIndex, Grade(id, studentid, year, started, completed))
       case _ =>
     }
   }
 
   def add(grade: Grade): Unit = {
     new GradeDialog(grade).showAndWait() match {
-      case Some(Grade(id, studentid, year, started, completed)) => model.add(Grade(id, studentid, year, started, completed))
+      case Some(Grade(id, studentid, year, started, completed)) => model.addGrade(Grade(id, studentid, year, started, completed))
       case _ =>
     }
   }
