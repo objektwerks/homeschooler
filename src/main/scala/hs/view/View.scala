@@ -20,4 +20,6 @@ class View(conf: Config, model: Model) {
   val southPane = new HBox { spacing = 6; children = List(coursePane, assignmentPane) }
   val contentPane = new VBox { spacing = 6; padding = Insets(6); children = List(menuPane, northPane, new Separator(), southPane) }
   val sceneGraph = new Scene { root = contentPane }
+
+  model.listStudents()
 }

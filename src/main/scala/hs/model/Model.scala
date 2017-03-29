@@ -6,13 +6,18 @@ import hs.entity.{Assignment, Course, Grade, Student}
 import scalafx.beans.property.ObjectProperty
 import scalafx.collections.ObservableBuffer
 
+import scala.collection.JavaConverters._
+
 class Model(repository: Repository) {
   import repository._
 
   val studentList = ObservableBuffer[Student]()
   val selectedStudent = new ObjectProperty[Student]()
 
-  def listStudents: Seq[Student] = await(students.list())
+  def listStudents(): Unit = {
+    studentList.clear()
+    studentList.addAll( await(students.list()).asJava )
+  }
 
   def updateStudent(selectedIndex: Int, student: Student): Unit = {
     await(students.save(student))
@@ -29,7 +34,10 @@ class Model(repository: Repository) {
   val gradeList = ObservableBuffer[Grade]()
   val selectedGrade = new ObjectProperty[Grade]()
 
-  def listGrades(studentId: Int): Seq[Grade] = await(grades.list(studentId))
+  def listGrades(studentId: Int): Unit = {
+    gradeList.clear
+    gradeList.addAll( await(grades.list(studentId)).asJava )
+  }
 
   def updateGrade(selectedIndex: Int, grade: Grade): Unit = {
     await(grades.save(grade))
@@ -46,7 +54,10 @@ class Model(repository: Repository) {
   val courseList = ObservableBuffer[Course]()
   val selectedCourse = new ObjectProperty[Course]()
 
-  def listCourses(gradeId: Int): Seq[Course] = await(courses.list(gradeId))
+  def listCourses(gradeId: Int): Unit = {
+    courseList.clear
+    courseList.addAll( await(courses.list(gradeId)).asJava )
+  }
 
   def updateCourse(selectedIndex: Int, course: Course): Unit = {
     await(courses.save(course))
@@ -63,7 +74,10 @@ class Model(repository: Repository) {
   val assignmentList = ObservableBuffer[Assignment]()
   val selectedAssignment = new ObjectProperty[Assignment]()
 
-  def listAssignments(courseId: Int): Seq[Assignment] = await(assignments.list(courseId))
+  def listAssignments(courseId: Int): Unit = {
+    assignmentList.clear
+    assignmentList.addAll( await(assignments.list(courseId)).asJava )
+  }
 
   def updateAssignment(selectedIndex: Int, assignment: Assignment): Unit = {
     await(assignments.save(assignment))

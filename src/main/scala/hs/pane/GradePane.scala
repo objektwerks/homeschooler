@@ -20,6 +20,10 @@ class GradePane(conf: Config, model: Model) extends HBox {
   spacing = 6
   children = List(gradeLabel, gradeComboBox, gradePropsButton, gradeAddButton)
 
+  model.selectedStudent.onChange { (_, _, selectedStudent) =>
+    model.listGrades(selectedStudent.id)
+  }
+
   model.selectedGrade <== gradeComboBox.selectionModel().selectedItemProperty()
 
   model.selectedGrade.onChange { (_, _, selectedGrade) =>

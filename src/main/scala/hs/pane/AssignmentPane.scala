@@ -31,6 +31,10 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
   spacing = 6
   children = List(assignmentLabel, assignmentList, assignmentDetailsPane)
 
+  model.selectedCourse.onChange { (_, _, selectedCourse) =>
+    model.listAssignments(selectedCourse.id)
+  }
+
   model.selectedAssignment <== assignmentList.selectionModel().selectedItemProperty()
 
   model.selectedAssignment.onChange { (_, _, selectedAssignment) =>

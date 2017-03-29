@@ -22,6 +22,10 @@ class CoursePane(conf: Config, model: Model) extends VBox {
   spacing = 6
   children = List(courseLabel, courseList, courseToolBar)
 
+  model.selectedGrade.onChange { (_, _, selectedGrade) =>
+    model.listCourses(selectedGrade.id)
+  }
+
   model.selectedCourse <== courseList.selectionModel().selectedItemProperty()
 
   model.selectedCourse.onChange { (_, _, selectedCourse) =>
