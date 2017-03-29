@@ -13,7 +13,10 @@ import scala.concurrent.{Await, Future}
 
 object Repository {
   def newInstance(configFile: String): Repository = {
-    new Repository(config = DatabaseConfig.forConfig[JdbcProfile]("repository", ConfigFactory.load(configFile)), profile = H2Profile)
+    val repository = new Repository(config = DatabaseConfig.forConfig[JdbcProfile]("repository", ConfigFactory.load(configFile)), profile = H2Profile)
+    import repository._
+    try { await(students.list()).length } catch { case _: Throwable => repository.createSchema() }
+    repository
   }
 }
 
