@@ -5,6 +5,7 @@ import hs.dialog.StudentDialog
 import hs.entity.Student
 import hs.model.Model
 
+import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, Label, ListView}
 import scalafx.scene.layout.HBox
@@ -22,9 +23,10 @@ class StudentPane(conf: Config, model: Model) extends HBox {
 
   model.selectedStudent <== studentListView.selectionModel().selectedItemProperty()
 
-  model.studentList.onChange { studentPropsButton.disable = model.studentList.isEmpty }
+  model.studentList.onChange { studentPropsButton.disable = false }
 
-  studentPropsButton.onAction = { _ => update(studentListView.selectionModel().getSelectedIndex, studentListView.selectionModel().getSelectedItem) }
+  studentPropsButton.onAction = { _ => update(studentListView.selectionModel().getSelectedIndex,
+                                              studentListView.selectionModel().getSelectedItem) }
 
   studentAddButton.onAction = { _ => add(Student()) }
 

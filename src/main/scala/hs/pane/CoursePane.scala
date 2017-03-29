@@ -14,26 +14,25 @@ import scalafx.util.StringConverter
 class CoursePane(conf: Config, model: Model) extends VBox {
   val courseLabel = new Label { text = "Courses:" }
   val courseCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Course](c => c.name) )
-  val courseList = new ListView[Course] { prefWidth = 333; items = model.courseList; cellFactory = courseCellFactory; selectionModel().selectionMode = SelectionMode.Single }
+  val courseListView = new ListView[Course] { prefWidth = 333; items = model.courseList; cellFactory = courseCellFactory
+                                              selectionModel().selectionMode = SelectionMode.Single }
   val coursePropsButton = new Button { text = "*"; prefHeight = 25; disable = true }
   val courseAddButton = new Button { text = "+"; prefHeight = 25; disable = true }
   val courseToolBar = new HBox { spacing = 6; children = List(coursePropsButton, courseAddButton) }
 
   spacing = 6
-  children = List(courseLabel, courseList, courseToolBar)
+  children = List(courseLabel, courseListView, courseToolBar)
+
+  model.selectedCourse <== courseListView.selectionModel().selectedItemProperty()
 
   model.selectedGrade.onChange { (_, _, selectedGrade) =>
     model.listCourses(selectedGrade.id)
+    coursePropsButton.disable = false
+    courseAddButton.disable = false
   }
 
-  model.selectedCourse <== courseList.selectionModel().selectedItemProperty()
-
-  model.courseList.onChange {
-    coursePropsButton.disable = model.courseList.isEmpty
-    courseAddButton.disable = model.courseList.isEmpty
-  }
-
-  coursePropsButton.onAction = { _ => update(courseList.selectionModel().getSelectedIndex, courseList.selectionModel().getSelectedItem) }
+  coursePropsButton.onAction = { _ => update(courseListView.selectionModel().getSelectedIndex,
+                                             courseListView.selectionModel().getSelectedItem) }
 
   courseAddButton.onAction = { _ => add(Course(gradeid = model.selectedGrade.value.id)) }
 

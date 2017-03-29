@@ -5,6 +5,7 @@ import hs.dialog.GradeDialog
 import hs.entity.Grade
 import hs.model.Model
 
+import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, Label, ListView}
 import scalafx.scene.layout.HBox
@@ -22,14 +23,14 @@ class GradePane(conf: Config, model: Model) extends HBox {
 
   model.selectedGrade <== gradeListView.selectionModel().selectedItemProperty()
 
-  model.selectedStudent.onChange { (_, _, selectedStudent) => model.listGrades(selectedStudent.id) }
-
-  model.gradeList.onChange {
-    gradePropsButton.disable = model.studentList.isEmpty
-    gradeAddButton.disable = model.studentList.isEmpty
+  model.selectedStudent.onChange { (_, _, selectedStudent) =>
+    model.listGrades(selectedStudent.id)
+    gradePropsButton.disable = false
+    gradeAddButton.disable = false
   }
 
-  gradePropsButton.onAction = { _ => update(gradeListView.selectionModel().getSelectedIndex, gradeListView.selectionModel().getSelectedItem) }
+  gradePropsButton.onAction = { _ => update(gradeListView.selectionModel().getSelectedIndex,
+                                            gradeListView.selectionModel().getSelectedItem) }
 
   gradeAddButton.onAction = { _ => add(Grade(studentid = model.selectedStudent.value.id)) }
 

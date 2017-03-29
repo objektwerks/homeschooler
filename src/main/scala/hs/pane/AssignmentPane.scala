@@ -14,8 +14,8 @@ import scalafx.util.StringConverter
 class AssignmentPane(conf: Config, model: Model) extends VBox {
   val assignmentLabel = new Label { text = "Assignments:" }
   val assignmentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Assignment](a => a.task) )
-  val assignmentList = new ListView[Assignment] { prefWidth = 333; items = model.assignmentList; cellFactory = assignmentCellFactory
-                                                  selectionModel().selectionMode = SelectionMode.Single }
+  val assignmentListView = new ListView[Assignment] { prefWidth = 333; items = model.assignmentList; cellFactory = assignmentCellFactory
+                                                      selectionModel().selectionMode = SelectionMode.Single }
   val assignedDate = new Label { text = "00/00/0000" }
   val toLabel = new Label { text = " - " }
   val completedDate = new Label { text = "00/00/0000" }
@@ -29,21 +29,18 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
                                                                       splitLabel, totalLabel, assignmentToolBar) }
 
   spacing = 6
-  children = List(assignmentLabel, assignmentList, assignmentDetailsPane)
+  children = List(assignmentLabel, assignmentListView, assignmentDetailsPane)
+
+  model.selectedAssignment <== assignmentListView.selectionModel().selectedItemProperty()
 
   model.selectedCourse.onChange { (_, _, selectedCourse) =>
     model.listAssignments(selectedCourse.id)
+    assignmentPropsButton.disable = false
+    assignmentAddButton.disable = false
   }
 
-  model.selectedAssignment <== assignmentList.selectionModel().selectedItemProperty()
-
-  model.assignmentList.onChange {
-    assignmentPropsButton.disable = model.assignmentList.isEmpty
-    assignmentAddButton.disable = model.assignmentList.isEmpty
-  }
-
-  assignmentPropsButton.onAction = { _ => update(assignmentList.selectionModel().getSelectedIndex,
-                                                 assignmentList.selectionModel().getSelectedItem) }
+  assignmentPropsButton.onAction = { _ => update(assignmentListView.selectionModel().getSelectedIndex,
+                                                 assignmentListView.selectionModel().getSelectedItem) }
 
   assignmentAddButton.onAction = { _ => add(Assignment(courseid = model.selectedCourse.value.id)) }
 
