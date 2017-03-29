@@ -6,21 +6,21 @@ import hs.entity.Grade
 import hs.model.Model
 
 import scalafx.scene.control.cell.TextFieldListCell
-import scalafx.scene.control.{Button, ComboBox, Label}
+import scalafx.scene.control.{Button, Label, ListView}
 import scalafx.scene.layout.HBox
 import scalafx.util.StringConverter
 
 class GradePane(conf: Config, model: Model) extends HBox {
   val gradeLabel = new Label { text = "Grade:" }
   val gradeCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Grade](g => g.year) )
-  val gradeComboBox = new ComboBox[Grade] { prefHeight = 25; prefWidth = 203; items = model.gradeList; cellFactory = gradeCellFactory }
+  val gradeListView = new ListView[Grade] { prefHeight = 100; prefWidth = 203; items = model.gradeList; cellFactory = gradeCellFactory }
   val gradePropsButton = new Button { text = "*"; prefHeight = 25; disable = true }
   val gradeAddButton = new Button { text = "+"; prefHeight = 25; disable = true }
 
   spacing = 6
-  children = List(gradeLabel, gradeComboBox, gradePropsButton, gradeAddButton)
+  children = List(gradeLabel, gradeListView, gradePropsButton, gradeAddButton)
 
-  model.selectedGrade <== gradeComboBox.selectionModel().selectedItemProperty()
+  model.selectedGrade <== gradeListView.selectionModel().selectedItemProperty()
 
   model.selectedStudent.onChange { (_, _, selectedStudent) => model.listGrades(selectedStudent.id) }
 
@@ -29,7 +29,7 @@ class GradePane(conf: Config, model: Model) extends HBox {
     gradeAddButton.disable = model.studentList.isEmpty
   }
 
-  gradePropsButton.onAction = { _ => update(gradeComboBox.selectionModel().getSelectedIndex, gradeComboBox.selectionModel().getSelectedItem) }
+  gradePropsButton.onAction = { _ => update(gradeListView.selectionModel().getSelectedIndex, gradeListView.selectionModel().getSelectedItem) }
 
   gradeAddButton.onAction = { _ => add(Grade(studentid = model.selectedStudent.value.id)) }
 

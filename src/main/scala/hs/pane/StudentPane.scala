@@ -6,25 +6,25 @@ import hs.entity.Student
 import hs.model.Model
 
 import scalafx.scene.control.cell.TextFieldListCell
-import scalafx.scene.control.{Button, ComboBox, Label}
+import scalafx.scene.control.{Button, Label, ListView}
 import scalafx.scene.layout.HBox
 import scalafx.util.StringConverter
 
 class StudentPane(conf: Config, model: Model) extends HBox {
   val studentLabel = new Label { text = "Student:" }
   val studentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Student](s => s.name) )
-  val studentComboBox = new ComboBox[Student] { prefHeight = 25; prefWidth = 203; items = model.studentList; cellFactory = studentCellFactory }
+  val studentListView = new ListView[Student] { prefHeight = 100; prefWidth = 203; items = model.studentList; cellFactory = studentCellFactory }
   val studentPropsButton = new Button { text = "*"; prefHeight = 25; disable = true }
   val studentAddButton = new Button { text = "+"; prefHeight = 25 }
 
   spacing = 6
-  children = List(studentLabel, studentComboBox, studentPropsButton, studentAddButton)
+  children = List(studentLabel, studentListView, studentPropsButton, studentAddButton)
 
-  model.selectedStudent <== studentComboBox.selectionModel().selectedItemProperty()
+  model.selectedStudent <== studentListView.selectionModel().selectedItemProperty()
 
   model.studentList.onChange { studentPropsButton.disable = model.studentList.isEmpty }
 
-  studentPropsButton.onAction = { _ => update(studentComboBox.selectionModel().getSelectedIndex, studentComboBox.selectionModel().getSelectedItem) }
+  studentPropsButton.onAction = { _ => update(studentListView.selectionModel().getSelectedIndex, studentListView.selectionModel().getSelectedItem) }
 
   studentAddButton.onAction = { _ => add(Student()) }
 
