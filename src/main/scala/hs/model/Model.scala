@@ -76,4 +76,6 @@ class Model(repository: Repository) {
     assignmentList += newAssignment
     selectedAssignment.value = newAssignment
   }
+
+  def scoreAssignments(courseId: Int): Double = await(assignments.score(courseId)).getOrElse(0.0)
 }
