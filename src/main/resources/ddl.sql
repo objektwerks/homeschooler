@@ -1,7 +1,3 @@
-drop if exists table "assignments"
-drop if exists table "courses"
-drop if exists table "grades"
-drop if exists table "students"
 create table "students" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"name" VARCHAR NOT NULL,"born" DATE NOT NULL)
 create table "grades" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"student_id" INTEGER NOT NULL,"grade" VARCHAR NOT NULL,"started" DATE NOT NULL,"completed" DATE NOT NULL)
 create table "courses" ("id" INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,"grade_id" INTEGER NOT NULL,"name" VARCHAR NOT NULL)
