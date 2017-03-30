@@ -1,5 +1,7 @@
 package hs.pane
 
+import java.time.format.DateTimeFormatter
+
 import com.typesafe.config.Config
 import hs.dialog.AssignmentDialog
 import hs.entity.Assignment
@@ -38,7 +40,14 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
     assignmentPropsButton.disable = false
   }
 
-  assignmentListView.selectionModel().selectedItemProperty().onChange { assignmentPropsButton.disable = false }
+  assignmentListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedAssignment) =>
+    val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    assignedDate.text = selectedAssignment.assigned.format(dateTimeFormatter)
+    completedDate.text = selectedAssignment.completed.format(dateTimeFormatter)
+    scoreLabel.text = selectedAssignment.score.toString
+    totalLabel.text = score(selectedAssignment)
+    assignmentPropsButton.disable = false
+  }
 
   assignmentPropsButton.onAction = { _ => update(assignmentListView.selectionModel().getSelectedIndex,
                                                  assignmentListView.selectionModel().getSelectedItem) }
@@ -60,4 +69,6 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
       case _ =>
     }
   }
+
+  def score(assignment: Assignment): String = model.scoreAssignments(assignment.courseid).toString
 }
