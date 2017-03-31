@@ -3,7 +3,7 @@ package hs.dialog
 import com.typesafe.config.Config
 import hs.App
 import hs.entity.Grade
-import hs.pane.ControlGridPane
+import hs.pane.ComponentGridPane
 
 import scalafx.Includes._
 import scalafx.scene.control.ButtonBar.ButtonData
@@ -15,15 +15,15 @@ class GradeDialog(conf: Config, grade: Grade) extends Dialog[Grade]() {
   val yearTextField = new TextField { text = grade.year }
   val startedDatePicker = new DatePicker { value = grade.started }
   val completedDatePicker = new DatePicker { value = grade.completed }
-  val gridPaneControls = Map[String, Region](
+  val components = Map[String, Region](
     "Year:" -> yearTextField,
     "Started:" -> startedDatePicker,
     "Completed:" -> completedDatePicker)
-  val gridPane = new ControlGridPane(gridPaneControls)
+  val componentGridPane = new ComponentGridPane(components)
 
   val dialog = dialogPane()
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
-  dialog.content = gridPane
+  dialog.content = componentGridPane
   initOwner(App.stage)
   title = "Grade"
   headerText = "Save Grade"

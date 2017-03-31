@@ -3,7 +3,7 @@ package hs.dialog
 import com.typesafe.config.Config
 import hs.App
 import hs.entity.Assignment
-import hs.pane.ControlGridPane
+import hs.pane.ComponentGridPane
 
 import scalafx.Includes._
 import scalafx.scene.control.ButtonBar.ButtonData
@@ -18,18 +18,18 @@ class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assi
   val scoreLabel = new Label { text = assignment.score.toInt.toString }
   val scoreSlider = new Slider { min = 50.0; max = 100.00; value = assignment.score; showTickLabels = true }
   val scoreBox = new HBox { children = List(scoreSlider, scoreLabel) }
-  val gridPaneControls = Map[String, Region](
+  val components = Map[String, Region](
     "Task:" -> taskTextField,
     "Assigned:" -> assignedDatePicker,
     "Completed:" -> completedDatePicker,
     "Score:" -> scoreBox)
-  val gridPane = new ControlGridPane(gridPaneControls)
+  val componentGridPane = new ComponentGridPane(components)
 
   scoreSlider.value.onChange { (_, _, newScore) => scoreLabel.text = newScore.intValue.toString }
 
   val dialog = dialogPane()
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
-  dialog.content = gridPane
+  dialog.content = componentGridPane
   initOwner(App.stage)
   title = "Assignment"
   headerText = "Save Assignment"

@@ -3,7 +3,7 @@ package hs.dialog
 import com.typesafe.config.Config
 import hs.App
 import hs.entity.Course
-import hs.pane.ControlGridPane
+import hs.pane.ComponentGridPane
 
 import scalafx.Includes._
 import scalafx.scene.control.ButtonBar.ButtonData
@@ -13,12 +13,12 @@ import scalafx.scene.layout.Region
 class CourseDialog(conf: Config, course: Course) extends Dialog[Course]() {
   val saveButtonType = new ButtonType("Save", ButtonData.OKDone)
   val nameTextField = new TextField { text = course.name}
-  val gridPaneControls = Map[String, Region]("Name:" -> nameTextField)
-  val gridPane = new ControlGridPane(gridPaneControls)
+  val components = Map[String, Region]("Name:" -> nameTextField)
+  val componentGridPane = new ComponentGridPane(components)
 
   val dialog = dialogPane()
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
-  dialog.content = gridPane
+  dialog.content = componentGridPane
   initOwner(App.stage)
   title = "Course"
   headerText = "Save Course"
