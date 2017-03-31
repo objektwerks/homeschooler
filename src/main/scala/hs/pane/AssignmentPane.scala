@@ -6,6 +6,7 @@ import com.typesafe.config.Config
 import hs.dialog.AssignmentDialog
 import hs.entity.Assignment
 import hs.model.Model
+import hs.view.View
 
 import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
@@ -19,13 +20,13 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
   val assignmentListView = new ListView[Assignment] { prefWidth = 333; items = model.assignmentList; cellFactory = assignmentCellFactory
                                                       selectionModel().selectionMode = SelectionMode.Single }
   val assignedDate = new Label { text = "00/00/0000" }
-  val toLabel = new Label { text = " - " }
+  val toLabel = new Label { text = "-" }
   val completedDate = new Label { text = "00/00/0000" }
   val scoreLabel = new Label { text = "0" }
-  val splitLabel = new Label { text = " / " }
+  val splitLabel = new Label { text = "/" }
   val totalLabel = new Label { text = "0" }
-  val assignmentPropsButton = new Button { text = "*"; prefHeight = 25; disable = true }
-  val assignmentAddButton = new Button { text = "+"; prefHeight = 25; disable = true }
+  val assignmentPropsButton = new Button { graphic = View.editImageView(); prefHeight = 25; disable = true }
+  val assignmentAddButton = new Button { graphic = View.addImageView(); prefHeight = 25; disable = true }
   val assignmentToolBar = new HBox { spacing = 6; children = List(assignmentPropsButton, assignmentAddButton) }
   val assignmentDetailsPane = new HBox { spacing = 6; children = List(assignedDate, toLabel, completedDate, scoreLabel,
                                                                       splitLabel, totalLabel, assignmentToolBar) }

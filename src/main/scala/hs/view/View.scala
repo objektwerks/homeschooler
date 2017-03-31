@@ -7,6 +7,7 @@ import hs.pane._
 import scalafx.geometry.{Insets, Orientation}
 import scalafx.scene.Scene
 import scalafx.scene.control.Separator
+import scalafx.scene.image.{Image, ImageView}
 import scalafx.scene.layout.{HBox, VBox}
 
 class View(conf: Config, model: Model) {
@@ -22,4 +23,18 @@ class View(conf: Config, model: Model) {
   val sceneGraph = new Scene { root = contentPane }
 
   model.listStudents()
+}
+
+object View {
+  def addImageView() = loadImageView("/add.png")
+
+  def editImageView() = loadImageView("/edit.png")
+
+  def loadImageView(path: String) = new ImageView {
+    image = new Image(View.getClass.getResourceAsStream(path))
+    fitHeight = 25
+    fitWidth = 25
+    preserveRatio = true
+    smooth = true
+  }
 }

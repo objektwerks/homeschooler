@@ -4,6 +4,7 @@ import com.typesafe.config.Config
 import hs.dialog.CourseDialog
 import hs.entity.Course
 import hs.model.Model
+import hs.view.View
 
 import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
@@ -16,8 +17,8 @@ class CoursePane(conf: Config, model: Model) extends VBox {
   val courseCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Course](c => c.name) )
   val courseListView = new ListView[Course] { prefWidth = 333; items = model.courseList; cellFactory = courseCellFactory
                                               selectionModel().selectionMode = SelectionMode.Single }
-  val coursePropsButton = new Button { text = "*"; prefHeight = 25; disable = true }
-  val courseAddButton = new Button { text = "+"; prefHeight = 25; disable = true }
+  val coursePropsButton = new Button { graphic = View.editImageView(); prefHeight = 25; disable = true }
+  val courseAddButton = new Button { graphic = View.addImageView(); prefHeight = 25; disable = true }
   val courseToolBar = new HBox { spacing = 6; children = List(coursePropsButton, courseAddButton) }
 
   spacing = 6

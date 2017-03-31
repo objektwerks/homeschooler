@@ -4,6 +4,7 @@ import com.typesafe.config.Config
 import hs.dialog.GradeDialog
 import hs.entity.Grade
 import hs.model.Model
+import hs.view.View
 
 import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
@@ -15,8 +16,8 @@ class GradePane(conf: Config, model: Model) extends HBox {
   val gradeLabel = new Label { text = "Grade:" }
   val gradeCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Grade](g => g.year) )
   val gradeListView = new ListView[Grade] { prefHeight = 100; prefWidth = 203; items = model.gradeList; cellFactory = gradeCellFactory }
-  val gradePropsButton = new Button { text = "*"; prefHeight = 25; disable = true }
-  val gradeAddButton = new Button { text = "+"; prefHeight = 25; disable = true }
+  val gradePropsButton = new Button { graphic = View.editImageView(); prefHeight = 25; disable = true }
+  val gradeAddButton = new Button { graphic = View.addImageView(); prefHeight = 25; disable = true }
 
   spacing = 6
   children = List(gradeLabel, gradeListView, gradePropsButton, gradeAddButton)
