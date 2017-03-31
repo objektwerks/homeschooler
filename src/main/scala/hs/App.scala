@@ -15,6 +15,8 @@ object App extends JFXApp {
   stage = new JFXApp.PrimaryStage {
     scene = view.sceneGraph
     title = conf.getString("title")
+    minHeight = 600
+    minWidth = 800
     icons.add(View.appImmage())
   }
 

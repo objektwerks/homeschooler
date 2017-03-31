@@ -15,7 +15,7 @@ import scalafx.util.StringConverter
 class CoursePane(conf: Config, model: Model) extends VBox {
   val courseLabel = new Label { text = "Courses:" }
   val courseCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Course](c => c.name) )
-  val courseListView = new ListView[Course] { items = model.courseList; cellFactory = courseCellFactory
+  val courseListView = new ListView[Course] { minHeight = 300; items = model.courseList; cellFactory = courseCellFactory
                                               selectionModel().selectionMode = SelectionMode.Single }
   val coursePropsButton = new Button { graphic = View.editImageView(); prefHeight = 25; disable = true }
   val courseAddButton = new Button { graphic = View.addImageView(); prefHeight = 25; disable = true }

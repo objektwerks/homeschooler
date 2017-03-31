@@ -17,7 +17,7 @@ import scalafx.util.StringConverter
 class AssignmentPane(conf: Config, model: Model) extends VBox {
   val assignmentLabel = new Label { text = "Assignments:" }
   val assignmentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Assignment](a => a.task) )
-  val assignmentListView = new ListView[Assignment] { items = model.assignmentList; cellFactory = assignmentCellFactory
+  val assignmentListView = new ListView[Assignment] { minHeight = 300; items = model.assignmentList; cellFactory = assignmentCellFactory
                                                       selectionModel().selectionMode = SelectionMode.Single }
   val assignedDate = new Label { text = "00/00" }
   val toLabel = new Label { text = "-" }

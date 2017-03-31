@@ -15,7 +15,7 @@ import scalafx.util.StringConverter
 class StudentPane(conf: Config, model: Model) extends VBox {
   val studentLabel = new Label { text = "Student:" }
   val studentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Student](s => s.name) )
-  val studentListView = new ListView[Student] { items = model.studentList; cellFactory = studentCellFactory }
+  val studentListView = new ListView[Student] { minHeight = 50; items = model.studentList; cellFactory = studentCellFactory }
   val studentPropsButton = new Button { graphic = View.editImageView(); prefHeight = 25; disable = true }
   val studentAddButton = new Button { graphic = View.addImageView(); prefHeight = 25 }
   val studentToolBar = new HBox { spacing = 6; children = List(studentPropsButton, studentAddButton) }
