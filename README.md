@@ -1,6 +1,6 @@
 Homeschool
 ----------
->Homeschool app.
+>Open source homeschool app.
 
 Object Model
 ------------
@@ -12,20 +12,6 @@ Object Model
 Relational Model
 ----------------
 * Student 1 ---> * Grade 1 ---> * Course 1 ---> * Assignement
-
-Commands
---------
-* Change[T]
-
-Events
-------
-* Changed[T]
-
-Queries
--------
-1. Save[T]
-2. List[T]
-3. Score Course
 
 Test
 ----
