@@ -22,25 +22,30 @@ class StudentPane(conf: Config, model: Model) extends HBox {
   children = List(studentLabel, studentListView, studentPropsButton, studentAddButton)
 
   studentListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedStudent) =>
-    model.selectedStudent.value = selectedStudent.id
-    studentPropsButton.disable = false
+    if (selectedStudent != null) {
+      model.selectedStudent.value = selectedStudent.id
+      studentPropsButton.disable = false
+    }
   }
 
-  studentPropsButton.onAction = { _ => update(studentListView.selectionModel().getSelectedIndex,
-                                              studentListView.selectionModel().getSelectedItem) }
+  studentPropsButton.onAction = { _ => update(studentListView.selectionModel().getSelectedIndex, studentListView.selectionModel().getSelectedItem) }
 
   studentAddButton.onAction = { _ => add(Student()) }
 
   def update(selectedIndex: Int, student: Student): Unit = {
     new StudentDialog(conf, student).showAndWait() match {
-      case Some(Student(id, name, born)) => model.updateStudent(selectedIndex, Student(id, name, born))
+      case Some(Student(id, name, born)) =>
+        model.updateStudent(selectedIndex, Student(id, name, born))
+        studentListView.selectionModel().select(selectedIndex)
       case _ =>
     }
   }
 
   def add(student: Student): Unit = {
     new StudentDialog(conf, student).showAndWait() match {
-      case Some(Student(id, name, born)) => model.addStudent(Student(id, name, born))
+      case Some(Student(id, name, born)) =>
+        val newStudent = model.addStudent(Student(id, name, born))
+        studentListView.selectionModel().select(newStudent)
       case _ =>
     }
   }

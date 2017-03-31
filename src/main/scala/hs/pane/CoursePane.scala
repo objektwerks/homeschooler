@@ -29,25 +29,30 @@ class CoursePane(conf: Config, model: Model) extends VBox {
   }
 
   courseListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedCourse) =>
-    model.selectedCourse.value = selectedCourse.id
-    coursePropsButton.disable = false
+    if (selectedCourse != null) {
+      model.selectedCourse.value = selectedCourse.id
+      coursePropsButton.disable = false
+    }
   }
 
-  coursePropsButton.onAction = { _ => update(courseListView.selectionModel().getSelectedIndex,
-                                             courseListView.selectionModel().getSelectedItem) }
+  coursePropsButton.onAction = { _ => update(courseListView.selectionModel().getSelectedIndex, courseListView.selectionModel().getSelectedItem) }
 
   courseAddButton.onAction = { _ => add(Course(gradeid = model.selectedGrade.value)) }
 
   def update(selectedIndex: Int, course: Course): Unit = {
     new CourseDialog(conf, course).showAndWait() match {
-      case Some(Course(id, gradeid, name)) => model.updateCourse(selectedIndex, Course(id, gradeid, name))
+      case Some(Course(id, gradeid, name)) =>
+        model.updateCourse(selectedIndex, Course(id, gradeid, name))
+        courseListView.selectionModel().select(selectedIndex)
       case _ =>
     }
   }
 
   def add(course: Course): Unit = {
     new CourseDialog(conf, course).showAndWait() match {
-      case Some(Course(id, gradeid, name)) => model.addCourse(Course(id, gradeid, name))
+      case Some(Course(id, gradeid, name)) =>
+        val newCourse = model.addCourse(Course(id, gradeid, name))
+        courseListView.selectionModel().select(newCourse)
       case _ =>
     }
   }

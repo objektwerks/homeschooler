@@ -27,25 +27,30 @@ class GradePane(conf: Config, model: Model) extends HBox {
   }
 
   gradeListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedGrade) =>
-    model.selectedGrade.value = selectedGrade.id
-    gradePropsButton.disable = false
+    if (selectedGrade != null) {
+      model.selectedGrade.value = selectedGrade.id
+      gradePropsButton.disable = false
+    }
   }
 
-  gradePropsButton.onAction = { _ => update(gradeListView.selectionModel().getSelectedIndex,
-                                            gradeListView.selectionModel().getSelectedItem) }
+  gradePropsButton.onAction = { _ => update(gradeListView.selectionModel().getSelectedIndex, gradeListView.selectionModel().getSelectedItem) }
 
   gradeAddButton.onAction = { _ => add(Grade(studentid = model.selectedStudent.value)) }
 
   def update(selectedIndex: Int, grade: Grade): Unit = {
     new GradeDialog(conf, grade).showAndWait() match {
-      case Some(Grade(id, studentid, year, started, completed)) => model.updateGrade(selectedIndex, Grade(id, studentid, year, started, completed))
+      case Some(Grade(id, studentid, year, started, completed)) =>
+        model.updateGrade(selectedIndex, Grade(id, studentid, year, started, completed))
+        gradeListView.selectionModel().select(selectedIndex)
       case _ =>
     }
   }
 
   def add(grade: Grade): Unit = {
     new GradeDialog(conf, grade).showAndWait() match {
-      case Some(Grade(id, studentid, year, started, completed)) => model.addGrade(Grade(id, studentid, year, started, completed))
+      case Some(Grade(id, studentid, year, started, completed)) =>
+        val newGrade = model.addGrade(Grade(id, studentid, year, started, completed))
+        gradeListView.selectionModel().select(newGrade)
       case _ =>
     }
   }

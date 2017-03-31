@@ -25,11 +25,12 @@ class Model(repository: Repository) {
     studentList.update(selectedIndex, student)
   }
 
-  def addStudent(student: Student): Unit = {
+  def addStudent(student: Student): Student = {
     val newId = await(students.save(student))
     val newStudent = student.copy(id = newId.get)
     studentList += newStudent
     selectedStudent.value = newStudent.id
+    newStudent
   }
 
   val gradeList = ObservableBuffer[Grade]()
@@ -47,11 +48,12 @@ class Model(repository: Repository) {
     gradeList.update(selectedIndex, grade)
   }
 
-  def addGrade(grade: Grade): Unit = {
+  def addGrade(grade: Grade): Grade = {
     val newId = await(grades.save(grade))
     val newGrade = grade.copy(id = newId.get)
     gradeList += newGrade
     selectedGrade.value = newGrade.id
+    newGrade
   }
 
   val courseList = ObservableBuffer[Course]()
@@ -68,11 +70,12 @@ class Model(repository: Repository) {
     courseList.update(selectedIndex, course)
   }
 
-  def addCourse(course: Course): Unit = {
+  def addCourse(course: Course): Course = {
     val newId = await(courses.save(course))
     val newCourse = course.copy(id = newId.get)
     courseList += newCourse
     selectedCourse.value = newCourse.id
+    newCourse
   }
 
   val assignmentList = ObservableBuffer[Assignment]()
@@ -88,11 +91,12 @@ class Model(repository: Repository) {
     assignmentList.update(selectedIndex, assignment)
   }
 
-  def addAssignment(assignment: Assignment): Unit = {
+  def addAssignment(assignment: Assignment): Assignment = {
     val newId = await(assignments.save(assignment))
     val newAssignment = assignment.copy(id = newId.get)
     assignmentList += newAssignment
     selectedAssignment.value = newAssignment.id
+    newAssignment
   }
 
   def scoreAssignments(courseId: Int): Double = await(assignments.score(courseId)).getOrElse(0.0)

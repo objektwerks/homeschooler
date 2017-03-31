@@ -39,17 +39,18 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
   }
 
   assignmentListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedAssignment) =>
-    model.selectedAssignment.value = selectedAssignment.id
-    val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
-    assignedDate.text = selectedAssignment.assigned.format(dateTimeFormatter)
-    completedDate.text = selectedAssignment.completed.format(dateTimeFormatter)
-    scoreLabel.text = selectedAssignment.score.toString
-    totalLabel.text = score(selectedAssignment)
-    assignmentPropsButton.disable = false
+    if (selectedAssignment != null) {
+      model.selectedAssignment.value = selectedAssignment.id
+      val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+      assignedDate.text = selectedAssignment.assigned.format(dateTimeFormatter)
+      completedDate.text = selectedAssignment.completed.format(dateTimeFormatter)
+      scoreLabel.text = selectedAssignment.score.toString
+      totalLabel.text = score(selectedAssignment)
+      assignmentPropsButton.disable = false
+    }
   }
 
-  assignmentPropsButton.onAction = { _ => update(assignmentListView.selectionModel().getSelectedIndex,
-                                                 assignmentListView.selectionModel().getSelectedItem) }
+  assignmentPropsButton.onAction = { _ => update(assignmentListView.selectionModel().getSelectedIndex, assignmentListView.selectionModel().getSelectedItem) }
 
   assignmentAddButton.onAction = { _ => add(Assignment(courseid = model.selectedCourse.value)) }
 
@@ -57,6 +58,7 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
     new AssignmentDialog(conf, assignment).showAndWait() match {
       case Some(Assignment(id, courseid, task, assigned, completed, score)) =>
         model.updateAssignment(selectedIndex, Assignment(id, courseid, task, assigned, completed, score))
+        assignmentListView.selectionModel().select(selectedIndex)
       case _ =>
     }
   }
@@ -64,7 +66,8 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
   def add(assignment: Assignment): Unit = {
     new AssignmentDialog(conf, assignment).showAndWait() match {
       case Some(Assignment(id, courseid, task, assigned, completed, score)) =>
-        model.addAssignment(Assignment(id, courseid, task, assigned, completed, score))
+        val newAssignment = model.addAssignment(Assignment(id, courseid, task, assigned, completed, score))
+        assignmentListView.selectionModel().select(newAssignment)
       case _ =>
     }
   }
