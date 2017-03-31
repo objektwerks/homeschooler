@@ -21,9 +21,9 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
   val assignedDate = new Label { text = "00/00/0000" }
   val toLabel = new Label { text = " - " }
   val completedDate = new Label { text = "00/00/0000" }
-  val scoreLabel = new Label { text = "0.0" }
+  val scoreLabel = new Label { text = "0" }
   val splitLabel = new Label { text = " / " }
-  val totalLabel = new Label { text = "0.0" }
+  val totalLabel = new Label { text = "0" }
   val assignmentPropsButton = new Button { text = "*"; prefHeight = 25; disable = true }
   val assignmentAddButton = new Button { text = "+"; prefHeight = 25; disable = true }
   val assignmentToolBar = new HBox { spacing = 6; children = List(assignmentPropsButton, assignmentAddButton) }
@@ -41,10 +41,10 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
   assignmentListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedAssignment) =>
     if (selectedAssignment != null) {
       model.selectedAssignment.value = selectedAssignment.id
-      val dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+      val dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd")
       assignedDate.text = selectedAssignment.assigned.format(dateTimeFormatter)
       completedDate.text = selectedAssignment.completed.format(dateTimeFormatter)
-      scoreLabel.text = selectedAssignment.score.toString
+      scoreLabel.text = selectedAssignment.score.toInt.toString
       totalLabel.text = score(selectedAssignment)
       assignmentPropsButton.disable = false
     }

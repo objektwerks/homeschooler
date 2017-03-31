@@ -1,10 +1,10 @@
 package hs.pane
 
 import scalafx.geometry.Insets
-import scalafx.scene.control.{Control, Label}
-import scalafx.scene.layout.GridPane
+import scalafx.scene.control.Label
+import scalafx.scene.layout.{GridPane, Region}
 
-class ControlGridPane(controls: Map[String, Control]) extends GridPane {
+class ControlGridPane(controls: Map[String, Region]) extends GridPane {
   hgap = 6
   vgap = 6
   padding = Insets(top = 6, right = 100, bottom = 6, left = 6)

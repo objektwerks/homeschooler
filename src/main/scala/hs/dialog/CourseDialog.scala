@@ -8,11 +8,12 @@ import hs.pane.ControlGridPane
 import scalafx.Includes._
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
+import scalafx.scene.layout.Region
 
 class CourseDialog(conf: Config, course: Course) extends Dialog[Course]() {
   val saveButtonType = new ButtonType("Save", ButtonData.OKDone)
   val nameTextField = new TextField { text = course.name}
-  val gridPaneControls = Map[String, Control]("Name:" -> nameTextField)
+  val gridPaneControls = Map[String, Region]("Name:" -> nameTextField)
   val gridPane = new ControlGridPane(gridPaneControls)
 
   val dialog = dialogPane()

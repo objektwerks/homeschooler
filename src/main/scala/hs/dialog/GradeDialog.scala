@@ -8,13 +8,14 @@ import hs.pane.ControlGridPane
 import scalafx.Includes._
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
+import scalafx.scene.layout.Region
 
 class GradeDialog(conf: Config, grade: Grade) extends Dialog[Grade]() {
   val saveButtonType = new ButtonType("Save", ButtonData.OKDone)
   val yearTextField = new TextField { text = grade.year }
   val startedDatePicker = new DatePicker { value = grade.started }
   val completedDatePicker = new DatePicker { value = grade.completed }
-  val gridPaneControls = Map[String, Control](
+  val gridPaneControls = Map[String, Region](
     "Year:" -> yearTextField,
     "Started:" -> startedDatePicker,
     "Completed:" -> completedDatePicker)
