@@ -10,7 +10,7 @@ class Model(repository: Repository) {
   import repository._
 
   val studentList = ObservableBuffer[Student]()
-  var selectedStudent = ObjectProperty[Student](Student())
+  val selectedStudent = ObjectProperty[Int](0)
 
   def listStudents(): Unit = {
     studentList.clear()
@@ -29,11 +29,11 @@ class Model(repository: Repository) {
     val newId = await(students.save(student))
     val newStudent = student.copy(id = newId.get)
     studentList += newStudent
-    selectedStudent = ObjectProperty[Student](newStudent)
+    selectedStudent.value = newStudent.id
   }
 
   val gradeList = ObservableBuffer[Grade]()
-  var selectedGrade = ObjectProperty[Grade](Grade(studentid = 0))
+  val selectedGrade = ObjectProperty[Int](0)
 
   def listGrades(studentId: Int): Unit = {
     gradeList.clear()
@@ -51,11 +51,11 @@ class Model(repository: Repository) {
     val newId = await(grades.save(grade))
     val newGrade = grade.copy(id = newId.get)
     gradeList += newGrade
-    selectedGrade = ObjectProperty[Grade](newGrade)
+    selectedGrade.value = newGrade.id
   }
 
   val courseList = ObservableBuffer[Course]()
-  var selectedCourse = ObjectProperty[Course](Course(gradeid = 0))
+  val selectedCourse = ObjectProperty[Int](0)
 
   def listCourses(gradeId: Int): Unit = {
     courseList.clear()
@@ -72,11 +72,11 @@ class Model(repository: Repository) {
     val newId = await(courses.save(course))
     val newCourse = course.copy(id = newId.get)
     courseList += newCourse
-    selectedCourse = ObjectProperty[Course](newCourse)
+    selectedCourse.value = newCourse.id
   }
 
   val assignmentList = ObservableBuffer[Assignment]()
-  var selectedAssignment = ObjectProperty[Assignment](Assignment(courseid = 0))
+  val selectedAssignment = ObjectProperty[Int](0)
 
   def listAssignments(courseId: Int): Unit = {
     assignmentList.clear()
@@ -92,7 +92,7 @@ class Model(repository: Repository) {
     val newId = await(assignments.save(assignment))
     val newAssignment = assignment.copy(id = newId.get)
     assignmentList += newAssignment
-    selectedAssignment = ObjectProperty[Assignment](assignment)
+    selectedAssignment.value = newAssignment.id
   }
 
   def scoreAssignments(courseId: Int): Double = await(assignments.score(courseId)).getOrElse(0.0)

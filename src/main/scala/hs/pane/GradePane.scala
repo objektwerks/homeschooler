@@ -21,19 +21,20 @@ class GradePane(conf: Config, model: Model) extends HBox {
   spacing = 6
   children = List(gradeLabel, gradeListView, gradePropsButton, gradeAddButton)
 
-  model.selectedGrade <== gradeListView.selectionModel().selectedItemProperty()
-
   model.selectedStudent.onChange { (_, _, selectedStudent) =>
-    model.listGrades(selectedStudent.id)
+    model.listGrades(selectedStudent)
     gradeAddButton.disable = false
   }
 
-  gradeListView.selectionModel().selectedItemProperty().onChange { gradePropsButton.disable = false }
+  gradeListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedGrade) =>
+    model.selectedGrade.value = selectedGrade.id
+    gradePropsButton.disable = false
+  }
 
   gradePropsButton.onAction = { _ => update(gradeListView.selectionModel().getSelectedIndex,
                                             gradeListView.selectionModel().getSelectedItem) }
 
-  gradeAddButton.onAction = { _ => add(Grade(studentid = model.selectedStudent.value.id)) }
+  gradeAddButton.onAction = { _ => add(Grade(studentid = model.selectedStudent.value)) }
 
   def update(selectedIndex: Int, grade: Grade): Unit = {
     new GradeDialog(conf, grade).showAndWait() match {
