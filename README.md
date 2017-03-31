@@ -23,11 +23,14 @@ Run
 
 Package
 -------
-1. sbt universal:packageBin
+1. sbt clean test universal:packageBin
+
+Install
+-------
+1. copy universal directory to target directory (i.e., home directory ~ )
+2. unzip ~/universal/hs-0.1-SNAPSHOT.zip
+3. set executable permissions for ~/universal/hs-0.1-SNAPSHOT/bin/hs
 
 Execute
 -------
-1. copy universal directory to desired location
-2. unzip ~/universal/hs-0.1-SNAPSHOT.zip
-3. set executable permission for ~/universal/hs-0.1-SNAPSHOT/bin/hs
-4. execute ~/universal/hs-0.1-SNAPSHOT/bin/hs
+1. execute ~/universal/hs-0.1-SNAPSHOT/bin/hs
