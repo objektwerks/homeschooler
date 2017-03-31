@@ -24,15 +24,15 @@ class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assi
     "Completed:" -> completedDatePicker,
     "Score:" -> scoreBox)
   val componentGridPane = new ComponentGridPane(components)
-
-  scoreSlider.value.onChange { (_, _, newScore) => scoreLabel.text = newScore.intValue.toString }
-
   val dialog = dialogPane()
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   dialog.content = componentGridPane
+
   initOwner(App.stage)
   title = "Assignment"
   headerText = "Save Assignment"
+
+  scoreSlider.value.onChange { (_, _, newScore) => scoreLabel.text = newScore.intValue.toString }
 
   val saveButton = dialog.lookupButton(saveButtonType)
   saveButton.disable = taskTextField.text.value.trim.isEmpty

@@ -15,10 +15,10 @@ class CourseDialog(conf: Config, course: Course) extends Dialog[Course]() {
   val nameTextField = new TextField { text = course.name}
   val components = Map[String, Region]("Name:" -> nameTextField)
   val componentGridPane = new ComponentGridPane(components)
-
   val dialog = dialogPane()
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   dialog.content = componentGridPane
+
   initOwner(App.stage)
   title = "Course"
   headerText = "Save Course"

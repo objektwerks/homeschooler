@@ -20,10 +20,10 @@ class GradeDialog(conf: Config, grade: Grade) extends Dialog[Grade]() {
     "Started:" -> startedDatePicker,
     "Completed:" -> completedDatePicker)
   val componentGridPane = new ComponentGridPane(components)
-
   val dialog = dialogPane()
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   dialog.content = componentGridPane
+
   initOwner(App.stage)
   title = "Grade"
   headerText = "Save Grade"

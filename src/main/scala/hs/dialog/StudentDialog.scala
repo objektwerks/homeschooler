@@ -16,10 +16,10 @@ class StudentDialog(conf: Config, student: Student) extends Dialog[Student]() {
   val bornDatePicker = new DatePicker { value = student.born}
   val components = Map[String, Region]("Name:" -> nameTextField, "Born:" -> bornDatePicker)
   val componentGridPane = new ComponentGridPane(components)
-
   val dialog = dialogPane()
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   dialog.content = componentGridPane
+
   initOwner(App.stage)
   title = "Student"
   headerText = "Save Student"
