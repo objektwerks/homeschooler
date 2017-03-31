@@ -17,11 +17,11 @@ import scalafx.util.StringConverter
 class AssignmentPane(conf: Config, model: Model) extends VBox {
   val assignmentLabel = new Label { text = "Assignments:" }
   val assignmentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Assignment](a => a.task) )
-  val assignmentListView = new ListView[Assignment] { prefWidth = 333; items = model.assignmentList; cellFactory = assignmentCellFactory
+  val assignmentListView = new ListView[Assignment] { items = model.assignmentList; cellFactory = assignmentCellFactory
                                                       selectionModel().selectionMode = SelectionMode.Single }
-  val assignedDate = new Label { text = "00/00/0000" }
+  val assignedDate = new Label { text = "00/00" }
   val toLabel = new Label { text = "-" }
-  val completedDate = new Label { text = "00/00/0000" }
+  val completedDate = new Label { text = "00/00" }
   val scoreLabel = new Label { text = "0" }
   val splitLabel = new Label { text = "/" }
   val totalLabel = new Label { text = "0" }
@@ -51,7 +51,8 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
     }
   }
 
-  assignmentPropsButton.onAction = { _ => update(assignmentListView.selectionModel().getSelectedIndex, assignmentListView.selectionModel().getSelectedItem) }
+  assignmentPropsButton.onAction = { _ => update(assignmentListView.selectionModel().getSelectedIndex,
+                                                 assignmentListView.selectionModel().getSelectedItem) }
 
   assignmentAddButton.onAction = { _ => add(Assignment(courseid = model.selectedCourse.value)) }
 

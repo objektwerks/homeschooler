@@ -9,18 +9,19 @@ import hs.view.View
 import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, Label, ListView}
-import scalafx.scene.layout.HBox
+import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
-class StudentPane(conf: Config, model: Model) extends HBox {
+class StudentPane(conf: Config, model: Model) extends VBox {
   val studentLabel = new Label { text = "Student:" }
   val studentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Student](s => s.name) )
-  val studentListView = new ListView[Student] { prefHeight = 100; prefWidth = 203; items = model.studentList; cellFactory = studentCellFactory }
+  val studentListView = new ListView[Student] { items = model.studentList; cellFactory = studentCellFactory }
   val studentPropsButton = new Button { graphic = View.editImageView(); prefHeight = 25; disable = true }
   val studentAddButton = new Button { graphic = View.addImageView(); prefHeight = 25 }
+  val studentToolBar = new HBox { spacing = 6; children = List(studentPropsButton, studentAddButton) }
 
   spacing = 6
-  children = List(studentLabel, studentListView, studentPropsButton, studentAddButton)
+  children = List(studentLabel, studentListView, studentToolBar)
 
   studentListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedStudent) =>
     if (selectedStudent != null) {
@@ -29,7 +30,8 @@ class StudentPane(conf: Config, model: Model) extends HBox {
     }
   }
 
-  studentPropsButton.onAction = { _ => update(studentListView.selectionModel().getSelectedIndex, studentListView.selectionModel().getSelectedItem) }
+  studentPropsButton.onAction = { _ => update(studentListView.selectionModel().getSelectedIndex,
+                                              studentListView.selectionModel().getSelectedItem) }
 
   studentAddButton.onAction = { _ => add(Student()) }
 

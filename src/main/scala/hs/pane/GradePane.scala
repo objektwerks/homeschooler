@@ -9,18 +9,19 @@ import hs.view.View
 import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, Label, ListView}
-import scalafx.scene.layout.HBox
+import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
-class GradePane(conf: Config, model: Model) extends HBox {
+class GradePane(conf: Config, model: Model) extends VBox {
   val gradeLabel = new Label { text = "Grade:" }
   val gradeCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Grade](g => g.year) )
-  val gradeListView = new ListView[Grade] { prefHeight = 100; prefWidth = 203; items = model.gradeList; cellFactory = gradeCellFactory }
+  val gradeListView = new ListView[Grade] { items = model.gradeList; cellFactory = gradeCellFactory }
   val gradePropsButton = new Button { graphic = View.editImageView(); prefHeight = 25; disable = true }
   val gradeAddButton = new Button { graphic = View.addImageView(); prefHeight = 25; disable = true }
+  val gradeToolBar = new HBox { spacing = 6; children = List(gradePropsButton, gradeAddButton) }
 
   spacing = 6
-  children = List(gradeLabel, gradeListView, gradePropsButton, gradeAddButton)
+  children = List(gradeLabel, gradeListView, gradeToolBar)
 
   model.selectedStudent.onChange { (_, _, selectedStudent) =>
     model.listGrades(selectedStudent)
@@ -34,7 +35,8 @@ class GradePane(conf: Config, model: Model) extends HBox {
     }
   }
 
-  gradePropsButton.onAction = { _ => update(gradeListView.selectionModel().getSelectedIndex, gradeListView.selectionModel().getSelectedItem) }
+  gradePropsButton.onAction = { _ => update(gradeListView.selectionModel().getSelectedIndex,
+                                            gradeListView.selectionModel().getSelectedItem) }
 
   gradeAddButton.onAction = { _ => add(Grade(studentid = model.selectedStudent.value)) }
 

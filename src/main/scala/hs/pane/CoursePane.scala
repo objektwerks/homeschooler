@@ -15,7 +15,7 @@ import scalafx.util.StringConverter
 class CoursePane(conf: Config, model: Model) extends VBox {
   val courseLabel = new Label { text = "Courses:" }
   val courseCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Course](c => c.name) )
-  val courseListView = new ListView[Course] { prefWidth = 333; items = model.courseList; cellFactory = courseCellFactory
+  val courseListView = new ListView[Course] { items = model.courseList; cellFactory = courseCellFactory
                                               selectionModel().selectionMode = SelectionMode.Single }
   val coursePropsButton = new Button { graphic = View.editImageView(); prefHeight = 25; disable = true }
   val courseAddButton = new Button { graphic = View.addImageView(); prefHeight = 25; disable = true }
@@ -36,7 +36,8 @@ class CoursePane(conf: Config, model: Model) extends VBox {
     }
   }
 
-  coursePropsButton.onAction = { _ => update(courseListView.selectionModel().getSelectedIndex, courseListView.selectionModel().getSelectedItem) }
+  coursePropsButton.onAction = { _ => update(courseListView.selectionModel().getSelectedIndex,
+                                             courseListView.selectionModel().getSelectedItem) }
 
   courseAddButton.onAction = { _ => add(Course(gradeid = model.selectedGrade.value)) }
 

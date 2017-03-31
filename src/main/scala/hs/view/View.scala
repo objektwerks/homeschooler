@@ -4,11 +4,11 @@ import com.typesafe.config.Config
 import hs.model.Model
 import hs.pane._
 
-import scalafx.geometry.{Insets, Orientation}
+import scalafx.geometry.Insets
 import scalafx.scene.Scene
-import scalafx.scene.control.Separator
+import scalafx.scene.control.SplitPane
 import scalafx.scene.image.{Image, ImageView}
-import scalafx.scene.layout.{HBox, VBox}
+import scalafx.scene.layout.{HBox, Priority, VBox}
 
 class View(conf: Config, model: Model) {
   val menuPane = new MenuPane()
@@ -17,15 +17,18 @@ class View(conf: Config, model: Model) {
   val coursePane = new CoursePane(conf, model)
   val assignmentPane = new AssignmentPane(conf, model)
 
-  val northPane = new HBox { spacing = 6; children = List(studentPane, new Separator { orientation = Orientation.Vertical }, gradePane) }
-  val southPane = new HBox { spacing = 6; children = List(coursePane, assignmentPane) }
-  val contentPane = new VBox { spacing = 6; padding = Insets(6); children = List(menuPane, northPane, new Separator(), southPane) }
+  val westPane = new VBox { vgrow = Priority.Always; hgrow = Priority.Always; spacing = 6; padding = Insets(6); children = List(studentPane, gradePane) }
+  val eastPane = new VBox { vgrow = Priority.Always; hgrow = Priority.Always; spacing = 6; padding = Insets(6); children = List(coursePane, assignmentPane) }
+  val splitPane = new SplitPane { vgrow = Priority.Always; hgrow = Priority.Always; padding = Insets(6); items.addAll(westPane, eastPane) }
+  val contentPane = new HBox { vgrow = Priority.Always; hgrow = Priority.Always; spacing = 6; padding = Insets(6); children = List(menuPane, splitPane) }
   val sceneGraph = new Scene { root = contentPane }
 
   model.listStudents()
 }
 
 object View {
+  def appImmage() = new Image(View.getClass.getResourceAsStream("/homeschool.png"))
+
   def addImageView() = loadImageView("/add.png")
 
   def editImageView() = loadImageView("/edit.png")
