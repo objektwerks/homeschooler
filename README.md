@@ -1,6 +1,10 @@
 Homeschool
 ----------
->Open source homeschool app.
+>Open source homeschool app built by Objektwerks.
+
+License
+-------
+GPL.V3 ( ./GPL.V3 )
 
 Object Model
 ------------
