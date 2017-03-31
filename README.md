@@ -23,4 +23,4 @@ Run
 
 Package
 -------
-1. sbt universal:packageBin
+1. sbt universal:packageBi
