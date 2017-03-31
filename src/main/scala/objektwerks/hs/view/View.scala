@@ -1,8 +1,8 @@
-package hs.view
+package objektwerks.hs.view
 
 import com.typesafe.config.Config
-import hs.model.Model
-import hs.pane._
+import objektwerks.hs.model.Model
+import objektwerks.hs.pane._
 
 import scalafx.geometry.Insets
 import scalafx.scene.Scene

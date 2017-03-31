@@ -1,8 +1,8 @@
-package hs.entity
+package objektwerks.hs.entity
 
 import java.time.LocalDate
 
-import hs.repository._
+import objektwerks.hs.repository._
 import org.scalatest.{BeforeAndAfterAll, FunSuite, Matchers}
 
 class RepositoryTest extends FunSuite with BeforeAndAfterAll with Matchers {

@@ -1,4 +1,4 @@
-package hs.entity
+package objektwerks.hs.entity
 
 import java.time.LocalDate
 

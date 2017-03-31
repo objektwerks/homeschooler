@@ -1,10 +1,10 @@
-package hs.pane
+package objektwerks.hs.pane
 
 import com.typesafe.config.Config
-import hs.dialog.StudentDialog
-import hs.entity.Student
-import hs.model.Model
-import hs.view.View
+import objektwerks.hs.dialog.StudentDialog
+import objektwerks.hs.entity.Student
+import objektwerks.hs.model.Model
+import objektwerks.hs.view.View
 
 import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell

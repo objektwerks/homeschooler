@@ -1,12 +1,12 @@
-package hs.pane
+package objektwerks.hs.pane
 
 import java.time.format.DateTimeFormatter
 
 import com.typesafe.config.Config
-import hs.dialog.AssignmentDialog
-import hs.entity.Assignment
-import hs.model.Model
-import hs.view.View
+import objektwerks.hs.dialog.AssignmentDialog
+import objektwerks.hs.entity.Assignment
+import objektwerks.hs.model.Model
+import objektwerks.hs.view.View
 
 import scalafx.Includes._
 import scalafx.geometry.{Orientation, Pos}

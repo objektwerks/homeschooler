@@ -1,9 +1,9 @@
-package hs
+package objektwerks.hs
 
 import com.typesafe.config.ConfigFactory
-import hs.model.Model
-import hs.repository.Repository
-import hs.view.View
+import objektwerks.hs.model.Model
+import objektwerks.hs.repository.Repository
+import objektwerks.hs.view.View
 
 import scalafx.application.JFXApp
 

@@ -28,9 +28,9 @@ Package
 Install
 -------
 1. copy universal directory to target directory (i.e., home directory ~ )
-2. unzip ~/universal/hs-0.1-SNAPSHOT.zip
-3. set executable permissions for ~/universal/hs-0.1-SNAPSHOT/bin/hs
+2. unzip ~/universal/objektwerks.hs-0.1-SNAPSHOT.zip
+3. set executable permissions for ~/universal/objektwerks.hs-0.1-SNAPSHOT/bin/objektwerks.hs
 
 Execute
 -------
-1. execute ~/universal/hs-0.1-SNAPSHOT/bin/hs
+1. execute ~/universal/objektwerks.hs-0.1-SNAPSHOT/bin/objektwerks.hs

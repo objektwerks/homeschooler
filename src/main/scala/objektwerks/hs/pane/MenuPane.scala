@@ -1,4 +1,4 @@
-package hs.pane
+package objektwerks.hs.pane
 
 import scalafx.application.Platform
 import scalafx.scene.control.{Menu, MenuBar, MenuItem}
