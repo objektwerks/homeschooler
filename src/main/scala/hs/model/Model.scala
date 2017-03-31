@@ -3,7 +3,6 @@ package hs.model
 import hs.entity.{Assignment, Course, Grade, Student}
 import hs.repository.Repository
 
-import scala.collection.JavaConverters._
 import scalafx.beans.property.ObjectProperty
 import scalafx.collections.ObservableBuffer
 
@@ -18,7 +17,7 @@ class Model(repository: Repository) {
     gradeList.clear()
     courseList.clear()
     assignmentList.clear()
-    studentList.addAll( await(students.list()).asJava )
+    studentList ++= await(students.list())
   }
 
   def updateStudent(selectedIndex: Int, student: Student): Unit = {
@@ -40,7 +39,7 @@ class Model(repository: Repository) {
     gradeList.clear()
     courseList.clear()
     assignmentList.clear()
-    gradeList.addAll( await(grades.list(studentId)).asJava )
+    gradeList ++= await(grades.list(studentId))
   }
 
   def updateGrade(selectedIndex: Int, grade: Grade): Unit = {
@@ -61,7 +60,7 @@ class Model(repository: Repository) {
   def listCourses(gradeId: Int): Unit = {
     courseList.clear()
     assignmentList.clear()
-    courseList.addAll( await(courses.list(gradeId)).asJava )
+    courseList ++= await(courses.list(gradeId))
   }
 
   def updateCourse(selectedIndex: Int, course: Course): Unit = {
@@ -81,7 +80,7 @@ class Model(repository: Repository) {
 
   def listAssignments(courseId: Int): Unit = {
     assignmentList.clear()
-    assignmentList.addAll( await(assignments.list(courseId)).asJava )
+    assignmentList ++= await(assignments.list(courseId))
   }
 
   def updateAssignment(selectedIndex: Int, assignment: Assignment): Unit = {
