@@ -20,3 +20,7 @@ Test
 Run
 ---
 1. sbt clean test run
+
+Package
+-------
+1. sbt universal:packageBin
