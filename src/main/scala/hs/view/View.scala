@@ -17,10 +17,10 @@ class View(conf: Config, model: Model) {
   val coursePane = new CoursePane(conf, model)
   val assignmentPane = new AssignmentPane(conf, model)
 
-  val westPane = new VBox { vgrow = Priority.Always; hgrow = Priority.Always; spacing = 6; padding = Insets(6); children = List(studentPane, gradePane) }
-  val eastPane = new VBox { vgrow = Priority.Always; hgrow = Priority.Always; spacing = 6; padding = Insets(6); children = List(coursePane, assignmentPane) }
+  val westPane = new VBox { spacing = 6; padding = Insets(6); children = List(studentPane, gradePane) }
+  val eastPane = new VBox { spacing = 6; padding = Insets(6); children = List(coursePane, assignmentPane) }
   val splitPane = new SplitPane { vgrow = Priority.Always; hgrow = Priority.Always; padding = Insets(6); items.addAll(westPane, eastPane) }
-  val contentPane = new HBox { vgrow = Priority.Always; hgrow = Priority.Always; spacing = 6; padding = Insets(6); children = List(menuPane, splitPane) }
+  val contentPane = new HBox { spacing = 6; padding = Insets(6); children = List(menuPane, splitPane) }
   val sceneGraph = new Scene { root = contentPane }
 
   model.listStudents()
