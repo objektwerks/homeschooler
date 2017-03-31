@@ -9,8 +9,9 @@ import hs.model.Model
 import hs.view.View
 
 import scalafx.Includes._
+import scalafx.geometry.{Orientation, Pos}
 import scalafx.scene.control.cell.TextFieldListCell
-import scalafx.scene.control.{Button, Label, ListView, SelectionMode}
+import scalafx.scene.control._
 import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
@@ -27,12 +28,13 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
   val totalLabel = new Label { text = "0" }
   val assignmentPropsButton = new Button { graphic = View.editImageView(); prefHeight = 25; disable = true }
   val assignmentAddButton = new Button { graphic = View.addImageView(); prefHeight = 25; disable = true }
-  val assignmentToolBar = new HBox { spacing = 6; children = List(assignmentPropsButton, assignmentAddButton) }
-  val assignmentDetailsPane = new HBox { spacing = 6; children = List(assignedDate, toLabel, completedDate, scoreLabel,
-                                                                      splitLabel, totalLabel, assignmentToolBar) }
+  val assignmentToolBar = new HBox { spacing = 6; alignment = Pos.CenterLeft; children = List(assignmentPropsButton, assignmentAddButton) }
+  val assignmentDetailsPane = new HBox { spacing = 6; alignment = Pos.CenterRight; children = List(assignedDate, toLabel, completedDate, scoreLabel, splitLabel, totalLabel) }
+  val separator = new Separator { orientation = Orientation.Vertical}
+  val assignementDetailTollBarPane = new HBox { spacing = 6; children = List(assignmentToolBar, separator, assignmentDetailsPane) }
 
   spacing = 6
-  children = List(assignmentLabel, assignmentListView, assignmentDetailsPane)
+  children = List(assignmentLabel, assignmentListView, assignementDetailTollBarPane)
 
   model.selectedCourse.onChange { (_, _, selectedCourse) =>
     model.listAssignments(selectedCourse)
