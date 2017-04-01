@@ -1,6 +1,6 @@
 Homeschool
 ----------
->Open source homeschool app built by Objektwerks.
+>Open source ScalaFX homeschool app.
 
 License
 -------
