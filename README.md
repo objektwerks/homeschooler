@@ -38,3 +38,8 @@ Install
 Execute
 -------
 1. execute ~/universal/homeschool-0.1/bin/homeschool
+
+Todo
+----
+1. Add control resource strings to app.conf.
+2. Set app.conf resource string on controls.
