@@ -4,7 +4,7 @@ Homeschool
 
 License
 -------
-GPL.V3 ( ./GPL.V3 )
+GPL.V3 ( See ./GPL.V3 )
 
 Object Model
 ------------
@@ -32,9 +32,9 @@ Package
 Install
 -------
 1. copy universal directory to target directory (i.e., home directory ~ )
-2. unzip ~/universal/objektwerks.hs-0.1-SNAPSHOT.zip
-3. set executable permissions for ~/universal/objektwerks.hs-0.1-SNAPSHOT/bin/objektwerks.hs
+2. unzip ~/universal/homeschool-0.1.zip
+3. set executable permissions for ~/universal/homeschool-0.1/bin/homeschool
 
 Execute
 -------
-1. execute ~/universal/objektwerks.hs-0.1-SNAPSHOT/bin/objektwerks.hs
+1. execute ~/universal/homeschool-0.1/bin/homeschool
