@@ -11,7 +11,7 @@ import scalafx.scene.control._
 import scalafx.scene.layout.{HBox, Region}
 
 class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assignment]() {
-  val saveButtonType = new ButtonType("Save", ButtonData.OKDone)
+  val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
   val taskTextField = new TextField { text = assignment.task }
   val assignedDatePicker = new DatePicker { value = assignment.assigned }
   val completedDatePicker = new DatePicker { value = assignment.completed }
@@ -19,18 +19,18 @@ class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assi
   val scoreSlider = new Slider { min = 50.0; max = 100.00; value = assignment.score; showTickLabels = true }
   val scoreBox = new HBox { children = List(scoreSlider, scoreLabel) }
   val components = Map[String, Region](
-    "Task:" -> taskTextField,
-    "Assigned:" -> assignedDatePicker,
-    "Completed:" -> completedDatePicker,
-    "Score:" -> scoreBox)
+    conf.getString("task") -> taskTextField,
+    conf.getString("assigned") -> assignedDatePicker,
+    conf.getString("completed") -> completedDatePicker,
+    conf.getString("score") -> scoreBox)
   val componentGridPane = new ComponentGridPane(components)
   val dialog = dialogPane()
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   dialog.content = componentGridPane
 
   initOwner(App.stage)
-  title = "Assignment"
-  headerText = "Save Assignment"
+  title = conf.getString("assignment")
+  headerText = conf.getString("save-assignment")
 
   scoreSlider.value.onChange { (_, _, newScore) => scoreLabel.text = newScore.intValue.toString }
 

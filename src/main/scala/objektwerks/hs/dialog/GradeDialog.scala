@@ -11,22 +11,22 @@ import scalafx.scene.control._
 import scalafx.scene.layout.Region
 
 class GradeDialog(conf: Config, grade: Grade) extends Dialog[Grade]() {
-  val saveButtonType = new ButtonType("Save", ButtonData.OKDone)
+  val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
   val yearTextField = new TextField { text = grade.year }
   val startedDatePicker = new DatePicker { value = grade.started }
   val completedDatePicker = new DatePicker { value = grade.completed }
   val components = Map[String, Region](
-    "Year:" -> yearTextField,
-    "Started:" -> startedDatePicker,
-    "Completed:" -> completedDatePicker)
+    conf.getString("year") -> yearTextField,
+    conf.getString("started") -> startedDatePicker,
+    conf.getString("completed") -> completedDatePicker)
   val componentGridPane = new ComponentGridPane(components)
   val dialog = dialogPane()
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   dialog.content = componentGridPane
 
   initOwner(App.stage)
-  title = "Grade"
-  headerText = "Save Grade"
+  title = conf.getString("grade")
+  headerText = conf.getString("save-grade")
 
   val saveButton = dialog.lookupButton(saveButtonType)
   saveButton.disable = yearTextField.text.value.trim.isEmpty
