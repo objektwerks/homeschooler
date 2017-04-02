@@ -29,12 +29,7 @@ class CoursePane(conf: Config, model: Model) extends VBox {
     courseAddButton.disable = false
   }
 
-  courseListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedCourse) =>
-    if (selectedCourse != null) { // NPE Bug!
-      model.selectedCourseId.value = selectedCourse.id
-      coursePropsButton.disable = false
-    }
-  }
+  courseListView.selectionModel().selectedItemProperty().onChange { coursePropsButton.disable = false }
 
   coursePropsButton.onAction = { _ => update(courseListView.selectionModel().getSelectedIndex,
                                              courseListView.selectionModel().getSelectedItem) }

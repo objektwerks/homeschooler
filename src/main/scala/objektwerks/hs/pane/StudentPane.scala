@@ -7,6 +7,7 @@ import objektwerks.hs.model.Model
 import objektwerks.hs.view.View
 
 import scalafx.Includes._
+import scalafx.collections.ObservableBuffer.{Add, Remove, Reorder, Update}
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, Label, ListView}
 import scalafx.scene.layout.{HBox, VBox}
@@ -23,11 +24,17 @@ class StudentPane(conf: Config, model: Model) extends VBox {
   spacing = 6
   children = List(studentLabel, studentListView, studentToolBar)
 
-  studentListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedStudent) =>
-    if (selectedStudent != null) { // NPE Bug!
-      model.selectedStudentId.value = selectedStudent.id
-      studentPropsButton.disable = false
+  studentListView.items.getValue.onChange { (_, changes) =>
+    for (change <- changes) change match {
+      case Add(pos, added) => println(s"add: $pos : $added")
+      case Remove(pos, removed) => println(s"remove: $pos : $removed")
+      case Reorder(from, to, permutation) => println(s"reorder: $from - $to : $permutation")
+      case Update(pos, updated) => println(s"update: $pos : $updated")
     }
+  }
+
+  studentListView.selectionModel().selectedItemProperty().onChange { (_, _, selected) =>
+    studentPropsButton.disable = false
   }
 
   studentPropsButton.onAction = { _ => update(studentListView.selectionModel().getSelectedIndex,

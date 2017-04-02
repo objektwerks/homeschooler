@@ -23,6 +23,7 @@ class Model(repository: Repository) {
   def updateStudent(selectedIndex: Int, student: Student): Unit = {
     await(students.save(student))
     studentList.update(selectedIndex, student)
+    selectedStudentId.value = student.id
   }
 
   def addStudent(student: Student): Student = {
@@ -46,6 +47,7 @@ class Model(repository: Repository) {
   def updateGrade(selectedIndex: Int, grade: Grade): Unit = {
     await(grades.save(grade))
     gradeList.update(selectedIndex, grade)
+    selectedGradeId.value = grade.id
   }
 
   def addGrade(grade: Grade): Grade = {
@@ -68,6 +70,7 @@ class Model(repository: Repository) {
   def updateCourse(selectedIndex: Int, course: Course): Unit = {
     await(courses.save(course))
     courseList.update(selectedIndex, course)
+    selectedCourseId.value = course.id
   }
 
   def addCourse(course: Course): Course = {
@@ -89,6 +92,7 @@ class Model(repository: Repository) {
   def updateAssignment(selectedIndex: Int, assignment: Assignment): Unit = {
     await(assignments.save(assignment))
     assignmentList.update(selectedIndex, assignment)
+    selectedAssignmentId.value = assignment.id
   }
 
   def addAssignment(assignment: Assignment): Assignment = {
