@@ -7,7 +7,6 @@ import objektwerks.hs.model.Model
 import objektwerks.hs.view.View
 
 import scalafx.Includes._
-import scalafx.collections.ObservableBuffer.{Add, Remove, Reorder, Update}
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, Label, ListView}
 import scalafx.scene.layout.{HBox, VBox}
