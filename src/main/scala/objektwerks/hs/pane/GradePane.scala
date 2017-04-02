@@ -29,7 +29,7 @@ class GradePane(conf: Config, model: Model) extends VBox {
   }
 
   gradeListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedGrade) =>
-    if (selectedGrade != null) {
+    if (selectedGrade != null) { // NPE Bug!
       model.selectedGradeId.value = selectedGrade.id
       gradePropsButton.disable = false
     }

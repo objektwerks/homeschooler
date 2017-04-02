@@ -24,7 +24,7 @@ class StudentPane(conf: Config, model: Model) extends VBox {
   children = List(studentLabel, studentListView, studentToolBar)
 
   studentListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedStudent) =>
-    if (selectedStudent != null) {
+    if (selectedStudent != null) { // NPE Bug!
       model.selectedStudentId.value = selectedStudent.id
       studentPropsButton.disable = false
     }
