@@ -13,7 +13,7 @@ import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
 class GradePane(conf: Config, model: Model) extends VBox {
-  val gradeLabel = new Label { text = "Grade:" }
+  val gradeLabel = new Label { text = conf.getString("grades") }
   val gradeCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Grade](g => g.year) )
   val gradeListView = new ListView[Grade] { minHeight = 50; items = model.gradeList; cellFactory = gradeCellFactory }
   val gradePropsButton = new Button { graphic = View.editImageView(); prefHeight = 25; disable = true }

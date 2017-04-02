@@ -16,7 +16,7 @@ import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
 class AssignmentPane(conf: Config, model: Model) extends VBox {
-  val assignmentLabel = new Label { text = "Assignments:" }
+  val assignmentLabel = new Label { text = conf.getString("assignments") }
   val assignmentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Assignment](a => a.task) )
   val assignmentListView = new ListView[Assignment] { minHeight = 300; items = model.assignmentList; cellFactory = assignmentCellFactory
                                                       selectionModel().selectionMode = SelectionMode.Single }

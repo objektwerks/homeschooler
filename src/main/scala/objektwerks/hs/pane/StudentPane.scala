@@ -13,7 +13,7 @@ import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
 class StudentPane(conf: Config, model: Model) extends VBox {
-  val studentLabel = new Label { text = "Student:" }
+  val studentLabel = new Label { text = conf.getString("students") }
   val studentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Student](s => s.name) )
   val studentListView = new ListView[Student] { minHeight = 50; items = model.studentList; cellFactory = studentCellFactory }
   val studentPropsButton = new Button { graphic = View.editImageView(); prefHeight = 25; disable = true }
