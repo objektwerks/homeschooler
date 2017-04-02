@@ -41,4 +41,4 @@ Execute
 
 Todo
 ----
-1. Resolve ListView selectionModel().selectedItemProperty().onChange { (_, _, selectedEntity) NPE
+1. ListView fires a null change event on an ObservableBuffer update, which is a remove + add.

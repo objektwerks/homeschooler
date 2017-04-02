@@ -24,18 +24,7 @@ class StudentPane(conf: Config, model: Model) extends VBox {
   spacing = 6
   children = List(studentLabel, studentListView, studentToolBar)
 
-  studentListView.items.getValue.onChange { (_, changes) =>
-    for (change <- changes) change match {
-      case Add(pos, added) => println(s"add: $pos : $added")
-      case Remove(pos, removed) => println(s"remove: $pos : $removed")
-      case Reorder(from, to, permutation) => println(s"reorder: $from - $to : $permutation")
-      case Update(pos, updated) => println(s"update: $pos : $updated")
-    }
-  }
-
-  studentListView.selectionModel().selectedItemProperty().onChange { (_, _, selected) =>
-    studentPropsButton.disable = false
-  }
+  studentListView.selectionModel().selectedItemProperty().onChange { studentPropsButton.disable = false }
 
   studentPropsButton.onAction = { _ => update(studentListView.selectionModel().getSelectedIndex,
                                               studentListView.selectionModel().getSelectedItem) }
