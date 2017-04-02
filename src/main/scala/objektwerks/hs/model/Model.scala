@@ -10,7 +10,7 @@ class Model(repository: Repository) {
   import repository._
 
   val studentList = ObservableBuffer[Student]()
-  val selectedStudent = ObjectProperty[Int](0)
+  val selectedStudentId = ObjectProperty[Int](0)
 
   def listStudents(): Unit = {
     studentList.clear()
@@ -29,12 +29,12 @@ class Model(repository: Repository) {
     val newId = await(students.save(student))
     val newStudent = student.copy(id = newId.get)
     studentList += newStudent
-    selectedStudent.value = newStudent.id
+    selectedStudentId.value = newStudent.id
     newStudent
   }
 
   val gradeList = ObservableBuffer[Grade]()
-  val selectedGrade = ObjectProperty[Int](0)
+  val selectedGradeId = ObjectProperty[Int](0)
 
   def listGrades(studentId: Int): Unit = {
     gradeList.clear()
@@ -52,12 +52,12 @@ class Model(repository: Repository) {
     val newId = await(grades.save(grade))
     val newGrade = grade.copy(id = newId.get)
     gradeList += newGrade
-    selectedGrade.value = newGrade.id
+    selectedGradeId.value = newGrade.id
     newGrade
   }
 
   val courseList = ObservableBuffer[Course]()
-  val selectedCourse = ObjectProperty[Int](0)
+  val selectedCourseId = ObjectProperty[Int](0)
 
   def listCourses(gradeId: Int): Unit = {
     courseList.clear()
@@ -74,12 +74,12 @@ class Model(repository: Repository) {
     val newId = await(courses.save(course))
     val newCourse = course.copy(id = newId.get)
     courseList += newCourse
-    selectedCourse.value = newCourse.id
+    selectedCourseId.value = newCourse.id
     newCourse
   }
 
   val assignmentList = ObservableBuffer[Assignment]()
-  val selectedAssignment = ObjectProperty[Int](0)
+  val selectedAssignmentId = ObjectProperty[Int](0)
 
   def listAssignments(courseId: Int): Unit = {
     assignmentList.clear()
@@ -95,7 +95,7 @@ class Model(repository: Repository) {
     val newId = await(assignments.save(assignment))
     val newAssignment = assignment.copy(id = newId.get)
     assignmentList += newAssignment
-    selectedAssignment.value = newAssignment.id
+    selectedAssignmentId.value = newAssignment.id
     newAssignment
   }
 

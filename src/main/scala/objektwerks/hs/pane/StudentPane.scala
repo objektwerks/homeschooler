@@ -25,7 +25,7 @@ class StudentPane(conf: Config, model: Model) extends VBox {
 
   studentListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedStudent) =>
     if (selectedStudent != null) {
-      model.selectedStudent.value = selectedStudent.id
+      model.selectedStudentId.value = selectedStudent.id
       studentPropsButton.disable = false
     }
   }

@@ -24,14 +24,14 @@ class CoursePane(conf: Config, model: Model) extends VBox {
   spacing = 6
   children = List(courseLabel, courseListView, courseToolBar)
 
-  model.selectedGrade.onChange { (_, _, selectedGrade) =>
+  model.selectedGradeId.onChange { (_, _, selectedGrade) =>
     model.listCourses(selectedGrade)
     courseAddButton.disable = false
   }
 
   courseListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedCourse) =>
     if (selectedCourse != null) {
-      model.selectedCourse.value = selectedCourse.id
+      model.selectedCourseId.value = selectedCourse.id
       coursePropsButton.disable = false
     }
   }
@@ -39,7 +39,7 @@ class CoursePane(conf: Config, model: Model) extends VBox {
   coursePropsButton.onAction = { _ => update(courseListView.selectionModel().getSelectedIndex,
                                              courseListView.selectionModel().getSelectedItem) }
 
-  courseAddButton.onAction = { _ => add(Course(gradeid = model.selectedGrade.value)) }
+  courseAddButton.onAction = { _ => add(Course(gradeid = model.selectedGradeId.value)) }
 
   def update(selectedIndex: Int, course: Course): Unit = {
     new CourseDialog(conf, course).showAndWait() match {

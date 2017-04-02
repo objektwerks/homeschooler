@@ -36,14 +36,14 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
   spacing = 6
   children = List(assignmentLabel, assignmentListView, assignementDetailTollBarPane)
 
-  model.selectedCourse.onChange { (_, _, selectedCourse) =>
+  model.selectedCourseId.onChange { (_, _, selectedCourse) =>
     model.listAssignments(selectedCourse)
     assignmentAddButton.disable = false
   }
 
   assignmentListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedAssignment) =>
     if (selectedAssignment != null) {
-      model.selectedAssignment.value = selectedAssignment.id
+      model.selectedAssignmentId.value = selectedAssignment.id
       val dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd")
       assignedDate.text = selectedAssignment.assigned.format(dateTimeFormatter)
       completedDate.text = selectedAssignment.completed.format(dateTimeFormatter)
@@ -56,7 +56,7 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
   assignmentPropsButton.onAction = { _ => update(assignmentListView.selectionModel().getSelectedIndex,
                                                  assignmentListView.selectionModel().getSelectedItem) }
 
-  assignmentAddButton.onAction = { _ => add(Assignment(courseid = model.selectedCourse.value)) }
+  assignmentAddButton.onAction = { _ => add(Assignment(courseid = model.selectedCourseId.value)) }
 
   def update(selectedIndex: Int, assignment: Assignment): Unit = {
     new AssignmentDialog(conf, assignment).showAndWait() match {

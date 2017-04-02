@@ -23,14 +23,14 @@ class GradePane(conf: Config, model: Model) extends VBox {
   spacing = 6
   children = List(gradeLabel, gradeListView, gradeToolBar)
 
-  model.selectedStudent.onChange { (_, _, selectedStudent) =>
+  model.selectedStudentId.onChange { (_, _, selectedStudent) =>
     model.listGrades(selectedStudent)
     gradeAddButton.disable = false
   }
 
   gradeListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedGrade) =>
     if (selectedGrade != null) {
-      model.selectedGrade.value = selectedGrade.id
+      model.selectedGradeId.value = selectedGrade.id
       gradePropsButton.disable = false
     }
   }
@@ -38,7 +38,7 @@ class GradePane(conf: Config, model: Model) extends VBox {
   gradePropsButton.onAction = { _ => update(gradeListView.selectionModel().getSelectedIndex,
                                             gradeListView.selectionModel().getSelectedItem) }
 
-  gradeAddButton.onAction = { _ => add(Grade(studentid = model.selectedStudent.value)) }
+  gradeAddButton.onAction = { _ => add(Grade(studentid = model.selectedStudentId.value)) }
 
   def update(selectedIndex: Int, grade: Grade): Unit = {
     new GradeDialog(conf, grade).showAndWait() match {
