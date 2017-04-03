@@ -23,7 +23,12 @@ class StudentPane(conf: Config, model: Model) extends VBox {
   spacing = 6
   children = List(studentLabel, studentListView, studentToolBar)
 
-  studentListView.selectionModel().selectedItemProperty().onChange { studentPropsButton.disable = false }
+  studentListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedStudent) =>
+    if (selectedStudent != null) {
+      model.selectedStudentId.value = selectedStudent.id
+      studentPropsButton.disable = false
+    }
+  }
 
   studentPropsButton.onAction = { _ => update(studentListView.selectionModel().getSelectedIndex,
                                               studentListView.selectionModel().getSelectedItem) }
