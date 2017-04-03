@@ -38,7 +38,3 @@ Install
 Execute
 -------
 1. execute ~/universal/homeschool-0.1/bin/homeschool
-
-Todo
-----
-1. ListView fires a null change event on an ObservableBuffer update, which is a remove + add.
