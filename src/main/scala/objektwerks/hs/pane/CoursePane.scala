@@ -30,7 +30,7 @@ class CoursePane(conf: Config, model: Model) extends VBox {
   }
 
   courseListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedCourse) =>
-    if (selectedCourse != null) {
+    if (selectedCourse != null) { // model.update yields a remove and add to items. the remove passes a null selectedCourse!
       model.selectedCourseId.value = selectedCourse.id
       coursePropsButton.disable = false
     }

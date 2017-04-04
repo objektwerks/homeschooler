@@ -42,7 +42,7 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
   }
 
   assignmentListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedAssignment) =>
-    if (selectedAssignment != null) {
+    if (selectedAssignment != null) { // model.update yields a remove and add to items. the remove passes a null selectedAssignment!
       model.selectedAssignmentId.value = selectedAssignment.id
       val dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd")
       assignedDate.text = selectedAssignment.assigned.format(dateTimeFormatter)
