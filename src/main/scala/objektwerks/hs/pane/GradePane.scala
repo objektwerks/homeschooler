@@ -3,8 +3,8 @@ package objektwerks.hs.pane
 import com.typesafe.config.Config
 import objektwerks.hs.dialog.GradeDialog
 import objektwerks.hs.entity.Grade
+import objektwerks.hs.image.Images
 import objektwerks.hs.model.Model
-import objektwerks.hs.view.View
 
 import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
@@ -16,8 +16,8 @@ class GradePane(conf: Config, model: Model) extends VBox {
   val gradeLabel = new Label { text = conf.getString("grades") }
   val gradeCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Grade](g => g.year) )
   val gradeListView = new ListView[Grade] { minHeight = 50; items = model.gradeList; cellFactory = gradeCellFactory }
-  val gradePropsButton = new Button { graphic = View.editImageView(); prefHeight = 25; disable = true }
-  val gradeAddButton = new Button { graphic = View.addImageView(); prefHeight = 25; disable = true }
+  val gradePropsButton = new Button { graphic = Images.editImageView(); prefHeight = 25; disable = true }
+  val gradeAddButton = new Button { graphic = Images.addImageView(); prefHeight = 25; disable = true }
   val gradeToolBar = new HBox { spacing = 6; children = List(gradePropsButton, gradeAddButton) }
 
   spacing = 6

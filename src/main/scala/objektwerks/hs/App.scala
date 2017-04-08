@@ -1,6 +1,7 @@
 package objektwerks.hs
 
 import com.typesafe.config.ConfigFactory
+import objektwerks.hs.image.Images
 import objektwerks.hs.model.Model
 import objektwerks.hs.repository.Repository
 import objektwerks.hs.view.View
@@ -15,9 +16,9 @@ object App extends JFXApp {
   stage = new JFXApp.PrimaryStage {
     scene = view.sceneGraph
     title = conf.getString("title")
-    minHeight = 600
-    minWidth = 800
-    icons.add(View.appImmage())
+    minHeight = conf.getInt("height")
+    minWidth = conf.getInt("width")
+    icons.add(Images.appImage())
   }
 
   sys.addShutdownHook { repository.close() }

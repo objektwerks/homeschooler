@@ -3,8 +3,8 @@ package objektwerks.hs.pane
 import com.typesafe.config.Config
 import objektwerks.hs.dialog.CourseDialog
 import objektwerks.hs.entity.Course
+import objektwerks.hs.image.Images
 import objektwerks.hs.model.Model
-import objektwerks.hs.view.View
 
 import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
@@ -17,8 +17,8 @@ class CoursePane(conf: Config, model: Model) extends VBox {
   val courseCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Course](c => c.name) )
   val courseListView = new ListView[Course] { minHeight = 300; items = model.courseList; cellFactory = courseCellFactory
                                               selectionModel().selectionMode = SelectionMode.Single }
-  val coursePropsButton = new Button { graphic = View.editImageView(); prefHeight = 25; disable = true }
-  val courseAddButton = new Button { graphic = View.addImageView(); prefHeight = 25; disable = true }
+  val coursePropsButton = new Button { graphic = Images.editImageView(); prefHeight = 25; disable = true }
+  val courseAddButton = new Button { graphic = Images.addImageView(); prefHeight = 25; disable = true }
   val courseToolBar = new HBox { spacing = 6; children = List(coursePropsButton, courseAddButton) }
 
   spacing = 6
