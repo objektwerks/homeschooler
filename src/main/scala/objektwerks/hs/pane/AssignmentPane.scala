@@ -76,5 +76,5 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
     }
   }
 
-  def score(assignment: Assignment): String = model.scoreAssignments(assignment.courseid).toInt.toString
+  def score(assignment: Assignment): String = model.scoreCourse(assignment.courseid).toInt.toString
 }

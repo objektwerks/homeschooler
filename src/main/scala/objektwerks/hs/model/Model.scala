@@ -99,5 +99,5 @@ class Model(repository: Repository) {
     newAssignment
   }
 
-  def scoreAssignments(courseId: Int): Double = await(assignments.score(courseId)).getOrElse(0.0)
+  def scoreCourse(courseId: Int): Double = await(assignments.score(courseId)).getOrElse(0.0)
 }
