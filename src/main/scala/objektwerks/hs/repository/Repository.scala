@@ -66,7 +66,9 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def gradeid = column[Int]("grade_id")
     def name = column[String]("name")
-    def * = (id, gradeid, name) <> (Course.tupled, Course.unapply)
+    def started = column[LocalDate]("started")
+    def completed = column[LocalDate]("completed")
+    def * = (id, gradeid, name, started, completed) <> (Course.tupled, Course.unapply)
     def gradeFk = foreignKey("grade_fk", gradeid, TableQuery[Grades])(_.id)
   }
   object courses extends TableQuery(new Courses(_)) {

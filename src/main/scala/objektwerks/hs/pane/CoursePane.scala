@@ -43,8 +43,8 @@ class CoursePane(conf: Config, model: Model) extends VBox {
 
   def update(selectedIndex: Int, course: Course): Unit = {
     new CourseDialog(conf, course).showAndWait() match {
-      case Some(Course(id, gradeid, name)) =>
-        model.updateCourse(selectedIndex, Course(id, gradeid, name))
+      case Some(Course(id, gradeid, name, started, completed)) =>
+        model.updateCourse(selectedIndex, Course(id, gradeid, name, started, completed))
         courseListView.selectionModel().select(selectedIndex)
       case _ =>
     }
@@ -52,8 +52,8 @@ class CoursePane(conf: Config, model: Model) extends VBox {
 
   def add(course: Course): Unit = {
     new CourseDialog(conf, course).showAndWait() match {
-      case Some(Course(id, gradeid, name)) =>
-        val newCourse = model.addCourse(Course(id, gradeid, name))
+      case Some(Course(id, gradeid, name, started, completed)) =>
+        val newCourse = model.addCourse(Course(id, gradeid, name, started, completed))
         courseListView.selectionModel().select(newCourse)
       case _ =>
     }
