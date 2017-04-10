@@ -9,6 +9,8 @@ object Images {
 
   def editImageView(): ImageView = loadImageView("/edit.png")
 
+  def chartImageView(): ImageView = loadImageView("/chart.png")
+
   def loadImageView(path: String): ImageView = new ImageView {
     image = new Image(Images.getClass.getResourceAsStream(path))
     fitHeight = 25

@@ -1,7 +1,5 @@
 package objektwerks.hs.pane
 
-import java.time.format.DateTimeFormatter
-
 import com.typesafe.config.Config
 import objektwerks.hs.dialog.AssignmentDialog
 import objektwerks.hs.entity.Assignment
@@ -9,7 +7,6 @@ import objektwerks.hs.image.Images
 import objektwerks.hs.model.Model
 
 import scalafx.Includes._
-import scalafx.geometry.{Orientation, Pos}
 import scalafx.scene.control._
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.layout.{HBox, VBox}
@@ -20,21 +17,13 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
   val assignmentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Assignment](a => a.task) )
   val assignmentListView = new ListView[Assignment] { minHeight = 300; items = model.assignmentList; cellFactory = assignmentCellFactory
                                                       selectionModel().selectionMode = SelectionMode.Single }
-  val assignedDate = new Label { text = "00/00" }
-  val toLabel = new Label { text = "-" }
-  val completedDate = new Label { text = "00/00" }
-  val scoreLabel = new Label { text = "0" }
-  val splitLabel = new Label { text = "/" }
-  val totalLabel = new Label { text = "0" }
-  val assignmentPropsButton = new Button { graphic = Images.editImageView(); prefHeight = 25; disable = true }
   val assignmentAddButton = new Button { graphic = Images.addImageView(); prefHeight = 25; disable = true }
-  val assignmentToolBar = new HBox { spacing = 6; alignment = Pos.CenterLeft; children = List(assignmentPropsButton, assignmentAddButton) }
-  val assignmentDetailsPane = new HBox { spacing = 6; alignment = Pos.CenterRight; children = List(assignedDate, toLabel, completedDate, scoreLabel, splitLabel, totalLabel) }
-  val separator = new Separator { orientation = Orientation.Vertical}
-  val assignementDetailTollBarPane = new HBox { spacing = 6; children = List(assignmentToolBar, separator, assignmentDetailsPane) }
+  val assignmentEditButton = new Button { graphic = Images.editImageView(); prefHeight = 25; disable = true }
+  val assignmentChartButton = new Button { graphic = Images.chartImageView(); prefHeight = 25; disable = true }
+  val assignmentToolBar = new HBox { spacing = 6; children = List(assignmentAddButton, assignmentEditButton, assignmentChartButton) }
 
   spacing = 6
-  children = List(assignmentLabel, assignmentListView, assignementDetailTollBarPane)
+  children = List(assignmentLabel, assignmentListView, assignmentToolBar)
 
   model.selectedCourseId.onChange { (_, _, selectedCourse) =>
     model.listAssignments(selectedCourse)
@@ -44,28 +33,15 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
   assignmentListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedAssignment) =>
     if (selectedAssignment != null) { // model.update yields a remove and add to items. the remove passes a null selectedAssignment!
       model.selectedAssignmentId.value = selectedAssignment.id
-      val dateTimeFormatter = DateTimeFormatter.ofPattern("MM-dd")
-      assignedDate.text = selectedAssignment.assigned.format(dateTimeFormatter)
-      completedDate.text = selectedAssignment.completed.format(dateTimeFormatter)
-      scoreLabel.text = selectedAssignment.score.toInt.toString
-      totalLabel.text = score(selectedAssignment.courseid)
-      assignmentPropsButton.disable = false
+      assignmentEditButton.disable = false
+      assignmentChartButton.disable = false
     }
   }
-
-  assignmentPropsButton.onAction = { _ => update(assignmentListView.selectionModel().getSelectedIndex,
-                                                 assignmentListView.selectionModel().getSelectedItem) }
 
   assignmentAddButton.onAction = { _ => add(Assignment(courseid = model.selectedCourseId.value)) }
 
-  def update(selectedIndex: Int, assignment: Assignment): Unit = {
-    new AssignmentDialog(conf, assignment).showAndWait() match {
-      case Some(Assignment(id, courseid, task, assigned, completed, score)) =>
-        model.updateAssignment(selectedIndex, Assignment(id, courseid, task, assigned, completed, score))
-        assignmentListView.selectionModel().select(selectedIndex)
-      case _ =>
-    }
-  }
+  assignmentEditButton.onAction = { _ => update(assignmentListView.selectionModel().getSelectedIndex,
+                                                 assignmentListView.selectionModel().getSelectedItem) }
 
   def add(assignment: Assignment): Unit = {
     new AssignmentDialog(conf, assignment).showAndWait() match {
@@ -76,5 +52,12 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
     }
   }
 
-  def score(courseId: Int): String = model.scoreCourse(courseId).toInt.toString
+  def update(selectedIndex: Int, assignment: Assignment): Unit = {
+    new AssignmentDialog(conf, assignment).showAndWait() match {
+      case Some(Assignment(id, courseid, task, assigned, completed, score)) =>
+        model.updateAssignment(selectedIndex, Assignment(id, courseid, task, assigned, completed, score))
+        assignmentListView.selectionModel().select(selectedIndex)
+      case _ =>
+    }
+  }
 }

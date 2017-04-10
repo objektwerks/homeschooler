@@ -16,9 +16,9 @@ class GradePane(conf: Config, model: Model) extends VBox {
   val gradeLabel = new Label { text = conf.getString("grades") }
   val gradeCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Grade](g => g.year) )
   val gradeListView = new ListView[Grade] { minHeight = 50; items = model.gradeList; cellFactory = gradeCellFactory }
-  val gradePropsButton = new Button { graphic = Images.editImageView(); prefHeight = 25; disable = true }
   val gradeAddButton = new Button { graphic = Images.addImageView(); prefHeight = 25; disable = true }
-  val gradeToolBar = new HBox { spacing = 6; children = List(gradePropsButton, gradeAddButton) }
+  val gradeEditButton = new Button { graphic = Images.editImageView(); prefHeight = 25; disable = true }
+  val gradeToolBar = new HBox { spacing = 6; children = List(gradeAddButton, gradeEditButton) }
 
   spacing = 6
   children = List(gradeLabel, gradeListView, gradeToolBar)
@@ -31,29 +31,29 @@ class GradePane(conf: Config, model: Model) extends VBox {
   gradeListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedGrade) =>
     if (selectedGrade != null) { // model.update yields a remove and add to items. the remove passes a null selectedGrade!
       model.selectedGradeId.value = selectedGrade.id
-      gradePropsButton.disable = false
+      gradeEditButton.disable = false
     }
   }
-
-  gradePropsButton.onAction = { _ => update(gradeListView.selectionModel().getSelectedIndex,
-                                            gradeListView.selectionModel().getSelectedItem) }
 
   gradeAddButton.onAction = { _ => add(Grade(studentid = model.selectedStudentId.value)) }
 
-  def update(selectedIndex: Int, grade: Grade): Unit = {
-    new GradeDialog(conf, grade).showAndWait() match {
-      case Some(Grade(id, studentid, year, started, completed)) =>
-        model.updateGrade(selectedIndex, Grade(id, studentid, year, started, completed))
-        gradeListView.selectionModel().select(selectedIndex)
-      case _ =>
-    }
-  }
+  gradeEditButton.onAction = { _ => update(gradeListView.selectionModel().getSelectedIndex,
+                                            gradeListView.selectionModel().getSelectedItem) }
 
   def add(grade: Grade): Unit = {
     new GradeDialog(conf, grade).showAndWait() match {
       case Some(Grade(id, studentid, year, started, completed)) =>
         val newGrade = model.addGrade(Grade(id, studentid, year, started, completed))
         gradeListView.selectionModel().select(newGrade)
+      case _ =>
+    }
+  }
+
+  def update(selectedIndex: Int, grade: Grade): Unit = {
+    new GradeDialog(conf, grade).showAndWait() match {
+      case Some(Grade(id, studentid, year, started, completed)) =>
+        model.updateGrade(selectedIndex, Grade(id, studentid, year, started, completed))
+        gradeListView.selectionModel().select(selectedIndex)
       case _ =>
     }
   }
