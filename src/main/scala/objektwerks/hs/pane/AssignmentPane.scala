@@ -48,7 +48,7 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
       assignedDate.text = selectedAssignment.assigned.format(dateTimeFormatter)
       completedDate.text = selectedAssignment.completed.format(dateTimeFormatter)
       scoreLabel.text = selectedAssignment.score.toInt.toString
-      totalLabel.text = score(selectedAssignment)
+      totalLabel.text = score(selectedAssignment.courseid)
       assignmentPropsButton.disable = false
     }
   }
@@ -76,5 +76,5 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
     }
   }
 
-  def score(assignment: Assignment): String = model.scoreCourse(assignment.courseid).toInt.toString
+  def score(courseId: Int): String = model.scoreCourse(courseId).toInt.toString
 }
