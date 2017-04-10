@@ -13,7 +13,13 @@ import scalafx.scene.layout.Region
 class CourseDialog(conf: Config, course: Course) extends Dialog[Course]() {
   val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
   val nameTextField = new TextField { text = course.name}
-  val components = Map[String, Region](conf.getString("name") -> nameTextField)
+  val startedDatePicker = new DatePicker { value = course.started }
+  val completedDatePicker = new DatePicker { value = course.completed }
+  val components = Map[String, Region](
+    conf.getString("name") -> nameTextField,
+    conf.getString("started") -> startedDatePicker,
+    conf.getString("completed") -> completedDatePicker
+  )
   val componentGridPane = new ComponentGridPane(components)
   val dialog = dialogPane()
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
@@ -31,7 +37,9 @@ class CourseDialog(conf: Config, course: Course) extends Dialog[Course]() {
 
   resultConverter = dialogButton => {
     if (dialogButton == saveButtonType)
-      course.copy(name = nameTextField.text.value)
+      course.copy(name = nameTextField.text.value,
+      started = startedDatePicker.value.value,
+      completed = completedDatePicker.value.value)
     else null
   }
 }
