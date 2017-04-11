@@ -12,12 +12,12 @@ import scalafx.scene.layout.{HBox, VBox}
 
 class AssignmentChartDialog(conf: Config, assignments: List[Assignment]) extends Dialog[Unit] {
   val chart = LineChart[Number, Number](
-    NumberAxis(axisLabel = "Days", lowerBound = 1, upperBound = 365, tickUnit = 1),
-    NumberAxis(axisLabel = "Scores", lowerBound = 1, upperBound = 100, tickUnit = 1)
+    NumberAxis(axisLabel = "Values", lowerBound = 1, upperBound = 100, tickUnit = 10),
+    NumberAxis(axisLabel = "Scores", lowerBound = 1, upperBound = 100, tickUnit = 10)
   )
-  val series = new XYChart.Series[Number, Number]()
+  val series = new XYChart.Series[Number, Number]{ name = conf.getString("chart-score") }
   assignments foreach { assignment =>
-    series.data() += XYChart.Data[Number, Number]( assignment.completed.getDayOfYear, assignment.score.toInt )
+    series.data() += XYChart.Data[Number, Number]( assignment.score.toInt, assignment.score.toInt )
   }
   chart.data = series
 
