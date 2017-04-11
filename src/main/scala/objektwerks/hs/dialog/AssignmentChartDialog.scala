@@ -6,15 +6,20 @@ import objektwerks.hs.entity.Assignment
 
 import scalafx.Includes._
 import scalafx.geometry.Pos
-import scalafx.scene.chart.{LineChart, NumberAxis}
+import scalafx.scene.chart.{LineChart, NumberAxis, XYChart}
 import scalafx.scene.control.{ButtonType, Dialog, Label}
 import scalafx.scene.layout.{HBox, VBox}
 
 class AssignmentChartDialog(conf: Config, assignments: List[Assignment]) extends Dialog[Unit] {
-  val chart = new LineChart(
-    NumberAxis(axisLabel = "Dates", lowerBound = 1, upperBound = 10, tickUnit = 1),
+  val chart = LineChart[Number, Number](
+    NumberAxis(axisLabel = "Days", lowerBound = 1, upperBound = 365, tickUnit = 1),
     NumberAxis(axisLabel = "Scores", lowerBound = 1, upperBound = 100, tickUnit = 1)
   )
+  val series = new XYChart.Series[Number, Number]()
+  assignments foreach { assignment =>
+    series.data() += XYChart.Data[Number, Number]( assignment.completed.getDayOfYear, assignment.score.toInt )
+  }
+  chart.data = series
 
   val minScoreLabel = new Label { text = conf.getString("min-score") }
   val minScore = new Label { text = assignments.map(a => a.score).min.toInt.toString }
