@@ -1,7 +1,7 @@
 package objektwerks.hs.pane
 
 import com.typesafe.config.Config
-import objektwerks.hs.dialog.AssignmentDialog
+import objektwerks.hs.dialog.{AssignmentChartDialog, AssignmentDialog}
 import objektwerks.hs.entity.Assignment
 import objektwerks.hs.image.Images
 import objektwerks.hs.model.Model
@@ -42,6 +42,8 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
 
   assignmentEditButton.onAction = { _ => update(assignmentListView.selectionModel().getSelectedIndex,
                                                 assignmentListView.selectionModel().getSelectedItem) }
+
+  assignmentChartButton.onAction = { _ => new AssignmentChartDialog(conf, model.assignmentList.toList).showAndWait() }
 
   def add(assignment: Assignment): Unit = {
     new AssignmentDialog(conf, assignment).showAndWait() match {
