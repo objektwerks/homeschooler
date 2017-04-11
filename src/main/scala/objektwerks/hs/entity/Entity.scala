@@ -10,7 +10,7 @@ case class Course(id: Int = 0, gradeid: Int, name: String = "default_course", st
 
 case class Assignment(id: Int = 0, courseid: Int, task: String = "default_assignment", assigned: LocalDate = LocalDate.now, completed: LocalDate = LocalDate.now, score: Double = 50.0)
 
-object EntityOrdering {
+object Entity {
   implicit def localDateOrdering: Ordering[LocalDate] = Ordering.by(_.toEpochDay)
 
   implicit def studentOrdering: Ordering[Student] = Ordering.by(_.born)
