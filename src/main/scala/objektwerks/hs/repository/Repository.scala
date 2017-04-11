@@ -42,7 +42,7 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def * = (id, name, born) <> (Student.tupled, Student.unapply)
   }
   object students extends TableQuery(new Students(_)) {
-    val compiledList = Compiled { sortBy(_.name.asc) }
+    val compiledList = Compiled { sortBy(_.born.asc) }
     def save(student: Student) = (this returning this.map(_.id)).insertOrUpdate(student)
     def list() = compiledList.result
   }
@@ -57,7 +57,7 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def studentFk = foreignKey("student_fk", studentid, TableQuery[Students])(_.id)
   }
   object grades extends TableQuery(new Grades(_)) {
-    val compiledList = Compiled { studentid: Rep[Int] => filter(_.studentid === studentid).sortBy(_.year.asc) }
+    val compiledList = Compiled { studentid: Rep[Int] => filter(_.studentid === studentid).sortBy(_.started.asc) }
     def save(grade: Grade) = (this returning this.map(_.id)).insertOrUpdate(grade)
     def list(studentid: Int) = compiledList(studentid).result
   }
@@ -72,7 +72,7 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
     def gradeFk = foreignKey("grade_fk", gradeid, TableQuery[Grades])(_.id)
   }
   object courses extends TableQuery(new Courses(_)) {
-    val compiledList = Compiled { gradeid: Rep[Int] => filter(_.gradeid === gradeid).sortBy(_.name.asc) }
+    val compiledList = Compiled { gradeid: Rep[Int] => filter(_.gradeid === gradeid).sortBy(_.started.asc) }
     def save(course: Course) = (this returning this.map(_.id)).insertOrUpdate(course)
     def list(gradeid: Int) = compiledList(gradeid).result
   }
