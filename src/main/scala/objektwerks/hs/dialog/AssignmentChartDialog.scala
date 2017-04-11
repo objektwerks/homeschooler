@@ -14,7 +14,6 @@ import scalafx.scene.layout.{HBox, VBox}
 
 class AssignmentChartDialog(conf: Config, assignments: List[Assignment]) extends Dialog[Unit] {
   val xAxis = NumberAxis(axisLabel = conf.getString("chart-months"), lowerBound = 1, upperBound = 13, tickUnit = 1)
-  xAxis.minorTickCount = 16
   val yAxis = NumberAxis(axisLabel = conf.getString("chart-scores"), lowerBound = 0, upperBound = 100, tickUnit = 10)
   val chart = LineChart[Number, Number](xAxis, yAxis)
   val series = new XYChart.Series[Number, Number]{ name = conf.getString("chart-score") }
