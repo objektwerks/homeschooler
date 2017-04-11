@@ -89,7 +89,7 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
   }
   object assignments extends TableQuery(new Assignments(_)) {
     val compiledList = Compiled { courseid: Rep[Int] => filter(_.courseid === courseid).sortBy(_.assigned.asc) }
-    val compiledScore = Compiled { courseid: Rep[Int] => filter(_.courseid === courseid).map(_.score).sum }
+    val compiledScore = Compiled { courseid: Rep[Int] => filter(_.courseid === courseid).map(_.score).avg }
     def save(assignment: Assignment) = (this returning this.map(_.id)).insertOrUpdate(assignment)
     def list(courseid: Int) = compiledList(courseid).result
     def score(courseid: Int) = compiledScore(courseid).result

@@ -41,7 +41,7 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
   assignmentAddButton.onAction = { _ => add(Assignment(courseid = model.selectedCourseId.value)) }
 
   assignmentEditButton.onAction = { _ => update(assignmentListView.selectionModel().getSelectedIndex,
-                                                 assignmentListView.selectionModel().getSelectedItem) }
+                                                assignmentListView.selectionModel().getSelectedItem) }
 
   def add(assignment: Assignment): Unit = {
     new AssignmentDialog(conf, assignment).showAndWait() match {
