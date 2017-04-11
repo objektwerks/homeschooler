@@ -1,6 +1,5 @@
 package objektwerks.hs.dialog
 
-
 import java.time.format.DateTimeFormatter
 
 import com.typesafe.config.Config
