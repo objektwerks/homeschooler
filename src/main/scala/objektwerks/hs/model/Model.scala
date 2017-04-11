@@ -1,6 +1,7 @@
 package objektwerks.hs.model
 
 import objektwerks.hs.entity.{Assignment, Course, Grade, Student}
+import objektwerks.hs.entity.EntityOrdering._
 import objektwerks.hs.repository.Repository
 
 import scalafx.beans.property.ObjectProperty
@@ -23,6 +24,7 @@ class Model(repository: Repository) {
   def updateStudent(selectedIndex: Int, student: Student): Unit = {
     await(students.save(student))
     studentList.update(selectedIndex, student)
+    studentList.sorted
   }
 
   def addStudent(student: Student): Student = {
@@ -46,6 +48,7 @@ class Model(repository: Repository) {
   def updateGrade(selectedIndex: Int, grade: Grade): Unit = {
     await(grades.save(grade))
     gradeList.update(selectedIndex, grade)
+    gradeList.sorted
   }
 
   def addGrade(grade: Grade): Grade = {
@@ -68,6 +71,7 @@ class Model(repository: Repository) {
   def updateCourse(selectedIndex: Int, course: Course): Unit = {
     await(courses.save(course))
     courseList.update(selectedIndex, course)
+    courseList.sorted
   }
 
   def addCourse(course: Course): Course = {
@@ -89,6 +93,7 @@ class Model(repository: Repository) {
   def updateAssignment(selectedIndex: Int, assignment: Assignment): Unit = {
     await(assignments.save(assignment))
     assignmentList.update(selectedIndex, assignment)
+    assignmentList.sorted
   }
 
   def addAssignment(assignment: Assignment): Assignment = {
