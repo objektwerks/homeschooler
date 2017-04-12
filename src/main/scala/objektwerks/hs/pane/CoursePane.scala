@@ -1,7 +1,7 @@
 package objektwerks.hs.pane
 
 import com.typesafe.config.Config
-import objektwerks.hs.dialog.CourseDialog
+import objektwerks.hs.dialog.{CourseChartDialog, CourseDialog}
 import objektwerks.hs.entity.Course
 import objektwerks.hs.image.Images
 import objektwerks.hs.model.Model
@@ -19,7 +19,8 @@ class CoursePane(conf: Config, model: Model) extends VBox {
                                               selectionModel().selectionMode = SelectionMode.Single }
   val courseAddButton = new Button { graphic = Images.addImageView(); prefHeight = 25; disable = true }
   val courseEditButton = new Button { graphic = Images.editImageView(); prefHeight = 25; disable = true }
-  val courseToolBar = new HBox { spacing = 6; children = List(courseAddButton, courseEditButton) }
+  val courseChartButton = new Button { graphic = Images.chartImageView(); prefHeight = 25; disable = true }
+  val courseToolBar = new HBox { spacing = 6; children = List(courseAddButton, courseEditButton, courseChartButton) }
 
   spacing = 6
   children = List(courseLabel, courseListView, courseToolBar)
@@ -34,6 +35,7 @@ class CoursePane(conf: Config, model: Model) extends VBox {
     if (selectedCourse != null) {
       model.selectedCourseId.value = selectedCourse.id
       courseEditButton.disable = false
+      courseChartButton.disable = false
     }
   }
 
@@ -41,6 +43,8 @@ class CoursePane(conf: Config, model: Model) extends VBox {
 
   courseEditButton.onAction = { _ => update(courseListView.selectionModel().getSelectedIndex,
                                              courseListView.selectionModel().getSelectedItem) }
+
+  courseChartButton.onAction = { _ => new CourseChartDialog(conf, model.courseList.toList, model).showAndWait() }
 
   def add(course: Course): Unit = {
     new CourseDialog(conf, course).showAndWait() match {
