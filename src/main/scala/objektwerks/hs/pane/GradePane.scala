@@ -29,7 +29,8 @@ class GradePane(conf: Config, model: Model) extends VBox {
   }
 
   gradeListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedGrade) =>
-    if (selectedGrade != null) { // model.update yields a remove and add to items. the remove passes a null selectedGrade!
+    // model.update executes a remove and add on items. the remove passes a null selectedGrade!
+    if (selectedGrade != null) {
       model.selectedGradeId.value = selectedGrade.id
       gradeEditButton.disable = false
     }

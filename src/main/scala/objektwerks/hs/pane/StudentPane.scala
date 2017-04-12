@@ -24,7 +24,8 @@ class StudentPane(conf: Config, model: Model) extends VBox {
   children = List(studentLabel, studentListView, studentToolBar)
 
   studentListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedStudent) =>
-    if (selectedStudent != null) { // model.update yields a remove and add to items. the remove passes a null selectedStudent!
+    // model.update executes a remove and add on items. the remove passes a null selectedStudent!
+    if (selectedStudent != null) {
       model.selectedStudentId.value = selectedStudent.id
       studentEditButton.disable = false
     }
