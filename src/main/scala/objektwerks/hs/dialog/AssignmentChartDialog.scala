@@ -7,12 +7,13 @@ import objektwerks.hs.App
 import objektwerks.hs.entity.Assignment
 
 import scalafx.Includes._
+import scalafx.collections.ObservableBuffer
 import scalafx.geometry.Pos
 import scalafx.scene.chart.{LineChart, NumberAxis, XYChart}
 import scalafx.scene.control.{ButtonType, Dialog, Label}
 import scalafx.scene.layout.{HBox, VBox}
 
-class AssignmentChartDialog(conf: Config, assignments: List[Assignment]) extends Dialog[Unit] {
+class AssignmentChartDialog(conf: Config, assignments: ObservableBuffer[Assignment]) extends Dialog[Unit] {
   val monthFormatter = DateTimeFormatter.ofPattern("MM")
   val minMonth = assignments.map(a => a.completed.format(monthFormatter).toInt).min
   val maxMonth = assignments.map(a => a.completed.format(monthFormatter).toInt).max

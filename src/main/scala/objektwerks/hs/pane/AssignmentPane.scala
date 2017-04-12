@@ -47,7 +47,7 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
 
   assignmentEditButton.onAction = { _ => update() }
 
-  assignmentChartButton.onAction = { _ => new AssignmentChartDialog(conf, model.assignmentList.toList).showAndWait() }
+  assignmentChartButton.onAction = { _ => new AssignmentChartDialog(conf, model.assignmentList).showAndWait() }
 
   def add(assignment: Assignment): Unit = {
     new AssignmentDialog(conf, assignment).showAndWait() match {

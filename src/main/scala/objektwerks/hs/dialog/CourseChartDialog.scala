@@ -6,11 +6,12 @@ import objektwerks.hs.entity.Course
 import objektwerks.hs.model.Model
 
 import scalafx.Includes._
+import scalafx.collections.ObservableBuffer
 import scalafx.scene.chart.{BarChart, CategoryAxis, NumberAxis, XYChart}
 import scalafx.scene.control.{ButtonType, Dialog}
 import scalafx.scene.layout.VBox
 
-class CourseChartDialog(conf: Config, courses: List[Course], model: Model) extends Dialog[Unit] {
+class CourseChartDialog(conf: Config, courses: ObservableBuffer[Course], model: Model) extends Dialog[Unit] {
   val xAxis = CategoryAxis(courses.map(c => c.name))
   xAxis.label = conf.getString("course-chart-courses")
   val yAxis = NumberAxis(axisLabel = conf.getString("course-chart-scores"), lowerBound = 0, upperBound = 100, tickUnit = 10)
