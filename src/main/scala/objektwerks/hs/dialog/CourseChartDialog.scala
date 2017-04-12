@@ -12,8 +12,8 @@ import scalafx.scene.layout.VBox
 
 class CourseChartDialog(conf: Config, courses: List[Course], model: Model) extends Dialog[Unit] {
   val xAxis = CategoryAxis(courses.map(c => c.name))
-  xAxis.label = conf.getString("chart-courses")
-  val yAxis = NumberAxis(axisLabel = conf.getString("chart-scores"), lowerBound = 0, upperBound = 100, tickUnit = 10)
+  xAxis.label = conf.getString("course-chart-courses")
+  val yAxis = NumberAxis(axisLabel = conf.getString("course-chart-scores"), lowerBound = 0, upperBound = 100, tickUnit = 10)
   val chart = BarChart[String, Number](xAxis, yAxis)
   chart.categoryGap = 25.0
 
@@ -31,6 +31,6 @@ class CourseChartDialog(conf: Config, courses: List[Course], model: Model) exten
   dialog.content = chartBox
 
   initOwner(App.stage)
-  title = conf.getString("assignment-chart")
-  headerText = conf.getString("assignment-scores")
+  title = conf.getString("course-chart")
+  headerText = conf.getString("course-scores")
 }
