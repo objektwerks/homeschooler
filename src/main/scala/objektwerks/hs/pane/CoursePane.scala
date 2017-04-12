@@ -39,10 +39,13 @@ class CoursePane(conf: Config, model: Model) extends VBox {
     }
   }
 
+  courseListView.onMouseClicked = { event =>
+    if(event.getClickCount == 2 && courseListView.selectionModel().getSelectedItem != null ) update()
+  }
+
   courseAddButton.onAction = { _ => add(Course(gradeid = model.selectedGradeId.value)) }
 
-  courseEditButton.onAction = { _ => update(courseListView.selectionModel().getSelectedIndex,
-                                             courseListView.selectionModel().getSelectedItem) }
+  courseEditButton.onAction = { _ => update() }
 
   courseChartButton.onAction = { _ => new CourseChartDialog(conf, model.courseList.toList, model).showAndWait() }
 
@@ -55,7 +58,9 @@ class CoursePane(conf: Config, model: Model) extends VBox {
     }
   }
 
-  def update(selectedIndex: Int, course: Course): Unit = {
+  def update(): Unit = {
+    val selectedIndex = courseListView.selectionModel().getSelectedIndex
+    val course = courseListView.selectionModel().getSelectedItem
     new CourseDialog(conf, course).showAndWait() match {
       case Some(Course(id, gradeid, name, started, completed)) =>
         model.updateCourse(selectedIndex, Course(id, gradeid, name, started, completed))

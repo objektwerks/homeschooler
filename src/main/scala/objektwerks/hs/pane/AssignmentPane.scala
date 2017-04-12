@@ -39,10 +39,13 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
     }
   }
 
+  assignmentListView.onMouseClicked = { event =>
+    if(event.getClickCount == 2 && assignmentListView.selectionModel().getSelectedItem != null ) update()
+  }
+
   assignmentAddButton.onAction = { _ => add(Assignment(courseid = model.selectedCourseId.value)) }
 
-  assignmentEditButton.onAction = { _ => update(assignmentListView.selectionModel().getSelectedIndex,
-                                                assignmentListView.selectionModel().getSelectedItem) }
+  assignmentEditButton.onAction = { _ => update() }
 
   assignmentChartButton.onAction = { _ => new AssignmentChartDialog(conf, model.assignmentList.toList).showAndWait() }
 
@@ -55,7 +58,9 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
     }
   }
 
-  def update(selectedIndex: Int, assignment: Assignment): Unit = {
+  def update(): Unit = {
+    val selectedIndex = assignmentListView.selectionModel().getSelectedIndex
+    val assignment = assignmentListView.selectionModel().getSelectedItem
     new AssignmentDialog(conf, assignment).showAndWait() match {
       case Some(Assignment(id, courseid, task, assigned, completed, score)) =>
         model.updateAssignment(selectedIndex, Assignment(id, courseid, task, assigned, completed, score))

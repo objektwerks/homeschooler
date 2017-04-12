@@ -31,10 +31,13 @@ class StudentPane(conf: Config, model: Model) extends VBox {
     }
   }
 
+  studentListView.onMouseClicked = { event =>
+    if(event.getClickCount == 2 && studentListView.selectionModel().getSelectedItem != null ) update()
+  }
+
   studentAddButton.onAction = { _ => add(Student()) }
 
-  studentEditButton.onAction = { _ => update(studentListView.selectionModel().getSelectedIndex,
-                                              studentListView.selectionModel().getSelectedItem) }
+  studentEditButton.onAction = { _ => update() }
 
   def add(student: Student): Unit = {
     new StudentDialog(conf, student).showAndWait() match {
@@ -45,7 +48,9 @@ class StudentPane(conf: Config, model: Model) extends VBox {
     }
   }
 
-  def update(selectedIndex: Int, student: Student): Unit = {
+  def update(): Unit = {
+    val selectedIndex = studentListView.selectionModel().getSelectedIndex
+    val student = studentListView.selectionModel().getSelectedItem
     new StudentDialog(conf, student).showAndWait() match {
       case Some(Student(id, name, born)) =>
         model.updateStudent(selectedIndex, Student(id, name, born))

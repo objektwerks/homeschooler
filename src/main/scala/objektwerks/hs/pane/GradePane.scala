@@ -36,10 +36,13 @@ class GradePane(conf: Config, model: Model) extends VBox {
     }
   }
 
+  gradeListView.onMouseClicked = { event =>
+    if(event.getClickCount == 2 && gradeListView.selectionModel().getSelectedItem != null ) update()
+  }
+
   gradeAddButton.onAction = { _ => add(Grade(studentid = model.selectedStudentId.value)) }
 
-  gradeEditButton.onAction = { _ => update(gradeListView.selectionModel().getSelectedIndex,
-                                            gradeListView.selectionModel().getSelectedItem) }
+  gradeEditButton.onAction = { _ => update() }
 
   def add(grade: Grade): Unit = {
     new GradeDialog(conf, grade).showAndWait() match {
@@ -50,7 +53,9 @@ class GradePane(conf: Config, model: Model) extends VBox {
     }
   }
 
-  def update(selectedIndex: Int, grade: Grade): Unit = {
+  def update(): Unit = {
+    val selectedIndex = gradeListView.selectionModel().getSelectedIndex
+    val grade = gradeListView.selectionModel().getSelectedItem
     new GradeDialog(conf, grade).showAndWait() match {
       case Some(Grade(id, studentid, year, started, completed)) =>
         model.updateGrade(selectedIndex, Grade(id, studentid, year, started, completed))
