@@ -32,9 +32,9 @@ Package
 Install
 -------
 1. copy universal directory to target directory (i.e., home directory ~ )
-2. unzip ~/universal/homeschool-0.1.zip
-3. set executable permissions for ~/universal/homeschool-0.1/bin/homeschool
+2. unzip ~/universal/homeschool-${version}.zip
+3. set executable permissions for ~/universal/homeschool-${version}/bin/homeschool
 
 Execute
 -------
-1. execute ~/universal/homeschool-0.1/bin/homeschool
+1. execute ~/universal/homeschool-${version}/bin/homeschool
