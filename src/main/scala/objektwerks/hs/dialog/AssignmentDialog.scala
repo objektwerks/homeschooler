@@ -3,7 +3,7 @@ package objektwerks.hs.dialog
 import com.typesafe.config.Config
 import objektwerks.hs.App
 import objektwerks.hs.entity.Assignment
-import objektwerks.hs.pane.ComponentGridPane
+import objektwerks.hs.pane.ControlGridPane
 
 import scalafx.Includes._
 import scalafx.scene.control.ButtonBar.ButtonData
@@ -18,15 +18,15 @@ class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assi
   val scoreLabel = new Label { text = assignment.score.toInt.toString }
   val scoreSlider = new Slider { min = 50.0; max = 100.00; value = assignment.score; showTickLabels = true }
   val scoreBox = new HBox { children = List(scoreSlider, scoreLabel) }
-  val components = Map[String, Region](
+  val controls = Map[String, Region](
     conf.getString("task") -> taskTextField,
     conf.getString("assigned") -> assignedDatePicker,
     conf.getString("completed") -> completedDatePicker,
     conf.getString("score") -> scoreBox)
-  val componentGridPane = new ComponentGridPane(components)
+  val controlGridPane = new ControlGridPane(controls)
   val dialog = dialogPane()
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
-  dialog.content = componentGridPane
+  dialog.content = controlGridPane
 
   initOwner(App.stage)
   title = conf.getString("assignment")

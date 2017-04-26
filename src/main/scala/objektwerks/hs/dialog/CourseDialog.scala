@@ -3,7 +3,7 @@ package objektwerks.hs.dialog
 import com.typesafe.config.Config
 import objektwerks.hs.App
 import objektwerks.hs.entity.Course
-import objektwerks.hs.pane.ComponentGridPane
+import objektwerks.hs.pane.ControlGridPane
 
 import scalafx.Includes._
 import scalafx.scene.control.ButtonBar.ButtonData
@@ -15,15 +15,15 @@ class CourseDialog(conf: Config, course: Course) extends Dialog[Course]() {
   val nameTextField = new TextField { text = course.name}
   val startedDatePicker = new DatePicker { value = course.started }
   val completedDatePicker = new DatePicker { value = course.completed }
-  val components = Map[String, Region](
+  val controls = Map[String, Region](
     conf.getString("name") -> nameTextField,
     conf.getString("started") -> startedDatePicker,
     conf.getString("completed") -> completedDatePicker
   )
-  val componentGridPane = new ComponentGridPane(components)
+  val controlGridPane = new ControlGridPane(controls)
   val dialog = dialogPane()
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
-  dialog.content = componentGridPane
+  dialog.content = controlGridPane
 
   initOwner(App.stage)
   title = conf.getString("course")
