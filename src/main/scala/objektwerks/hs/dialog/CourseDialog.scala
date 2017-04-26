@@ -15,7 +15,7 @@ class CourseDialog(conf: Config, course: Course) extends Dialog[Course]() {
   val nameTextField = new TextField { text = course.name}
   val startedDatePicker = new DatePicker { value = course.started }
   val completedDatePicker = new DatePicker { value = course.completed }
-  val controls = Map[String, Region](
+  val controls = List[(String, Region)](
     conf.getString("name") -> nameTextField,
     conf.getString("started") -> startedDatePicker,
     conf.getString("completed") -> completedDatePicker

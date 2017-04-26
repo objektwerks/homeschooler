@@ -18,7 +18,7 @@ class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assi
   val scoreLabel = new Label { text = assignment.score.toInt.toString }
   val scoreSlider = new Slider { min = 50.0; max = 100.00; value = assignment.score; showTickLabels = true }
   val scoreBox = new HBox { children = List(scoreSlider, scoreLabel) }
-  val controls = Map[String, Region](
+  val controls = List[(String, Region)](
     conf.getString("task") -> taskTextField,
     conf.getString("assigned") -> assignedDatePicker,
     conf.getString("completed") -> completedDatePicker,
