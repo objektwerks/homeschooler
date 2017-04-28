@@ -4,14 +4,14 @@ import objektwerks.hs.entity.Entity._
 import objektwerks.hs.entity.{Assignment, Course, Grade, Student}
 import objektwerks.hs.repository.Repository
 
-import scalafx.beans.property.ObjectProperty
+import scalafx.beans.property.IntegerProperty
 import scalafx.collections.ObservableBuffer
 
 class Model(repository: Repository) {
   import repository._
 
   val studentList = ObservableBuffer[Student]()
-  val selectedStudentId = ObjectProperty[Int](0)
+  val selectedStudentId = IntegerProperty(0)
 
   def listStudents(): Unit = {
     studentList.clear()
@@ -36,7 +36,7 @@ class Model(repository: Repository) {
   }
 
   val gradeList = ObservableBuffer[Grade]()
-  val selectedGradeId = ObjectProperty[Int](0)
+  val selectedGradeId = IntegerProperty(0)
 
   def listGrades(studentId: Int): Unit = {
     gradeList.clear()
@@ -60,7 +60,7 @@ class Model(repository: Repository) {
   }
 
   val courseList = ObservableBuffer[Course]()
-  val selectedCourseId = ObjectProperty[Int](0)
+  val selectedCourseId = IntegerProperty(0)
 
   def listCourses(gradeId: Int): Unit = {
     courseList.clear()
@@ -83,7 +83,7 @@ class Model(repository: Repository) {
   }
 
   val assignmentList = ObservableBuffer[Assignment]()
-  val selectedAssignmentId = ObjectProperty[Int](0)
+  val selectedAssignmentId = IntegerProperty(0)
 
   def listAssignments(courseId: Int): Unit = {
     assignmentList.clear()

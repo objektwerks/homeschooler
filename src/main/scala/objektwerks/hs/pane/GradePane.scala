@@ -23,8 +23,8 @@ class GradePane(conf: Config, model: Model) extends VBox {
   spacing = 6
   children = List(gradeLabel, gradeListView, gradeToolBar)
 
-  model.selectedStudentId.onChange { (_, _, selectedStudent) =>
-    model.listGrades(selectedStudent)
+  model.selectedStudentId.onChange { (_, _, selectedStudentId) =>
+    model.listGrades(selectedStudentId.intValue)
     gradeAddButton.disable = false
   }
 

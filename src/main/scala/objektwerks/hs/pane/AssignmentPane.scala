@@ -25,8 +25,8 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
   spacing = 6
   children = List(assignmentLabel, assignmentListView, assignmentToolBar)
 
-  model.selectedCourseId.onChange { (_, _, selectedCourse) =>
-    model.listAssignments(selectedCourse)
+  model.selectedCourseId.onChange { (_, _, selectedCourseId) =>
+    model.listAssignments(selectedCourseId.intValue)
     assignmentAddButton.disable = false
   }
 

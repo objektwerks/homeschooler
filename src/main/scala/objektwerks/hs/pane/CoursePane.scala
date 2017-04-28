@@ -25,8 +25,8 @@ class CoursePane(conf: Config, model: Model) extends VBox {
   spacing = 6
   children = List(courseLabel, courseListView, courseToolBar)
 
-  model.selectedGradeId.onChange { (_, _, selectedGrade) =>
-    model.listCourses(selectedGrade)
+  model.selectedGradeId.onChange { (_, _, selectedGradeId) =>
+    model.listCourses(selectedGradeId.intValue)
     courseAddButton.disable = false
   }
 
