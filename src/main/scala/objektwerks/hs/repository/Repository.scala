@@ -65,7 +65,7 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
   class Courses(tag: Tag) extends Table[Course](tag, "courses") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def gradeid = column[Int]("grade_id")
-    def name = column[String]("name")
+    def name = column[String]("name", O.Unique)
     def started = column[LocalDate]("started")
     def completed = column[LocalDate]("completed")
     def * = (id, gradeid, name, started, completed) <> (Course.tupled, Course.unapply)
