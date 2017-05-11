@@ -12,7 +12,7 @@ import scalafx.scene.control.{ButtonType, Dialog}
 import scalafx.scene.layout.VBox
 
 class CourseChartDialog(conf: Config, courses: ObservableBuffer[Course], model: Model) extends Dialog[Unit] {
-  val xAxis = CategoryAxis(courses.map(c => c.name))
+  val xAxis = CategoryAxis(courses.map(c => c.name).distinct)
   xAxis.label = conf.getString("course-chart-courses")
   val yAxis = NumberAxis(axisLabel = conf.getString("course-chart-scores"), lowerBound = 0, upperBound = 100, tickUnit = 10)
   val chart = BarChart[String, Number](xAxis, yAxis)
