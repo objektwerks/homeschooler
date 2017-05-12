@@ -1,5 +1,6 @@
 package objektwerks.hs.dialog
 
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 import com.typesafe.config.Config
@@ -8,24 +9,25 @@ import objektwerks.hs.entity.Assignment
 
 import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
-import scalafx.geometry.Pos
+import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.chart.{LineChart, NumberAxis, XYChart}
 import scalafx.scene.control.{ButtonType, Dialog, Label}
 import scalafx.scene.layout.{HBox, VBox}
 
 class AssignmentChartDialog(conf: Config, assignments: ObservableBuffer[Assignment]) extends Dialog[Unit] {
-  val monthFormatter = DateTimeFormatter.ofPattern("MM")
-  val minMonth = assignments.map(a => a.completed.format(monthFormatter).toInt).min
-  val maxMonth = assignments.map(a => a.completed.format(monthFormatter).toInt).max
+  implicit def localDateOrdering: Ordering[LocalDate] = Ordering.by(_.toEpochDay)
+  val dateFormatter = DateTimeFormatter.ofPattern("yy.D")
+  val minDate = assignments.map(a => a.completed).min.format(dateFormatter).toDouble
+  val maxDate = assignments.map(a => a.completed).max.format(dateFormatter).toDouble
 
-  val xAxis = NumberAxis(axisLabel = s"${conf.getString("assignment-chart-months")} [$minMonth - $maxMonth]", lowerBound = minMonth, upperBound = maxMonth + 1, tickUnit = 1)
+  val xAxis = NumberAxis(axisLabel = s"${conf.getString("assignment-chart-months")} [$minDate - $maxDate]", lowerBound = minDate, upperBound = maxDate, tickUnit = 1)
   val yAxis = NumberAxis(axisLabel = conf.getString("assignment-chart-scores"), lowerBound = 0, upperBound = 100, tickUnit = 10)
   val chart = LineChart[Number, Number](xAxis, yAxis)
+  chart.padding = Insets(6)
 
   val series = new XYChart.Series[Number, Number]{ name = conf.getString("assignment-chart-score") }
-  val monthDayFormatter = DateTimeFormatter.ofPattern("MM.dd")
   assignments foreach { assignment =>
-    series.data() += XYChart.Data[Number, Number]( assignment.completed.format(monthDayFormatter).toDouble, assignment.score.toInt )
+    series.data() += XYChart.Data[Number, Number]( assignment.completed.format(dateFormatter).toDouble, assignment.score.toInt )
   }
   chart.data = series
 

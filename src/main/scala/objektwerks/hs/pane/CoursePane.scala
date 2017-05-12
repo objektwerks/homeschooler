@@ -28,6 +28,7 @@ class CoursePane(conf: Config, model: Model) extends VBox {
   model.selectedGradeId.onChange { (_, _, selectedGradeId) =>
     model.listCourses(selectedGradeId.intValue)
     courseAddButton.disable = false
+    courseChartButton.disable = if (model.courseList.nonEmpty) false else true
   }
 
   courseListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedCourse) =>

@@ -28,6 +28,7 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
   model.selectedCourseId.onChange { (_, _, selectedCourseId) =>
     model.listAssignments(selectedCourseId.intValue)
     assignmentAddButton.disable = false
+    assignmentChartButton.disable = if (model.assignmentList.nonEmpty) false else true
   }
 
   assignmentListView.selectionModel().selectedItemProperty().onChange { (_, _, selectedAssignment) =>
