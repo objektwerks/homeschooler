@@ -17,6 +17,18 @@ Relational Model
 ----------------
 * Student 1 ---> * Grade 1 ---> * Course 1 ---> * Assignement
 
+View
+----
+top west pane - students
+top east pane - grades
+bottom west pane - courses
+bottom east pane - assignments
+
+Charts
+------
+1. courses - bar chart ( x = name, y = score, c = name )
+2. assignments - line chart ( x = date, y = score )
+
 Test
 ----
 1. sbt clean test
