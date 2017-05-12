@@ -1,6 +1,6 @@
 name := "homeschool"
 organization := "objektwerks"
-version := "0.3"
+version := "0.4-SNAPSHOT"
 scalaVersion := "2.12.2"
 ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
 libraryDependencies ++= {
