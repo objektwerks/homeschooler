@@ -19,10 +19,10 @@ Relational Model
 
 View
 ----
-top west pane - students
-top east pane - grades
-bottom west pane - courses
-bottom east pane - assignments
+* top west pane - students
+* top east pane - grades
+* bottom west pane - courses
+* bottom east pane - assignments
 
 Charts
 ------
