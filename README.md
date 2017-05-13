@@ -17,8 +17,8 @@ Relational Model
 ----------------
 * Student 1 ---> * Grade 1 ---> * Course 1 ---> * Assignement
 
-View
-----
+Panes
+-----
 * top west pane - students
 * top east pane - grades
 * bottom west pane - courses
