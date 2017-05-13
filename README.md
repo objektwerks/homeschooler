@@ -27,7 +27,7 @@ View
 Charts
 ------
 1. courses - bar chart ( x = name, y = score, c = name )
-2. assignments - line chart ( x = date, y = score )
+2. assignments - line chart ( x = completed, y = score )
 
 Test
 ----
