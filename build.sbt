@@ -30,6 +30,3 @@ scalacOptions ++= Seq(
   "-Xlint"
 )
 fork in test := true
-javaOptions += "-server -Xss1m -Xmx2g"
-clippyColorsEnabled := true
-enablePlugins(JavaAppPackaging)
