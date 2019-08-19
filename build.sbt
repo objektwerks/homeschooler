@@ -3,12 +3,12 @@ organization := "objektwerks"
 version := "0.4-SNAPSHOT"
 scalaVersion := "2.12.9"
 libraryDependencies ++= {
-  val slickVersion = "3.2.0"
+  val slickVersion = "3.3.2"
   Seq(
     "org.scalafx" %% "scalafx" % "8.0.144-R12",
     "com.typesafe.slick" %% "slick" % slickVersion,
     "com.typesafe.slick" %% "slick-hikaricp" % slickVersion,
-    "com.h2database" % "h2" % "1.4.196",
+    "com.h2database" % "h2" % "1.4.197",
     "ch.qos.logback" % "logback-classic" % "1.2.3",
     "org.scalatest" %% "scalatest" % "3.0.8" % Test
   )
