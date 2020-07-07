@@ -3,9 +3,12 @@ package objektwerks.hs.entity
 import java.time.LocalDate
 
 import objektwerks.hs.repository._
-import org.scalatest.{BeforeAndAfterAll, FunSuite, Matchers}
 
-class RepositoryTest extends FunSuite with BeforeAndAfterAll with Matchers {
+import org.scalatest.BeforeAndAfterAll
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should.Matchers
+
+class RepositoryTest extends AnyFunSuite with BeforeAndAfterAll with Matchers {
   val repository = Repository.newInstance("test.conf")
   import repository._
 

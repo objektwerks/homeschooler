@@ -48,7 +48,10 @@ class CoursePane(conf: Config, model: Model) extends VBox {
 
   courseEditButton.onAction = { _ => update() }
 
-  courseChartButton.onAction = { _ => new CourseChartDialog(conf, model.courseList, model).showAndWait() }
+  courseChartButton.onAction = { _ => 
+    new CourseChartDialog(conf, model.courseList, model).showAndWait() 
+    ()
+  }
 
   def add(course: Course): Unit = {
     new CourseDialog(conf, course).showAndWait() match {

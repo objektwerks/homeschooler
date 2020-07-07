@@ -33,6 +33,7 @@ class Model(repository: Repository) {
     await(students.save(student))
     studentList.update(selectedIndex, student)
     studentList.sorted
+    ()
   }
 
   val gradeList = ObservableBuffer[Grade]()
@@ -57,6 +58,7 @@ class Model(repository: Repository) {
     await(grades.save(grade))
     gradeList.update(selectedIndex, grade)
     gradeList.sorted
+    ()
   }
 
   val courseList = ObservableBuffer[Course]()
@@ -80,6 +82,7 @@ class Model(repository: Repository) {
     await(courses.save(course))
     courseList.update(selectedIndex, course)
     courseList.sorted
+    ()
   }
 
   val assignmentList = ObservableBuffer[Assignment]()
@@ -102,6 +105,7 @@ class Model(repository: Repository) {
     await(assignments.save(assignment))
     assignmentList.update(selectedIndex, assignment)
     assignmentList.sorted
+    ()
   }
 
   def scoreCourse(courseId: Int): Double = await(assignments.score(courseId)).getOrElse(0.0)
