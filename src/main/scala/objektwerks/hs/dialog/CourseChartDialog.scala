@@ -24,7 +24,9 @@ class CourseChartDialog(conf: Config, courses: ObservableBuffer[Course], model: 
     }
     chart.data() += series
   }
-  val chartBox = new VBox { spacing = 6; children = List(chart) }
+  val chartBox = new VBox {
+    spacing = 6; children = List(chart)
+  }
 
   val dialog = dialogPane()
   dialog.buttonTypes = List(ButtonType.Close)

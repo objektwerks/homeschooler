@@ -12,14 +12,28 @@ import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
 class AssignmentPane(conf: Config, model: Model) extends VBox {
-  val assignmentLabel = new Label { text = conf.getString("assignments") }
-  val assignmentCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Assignment](a => a.task) )
-  val assignmentListView = new ListView[Assignment] { minHeight = 300; items = model.assignmentList; cellFactory = assignmentCellFactory
-                                                      selectionModel().selectionMode = SelectionMode.Single }
-  val assignmentAddButton = new Button { graphic = Images.addImageView(); prefHeight = 25; disable = true }
-  val assignmentEditButton = new Button { graphic = Images.editImageView(); prefHeight = 25; disable = true }
-  val assignmentChartButton = new Button { graphic = Images.lineChartImageView(); prefHeight = 25; disable = true }
-  val assignmentToolBar = new HBox { spacing = 6; children = List(assignmentAddButton, assignmentEditButton, assignmentChartButton) }
+  val assignmentLabel = new Label {
+    text = conf.getString("assignments")
+  }
+  val assignmentCellFactory = TextFieldListCell.forListView(StringConverter.toStringConverter[Assignment](a => a.task))
+  val assignmentListView = new ListView[Assignment] {
+    minHeight = 300;
+    items = model.assignmentList;
+    cellFactory = assignmentCellFactory
+    selectionModel().selectionMode = SelectionMode.Single
+  }
+  val assignmentAddButton = new Button {
+    graphic = Images.addImageView(); prefHeight = 25; disable = true
+  }
+  val assignmentEditButton = new Button {
+    graphic = Images.editImageView(); prefHeight = 25; disable = true
+  }
+  val assignmentChartButton = new Button {
+    graphic = Images.lineChartImageView(); prefHeight = 25; disable = true
+  }
+  val assignmentToolBar = new HBox {
+    spacing = 6; children = List(assignmentAddButton, assignmentEditButton, assignmentChartButton)
+  }
 
   spacing = 6
   children = List(assignmentLabel, assignmentListView, assignmentToolBar)
@@ -40,14 +54,14 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
   }
 
   assignmentListView.onMouseClicked = { event =>
-    if(event.getClickCount == 2 && assignmentListView.selectionModel().getSelectedItem != null ) update()
+    if (event.getClickCount == 2 && assignmentListView.selectionModel().getSelectedItem != null) update()
   }
 
   assignmentAddButton.onAction = { _ => add(Assignment(courseid = model.selectedCourseId.value)) }
 
   assignmentEditButton.onAction = { _ => update() }
 
-  assignmentChartButton.onAction = { _ => 
+  assignmentChartButton.onAction = { _ =>
     new AssignmentChartDialog(conf, model.assignmentList).showAndWait()
     ()
   }

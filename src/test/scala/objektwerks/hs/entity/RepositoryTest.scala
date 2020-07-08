@@ -9,6 +9,7 @@ import org.scalatest.matchers.should.Matchers
 
 class RepositoryTest extends AnyFunSuite with BeforeAndAfterAll with Matchers {
   val repository = Repository.newInstance("test.conf")
+
   import repository._
 
   override protected def beforeAll(): Unit = {

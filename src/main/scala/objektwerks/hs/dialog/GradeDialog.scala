@@ -11,9 +11,15 @@ import scalafx.scene.layout.Region
 
 class GradeDialog(conf: Config, grade: Grade) extends Dialog[Grade]() {
   val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
-  val yearTextField = new TextField { text = grade.year }
-  val startedDatePicker = new DatePicker { value = grade.started }
-  val completedDatePicker = new DatePicker { value = grade.completed }
+  val yearTextField = new TextField {
+    text = grade.year
+  }
+  val startedDatePicker = new DatePicker {
+    value = grade.started
+  }
+  val completedDatePicker = new DatePicker {
+    value = grade.completed
+  }
   val controls = List[(String, Region)](
     conf.getString("year") -> yearTextField,
     conf.getString("started") -> startedDatePicker,

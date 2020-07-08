@@ -11,8 +11,12 @@ import scalafx.scene.layout.Region
 
 class StudentDialog(conf: Config, student: Student) extends Dialog[Student]() {
   val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
-  val nameTextField = new TextField { text = student.name}
-  val bornDatePicker = new DatePicker { value = student.born}
+  val nameTextField = new TextField {
+    text = student.name
+  }
+  val bornDatePicker = new DatePicker {
+    value = student.born
+  }
   val controls = List[(String, Region)](conf.getString("name") -> nameTextField, conf.getString("born") -> bornDatePicker)
   val controlGridPane = new ControlGridPane(controls)
   val dialog = dialogPane()

@@ -12,14 +12,28 @@ import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
 class CoursePane(conf: Config, model: Model) extends VBox {
-  val courseLabel = new Label { text = conf.getString("courses") }
-  val courseCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Course](c => c.name) )
-  val courseListView = new ListView[Course] { minHeight = 300; items = model.courseList; cellFactory = courseCellFactory
-                                              selectionModel().selectionMode = SelectionMode.Single }
-  val courseAddButton = new Button { graphic = Images.addImageView(); prefHeight = 25; disable = true }
-  val courseEditButton = new Button { graphic = Images.editImageView(); prefHeight = 25; disable = true }
-  val courseChartButton = new Button { graphic = Images.barChartImageView(); prefHeight = 25; disable = true }
-  val courseToolBar = new HBox { spacing = 6; children = List(courseAddButton, courseEditButton, courseChartButton) }
+  val courseLabel = new Label {
+    text = conf.getString("courses")
+  }
+  val courseCellFactory = TextFieldListCell.forListView(StringConverter.toStringConverter[Course](c => c.name))
+  val courseListView = new ListView[Course] {
+    minHeight = 300;
+    items = model.courseList;
+    cellFactory = courseCellFactory
+    selectionModel().selectionMode = SelectionMode.Single
+  }
+  val courseAddButton = new Button {
+    graphic = Images.addImageView(); prefHeight = 25; disable = true
+  }
+  val courseEditButton = new Button {
+    graphic = Images.editImageView(); prefHeight = 25; disable = true
+  }
+  val courseChartButton = new Button {
+    graphic = Images.barChartImageView(); prefHeight = 25; disable = true
+  }
+  val courseToolBar = new HBox {
+    spacing = 6; children = List(courseAddButton, courseEditButton, courseChartButton)
+  }
 
   spacing = 6
   children = List(courseLabel, courseListView, courseToolBar)
@@ -40,15 +54,15 @@ class CoursePane(conf: Config, model: Model) extends VBox {
   }
 
   courseListView.onMouseClicked = { event =>
-    if(event.getClickCount == 2 && courseListView.selectionModel().getSelectedItem != null ) update()
+    if (event.getClickCount == 2 && courseListView.selectionModel().getSelectedItem != null) update()
   }
 
   courseAddButton.onAction = { _ => add(Course(gradeid = model.selectedGradeId.value)) }
 
   courseEditButton.onAction = { _ => update() }
 
-  courseChartButton.onAction = { _ => 
-    new CourseChartDialog(conf, model.courseList, model).showAndWait() 
+  courseChartButton.onAction = { _ =>
+    new CourseChartDialog(conf, model.courseList, model).showAndWait()
     ()
   }
 

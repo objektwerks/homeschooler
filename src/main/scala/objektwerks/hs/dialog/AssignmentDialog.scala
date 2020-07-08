@@ -11,12 +11,24 @@ import scalafx.scene.layout.{HBox, Region}
 
 class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assignment]() {
   val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
-  val taskTextField = new TextField { text = assignment.task }
-  val assignedDatePicker = new DatePicker { value = assignment.assigned }
-  val completedDatePicker = new DatePicker { value = assignment.completed }
-  val scoreLabel = new Label { text = assignment.score.toInt.toString }
-  val scoreSlider = new Slider { min = 50.0; max = 100.00; value = assignment.score; showTickLabels = true }
-  val scoreBox = new HBox { children = List(scoreSlider, scoreLabel) }
+  val taskTextField = new TextField {
+    text = assignment.task
+  }
+  val assignedDatePicker = new DatePicker {
+    value = assignment.assigned
+  }
+  val completedDatePicker = new DatePicker {
+    value = assignment.completed
+  }
+  val scoreLabel = new Label {
+    text = assignment.score.toInt.toString
+  }
+  val scoreSlider = new Slider {
+    min = 50.0; max = 100.00; value = assignment.score; showTickLabels = true
+  }
+  val scoreBox = new HBox {
+    children = List(scoreSlider, scoreLabel)
+  }
   val controls = List[(String, Region)](
     conf.getString("task") -> taskTextField,
     conf.getString("assigned") -> assignedDatePicker,

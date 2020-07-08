@@ -15,6 +15,7 @@ import scalafx.scene.layout.{HBox, VBox}
 
 class AssignmentChartDialog(conf: Config, assignments: ObservableBuffer[Assignment]) extends Dialog[Unit] {
   implicit def localDateOrdering: Ordering[LocalDate] = Ordering.by(_.toEpochDay)
+
   val dateFormatter = DateTimeFormatter.ofPattern("yy.D")
   val minDate = assignments.map(a => a.completed).min.format(dateFormatter).toDouble
   val maxDate = assignments.map(a => a.completed).max.format(dateFormatter).toDouble
@@ -24,21 +25,42 @@ class AssignmentChartDialog(conf: Config, assignments: ObservableBuffer[Assignme
   val chart = LineChart[Number, Number](xAxis, yAxis)
   chart.padding = Insets(6)
 
-  val series = new XYChart.Series[Number, Number]{ name = conf.getString("assignment-chart-score") }
+  val series = new XYChart.Series[Number, Number] {
+    name = conf.getString("assignment-chart-score")
+  }
   assignments foreach { assignment =>
-    series.data() += XYChart.Data[Number, Number]( assignment.completed.format(dateFormatter).toDouble, assignment.score.toInt )
+    series.data() += XYChart.Data[Number, Number](assignment.completed.format(dateFormatter).toDouble, assignment.score.toInt)
   }
   chart.data = series
 
-  val minScoreLabel = new Label { text = conf.getString("min-score") }
-  val minScore = new Label { text = assignments.map(a => a.score).min.toInt.toString }
-  val maxScoreLabel = new Label { text = conf.getString("max-score") }
-  val maxScore = new Label { text = assignments.map(a => a.score).max.toInt.toString }
-  val scoreLabel = new Label { text = conf.getString("score") }
-  val score = new Label { text = (assignments.map(a => a.score).sum / assignments.length).toInt.toString }
+  val minScoreLabel = new Label {
+    text = conf.getString("min-score")
+  }
+  val minScore = new Label {
+    text = assignments.map(a => a.score).min.toInt.toString
+  }
+  val maxScoreLabel = new Label {
+    text = conf.getString("max-score")
+  }
+  val maxScore = new Label {
+    text = assignments.map(a => a.score).max.toInt.toString
+  }
+  val scoreLabel = new Label {
+    text = conf.getString("score")
+  }
+  val score = new Label {
+    text = (assignments.map(a => a.score).sum / assignments.length).toInt.toString
+  }
 
-  val scoreBox = new HBox { alignment = Pos.Center; spacing = 6; children = List(minScoreLabel, minScore, maxScoreLabel, maxScore, scoreLabel, score) }
-  val chartBox = new VBox { spacing = 6; children = List(chart, scoreBox) }
+  val scoreBox = new HBox {
+    alignment = Pos.Center;
+    spacing = 6;
+    children = List(minScoreLabel, minScore, maxScoreLabel, maxScore, scoreLabel, score)
+  }
+  val chartBox = new VBox {
+    spacing = 6;
+    children = List(chart, scoreBox)
+  }
 
   val dialog = dialogPane()
   dialog.buttonTypes = List(ButtonType.Close)

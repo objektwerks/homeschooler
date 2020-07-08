@@ -7,10 +7,17 @@ import scalafx.beans.property.IntegerProperty
 import scalafx.collections.ObservableBuffer
 
 class Model(repository: Repository) {
+
   import repository._
 
   val studentList = ObservableBuffer[Student]()
   val selectedStudentId = IntegerProperty(0)
+  val gradeList = ObservableBuffer[Grade]()
+  val selectedGradeId = IntegerProperty(0)
+  val courseList = ObservableBuffer[Course]()
+  val selectedCourseId = IntegerProperty(0)
+  val assignmentList = ObservableBuffer[Assignment]()
+  val selectedAssignmentId = IntegerProperty(0)
 
   def listStudents(): Unit = {
     studentList.clear()
@@ -35,9 +42,6 @@ class Model(repository: Repository) {
     ()
   }
 
-  val gradeList = ObservableBuffer[Grade]()
-  val selectedGradeId = IntegerProperty(0)
-
   def listGrades(studentId: Int): Unit = {
     gradeList.clear()
     courseList.clear()
@@ -60,9 +64,6 @@ class Model(repository: Repository) {
     ()
   }
 
-  val courseList = ObservableBuffer[Course]()
-  val selectedCourseId = IntegerProperty(0)
-
   def listCourses(gradeId: Int): Unit = {
     courseList.clear()
     assignmentList.clear()
@@ -83,9 +84,6 @@ class Model(repository: Repository) {
     courseList.sorted
     ()
   }
-
-  val assignmentList = ObservableBuffer[Assignment]()
-  val selectedAssignmentId = IntegerProperty(0)
 
   def listAssignments(courseId: Int): Unit = {
     assignmentList.clear()

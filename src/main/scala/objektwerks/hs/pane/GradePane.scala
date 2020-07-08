@@ -12,12 +12,22 @@ import scalafx.scene.layout.{HBox, VBox}
 import scalafx.util.StringConverter
 
 class GradePane(conf: Config, model: Model) extends VBox {
-  val gradeLabel = new Label { text = conf.getString("grades") }
-  val gradeCellFactory = TextFieldListCell.forListView( StringConverter.toStringConverter[Grade](g => g.year) )
-  val gradeListView = new ListView[Grade] { minHeight = 50; items = model.gradeList; cellFactory = gradeCellFactory }
-  val gradeAddButton = new Button { graphic = Images.addImageView(); prefHeight = 25; disable = true }
-  val gradeEditButton = new Button { graphic = Images.editImageView(); prefHeight = 25; disable = true }
-  val gradeToolBar = new HBox { spacing = 6; children = List(gradeAddButton, gradeEditButton) }
+  val gradeLabel = new Label {
+    text = conf.getString("grades")
+  }
+  val gradeCellFactory = TextFieldListCell.forListView(StringConverter.toStringConverter[Grade](g => g.year))
+  val gradeListView = new ListView[Grade] {
+    minHeight = 50; items = model.gradeList; cellFactory = gradeCellFactory
+  }
+  val gradeAddButton = new Button {
+    graphic = Images.addImageView(); prefHeight = 25; disable = true
+  }
+  val gradeEditButton = new Button {
+    graphic = Images.editImageView(); prefHeight = 25; disable = true
+  }
+  val gradeToolBar = new HBox {
+    spacing = 6; children = List(gradeAddButton, gradeEditButton)
+  }
 
   spacing = 6
   children = List(gradeLabel, gradeListView, gradeToolBar)
@@ -36,7 +46,7 @@ class GradePane(conf: Config, model: Model) extends VBox {
   }
 
   gradeListView.onMouseClicked = { event =>
-    if(event.getClickCount == 2 && gradeListView.selectionModel().getSelectedItem != null ) update()
+    if (event.getClickCount == 2 && gradeListView.selectionModel().getSelectedItem != null) update()
   }
 
   gradeAddButton.onAction = { _ => add(Grade(studentid = model.selectedStudentId.value)) }
