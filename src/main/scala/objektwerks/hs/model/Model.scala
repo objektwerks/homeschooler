@@ -3,7 +3,6 @@ package objektwerks.hs.model
 import objektwerks.hs.entity.Entity._
 import objektwerks.hs.entity.{Assignment, Course, Grade, Student}
 import objektwerks.hs.repository.Repository
-
 import scalafx.beans.property.IntegerProperty
 import scalafx.collections.ObservableBuffer
 

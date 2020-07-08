@@ -4,7 +4,6 @@ import com.typesafe.config.Config
 import objektwerks.hs.App
 import objektwerks.hs.entity.Course
 import objektwerks.hs.pane.ControlGridPane
-
 import scalafx.Includes._
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._

@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter
 import com.typesafe.config.Config
 import objektwerks.hs.App
 import objektwerks.hs.entity.Assignment
-
 import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.{Insets, Pos}

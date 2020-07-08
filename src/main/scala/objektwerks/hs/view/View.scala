@@ -3,7 +3,6 @@ package objektwerks.hs.view
 import com.typesafe.config.Config
 import objektwerks.hs.model.Model
 import objektwerks.hs.pane._
-
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
 import scalafx.scene.control.SplitPane

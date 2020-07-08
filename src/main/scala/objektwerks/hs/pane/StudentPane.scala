@@ -5,7 +5,6 @@ import objektwerks.hs.dialog.StudentDialog
 import objektwerks.hs.entity.Student
 import objektwerks.hs.image.Images
 import objektwerks.hs.model.Model
-
 import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, Label, ListView}

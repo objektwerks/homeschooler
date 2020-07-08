@@ -3,7 +3,6 @@ package objektwerks.hs.entity
 import java.time.LocalDate
 
 import objektwerks.hs.repository._
-
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers

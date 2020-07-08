@@ -5,7 +5,6 @@ import objektwerks.hs.image.Images
 import objektwerks.hs.model.Model
 import objektwerks.hs.repository.Repository
 import objektwerks.hs.view.View
-
 import scalafx.application.JFXApp
 
 object App extends JFXApp {
