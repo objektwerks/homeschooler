@@ -2,7 +2,7 @@ enablePlugins(JlinkPlugin)
 
 name := "homeschool"
 organization := "objektwerks"
-version := "0.4-SNAPSHOT"
+version := "0.5-SNAPSHOT"
 scalaVersion := "2.13.2"
 maintainer := "objektwerks@runbox.com"
 libraryDependencies ++= {
