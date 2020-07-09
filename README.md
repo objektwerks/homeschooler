@@ -50,3 +50,9 @@ Install
 Execute
 -------
 1. execute ~/universal/homeschool-${version}/bin/homeschool
+
+License
+-------
+>Copyright (c) 2020 Mike Funk
+
+>Published under GPL.v3
