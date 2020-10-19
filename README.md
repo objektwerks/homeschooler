@@ -1,6 +1,6 @@
 Homeschool
 ----------
->Open source ScalaFX homeschool app.
+>Open source homeschool app.
 
 License
 -------
