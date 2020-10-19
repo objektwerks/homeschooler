@@ -43,7 +43,7 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
   def await[T](action: DBIO[T]): T = Await.result(db.run(action), awaitDuration)
 
   class Students(tag: Tag) extends Table[Student](tag, "students") {
-    def * = (id, name, born) <> (Student.tupled, Student.unapply)
+    def * = (id, name, born).<>(Student.tupled, Student.unapply)
 
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
 
@@ -53,7 +53,7 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
   }
 
   class Grades(tag: Tag) extends Table[Grade](tag, "grades") {
-    def * = (id, studentid, year, started, completed) <> (Grade.tupled, Grade.unapply)
+    def * = (id, studentid, year, started, completed).<>(Grade.tupled, Grade.unapply)
 
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
 
@@ -69,7 +69,7 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
   }
 
   class Courses(tag: Tag) extends Table[Course](tag, "courses") {
-    def * = (id, gradeid, name, started, completed) <> (Course.tupled, Course.unapply)
+    def * = (id, gradeid, name, started, completed).<>(Course.tupled, Course.unapply)
 
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
 
@@ -85,7 +85,7 @@ class Repository(val config: DatabaseConfig[JdbcProfile], val profile: JdbcProfi
   }
 
   class Assignments(tag: Tag) extends Table[Assignment](tag, "assignments") {
-    def * = (id, courseid, task, assigned, completed, score) <> (Assignment.tupled, Assignment.unapply)
+    def * = (id, courseid, task, assigned, completed, score).<>(Assignment.tupled, Assignment.unapply)
 
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
 

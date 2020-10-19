@@ -3,7 +3,7 @@ enablePlugins(JlinkPlugin)
 name := "homeschool"
 organization := "objektwerks"
 version := "0.5-SNAPSHOT"
-scalaVersion := "2.13.2"
+scalaVersion := "2.13.3"
 maintainer := "objektwerks@runbox.com"
 libraryDependencies ++= {
   val slickVersion = "3.3.3"
