@@ -40,16 +40,17 @@ Run
 Package
 -------
 1. sbt clean test universal:packageBin
+2. verify ./target/universal/homeschool-${version}.zip
 
 Install
 -------
-1. copy universal directory to target directory (i.e., home directory ~ )
-2. unzip ~/universal/homeschool-${version}.zip
-3. set executable permissions for ~/universal/homeschool-${version}/bin/homeschool
+1. unzip ./target/universal/homeschool-${version}.zip
+2. copy unzipped homeschool-${version} directory to ${homeschool.directory}
+3. set executable permissions for ${homeschool.directory}/homeschool-${version}/bin/homeschool
 
 Execute
 -------
-1. execute ~/universal/homeschool-${version}/bin/homeschool
+1. execute ${homeschool-directory}/homeschool-${version}/bin/homeschool
 
 License
 -------
