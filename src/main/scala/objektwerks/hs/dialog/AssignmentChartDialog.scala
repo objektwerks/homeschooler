@@ -59,6 +59,7 @@ class AssignmentChartDialog(conf: Config, assignments: ObservableBuffer[Assignme
     spacing = 6;
     children = List(minScoreLabel, minScore, maxScoreLabel, maxScore, scoreLabel, score)
   }
+  
   val chartBox = new VBox {
     spacing = 6;
     children = List(chart, scoreBox)

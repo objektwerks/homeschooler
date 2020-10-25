@@ -11,8 +11,7 @@ import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
 import scalafx.scene.layout.Region
 
-class CourseDialog(conf: Config, course: Course) extends Dialog[Course]() {
-  val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
+class CourseDialog(conf: Config, course: Course) extends Dialog[Course] {
   val nameTextField = new TextField {
     text = course.name
   }
@@ -28,13 +27,11 @@ class CourseDialog(conf: Config, course: Course) extends Dialog[Course]() {
     conf.getString("completed") -> completedDatePicker
   )
   val controlGridPane = new ControlGridPane(controls)
+
   val dialog = dialogPane()
+  val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   dialog.content = controlGridPane
-
-  initOwner(App.stage)
-  title = conf.getString("course")
-  headerText = conf.getString("save-course")
 
   val saveButton = dialog.lookupButton(saveButtonType)
   saveButton.disable = nameTextField.text.value.trim.isEmpty
@@ -49,4 +46,8 @@ class CourseDialog(conf: Config, course: Course) extends Dialog[Course]() {
         completed = completedDatePicker.value.value)
     else null
   }
+
+  initOwner(App.stage)
+  title = conf.getString("course")
+  headerText = conf.getString("save-course")
 }

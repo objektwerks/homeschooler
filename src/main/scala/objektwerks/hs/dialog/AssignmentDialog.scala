@@ -11,8 +11,7 @@ import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
 import scalafx.scene.layout.{HBox, Region}
 
-class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assignment]() {
-  val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
+class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assignment] {
   val taskTextField = new TextField {
     text = assignment.task
   }
@@ -37,13 +36,11 @@ class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assi
     conf.getString("completed") -> completedDatePicker,
     conf.getString("score") -> scoreBox)
   val controlGridPane = new ControlGridPane(controls)
+
   val dialog = dialogPane()
+  val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   dialog.content = controlGridPane
-
-  initOwner(App.stage)
-  title = conf.getString("assignment")
-  headerText = conf.getString("save-assignment")
 
   scoreSlider.value.onChange { (_, _, newScore) => scoreLabel.text = newScore.intValue.toString }
 
@@ -62,4 +59,8 @@ class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assi
         score = scoreSlider.value.value)
     else null
   }
+
+  initOwner(App.stage)
+  title = conf.getString("assignment")
+  headerText = conf.getString("save-assignment")
 }

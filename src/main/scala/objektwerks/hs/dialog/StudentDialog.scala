@@ -11,8 +11,7 @@ import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
 import scalafx.scene.layout.Region
 
-class StudentDialog(conf: Config, student: Student) extends Dialog[Student]() {
-  val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
+class StudentDialog(conf: Config, student: Student) extends Dialog[Student] {
   val nameTextField = new TextField {
     text = student.name
   }
@@ -21,13 +20,11 @@ class StudentDialog(conf: Config, student: Student) extends Dialog[Student]() {
   }
   val controls = List[(String, Region)](conf.getString("name") -> nameTextField, conf.getString("born") -> bornDatePicker)
   val controlGridPane = new ControlGridPane(controls)
+
   val dialog = dialogPane()
+  val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   dialog.content = controlGridPane
-
-  initOwner(App.stage)
-  title = conf.getString("student")
-  headerText = conf.getString("save-student")
 
   val saveButton = dialog.lookupButton(saveButtonType)
   saveButton.disable = nameTextField.text.value.trim.isEmpty
@@ -40,4 +37,8 @@ class StudentDialog(conf: Config, student: Student) extends Dialog[Student]() {
       student.copy(name = nameTextField.text.value, born = bornDatePicker.value.value)
     else null
   }
+
+  initOwner(App.stage)
+  title = conf.getString("student")
+  headerText = conf.getString("save-student")
 }
