@@ -1,9 +1,11 @@
 package objektwerks.hs.dialog
 
 import com.typesafe.config.Config
+
 import objektwerks.hs.App
 import objektwerks.hs.entity.Course
 import objektwerks.hs.model.Model
+
 import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.chart.{BarChart, CategoryAxis, NumberAxis, XYChart}

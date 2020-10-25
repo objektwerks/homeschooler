@@ -1,10 +1,12 @@
 package objektwerks.hs.pane
 
 import com.typesafe.config.Config
+
 import objektwerks.hs.dialog.GradeDialog
 import objektwerks.hs.entity.Grade
 import objektwerks.hs.image.Images
 import objektwerks.hs.model.Model
+
 import scalafx.Includes._
 import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, Label, ListView}
