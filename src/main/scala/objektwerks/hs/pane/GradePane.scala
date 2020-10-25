@@ -20,10 +20,10 @@ class GradePane(conf: Config, model: Model) extends VBox {
     minHeight = 50; items = model.gradeList; cellFactory = gradeCellFactory
   }
   val gradeAddButton = new Button {
-    graphic = Images.addImageView(); prefHeight = 25; disable = true
+    graphic = Images.addImageView; prefHeight = 25; disable = true
   }
   val gradeEditButton = new Button {
-    graphic = Images.editImageView(); prefHeight = 25; disable = true
+    graphic = Images.editImageView; prefHeight = 25; disable = true
   }
   val gradeToolBar = new HBox {
     spacing = 6; children = List(gradeAddButton, gradeEditButton)

@@ -20,10 +20,10 @@ class StudentPane(conf: Config, model: Model) extends VBox {
     minHeight = 50; items = model.studentList; cellFactory = studentCellFactory
   }
   val studentAddButton = new Button {
-    graphic = Images.addImageView(); prefHeight = 25
+    graphic = Images.addImageView; prefHeight = 25
   }
   val studentEditButton = new Button {
-    graphic = Images.editImageView(); prefHeight = 25; disable = true
+    graphic = Images.editImageView; prefHeight = 25; disable = true
   }
   val studentToolBar = new HBox {
     spacing = 6; children = List(studentAddButton, studentEditButton)

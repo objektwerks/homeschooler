@@ -23,13 +23,13 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
     selectionModel().selectionMode = SelectionMode.Single
   }
   val assignmentAddButton = new Button {
-    graphic = Images.addImageView(); prefHeight = 25; disable = true
+    graphic = Images.addImageView; prefHeight = 25; disable = true
   }
   val assignmentEditButton = new Button {
-    graphic = Images.editImageView(); prefHeight = 25; disable = true
+    graphic = Images.editImageView; prefHeight = 25; disable = true
   }
   val assignmentChartButton = new Button {
-    graphic = Images.lineChartImageView(); prefHeight = 25; disable = true
+    graphic = Images.lineChartImageView; prefHeight = 25; disable = true
   }
   val assignmentToolBar = new HBox {
     spacing = 6; children = List(assignmentAddButton, assignmentEditButton, assignmentChartButton)

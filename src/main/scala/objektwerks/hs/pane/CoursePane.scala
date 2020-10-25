@@ -23,13 +23,13 @@ class CoursePane(conf: Config, model: Model) extends VBox {
     selectionModel().selectionMode = SelectionMode.Single
   }
   val courseAddButton = new Button {
-    graphic = Images.addImageView(); prefHeight = 25; disable = true
+    graphic = Images.addImageView; prefHeight = 25; disable = true
   }
   val courseEditButton = new Button {
-    graphic = Images.editImageView(); prefHeight = 25; disable = true
+    graphic = Images.editImageView; prefHeight = 25; disable = true
   }
   val courseChartButton = new Button {
-    graphic = Images.barChartImageView(); prefHeight = 25; disable = true
+    graphic = Images.barChartImageView; prefHeight = 25; disable = true
   }
   val courseToolBar = new HBox {
     spacing = 6; children = List(courseAddButton, courseEditButton, courseChartButton)
