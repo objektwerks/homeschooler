@@ -5,7 +5,7 @@
         <file>${HOME}/.homeschool/logs/log.${timeStamp}.txt</file>
         <append>true</append>
         <encoder>
-            <pattern>%-5p: %d{ISO8601} [%t] %m%n</pattern>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
     <root level="INFO">
