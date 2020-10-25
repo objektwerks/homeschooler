@@ -10,6 +10,10 @@ import scalafx.scene.Scene
 import scalafx.scene.control.SplitPane
 import scalafx.scene.layout.{Priority, VBox}
 
+object View {
+  def apply(conf: Config, model: Model): View = new View(conf, model)
+}
+
 class View(conf: Config, model: Model) {
   val studentPane = new StudentPane(conf, model)
   val gradePane = new GradePane(conf, model)

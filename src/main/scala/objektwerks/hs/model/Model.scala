@@ -7,6 +7,10 @@ import objektwerks.hs.repository.Repository
 import scalafx.beans.property.IntegerProperty
 import scalafx.collections.ObservableBuffer
 
+object Model {
+  def apply(repository: Repository): Model = new Model(repository)
+}
+
 class Model(repository: Repository) {
   import repository._
 
