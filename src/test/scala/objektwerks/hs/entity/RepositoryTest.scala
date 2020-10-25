@@ -3,24 +3,25 @@ package objektwerks.hs.entity
 import java.time.LocalDate
 
 import objektwerks.hs.repository._
+
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
 class RepositoryTest extends AnyFunSuite with BeforeAndAfterAll with Matchers {
-  val repository = Repository.newInstance("test.conf")
-
-  import repository._
+  val repository = Repository("test.conf")
 
   override protected def beforeAll(): Unit = {
-    schema.createStatements foreach println
+    repository.schema.createStatements foreach println
   }
 
   override protected def afterAll(): Unit = {
-    close()
+    repository.close()
   }
 
   test("repository") {
+    import repository._
+
     val barneyStudentId = await(students.save(Student(name = "barney", born = LocalDate.now.minusYears(7)))).get
     val fredStudentId = await(students.save(Student(name = "fred", born = LocalDate.now.minusYears(7)))).get
 

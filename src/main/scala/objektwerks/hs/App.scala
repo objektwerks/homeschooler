@@ -9,7 +9,7 @@ import scalafx.application.JFXApp
 
 object App extends JFXApp {
   val conf = ConfigFactory.load("app.conf")
-  val repository = Repository.newInstance("repository.conf")
+  val repository = Repository("repository.conf")
   val model = new Model(repository)
   val view = new View(conf, model)
   stage = new JFXApp.PrimaryStage {
