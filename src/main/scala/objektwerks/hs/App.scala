@@ -1,10 +1,12 @@
 package objektwerks.hs
 
 import com.typesafe.config.ConfigFactory
+
 import objektwerks.hs.image.Images
 import objektwerks.hs.model.Model
 import objektwerks.hs.repository.Repository
 import objektwerks.hs.view.View
+
 import scalafx.application.JFXApp
 
 object App extends JFXApp {
@@ -12,6 +14,7 @@ object App extends JFXApp {
   val repository = Repository("repository.conf")
   val model = new Model(repository)
   val view = new View(conf, model)
+  
   stage = new JFXApp.PrimaryStage {
     scene = view.sceneGraph
     title = conf.getString("title")
