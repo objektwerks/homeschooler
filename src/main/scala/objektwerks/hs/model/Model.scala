@@ -12,10 +12,13 @@ class Model(repository: Repository) {
 
   val studentList = ObservableBuffer[Student]()
   val selectedStudentId = IntegerProperty(0)
+
   val gradeList = ObservableBuffer[Grade]()
   val selectedGradeId = IntegerProperty(0)
+
   val courseList = ObservableBuffer[Course]()
   val selectedCourseId = IntegerProperty(0)
+  
   val assignmentList = ObservableBuffer[Assignment]()
   val selectedAssignmentId = IntegerProperty(0)
 
