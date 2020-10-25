@@ -36,11 +36,11 @@ class Repository(val config: DatabaseConfig[JdbcProfile],
   val schema = students.schema ++ grades.schema ++ courses.schema ++ assignments.schema
   val db = config.db
 
+  def await[T](action: DBIO[T]): T = Await.result(db.run(action), awaitDuration)
   def exec[T](action: DBIO[T]): Future[T] = db.run(action)
   def close() = db.close()
   def createSchema() = await(DBIO.seq(schema.create))
   def dropSchema() = await(DBIO.seq(schema.drop))
-  def await[T](action: DBIO[T]): T = Await.result(db.run(action), awaitDuration)
 
   class Students(tag: Tag) extends Table[Student](tag, "students") {
     def * = (id, name, born).<>(Student.tupled, Student.unapply)
