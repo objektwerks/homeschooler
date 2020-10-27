@@ -2,9 +2,9 @@ package objektwerks.hs.pane
 
 import com.typesafe.config.Config
 
+import objektwerks.hs.Resources
 import objektwerks.hs.dialog.{AssignmentChartDialog, AssignmentDialog}
 import objektwerks.hs.entity.Assignment
-import objektwerks.hs.image.Images
 import objektwerks.hs.model.Model
 
 import scalafx.Includes._
@@ -25,13 +25,13 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
     selectionModel().selectionMode = SelectionMode.Single
   }
   val assignmentAddButton = new Button {
-    graphic = Images.addImageView; prefHeight = 25; disable = true
+    graphic = Resources.addImageView; prefHeight = 25; disable = true
   }
   val assignmentEditButton = new Button {
-    graphic = Images.editImageView; prefHeight = 25; disable = true
+    graphic = Resources.editImageView; prefHeight = 25; disable = true
   }
   val assignmentChartButton = new Button {
-    graphic = Images.lineChartImageView; prefHeight = 25; disable = true
+    graphic = Resources.lineChartImageView; prefHeight = 25; disable = true
   }
   val assignmentToolBar = new HBox {
     spacing = 6; children = List(assignmentAddButton, assignmentEditButton, assignmentChartButton)

@@ -2,9 +2,9 @@ package objektwerks.hs.pane
 
 import com.typesafe.config.Config
 
+import objektwerks.hs.Resources
 import objektwerks.hs.dialog.{CourseChartDialog, CourseDialog}
 import objektwerks.hs.entity.Course
-import objektwerks.hs.image.Images
 import objektwerks.hs.model.Model
 
 import scalafx.Includes._
@@ -25,13 +25,13 @@ class CoursePane(conf: Config, model: Model) extends VBox {
     selectionModel().selectionMode = SelectionMode.Single
   }
   val courseAddButton = new Button {
-    graphic = Images.addImageView; prefHeight = 25; disable = true
+    graphic = Resources.addImageView; prefHeight = 25; disable = true
   }
   val courseEditButton = new Button {
-    graphic = Images.editImageView; prefHeight = 25; disable = true
+    graphic = Resources.editImageView; prefHeight = 25; disable = true
   }
   val courseChartButton = new Button {
-    graphic = Images.barChartImageView; prefHeight = 25; disable = true
+    graphic = Resources.barChartImageView; prefHeight = 25; disable = true
   }
   val courseToolBar = new HBox {
     spacing = 6; children = List(courseAddButton, courseEditButton, courseChartButton)

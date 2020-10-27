@@ -2,7 +2,6 @@ package objektwerks.hs
 
 import com.typesafe.config.ConfigFactory
 
-import objektwerks.hs.image.Images
 import objektwerks.hs.model.Model
 import objektwerks.hs.repository.Repository
 import objektwerks.hs.view.View
@@ -20,7 +19,7 @@ object App extends JFXApp {
     title = conf.getString("title")
     minHeight = conf.getInt("height").toDouble
     minWidth = conf.getInt("width").toDouble
-    icons.add(Images.appImage)
+    icons.add(Resources.appImage)
   }
 
   sys.addShutdownHook {
