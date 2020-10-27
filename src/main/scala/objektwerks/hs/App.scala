@@ -25,6 +25,5 @@ object App extends JFXApp {
 
   sys.addShutdownHook {
     repository.close()
-    stage.close()
   }
 }
