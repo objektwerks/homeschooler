@@ -1,10 +1,10 @@
 Homeschool
 ----------
->Open source homeschool app.
+>Open source homeschool app using ScalaFX.
 
 License
 -------
-GPL.V3 ( See ./GPL.V3 )
+Apache 2.0 ( See ./LICENSE )
 
 Object Model
 ------------
@@ -35,7 +35,7 @@ Test
 
 Run
 ---
-1. sbt clean test run
+1. sbt run
 
 Package
 -------

@@ -1,14 +1,11 @@
-enablePlugins(JlinkPlugin)
-
 name := "homeschool"
 organization := "objektwerks"
 version := "1.2-SNAPSHOT"
 scalaVersion := "2.13.5"
-maintainer := "objektwerks@runbox.com"
 libraryDependencies ++= {
   val slickVersion = "3.3.3"
   Seq(
-    "org.scalafx" %% "scalafx" % "14-R19",
+    "org.scalafx" %% "scalafx" % "15.0.1-R21",
     "com.typesafe.slick" %% "slick" % slickVersion,
     "com.typesafe.slick" %% "slick-hikaricp" % slickVersion,
     "com.h2database" % "h2" % "1.4.200",
@@ -16,15 +13,3 @@ libraryDependencies ++= {
     "org.scalatest" %% "scalatest" % "3.2.7" % Test
   )
 }
-lazy val osName = System.getProperty("os.name") match {
-  case n if n.startsWith("Linux")   => "linux"
-  case n if n.startsWith("Mac")     => "mac"
-  case n if n.startsWith("Windows") => "win"
-  case _ => throw new Exception("Unknown platform!")
-}
-lazy val javaFXModules = Seq("base", "controls", "fxml", "graphics", "media", "swing", "web")
-libraryDependencies ++= javaFXModules.map( m => "org.openjfx" % s"javafx-$m" % "14.0.1" classifier osName )
-jlinkModules := {
-  jlinkModules.value :+ "jdk.unsupported"
-}
-jlinkIgnoreMissingDependency := JlinkIgnore.everything
