@@ -5,7 +5,7 @@ scalaVersion := "2.13.7"
 libraryDependencies ++= {
   val slickVersion = "3.3.3"
   Seq(
-    "org.scalafx" %% "scalafx" % "16.0.0-R25",
+    "org.scalafx" %% "scalafx" % "17.0.1-R26",
     "com.typesafe.slick" %% "slick" % slickVersion,
     "com.typesafe.slick" %% "slick-hikaricp" % slickVersion,
     "com.h2database" % "h2" % "2.0.204",
