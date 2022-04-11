@@ -8,18 +8,17 @@ import objektwerks.hs.entity.Student
 import objektwerks.hs.model.Model
 
 import scalafx.Includes._
-import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, Label, ListView}
 import scalafx.scene.layout.{HBox, VBox}
-import scalafx.util.StringConverter
 
 class StudentPane(conf: Config, model: Model) extends VBox {
   val studentLabel = new Label {
     text = conf.getString("students")
   }
-  val studentCellFactory = TextFieldListCell.forListView(StringConverter.toStringConverter[Student](s => s.name))
   val studentListView = new ListView[Student] {
-    minHeight = 50; items = model.studentList; cellFactory = studentCellFactory
+    minHeight = 50
+    items = model.studentList
+    cellFactory = (cell, student) => { cell.text =  student.name }
   }
   val studentAddButton = new Button {
     graphic = Resources.addImageView; prefHeight = 25
