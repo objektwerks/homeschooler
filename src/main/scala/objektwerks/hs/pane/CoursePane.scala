@@ -8,20 +8,17 @@ import objektwerks.hs.entity.Course
 import objektwerks.hs.model.Model
 
 import scalafx.Includes._
-import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, Label, ListView, SelectionMode}
 import scalafx.scene.layout.{HBox, VBox}
-import scalafx.util.StringConverter
 
 class CoursePane(conf: Config, model: Model) extends VBox {
   val courseLabel = new Label {
     text = conf.getString("courses")
   }
-  val courseCellFactory = TextFieldListCell.forListView(StringConverter.toStringConverter[Course](c => c.name))
   val courseListView = new ListView[Course] {
     minHeight = 300;
     items = model.courseList;
-    cellFactory = courseCellFactory
+    cellFactory = (cell, course) => { cell.text =  course.name }
     selectionModel().selectionMode = SelectionMode.Single
   }
   val courseAddButton = new Button {
