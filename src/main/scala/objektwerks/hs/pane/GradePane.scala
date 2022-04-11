@@ -8,18 +8,17 @@ import objektwerks.hs.entity.Grade
 import objektwerks.hs.model.Model
 
 import scalafx.Includes._
-import scalafx.scene.control.cell.TextFieldListCell
 import scalafx.scene.control.{Button, Label, ListView}
 import scalafx.scene.layout.{HBox, VBox}
-import scalafx.util.StringConverter
 
 class GradePane(conf: Config, model: Model) extends VBox {
   val gradeLabel = new Label {
     text = conf.getString("grades")
   }
-  val gradeCellFactory = TextFieldListCell.forListView(StringConverter.toStringConverter[Grade](g => g.year))
   val gradeListView = new ListView[Grade] {
-    minHeight = 50; items = model.gradeList; cellFactory = gradeCellFactory
+    minHeight = 50
+    items = model.gradeList
+    cellFactory = (cell, grade) => { cell.text =  grade.year }
   }
   val gradeAddButton = new Button {
     graphic = Resources.addImageView; prefHeight = 25; disable = true
