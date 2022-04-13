@@ -2,10 +2,6 @@ package hs
 
 import com.typesafe.config.ConfigFactory
 
-import Model
-import Repository
-import View
-
 import scalafx.application.JFXApp3
 
 object App extends JFXApp3 {

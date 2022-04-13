@@ -1,8 +1,5 @@
 package hs
 
-import Entity._
-import Repository._
-
 import scalafx.beans.property.IntegerProperty
 import scalafx.collections.ObservableBuffer
 

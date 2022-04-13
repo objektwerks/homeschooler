@@ -2,7 +2,7 @@ package hs
 
 import com.typesafe.config.Config
 
-import objektwerks.hs.pane._
+import hs.pane._
 
 import scalafx.geometry.Insets
 import scalafx.scene.Scene
