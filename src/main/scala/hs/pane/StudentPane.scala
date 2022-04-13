@@ -2,7 +2,7 @@ package hs.pane
 
 import com.typesafe.config.Config
 
-import hs.Resources
+import hs.Images
 import hs.dialog.StudentDialog
 import hs.Student
 import hs.Model
@@ -21,10 +21,10 @@ class StudentPane(conf: Config, model: Model) extends VBox {
     cellFactory = (cell, student) => { cell.text =  student.name }
   }
   val studentAddButton = new Button {
-    graphic = Resources.addImageView; prefHeight = 25
+    graphic = Images.addImageView; prefHeight = 25
   }
   val studentEditButton = new Button {
-    graphic = Resources.editImageView; prefHeight = 25; disable = true
+    graphic = Images.editImageView; prefHeight = 25; disable = true
   }
   val studentToolBar = new HBox {
     spacing = 6; children = List(studentAddButton, studentEditButton)

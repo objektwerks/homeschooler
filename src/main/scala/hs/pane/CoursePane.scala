@@ -2,7 +2,7 @@ package hs.pane
 
 import com.typesafe.config.Config
 
-import hs.Resources
+import hs.Images
 import hs.dialog.{CourseChartDialog, CourseDialog}
 import hs.Course
 import hs.Model
@@ -22,13 +22,13 @@ class CoursePane(conf: Config, model: Model) extends VBox {
     selectionModel().selectionMode = SelectionMode.Single
   }
   val courseAddButton = new Button {
-    graphic = Resources.addImageView; prefHeight = 25; disable = true
+    graphic = Images.addImageView; prefHeight = 25; disable = true
   }
   val courseEditButton = new Button {
-    graphic = Resources.editImageView; prefHeight = 25; disable = true
+    graphic = Images.editImageView; prefHeight = 25; disable = true
   }
   val courseChartButton = new Button {
-    graphic = Resources.barChartImageView; prefHeight = 25; disable = true
+    graphic = Images.barChartImageView; prefHeight = 25; disable = true
   }
   val courseToolBar = new HBox {
     spacing = 6; children = List(courseAddButton, courseEditButton, courseChartButton)

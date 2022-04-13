@@ -2,7 +2,7 @@ package hs.pane
 
 import com.typesafe.config.Config
 
-import hs.Resources
+import hs.Images
 import hs.dialog.{AssignmentChartDialog, AssignmentDialog}
 import hs.Assignment
 import hs.Model
@@ -22,13 +22,13 @@ class AssignmentPane(conf: Config, model: Model) extends VBox {
     selectionModel().selectionMode = SelectionMode.Single
   }
   val assignmentAddButton = new Button {
-    graphic = Resources.addImageView; prefHeight = 25; disable = true
+    graphic = Images.addImageView; prefHeight = 25; disable = true
   }
   val assignmentEditButton = new Button {
-    graphic = Resources.editImageView; prefHeight = 25; disable = true
+    graphic = Images.editImageView; prefHeight = 25; disable = true
   }
   val assignmentChartButton = new Button {
-    graphic = Resources.lineChartImageView; prefHeight = 25; disable = true
+    graphic = Images.lineChartImageView; prefHeight = 25; disable = true
   }
   val assignmentToolBar = new HBox {
     spacing = 6; children = List(assignmentAddButton, assignmentEditButton, assignmentChartButton)

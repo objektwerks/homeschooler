@@ -17,7 +17,7 @@ object App extends JFXApp3 {
       title = resources.getString("title")
       minHeight = resources.getInt("height").toDouble
       minWidth = resources.getInt("width").toDouble
-      icons.add(Resources.appImage)
+      icons.add(Images.appImage)
     }
   }
   
