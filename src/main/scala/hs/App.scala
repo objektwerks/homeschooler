@@ -1,10 +1,10 @@
-package objektwerks.hs
+package hs
 
 import com.typesafe.config.ConfigFactory
 
-import objektwerks.hs.model.Model
-import objektwerks.hs.repository.Repository
-import objektwerks.hs.view.View
+import Model
+import Repository
+import View
 
 import scalafx.application.JFXApp3
 
