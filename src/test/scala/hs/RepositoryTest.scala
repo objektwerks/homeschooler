@@ -1,8 +1,6 @@
-package objektwerks.hs.entity
+package hs
 
 import java.time.LocalDate
-
-import objektwerks.hs.repository._
 
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.funsuite.AnyFunSuite
