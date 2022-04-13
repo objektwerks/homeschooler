@@ -5,7 +5,7 @@ import com.typesafe.config.ConfigFactory
 import scalafx.application.JFXApp3
 
 object App extends JFXApp3 {
-  val conf = ConfigFactory.load("app.conf")
+  val conf = ConfigFactory.load("resources.conf")
   val repository = Repository("repository.conf")
   val model = Model(repository)
   val view = View(conf, model)
