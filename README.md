@@ -1,10 +1,6 @@
 Homeschool
 ----------
->Open source homeschool app using ScalaFX.
-
-License
--------
-Apache 2.0 ( See ./LICENSE )
+>Open source homeschool app using ScalaFX and H2.
 
 Object Model
 ------------
