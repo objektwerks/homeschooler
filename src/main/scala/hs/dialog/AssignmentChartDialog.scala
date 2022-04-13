@@ -1,12 +1,12 @@
-package objektwerks.hs.dialog
+package hs.dialog
+
+import com.typesafe.config.Config
 
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-import com.typesafe.config.Config
-
-import objektwerks.hs.App
-import objektwerks.hs.entity.Assignment
+import hs.App
+import hs.Assignment
 
 import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
