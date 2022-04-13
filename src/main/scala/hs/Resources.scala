@@ -1,4 +1,4 @@
-package objektwerks.hs
+package hs
 
 import scalafx.scene.image.{Image, ImageView}
 
