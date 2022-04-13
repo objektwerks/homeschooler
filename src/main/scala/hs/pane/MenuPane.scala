@@ -1,8 +1,8 @@
-package objektwerks.hs.pane
+package hs.pane
 
 import com.typesafe.config.Config
 
-import objektwerks.hs.App
+import hs.App
 
 import scalafx.application.Platform
 import scalafx.scene.control.Alert.AlertType
