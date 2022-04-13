@@ -1,11 +1,11 @@
-package objektwerks.hs.pane
+package hs.pane
 
 import com.typesafe.config.Config
 
-import objektwerks.hs.Resources
-import objektwerks.hs.dialog.{AssignmentChartDialog, AssignmentDialog}
-import objektwerks.hs.entity.Assignment
-import objektwerks.hs.model.Model
+import hs.Resources
+import hs.dialog.{AssignmentChartDialog, AssignmentDialog}
+import hs.Assignment
+import hs.Model
 
 import scalafx.Includes._
 import scalafx.scene.control._
