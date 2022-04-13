@@ -1,10 +1,10 @@
-package objektwerks.hs.dialog
+package hs.dialog
 
 import com.typesafe.config.Config
 
-import objektwerks.hs.App
-import objektwerks.hs.entity.Course
-import objektwerks.hs.model.Model
+import hs.App
+import hs.Course
+import hs.Model
 
 import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
