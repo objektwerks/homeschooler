@@ -1,11 +1,11 @@
-package objektwerks.hs.pane
+package hs.pane
 
 import com.typesafe.config.Config
 
-import objektwerks.hs.Resources
-import objektwerks.hs.dialog.StudentDialog
-import objektwerks.hs.entity.Student
-import objektwerks.hs.model.Model
+import hs.Resources
+import hs.dialog.StudentDialog
+import hs.Student
+import hs.Model
 
 import scalafx.Includes._
 import scalafx.scene.control.{Button, Label, ListView}
