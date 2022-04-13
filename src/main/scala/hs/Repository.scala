@@ -1,11 +1,11 @@
-package objektwerks.hs.repository
+package hs
 
 import java.sql.Date
 import java.time.LocalDate
 
 import com.typesafe.config.ConfigFactory
 
-import objektwerks.hs.entity.{Assignment, Course, Grade, Student}
+import Entity._
 
 import slick.basic.DatabaseConfig
 import slick.jdbc.{H2Profile, JdbcProfile}
