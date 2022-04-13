@@ -1,4 +1,4 @@
-package objektwerks.hs.pane
+package hs.pane
 
 import scalafx.geometry.Insets
 import scalafx.scene.control.Label
