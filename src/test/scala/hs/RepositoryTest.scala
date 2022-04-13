@@ -1,5 +1,7 @@
 package hs
 
+import com.typesafe.config.ConfigFactory
+
 import java.time.LocalDate
 
 import org.scalatest.BeforeAndAfterAll
@@ -7,7 +9,7 @@ import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
 class RepositoryTest extends AnyFunSuite with BeforeAndAfterAll with Matchers {
-  val repository = Repository("test.conf")
+  val repository = Repository(ConfigFactory.load("test.conf"))
 
   override protected def beforeAll(): Unit = {
     repository.schema.createStatements foreach println

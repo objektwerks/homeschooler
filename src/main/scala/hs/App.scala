@@ -6,7 +6,7 @@ import scalafx.application.JFXApp3
 
 object App extends JFXApp3 {
   val resources = ConfigFactory.load("resources.conf")
-  val repository = Repository("repository.conf")
+  val repository = Repository(ConfigFactory.load("repository.conf"))
   val model = Model(repository)
   val view = View(resources, model)
 

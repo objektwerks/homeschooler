@@ -1,6 +1,6 @@
 package hs
 
-import com.typesafe.config.ConfigFactory
+import com.typesafe.config.Config
 
 import java.sql.Date
 import java.time.LocalDate
@@ -12,8 +12,8 @@ import scala.concurrent.duration._
 import scala.concurrent.{Await, Future}
 
 object Repository {
-  def apply(configFile: String): Repository = {
-    val config = DatabaseConfig.forConfig[JdbcProfile]("repository", ConfigFactory.load(configFile))
+  def apply(conf: Config): Repository = {
+    val config = DatabaseConfig.forConfig[JdbcProfile]("repository", conf)
     val repository = new Repository(config, H2Profile)
     import repository._
     try {
