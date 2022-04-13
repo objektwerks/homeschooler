@@ -1,10 +1,10 @@
-package objektwerks.hs.dialog
+package hs.dialog
 
 import com.typesafe.config.Config
 
-import objektwerks.hs.App
-import objektwerks.hs.entity.Assignment
-import objektwerks.hs.pane.ControlGridPane
+import hs.App
+import hs.Assignment
+import hs.pane.ControlGridPane
 
 import scalafx.Includes._
 import scalafx.scene.control.ButtonBar.ButtonData
