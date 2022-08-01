@@ -8,7 +8,7 @@ libraryDependencies ++= {
     "org.scalafx" %% "scalafx" % "18.0.2-R29",
     "com.typesafe.slick" %% "slick" % slickVersion,
     "com.typesafe.slick" %% "slick-hikaricp" % slickVersion,
-    "com.h2database" % "h2" % "2.1.212",
+    "com.h2database" % "h2" % "2.1.214",
     "ch.qos.logback" % "logback-classic" % "1.2.11",
     "org.scalatest" %% "scalatest" % "3.2.12" % Test
   )
