@@ -8,19 +8,17 @@ import org.scalatest.BeforeAndAfterAll
 import org.scalatest.funsuite.AnyFunSuite
 import org.scalatest.matchers.should.Matchers
 
-class RepositoryTest extends AnyFunSuite with BeforeAndAfterAll with Matchers {
+final class RepositoryTest extends AnyFunSuite with BeforeAndAfterAll with Matchers:
   val repository = Repository(ConfigFactory.load("test.conf"))
 
-  override protected def beforeAll(): Unit = {
+  override protected def beforeAll(): Unit =
     repository.schema.createStatements foreach println
-  }
 
-  override protected def afterAll(): Unit = {
+  override protected def afterAll(): Unit =
     repository.close()
-  }
 
-  test("repository") {
-    import repository._
+  test("repository"):
+    import repository.*
 
     val barneyStudentId = await(students.save(Student(name = "barney", born = LocalDate.now.minusYears(7)))).get
     val fredStudentId = await(students.save(Student(name = "fred", born = LocalDate.now.minusYears(7)))).get
@@ -47,5 +45,3 @@ class RepositoryTest extends AnyFunSuite with BeforeAndAfterAll with Matchers {
 
     await(assignments.score(mathCourseId)).get shouldBe 100.0
     await(assignments.score(scienceCourseId)).get shouldBe 75.0
-  }
-}
