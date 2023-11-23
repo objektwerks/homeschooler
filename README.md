@@ -1,6 +1,6 @@
 Homeschool
 ----------
->Open source homeschool app using ScalaFX, H2 and Scala 3.
+>Open source homeschool app using ScalaFx, H2 and Scala 3.
 
 Warning
 -------
