@@ -3,7 +3,7 @@ organization := "objektwerks"
 version := "1.5-SNAPSHOT"
 scalaVersion := "3.3.1"
 libraryDependencies ++= {
-  val slickVersion = "3.5.0-M4"
+  val slickVersion = "3.5.0-M5"
   Seq(
     "org.scalafx" %% "scalafx" % "21.0.0-R32",
     "com.typesafe.slick" %% "slick" % slickVersion,
