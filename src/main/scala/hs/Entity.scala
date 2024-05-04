@@ -2,7 +2,7 @@ package hs
 
 import java.time.LocalDate
 
-sealed trait Entity extends Product with Serializable
+sealed trait Entity
 
 object Entity {
   implicit def localDateOrdering: Ordering[LocalDate] = Ordering.by(_.toEpochDay)
