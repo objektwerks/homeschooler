@@ -30,6 +30,6 @@ final case class Course(id: Int = 0,
 final case class Assignment(id: Int = 0,
                             courseid: Int,
                             task: String = "default_assignment",
-                            assigned: LocalDate = LocalDate.now,
-                            completed: LocalDate = LocalDate.now,
+                            assigned: String = LocalDate.now.toString,
+                            completed: String = LocalDate.now.toString,
                             score: Double = 50.0) extends Entity
