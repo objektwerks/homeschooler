@@ -8,7 +8,7 @@ object Entity {
   implicit def studentOrdering: Ordering[Student] = Ordering.by(_.born)
   implicit def gradeOrdering: Ordering[Grade] = Ordering.by(_.started)
   implicit def courseOrdering: Ordering[Course] = Ordering.by(_.started)
-  implicit def assignmentOrdering: Ordering[Assignment] = Ordering.by(_.assigned)
+  given Ordering[Assignment] = Ordering.by[Assignment, String](a => a.assigned)
 }
 
 final case class Student(id: Int = 0,
