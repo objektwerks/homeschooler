@@ -82,7 +82,6 @@ class Repository(val config: DatabaseConfig[JdbcProfile],
   }
 
   class Assignments(tag: Tag) extends Table[Assignment](tag, "assignments") {
-    def * = (id, courseid, task, assigned, completed, score).<>(Assignment.tupled, Assignment.unapply)
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def courseid = column[Int]("course_id")
     def task = column[String]("task")
@@ -90,11 +89,11 @@ class Repository(val config: DatabaseConfig[JdbcProfile],
     def completed = column[LocalDate]("completed")
     def score = column[Double]("score")
     def courseFK = foreignKey("course_fk", courseid, TableQuery[Courses])(_.id)
+    def * = (id.?, courseid, task, assigned, completed, score).mapTo[Assignment]
   }
   object assignments extends TableQuery(new Assignments(_)) {
-    val compiledList = Compiled { courseid: Rep[Int] => filter(_.courseid === courseid).sortBy(_.assigned.asc) }
-    val compiledScore = Compiled { courseid: Rep[Int] => filter(_.courseid === courseid).map(_.score).avg }
-
+    val compiledList = Compiled { ( courseid: Rep[Int] ) => filter(_.courseid === courseid).sortBy(_.assigned.asc) }
+    val compiledScore = Compiled { ( courseid: Rep[Int] ) => filter(_.courseid === courseid).map(_.score).avg }
     def save(assignment: Assignment) = (this returning this.map(_.id)).insertOrUpdate(assignment)
     def list(courseid: Int) = compiledList(courseid).result
     def score(courseid: Int) = compiledScore(courseid).result
