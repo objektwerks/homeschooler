@@ -2,8 +2,7 @@ package hs.dialog
 
 import com.typesafe.config.Config
 
-import hs.App
-import hs.Course
+import hs.{App, Course, Entity}
 import hs.pane.ControlGridPane
 
 import scalafx.Includes._
@@ -16,10 +15,10 @@ class CourseDialog(conf: Config, course: Course) extends Dialog[Course] {
     text = course.name
   }
   val startedDatePicker = new DatePicker {
-    value = course.started
+    value = Entity.toLocalDate(course.started)
   }
   val completedDatePicker = new DatePicker {
-    value = course.completed
+    value = Entity.toLocalDate(course.completed)
   }
   val controls = List[(String, Region)](
     conf.getString("name") -> nameTextField,
@@ -42,8 +41,8 @@ class CourseDialog(conf: Config, course: Course) extends Dialog[Course] {
   resultConverter = dialogButton => {
     if (dialogButton == saveButtonType)
       course.copy(name = nameTextField.text.value,
-        started = startedDatePicker.value.value,
-        completed = completedDatePicker.value.value)
+        started = startedDatePicker.value.value.toString,
+        completed = completedDatePicker.value.value.toString)
     else null
   }
 
