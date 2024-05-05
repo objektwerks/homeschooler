@@ -2,8 +2,7 @@ package hs.dialog
 
 import com.typesafe.config.Config
 
-import hs.App
-import hs.Assignment
+import hs.{App, Assignment, Entity}
 import hs.pane.ControlGridPane
 
 import scalafx.Includes._
@@ -16,10 +15,10 @@ class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assi
     text = assignment.task
   }
   val assignedDatePicker = new DatePicker {
-    value = assignment.assigned
+    value = Entity.toLocalDate(assignment.assigned)
   }
   val completedDatePicker = new DatePicker {
-    value = assignment.completed
+    value = Entity.toLocalDate(assignment.completed)
   }
   val scoreLabel = new Label {
     text = assignment.score.toInt.toString
@@ -54,8 +53,8 @@ class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assi
     if (dialogButton == saveButtonType)
       assignment.copy(
         task = taskTextField.text.value,
-        assigned = assignedDatePicker.value.value,
-        completed = completedDatePicker.value.value,
+        assigned = assignedDatePicker.value.value.toString,
+        completed = completedDatePicker.value.value.toString,
         score = scoreSlider.value.value)
     else null
   }
