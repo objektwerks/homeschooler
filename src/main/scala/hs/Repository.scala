@@ -14,7 +14,7 @@ import slick.jdbc.{H2Profile, JdbcProfile}
 
 class Repository(val config: DatabaseConfig[JdbcProfile],
                  val profile: JdbcProfile, 
-                 val awaitDuration: Duration = 1 second) {
+                 val awaitDuration: Duration = 1 second):
   import profile.api._
 
   val schema = students.schema ++ grades.schema ++ courses.schema ++ assignments.schema
@@ -98,4 +98,3 @@ class Repository(val config: DatabaseConfig[JdbcProfile],
     def list(courseid: Int) = compiledList(courseid).result
     def score(courseid: Int) = compiledScore(courseid).result
   }
-}
