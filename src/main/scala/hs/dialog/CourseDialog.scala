@@ -10,16 +10,16 @@ import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
 import scalafx.scene.layout.Region
 
-class CourseDialog(conf: Config, course: Course) extends Dialog[Course] {
-  val nameTextField = new TextField {
+class CourseDialog(conf: Config, course: Course) extends Dialog[Course]:
+  val nameTextField = new TextField:
     text = course.name
-  }
-  val startedDatePicker = new DatePicker {
+
+  val startedDatePicker = new DatePicker:
     value = Entity.toLocalDate(course.started)
-  }
-  val completedDatePicker = new DatePicker {
+
+  val completedDatePicker = new DatePicker:
     value = Entity.toLocalDate(course.completed)
-  }
+
   val controls = List[(String, Region)](
     conf.getString("name") -> nameTextField,
     conf.getString("started") -> startedDatePicker,
@@ -49,4 +49,3 @@ class CourseDialog(conf: Config, course: Course) extends Dialog[Course] {
   initOwner(App.stage)
   title = conf.getString("course")
   headerText = conf.getString("save-course")
-}
