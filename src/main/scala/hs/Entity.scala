@@ -18,8 +18,8 @@ final case class Student(id: Int = 0,
 final case class Grade(id: Int = 0,
                        studentid: Int,
                        year: String = "default_grade",
-                       started: LocalDate = LocalDate.now,
-                       completed: LocalDate = LocalDate.now.plusMonths(6)) extends Entity
+                       started: String = LocalDate.now.toString,
+                       completed: String = LocalDate.now.plusMonths(6).toString) extends Entity
 
 final case class Course(id: Int = 0,
                         gradeid: Int,
