@@ -10,16 +10,16 @@ import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
 import scalafx.scene.layout.Region
 
-class GradeDialog(conf: Config, grade: Grade) extends Dialog[Grade] {
-  val yearTextField = new TextField {
+class GradeDialog(conf: Config, grade: Grade) extends Dialog[Grade]:
+  val yearTextField = new TextField:
     text = grade.year
-  }
-  val startedDatePicker = new DatePicker {
+
+  val startedDatePicker = new DatePicker:
     value = Entity.toLocalDate(grade.started)
-  }
-  val completedDatePicker = new DatePicker {
+
+  val completedDatePicker = new DatePicker:
     value = Entity.toLocalDate(grade.completed)
-  }
+
   val controls = List[(String, Region)](
     conf.getString("year") -> yearTextField,
     conf.getString("started") -> startedDatePicker,
@@ -50,4 +50,3 @@ class GradeDialog(conf: Config, grade: Grade) extends Dialog[Grade] {
   initOwner(App.stage)
   title = conf.getString("grade")
   headerText = conf.getString("save-grade")
-}
