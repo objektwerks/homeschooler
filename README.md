@@ -2,10 +2,6 @@ Homeschool
 ----------
 >Open source homeschool app using ScalaFx, H2 and Scala 3.
 
-TODO
-----
-* Upgrade to Slick 3.5. Requires significant work!
-
 Object Model
 ------------
 * Student (id, name, born)
