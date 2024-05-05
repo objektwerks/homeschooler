@@ -5,11 +5,11 @@ import com.typesafe.config.Config
 import java.sql.Date
 import java.time.LocalDate
 
-import slick.basic.DatabaseConfig
-import slick.jdbc.{H2Profile, JdbcProfile}
-
 import scala.concurrent.duration._
 import scala.concurrent.{Await, Future}
+
+import slick.basic.DatabaseConfig
+import slick.jdbc.{H2Profile, JdbcProfile}
 
 object Repository {
   def apply(conf: Config): Repository = {
