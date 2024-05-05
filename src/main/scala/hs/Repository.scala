@@ -30,20 +30,18 @@ class Repository(val config: DatabaseConfig[JdbcProfile],
 
   def dropSchema() = await(DBIO.seq(schema.drop))
 
-  class Students(tag: Tag) extends Table[Student](tag, "students") {
+  class Students(tag: Tag) extends Table[Student](tag, "students"):
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
     def name = column[String]("name")
     def born = column[LocalDate]("born")
     def * = (id.?, name, born).mapTo[Student]
-  }
 
-  object students extends TableQuery(new Students(_)) {
+  object students extends TableQuery(new Students(_)):
     val compiledList = Compiled {
       sortBy(_.born.asc)
     }
     def save(student: Student) = (this returning this.map(_.id)).insertOrUpdate(student)
     def list() = compiledList.result
-  }
 
   class Grades(tag: Tag) extends Table[Grade](tag, "grades") {
     def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
