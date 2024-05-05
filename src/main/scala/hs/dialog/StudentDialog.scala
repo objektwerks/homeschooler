@@ -2,8 +2,7 @@ package hs.dialog
 
 import com.typesafe.config.Config
 
-import hs.App
-import hs.Student
+import hs.{App, Entity, Student}
 import hs.pane.ControlGridPane
 
 import scalafx.Includes._
@@ -16,7 +15,7 @@ class StudentDialog(conf: Config, student: Student) extends Dialog[Student] {
     text = student.name
   }
   val bornDatePicker = new DatePicker {
-    value = student.born
+    value = Entity.toLocalDate(student.born)
   }
   val controls = List[(String, Region)](conf.getString("name") -> nameTextField, conf.getString("born") -> bornDatePicker)
   val controlGridPane = new ControlGridPane(controls)
@@ -34,7 +33,7 @@ class StudentDialog(conf: Config, student: Student) extends Dialog[Student] {
 
   resultConverter = dialogButton => {
     if (dialogButton == saveButtonType)
-      student.copy(name = nameTextField.text.value, born = bornDatePicker.value.value)
+      student.copy(name = nameTextField.text.value, born = bornDatePicker.value.value.toString)
     else null
   }
 
