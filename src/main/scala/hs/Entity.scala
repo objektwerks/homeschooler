@@ -5,7 +5,6 @@ import java.time.LocalDate
 sealed trait Entity
 
 object Entity {
-  implicit def localDateOrdering: Ordering[LocalDate] = Ordering.by(_.toEpochDay)
   implicit def studentOrdering: Ordering[Student] = Ordering.by(_.born)
   implicit def gradeOrdering: Ordering[Grade] = Ordering.by(_.started)
   implicit def courseOrdering: Ordering[Course] = Ordering.by(_.started)
