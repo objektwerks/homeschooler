@@ -30,7 +30,6 @@ class Repository(val config: DatabaseConfig[JdbcProfile],
                  val awaitDuration: Duration = 1 second) {
   import profile.api._
 
-  implicit val dateMapper = MappedColumnType.base[LocalDate, Date](ld => Date.valueOf(ld), d => d.toLocalDate)
   val schema = students.schema ++ grades.schema ++ courses.schema ++ assignments.schema
   val db = config.db
 
