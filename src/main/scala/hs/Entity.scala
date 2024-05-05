@@ -10,6 +10,8 @@ object Entity:
   given Ordering[Course] = Ordering.by[Course, String](c => c.started)
   given Ordering[Assignment] = Ordering.by[Assignment, String](a => a.assigned)
 
+  def toLocalDate(date: String): LocalDate = LocalDate.parse(date)
+
 final case class Student(id: Int = 0,
                          name: String = "",
                          born: String = LocalDate.now.minusYears(7).toString) extends Entity
