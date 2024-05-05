@@ -7,7 +7,7 @@ sealed trait Entity
 object Entity {
   implicit def studentOrdering: Ordering[Student] = Ordering.by(_.born)
   implicit def gradeOrdering: Ordering[Grade] = Ordering.by(_.started)
-  implicit def courseOrdering: Ordering[Course] = Ordering.by(_.started)
+  given Ordering[Course] = Ordering.by[Course, String](c => c.started)
   given Ordering[Assignment] = Ordering.by[Assignment, String](a => a.assigned)
 }
 
