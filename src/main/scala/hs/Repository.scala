@@ -7,6 +7,7 @@ import java.time.LocalDate
 
 import scala.concurrent.duration._
 import scala.concurrent.{Await, Future}
+import scala.language.postfixOps
 
 import slick.basic.DatabaseConfig
 import slick.jdbc.{H2Profile, JdbcProfile}
