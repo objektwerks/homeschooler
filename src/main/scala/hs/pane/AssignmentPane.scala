@@ -3,7 +3,7 @@ package hs.pane
 import com.typesafe.config.Config
 
 import scalafx.Includes.*
-import scalafx.scene.control.*
+import scalafx.scene.control.{Button, Label, ListView, SelectionMode}
 import scalafx.scene.layout.{HBox, VBox}
 
 import hs.{Assignment, Images, Model}
