@@ -2,7 +2,7 @@ package hs
 
 import java.time.LocalDate
 
-import scala.concurrent.duration._
+import scala.concurrent.duration.*
 import scala.concurrent.{Await, Future}
 import scala.language.postfixOps
 
