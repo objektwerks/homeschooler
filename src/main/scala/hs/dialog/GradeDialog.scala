@@ -43,7 +43,8 @@ class GradeDialog(conf: Config, grade: Grade) extends Dialog[Grade]:
       grade.copy(
         year = yearTextField.text.value,
         started = startedDatePicker.value.value.toString,
-        completed = completedDatePicker.value.value.toString)
+        completed = completedDatePicker.value.value.toString
+      )
     else null
 
   initOwner(App.stage)
