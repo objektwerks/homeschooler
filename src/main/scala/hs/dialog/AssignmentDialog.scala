@@ -2,13 +2,13 @@ package hs.dialog
 
 import com.typesafe.config.Config
 
-import hs.{App, Assignment, Entity}
-import hs.pane.ControlGridPane
-
 import scalafx.Includes._
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
 import scalafx.scene.layout.{HBox, Region}
+
+import hs.{App, Assignment, Entity}
+import hs.pane.ControlGridPane
 
 class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assignment]:
   val taskTextField = new TextField:
@@ -49,7 +49,7 @@ class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assi
     saveButton.disable = newValue.trim.isEmpty
   }
 
-  resultConverter = dialogButton => {
+  resultConverter = dialogButton =>
     if (dialogButton == saveButtonType)
       assignment.copy(
         task = taskTextField.text.value,
@@ -57,7 +57,6 @@ class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assi
         completed = completedDatePicker.value.value.toString,
         score = scoreSlider.value.value)
     else null
-  }
 
   initOwner(App.stage)
   title = conf.getString("assignment")
