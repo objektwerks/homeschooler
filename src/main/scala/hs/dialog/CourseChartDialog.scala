@@ -2,17 +2,19 @@ package hs.dialog
 
 import com.typesafe.config.Config
 
-import hs.App
-import hs.Course
-import hs.Model
-
 import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.chart.{BarChart, CategoryAxis, NumberAxis, XYChart}
 import scalafx.scene.control.{ButtonType, Dialog}
 import scalafx.scene.layout.VBox
 
-class CourseChartDialog(conf: Config, courses: ObservableBuffer[Course], model: Model) extends Dialog[Unit] {
+import hs.App
+import hs.Course
+import hs.Model
+
+class CourseChartDialog(conf: Config,
+                        courses: ObservableBuffer[Course],
+                        model: Model) extends Dialog[Unit]:
   val xAxis = CategoryAxis(courses.map(c => c.name).distinct)
   xAxis.label = conf.getString("course-chart-courses")
   val yAxis = NumberAxis(axisLabel = conf.getString("course-chart-scores"), lowerBound = 0, upperBound = 100, tickUnit = 10)
@@ -20,17 +22,15 @@ class CourseChartDialog(conf: Config, courses: ObservableBuffer[Course], model: 
   chart.categoryGap = 25.0
 
   courses foreach { course =>
-    val series = new XYChart.Series[String, Number] {
+    val series = new XYChart.Series[String, Number]:
       name = course.name
       data() += XYChart.Data[String, Number](course.name, model.scoreCourse(course.id))
-    }
     chart.data() += series
   }
   
-  val chartBox = new VBox {
+  val chartBox = new VBox:
     spacing = 6
     children = List(chart)
-  }
 
   val dialog = dialogPane()
   dialog.buttonTypes = List(ButtonType.Close)
@@ -39,4 +39,3 @@ class CourseChartDialog(conf: Config, courses: ObservableBuffer[Course], model: 
   initOwner(App.stage)
   title = conf.getString("course-chart")
   headerText = conf.getString("course-scores")
-}
