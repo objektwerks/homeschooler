@@ -2,13 +2,13 @@ package hs.dialog
 
 import com.typesafe.config.Config
 
-import hs.{App, Entity, Student}
-import hs.pane.ControlGridPane
-
 import scalafx.Includes._
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
 import scalafx.scene.layout.Region
+
+import hs.{App, Entity, Student}
+import hs.pane.ControlGridPane
 
 class StudentDialog(conf: Config, student: Student) extends Dialog[Student]:
   val nameTextField = new TextField:
@@ -17,8 +17,11 @@ class StudentDialog(conf: Config, student: Student) extends Dialog[Student]:
   val bornDatePicker = new DatePicker:
     value = Entity.toLocalDate(student.born)
 
-  val controls = List[(String, Region)](conf.getString("name") -> nameTextField, conf.getString("born") -> bornDatePicker)
-  val controlGridPane = new ControlGridPane(controls)
+  val controls = List[(String, Region)](
+    conf.getString("name") -> nameTextField,
+    conf.getString("born") -> bornDatePicker
+  )
+  val controlGridPane = ControlGridPane(controls)
 
   val dialog = dialogPane()
   val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
@@ -31,11 +34,13 @@ class StudentDialog(conf: Config, student: Student) extends Dialog[Student]:
     saveButton.disable = newValue.trim.isEmpty
   }
 
-  resultConverter = dialogButton => {
+  resultConverter = dialogButton =>
     if (dialogButton == saveButtonType)
-      student.copy(name = nameTextField.text.value, born = bornDatePicker.value.value.toString)
+      student.copy(
+        name = nameTextField.text.value,
+        born = bornDatePicker.value.value.toString
+      )
     else null
-  }
 
   initOwner(App.stage)
   title = conf.getString("student")
