@@ -5,7 +5,7 @@ import com.typesafe.config.Config
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.chart.{LineChart, NumberAxis, XYChart}

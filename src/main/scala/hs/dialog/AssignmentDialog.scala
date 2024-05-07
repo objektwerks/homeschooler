@@ -2,7 +2,7 @@ package hs.dialog
 
 import com.typesafe.config.Config
 
-import scalafx.Includes._
+import scalafx.Includes.*
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control._
 import scalafx.scene.layout.{HBox, Region}
