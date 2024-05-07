@@ -8,9 +8,7 @@ import scalafx.scene.chart.{BarChart, CategoryAxis, NumberAxis, XYChart}
 import scalafx.scene.control.{ButtonType, Dialog}
 import scalafx.scene.layout.VBox
 
-import hs.App
-import hs.Course
-import hs.Model
+import hs.{App, Course, Model}
 
 class CourseChartDialog(conf: Config,
                         courses: ObservableBuffer[Course],
