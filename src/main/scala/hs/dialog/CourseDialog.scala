@@ -25,7 +25,7 @@ class CourseDialog(conf: Config, course: Course) extends Dialog[Course]:
     conf.getString("started") -> startedDatePicker,
     conf.getString("completed") -> completedDatePicker
   )
-  val controlGridPane = new ControlGridPane(controls)
+  val controlGridPane = ControlGridPane(controls)
 
   val dialog = dialogPane()
   val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
