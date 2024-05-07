@@ -12,8 +12,7 @@ import scalafx.scene.chart.{LineChart, NumberAxis, XYChart}
 import scalafx.scene.control.{ButtonType, Dialog, Label}
 import scalafx.scene.layout.{HBox, VBox}
 
-import hs.App
-import hs.Assignment
+import hs.{App, Assignment}
 
 class AssignmentChartDialog(conf: Config, assignments: ObservableBuffer[Assignment]) extends Dialog[Unit]:
   implicit def localDateOrdering: Ordering[LocalDate] = Ordering.by(_.toEpochDay)
