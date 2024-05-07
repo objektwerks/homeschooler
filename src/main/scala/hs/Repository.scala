@@ -1,8 +1,5 @@
 package hs
 
-import com.typesafe.config.Config
-
-import java.sql.Date
 import java.time.LocalDate
 
 import scala.concurrent.duration._
@@ -10,7 +7,7 @@ import scala.concurrent.{Await, Future}
 import scala.language.postfixOps
 
 import slick.basic.DatabaseConfig
-import slick.jdbc.{H2Profile, JdbcProfile}
+import slick.jdbc.JdbcProfile
 
 class Repository(val config: DatabaseConfig[JdbcProfile],
                  val profile: JdbcProfile, 
