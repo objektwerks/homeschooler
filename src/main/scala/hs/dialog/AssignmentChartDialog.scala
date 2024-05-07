@@ -5,9 +5,6 @@ import com.typesafe.config.Config
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-import hs.App
-import hs.Assignment
-
 import scalafx.Includes._
 import scalafx.collections.ObservableBuffer
 import scalafx.geometry.{Insets, Pos}
@@ -15,7 +12,10 @@ import scalafx.scene.chart.{LineChart, NumberAxis, XYChart}
 import scalafx.scene.control.{ButtonType, Dialog, Label}
 import scalafx.scene.layout.{HBox, VBox}
 
-class AssignmentChartDialog(conf: Config, assignments: ObservableBuffer[Assignment]) extends Dialog[Unit] {
+import hs.App
+import hs.Assignment
+
+class AssignmentChartDialog(conf: Config, assignments: ObservableBuffer[Assignment]) extends Dialog[Unit]:
   implicit def localDateOrdering: Ordering[LocalDate] = Ordering.by(_.toEpochDay)
 
   val dateFormatter = DateTimeFormatter.ofPattern("yy.D")
@@ -27,43 +27,40 @@ class AssignmentChartDialog(conf: Config, assignments: ObservableBuffer[Assignme
   val chart = LineChart[Number, Number](xAxis, yAxis)
   chart.padding = Insets(6)
 
-  val series = new XYChart.Series[Number, Number] {
+  val series = new XYChart.Series[Number, Number]:
     name = conf.getString("assignment-chart-score")
-  }
+
   assignments foreach { assignment =>
     series.data() += XYChart.Data[Number, Number](assignment.completed.format(dateFormatter).toDouble, assignment.score.toInt)
   }
   chart.data = series
 
-  val minScoreLabel = new Label {
+  val minScoreLabel = new Label:
     text = conf.getString("min-score")
-  }
-  val minScore = new Label {
-    text = assignments.map(a => a.score).min.toInt.toString
-  }
-  val maxScoreLabel = new Label {
-    text = conf.getString("max-score")
-  }
-  val maxScore = new Label {
-    text = assignments.map(a => a.score).max.toInt.toString
-  }
-  val scoreLabel = new Label {
-    text = conf.getString("score")
-  }
-  val score = new Label {
-    text = (assignments.map(a => a.score).sum / assignments.length).toInt.toString
-  }
 
-  val scoreBox = new HBox {
+  val minScore = new Label:
+    text = assignments.map(a => a.score).min.toInt.toString
+
+  val maxScoreLabel = new Label:
+    text = conf.getString("max-score")
+
+  val maxScore = new Label:
+    text = assignments.map(a => a.score).max.toInt.toString
+
+  val scoreLabel = new Label:
+    text = conf.getString("score")
+
+  val score = new Label:
+    text = (assignments.map(a => a.score).sum / assignments.length).toInt.toString
+
+  val scoreBox = new HBox:
     alignment = Pos.Center;
     spacing = 6;
     children = List(minScoreLabel, minScore, maxScoreLabel, maxScore, scoreLabel, score)
-  }
   
-  val chartBox = new VBox {
+  val chartBox = new VBox:
     spacing = 6;
     children = List(chart, scoreBox)
-  }
 
   val dialog = dialogPane()
   dialog.buttonTypes = List(ButtonType.Close)
@@ -72,4 +69,3 @@ class AssignmentChartDialog(conf: Config, assignments: ObservableBuffer[Assignme
   initOwner(App.stage)
   title = conf.getString("assignment-chart")
   headerText = conf.getString("assignment-scores")
-}
