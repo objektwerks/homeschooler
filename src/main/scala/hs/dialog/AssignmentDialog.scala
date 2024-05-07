@@ -34,7 +34,7 @@ class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assi
     conf.getString("assigned") -> assignedDatePicker,
     conf.getString("completed") -> completedDatePicker,
     conf.getString("score") -> scoreBox)
-  val controlGridPane = new ControlGridPane(controls)
+  val controlGridPane = ControlGridPane(controls)
 
   val dialog = dialogPane()
   val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
