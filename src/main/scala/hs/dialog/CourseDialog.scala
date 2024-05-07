@@ -3,8 +3,8 @@ package hs.dialog
 import com.typesafe.config.Config
 
 import scalafx.Includes.*
+import scalafx.scene.control.{ButtonType, Dialog, DatePicker, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
-import scalafx.scene.control.*
 import scalafx.scene.layout.Region
 
 import hs.{App, Course, Entity}
