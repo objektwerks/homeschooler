@@ -55,7 +55,8 @@ class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assi
         task = taskTextField.text.value,
         assigned = assignedDatePicker.value.value.toString,
         completed = completedDatePicker.value.value.toString,
-        score = scoreSlider.value.value)
+        score = scoreSlider.value.value
+      )
     else null
 
   initOwner(App.stage)
