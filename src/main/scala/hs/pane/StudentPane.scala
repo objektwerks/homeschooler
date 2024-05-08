@@ -46,7 +46,7 @@ class StudentPane(conf: Config, model: Model) extends VBox:
   studentEditButton.onAction = { _ => update() }
 
   def add(student: Student): Unit =
-    new StudentDialog(conf, student).showAndWait() match
+    StudentDialog(conf, student).showAndWait() match
       case Some(Student(id, name, born)) =>
         val newStudent = model.addStudent(Student(id, name, born))
         studentListView.selectionModel().select(newStudent)
@@ -55,7 +55,7 @@ class StudentPane(conf: Config, model: Model) extends VBox:
   def update(): Unit =
     val selectedIndex = studentListView.selectionModel().getSelectedIndex
     val student = studentListView.selectionModel().getSelectedItem
-    new StudentDialog(conf, student).showAndWait() match
+    StudentDialog(conf, student).showAndWait() match
       case Some(Student(id, name, born)) =>
         model.updateStudent(selectedIndex, Student(id, name, born))
         studentListView.selectionModel().select(selectedIndex)
