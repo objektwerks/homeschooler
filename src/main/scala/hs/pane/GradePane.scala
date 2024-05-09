@@ -59,7 +59,9 @@ class GradePane(conf: Config, model: Model) extends VBox:
   def add(grade: Grade): Unit =
     GradeDialog(conf, grade).showAndWait() match
       case Some(Grade(id, studentid, year, started, completed)) =>
-        val newGrade = model.addGrade(Grade(id, studentid, year, started, completed))
+        val newGrade = model.addGrade(
+          Grade(id, studentid, year, started, completed)
+        )
         gradeListView.selectionModel().select(newGrade)
       case _ =>
 
@@ -68,6 +70,9 @@ class GradePane(conf: Config, model: Model) extends VBox:
     val grade = gradeListView.selectionModel().getSelectedItem
     GradeDialog(conf, grade).showAndWait() match
       case Some(Grade(id, studentid, year, started, completed)) =>
-        model.updateGrade(selectedIndex, Grade(id, studentid, year, started, completed))
+        model.updateGrade(
+          selectedIndex,
+          Grade(id, studentid, year, started, completed)
+        )
         gradeListView.selectionModel().select(selectedIndex)
       case _ =>
