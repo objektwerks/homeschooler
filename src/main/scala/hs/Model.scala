@@ -4,7 +4,7 @@ import scalafx.beans.property.IntegerProperty
 import scalafx.collections.ObservableBuffer
 
 class Model(repository: Repository):
-  import repository._
+  import repository.*
 
   val studentList = ObservableBuffer[Student]()
   val selectedStudentId = IntegerProperty(0)
