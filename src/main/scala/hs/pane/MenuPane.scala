@@ -21,7 +21,7 @@ class MenuPane(conf: Config) extends MenuBar:
       ()
     }
 
-  val separator = new SeparatorMenuItem()
+  val separator = SeparatorMenuItem()
 
   val exitMenuItem = new MenuItem(conf.getString("exit")):
     onAction = { _ => Platform.exit() }
