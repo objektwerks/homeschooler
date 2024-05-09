@@ -3,7 +3,7 @@ package hs
 import scalafx.scene.image.{Image, ImageView}
 
 object Images:
-  def appImage = loadImageView("/images/homeschool.png")
+  def appImage = Image( Images.getClass.getResourceAsStream("/images/homeschool.png") )
 
   def addImageView = loadImageView("/images/add.png")
 

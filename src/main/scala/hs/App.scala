@@ -21,7 +21,7 @@ object App extends JFXApp3:
       title = resources.getString("title")
       minHeight = resources.getInt("height").toDouble
       minWidth = resources.getInt("width").toDouble
-      icons.add(Images.appImage)
+      icons.add( Images.appImage )
   
   sys.addShutdownHook:
     repository.close()
