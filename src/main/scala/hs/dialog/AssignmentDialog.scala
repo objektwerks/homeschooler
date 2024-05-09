@@ -24,7 +24,9 @@ class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assi
     text = assignment.score.toInt.toString
 
   val scoreSlider = new Slider:
-    min = 50.0; max = 100.00; value = assignment.score; showTickLabels = true
+    min = 50.0
+    max = 100.00
+    value = assignment.score; showTickLabels = true
 
   val scoreBox = new HBox:
     children = List(scoreSlider, scoreLabel)
@@ -50,7 +52,7 @@ class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assi
   }
 
   resultConverter = dialogButton =>
-    if (dialogButton == saveButtonType)
+    if (dialogButton == saveButtonType) then
       assignment.copy(
         task = taskTextField.text.value,
         assigned = assignedDatePicker.value.value.toString,
