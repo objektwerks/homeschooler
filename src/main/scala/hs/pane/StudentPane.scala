@@ -19,13 +19,17 @@ class StudentPane(conf: Config, model: Model) extends VBox:
     cellFactory = (cell, student) => { cell.text =  student.name }
 
   val studentAddButton = new Button:
-    graphic = Images.addImageView; prefHeight = 25
+    graphic = Images.addImageView
+    prefHeight = 25
 
   val studentEditButton = new Button:
-    graphic = Images.editImageView; prefHeight = 25; disable = true
+    graphic = Images.editImageView
+    prefHeight = 25
+    disable = true
 
   val studentToolBar = new HBox:
-    spacing = 6; children = List(studentAddButton, studentEditButton)
+    spacing = 6
+    children = List(studentAddButton, studentEditButton)
 
   spacing = 6
   children = List(studentLabel, studentListView, studentToolBar)
@@ -38,10 +42,11 @@ class StudentPane(conf: Config, model: Model) extends VBox:
   }
 
   studentListView.onMouseClicked = { event =>
-    if (event.getClickCount == 2 && studentListView.selectionModel().getSelectedItem != null) update()
+    if (event.getClickCount == 2 &&
+        studentListView.selectionModel().getSelectedItem != null) then update()
   }
 
-  studentAddButton.onAction = { _ => add(Student()) }
+  studentAddButton.onAction = { _ => add( Student() ) }
 
   studentEditButton.onAction = { _ => update() }
 
