@@ -24,7 +24,7 @@ class StudentDialog(conf: Config, student: Student) extends Dialog[Student]:
   val controlGridPane = ControlGridPane(controls)
 
   val dialog = dialogPane()
-  val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
+  val saveButtonType = ButtonType(conf.getString("save"), ButtonData.OKDone)
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   dialog.content = controlGridPane
 
@@ -35,7 +35,7 @@ class StudentDialog(conf: Config, student: Student) extends Dialog[Student]:
   }
 
   resultConverter = dialogButton =>
-    if (dialogButton == saveButtonType)
+    if (dialogButton == saveButtonType) then
       student.copy(
         name = nameTextField.text.value,
         born = bornDatePicker.value.value.toString
