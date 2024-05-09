@@ -39,7 +39,7 @@ class CourseDialog(conf: Config, course: Course) extends Dialog[Course]:
   }
 
   resultConverter = dialogButton =>
-    if (dialogButton == saveButtonType)
+    if (dialogButton == saveButtonType) then
       course.copy(
         name = nameTextField.text.value,
         started = startedDatePicker.value.value.toString,
