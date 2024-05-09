@@ -68,7 +68,9 @@ class AssignmentPane(conf: Config, model: Model) extends VBox:
   def add(assignment: Assignment): Unit =
     AssignmentDialog(conf, assignment).showAndWait() match
       case Some(Assignment(id, courseid, task, assigned, completed, score)) =>
-        val newAssignment = model.addAssignment(Assignment(id, courseid, task, assigned, completed, score))
+        val newAssignment = model.addAssignment(
+          Assignment(id, courseid, task, assigned, completed, score)
+        )
         assignmentListView.selectionModel().select(newAssignment)
       case _ =>
 
@@ -77,6 +79,9 @@ class AssignmentPane(conf: Config, model: Model) extends VBox:
     val assignment = assignmentListView.selectionModel().getSelectedItem
     AssignmentDialog(conf, assignment).showAndWait() match
       case Some(Assignment(id, courseid, task, assigned, completed, score)) =>
-        model.updateAssignment(selectedIndex, Assignment(id, courseid, task, assigned, completed, score))
+        model.updateAssignment(
+          selectedIndex,
+          Assignment(id, courseid, task, assigned, completed, score)
+        )
         assignmentListView.selectionModel().select(selectedIndex)
       case _ =>
