@@ -14,19 +14,25 @@ class AssignmentPane(conf: Config, model: Model) extends VBox:
     text = conf.getString("assignments")
 
   val assignmentListView = new ListView[Assignment]:
-    minHeight = 300;
-    items = model.assignmentList;
+    minHeight = 300
+    items = model.assignmentList
     cellFactory = (cell, assignment) => { cell.text =  assignment.task }
     selectionModel().selectionMode = SelectionMode.Single
 
   val assignmentAddButton = new Button:
-    graphic = Images.addImageView; prefHeight = 25; disable = true
+    graphic = Images.addImageView
+    prefHeight = 25
+    disable = true
 
   val assignmentEditButton = new Button:
-    graphic = Images.editImageView; prefHeight = 25; disable = true
+    graphic = Images.editImageView
+    prefHeight = 25
+    disable = true
 
   val assignmentChartButton = new Button:
-    graphic = Images.lineChartImageView; prefHeight = 25; disable = true
+    graphic = Images.lineChartImageView
+    prefHeight = 25
+    disable = true
 
   val assignmentToolBar = new HBox:
     spacing = 6; children = List(assignmentAddButton, assignmentEditButton, assignmentChartButton)
@@ -49,17 +55,15 @@ class AssignmentPane(conf: Config, model: Model) extends VBox:
   }
 
   assignmentListView.onMouseClicked = { event =>
-    if (event.getClickCount == 2 && assignmentListView.selectionModel().getSelectedItem != null) update()
+    if (event.getClickCount == 2 &&
+    assignmentListView.selectionModel().getSelectedItem != null) then update()
   }
 
   assignmentAddButton.onAction = { _ => add(Assignment(courseid = model.selectedCourseId.value)) }
 
   assignmentEditButton.onAction = { _ => update() }
 
-  assignmentChartButton.onAction = { _ =>
-    new AssignmentChartDialog(conf, model.assignmentList).showAndWait()
-    ()
-  }
+  assignmentChartButton.onAction = { _ => AssignmentChartDialog(conf, model.assignmentList).showAndWait() }
 
   def add(assignment: Assignment): Unit =
     AssignmentDialog(conf, assignment).showAndWait() match
