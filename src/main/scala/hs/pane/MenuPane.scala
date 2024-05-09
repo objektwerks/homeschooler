@@ -16,10 +16,7 @@ class MenuPane(conf: Config) extends MenuBar:
     contentText = s"${conf.getString("app")} ${conf.getString("license")}"
 
   val aboutMenuItem = new MenuItem(conf.getString("about")):
-    onAction = { _ =>
-      aboutDialog.showAndWait()
-      ()
-    }
+    onAction = { _ => aboutDialog.showAndWait() }
 
   val separator = SeparatorMenuItem()
 
