@@ -19,13 +19,18 @@ class GradePane(conf: Config, model: Model) extends VBox:
     cellFactory = (cell, grade) => { cell.text =  grade.year }
 
   val gradeAddButton = new Button:
-    graphic = Images.addImageView; prefHeight = 25; disable = true
+    graphic = Images.addImageView
+    prefHeight = 25
+    disable = true
 
   val gradeEditButton = new Button:
-    graphic = Images.editImageView; prefHeight = 25; disable = true
+    graphic = Images.editImageView
+    prefHeight = 25
+    disable = true
 
   val gradeToolBar = new HBox:
-    spacing = 6; children = List(gradeAddButton, gradeEditButton)
+    spacing = 6
+    children = List(gradeAddButton, gradeEditButton)
 
   spacing = 6
   children = List(gradeLabel, gradeListView, gradeToolBar)
@@ -43,10 +48,11 @@ class GradePane(conf: Config, model: Model) extends VBox:
   }
 
   gradeListView.onMouseClicked = { event =>
-    if (event.getClickCount == 2 && gradeListView.selectionModel().getSelectedItem != null) update()
+    if (event.getClickCount == 2 &&
+        gradeListView.selectionModel().getSelectedItem != null) then update()
   }
 
-  gradeAddButton.onAction = { _ => add(Grade(studentid = model.selectedStudentId.value)) }
+  gradeAddButton.onAction = { _ => add( Grade(studentid = model.selectedStudentId.value) ) }
 
   gradeEditButton.onAction = { _ => update() }
 
