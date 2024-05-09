@@ -15,7 +15,9 @@ class CourseChartDialog(conf: Config,
                         model: Model) extends Dialog[Unit]:
   val xAxis = CategoryAxis(courses.map(c => c.name).distinct)
   xAxis.label = conf.getString("course-chart-courses")
+
   val yAxis = NumberAxis(axisLabel = conf.getString("course-chart-scores"), lowerBound = 0, upperBound = 100, tickUnit = 10)
+  
   val chart = BarChart[String, Number](xAxis, yAxis)
   chart.categoryGap = 25.0
 
