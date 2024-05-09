@@ -28,7 +28,7 @@ class GradeDialog(conf: Config, grade: Grade) extends Dialog[Grade]:
 
 
   val dialog = dialogPane()
-  val saveButtonType = new ButtonType(conf.getString("save"), ButtonData.OKDone)
+  val saveButtonType = ButtonType(conf.getString("save"), ButtonData.OKDone)
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   dialog.content = controlGridPane
 
@@ -39,7 +39,7 @@ class GradeDialog(conf: Config, grade: Grade) extends Dialog[Grade]:
   }
 
   resultConverter = dialogButton =>
-    if (dialogButton == saveButtonType)
+    if (dialogButton == saveButtonType) then
       grade.copy(
         year = yearTextField.text.value,
         started = startedDatePicker.value.value.toString,
