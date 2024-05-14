@@ -12,7 +12,7 @@ final class Context(config: Config):
   val assignmentChartScore = config.getString("assignment-chart-score")
   val assignmentChart = config.getString("assignment-chart")
   val assignmentScores = config.getString("assignment-scores")
-  val assignement = config.getString("assignment")
+  val assignment = config.getString("assignment")
   val saveAssignement = config.getString("save-assignment")
   val minScore = config.getString("min-score")
   val maxScore = config.getString("max-score")

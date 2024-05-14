@@ -60,5 +60,5 @@ class AssignmentDialog(context: Context, assignment: Assignment) extends Dialog[
     else null
 
   initOwner(App.stage)
-  title = conf.getString("assignment")
-  headerText = conf.getString("save-assignment")
+  title = context.assignment
+  headerText = context.saveAssignement
