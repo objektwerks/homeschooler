@@ -10,6 +10,7 @@ final class Context(config: Config):
   val started = config.getString("started")
   val completed = config.getString("completed")
   val save = config.getString("save")
+  val name = config.getString("name")
 
   val assignmentChartMonths = config.getString("assignment-chart-months")
   val assignmentChartScores = config.getString("assignment-chart-scores")
@@ -29,7 +30,6 @@ final class Context(config: Config):
   val courseChart = config.getString("course-chart")
   val courseScores = config.getString("course-scores")
   val course = config.getString("course")
-  val name = config.getString("name")
   val saveCourse = config.getString("save-course")
 
   val year = config.getString("year")

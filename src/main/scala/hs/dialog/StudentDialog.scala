@@ -1,16 +1,14 @@
 package hs.dialog
 
-import com.typesafe.config.Config
-
 import scalafx.Includes.*
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control.{ButtonType, Dialog, DatePicker, TextField}
 import scalafx.scene.layout.Region
 
-import hs.{App, Entity, Student}
+import hs.{App, Context, Entity, Student}
 import hs.pane.ControlGridPane
 
-class StudentDialog(conf: Config, student: Student) extends Dialog[Student]:
+class StudentDialog(context: Context, student: Student) extends Dialog[Student]:
   val nameTextField = new TextField:
     text = student.name
 
@@ -18,7 +16,7 @@ class StudentDialog(conf: Config, student: Student) extends Dialog[Student]:
     value = Entity.toLocalDate(student.born)
 
   val controls = List[(String, Region)](
-    conf.getString("name") -> nameTextField,
+    context.name -> nameTextField,
     conf.getString("born") -> bornDatePicker
   )
   val controlGridPane = ControlGridPane(controls)
