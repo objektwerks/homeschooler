@@ -14,7 +14,7 @@ class CourseChartDialog(context: Context,
   val xAxis = CategoryAxis(courses.map(c => c.name).distinct)
   xAxis.label = context.courseChartCourses
 
-  val yAxis = NumberAxis(axisLabel = conf.getString("course-chart-scores"), lowerBound = 0, upperBound = 100, tickUnit = 10)
+  val yAxis = NumberAxis(axisLabel = context.courseChartScores, lowerBound = 0, upperBound = 100, tickUnit = 10)
   
   val chart = BarChart[String, Number](xAxis, yAxis)
   chart.categoryGap = 25.0
