@@ -1,6 +1,6 @@
 name := "homeschool"
 organization := "objektwerks"
-version := "5.1"
+version := "6.0"
 scalaVersion := "3.4.2-RC1"
 libraryDependencies ++= {
   val slickVersion = "3.5.1"
