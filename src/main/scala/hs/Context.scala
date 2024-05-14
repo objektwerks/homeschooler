@@ -33,6 +33,7 @@ final class Context(config: Config):
   val saveCourse = config.getString("save-course")
 
   val year = config.getString("year")
+  val grade = config.getString("grade")
 
   def appImage = Image( Images.getClass.getResourceAsStream("/images/homeschool.png") )
 
