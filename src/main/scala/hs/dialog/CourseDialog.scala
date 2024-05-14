@@ -1,16 +1,14 @@
 package hs.dialog
 
-import com.typesafe.config.Config
-
 import scalafx.Includes.*
 import scalafx.scene.control.{ButtonType, Dialog, DatePicker, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.Region
 
-import hs.{App, Course, Entity}
+import hs.{App, Context, Course, Entity}
 import hs.pane.ControlGridPane
 
-class CourseDialog(conf: Config, course: Course) extends Dialog[Course]:
+class CourseDialog(context: Context, course: Course) extends Dialog[Course]:
   val nameTextField = new TextField:
     text = course.name
 

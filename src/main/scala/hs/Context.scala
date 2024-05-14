@@ -26,6 +26,8 @@ final class Context(config: Config):
   val courseChartScores = config.getString("course-chart-scores")
   val courseChart = config.getString("course-chart")
   val courseScores = config.getString("course-scores")
+  val name = config.getString("name")
+  val started = config.getString("started")
 
   def appImage = Image( Images.getClass.getResourceAsStream("/images/homeschool.png") )
 
