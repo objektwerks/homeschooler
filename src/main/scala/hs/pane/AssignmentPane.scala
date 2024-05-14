@@ -1,15 +1,13 @@
 package hs.pane
 
-import com.typesafe.config.Config
-
 import scalafx.Includes.*
 import scalafx.scene.control.{Button, Label, ListView, SelectionMode}
 import scalafx.scene.layout.{HBox, VBox}
 
-import hs.{Assignment, Images, Model}
+import hs.{Assignment, Context, Model}
 import hs.dialog.{AssignmentChartDialog, AssignmentDialog}
 
-class AssignmentPane(conf: Config, model: Model) extends VBox:
+class AssignmentPane(context: Context, model: Model) extends VBox:
   val assignmentLabel = new Label:
     text = conf.getString("assignments")
 
@@ -20,17 +18,17 @@ class AssignmentPane(conf: Config, model: Model) extends VBox:
     selectionModel().selectionMode = SelectionMode.Single
 
   val assignmentAddButton = new Button:
-    graphic = Images.addImageView
+    graphic = context.addImageView
     prefHeight = 25
     disable = true
 
   val assignmentEditButton = new Button:
-    graphic = Images.editImageView
+    graphic = context.editImageView
     prefHeight = 25
     disable = true
 
   val assignmentChartButton = new Button:
-    graphic = Images.lineChartImageView
+    graphic = context.lineChartImageView
     prefHeight = 25
     disable = true
 
@@ -63,10 +61,10 @@ class AssignmentPane(conf: Config, model: Model) extends VBox:
 
   assignmentEditButton.onAction = { _ => update() }
 
-  assignmentChartButton.onAction = { _ => AssignmentChartDialog(conf, model.assignmentList).showAndWait() }
+  assignmentChartButton.onAction = { _ => AssignmentChartDialog(context, model.assignmentList).showAndWait() }
 
   def add(assignment: Assignment): Unit =
-    AssignmentDialog(conf, assignment).showAndWait() match
+    AssignmentDialog(context, assignment).showAndWait() match
       case Some(Assignment(id, courseid, task, assigned, completed, score)) =>
         val newAssignment = model.addAssignment(
           Assignment(id, courseid, task, assigned, completed, score)
@@ -77,7 +75,7 @@ class AssignmentPane(conf: Config, model: Model) extends VBox:
   def update(): Unit =
     val selectedIndex = assignmentListView.selectionModel().getSelectedIndex
     val assignment = assignmentListView.selectionModel().getSelectedItem
-    AssignmentDialog(conf, assignment).showAndWait() match
+    AssignmentDialog(context, assignment).showAndWait() match
       case Some(Assignment(id, courseid, task, assigned, completed, score)) =>
         model.updateAssignment(
           selectedIndex,
