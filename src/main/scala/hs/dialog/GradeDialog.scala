@@ -19,9 +19,9 @@ class GradeDialog(context: Context, grade: Grade) extends Dialog[Grade]:
     value = Entity.toLocalDate(grade.completed)
 
   val controls = List[(String, Region)](
-    conf.getString("year") -> yearTextField,
-    conf.getString("started") -> startedDatePicker,
-    conf.getString("completed") -> completedDatePicker)
+    context.year -> yearTextField,
+    context.started -> startedDatePicker,
+    context.completed -> completedDatePicker)
   val controlGridPane = ControlGridPane(controls)
 
 
