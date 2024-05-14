@@ -1,7 +1,5 @@
 package hs.dialog
 
-import com.typesafe.config.Config
-
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -12,18 +10,18 @@ import scalafx.scene.chart.{LineChart, NumberAxis, XYChart}
 import scalafx.scene.control.{ButtonType, Dialog, Label}
 import scalafx.scene.layout.{HBox, VBox}
 
-import hs.{App, Assignment}
+import hs.{App, Assignment, Context}
 
-class AssignmentChartDialog(conf: Config, assignments: ObservableBuffer[Assignment]) extends Dialog[Unit]:
+class AssignmentChartDialog(context: Context, assignments: ObservableBuffer[Assignment]) extends Dialog[Unit]:
   given Ordering[LocalDate] = Ordering.by(_.toEpochDay)
 
   val dateFormatter = DateTimeFormatter.ofPattern("yy.D")
   val minDate = assignments.map(a => a.completed).min.format(dateFormatter).toDouble
   val maxDate = assignments.map(a => a.completed).max.format(dateFormatter).toDouble
 
-  val xAxis = NumberAxis(axisLabel = s"${conf.getString("assignment-chart-months")} [$minDate - $maxDate]", lowerBound = minDate, upperBound = maxDate, tickUnit = 1)
+  val xAxis = NumberAxis(axisLabel = s"${context.assignmentChartMonths} [$minDate - $maxDate]", lowerBound = minDate, upperBound = maxDate, tickUnit = 1)
   
-  val yAxis = NumberAxis(axisLabel = conf.getString("assignment-chart-scores"), lowerBound = 0, upperBound = 100, tickUnit = 10)
+  val yAxis = NumberAxis(axisLabel = context.assignmentChartScores, lowerBound = 0, upperBound = 100, tickUnit = 10)
 
   val chart = LineChart[Number, Number](xAxis, yAxis)
   chart.padding = Insets(6)
