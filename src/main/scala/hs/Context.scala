@@ -36,6 +36,8 @@ final class Context(config: Config):
   val grade = config.getString("grade")
   val saveGrade = config.getString("save-grade")
 
+  val born = config.getString("born")
+
   def appImage = Image( Images.getClass.getResourceAsStream("/images/homeschool.png") )
 
   def addImageView = loadImageView("/images/add.png")
