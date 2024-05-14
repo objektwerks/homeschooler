@@ -38,7 +38,5 @@ class View(context: Context, model: Model):
     padding = Insets(6)
     children = List(menuPane, splitPane)
   
-  val sceneGraph = new Scene:
+  val scene = new Scene:
     root = contentPane
-
-  model.listStudents()
