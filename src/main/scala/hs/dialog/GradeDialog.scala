@@ -47,4 +47,4 @@ class GradeDialog(context: Context, grade: Grade) extends Dialog[Grade]:
 
   initOwner(App.stage)
   title = context.grade
-  headerText = conf.getString("save-grade")
+  headerText = context.saveGrade
