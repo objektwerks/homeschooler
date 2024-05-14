@@ -22,9 +22,9 @@ object App extends JFXApp3:
       minWidth = context.width.toDouble
       icons.add( context.appImage )
 
-  model.listStudents()
-  stage.show()
-  println("*** Homeschool app started.")
+    model.listStudents()
+    stage.show()
+    println("*** Homeschool app started.")
 
   override def stopApp(): Unit =
     repository.close()
