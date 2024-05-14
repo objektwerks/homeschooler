@@ -9,7 +9,7 @@ import scalafx.scene.image.{Image, ImageView}
 final class Context(config: Config):
   val completed = config.getString("completed")
   val save = config.getString("save")
-  
+
   val assignmentChartMonths = config.getString("assignment-chart-months")
   val assignmentChartScores = config.getString("assignment-chart-scores")
   val assignmentChartScore = config.getString("assignment-chart-score")
@@ -27,6 +27,7 @@ final class Context(config: Config):
   val courseChartScores = config.getString("course-chart-scores")
   val courseChart = config.getString("course-chart")
   val courseScores = config.getString("course-scores")
+  val course = config.getString("course")
   val name = config.getString("name")
   val started = config.getString("started")
 
