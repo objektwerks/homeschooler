@@ -42,7 +42,7 @@ class AssignmentChartDialog(context: Context, assignments: ObservableBuffer[Assi
     text = assignments.map(a => a.score).min.toInt.toString
 
   val maxScoreLabel = new Label:
-    text = conf.getString("max-score")
+    text = context.maxScore
 
   val maxScore = new Label:
     text = assignments.map(a => a.score).max.toInt.toString
