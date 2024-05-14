@@ -9,6 +9,7 @@ import scalafx.scene.image.{Image, ImageView}
 final class Context(config: Config):
   val assignmentChartMonths = config.getString("assignment-chart-months")
   val assignmentChartScores = config.getString("assignment-chart-scores")
+  val minScore = config.getString("min-score")
 
   def appImage = Image( Images.getClass.getResourceAsStream("/images/homeschool.png") )
 

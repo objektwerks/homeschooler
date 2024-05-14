@@ -36,7 +36,7 @@ class AssignmentChartDialog(context: Context, assignments: ObservableBuffer[Assi
   chart.data = series
 
   val minScoreLabel = new Label:
-    text = conf.getString("min-score")
+    text = context.minScore
 
   val minScore = new Label:
     text = assignments.map(a => a.score).min.toInt.toString
