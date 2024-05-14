@@ -7,6 +7,10 @@ import scala.jdk.CollectionConverters.*
 import scalafx.scene.image.{Image, ImageView}
 
 final class Context(config: Config):
+  val title = config.getString("title")
+  val height = config.getInt("height")
+  val width = config.getInt("width")
+
   val started = config.getString("started")
   val completed = config.getString("completed")
   val save = config.getString("save")
@@ -44,7 +48,7 @@ final class Context(config: Config):
   val students = config.getString("students")
   val saveStudent = config.getString("save-student")
 
-  def appImage = Image( Images.getClass.getResourceAsStream("/images/homeschool.png") )
+  def appImage = Image( context.getClass.getResourceAsStream("/images/homeschool.png") )
 
   def addImageView = loadImageView("/images/add.png")
 
@@ -55,7 +59,7 @@ final class Context(config: Config):
   def lineChartImageView = loadImageView("/images/line.chart.png")
 
   def loadImageView(path: String): ImageView = new ImageView:
-    image = Image( Images.getClass.getResourceAsStream(path) )
+    image = Image( context.getClass.getResourceAsStream(path) )
     fitHeight = 25
     fitWidth = 25
     preserveRatio = true

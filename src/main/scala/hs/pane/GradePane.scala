@@ -6,7 +6,7 @@ import scalafx.Includes.*
 import scalafx.scene.control.{Button, Label, ListView}
 import scalafx.scene.layout.{HBox, VBox}
 
-import hs.{Grade, Images, Model}
+import hs.{Grade, context, Model}
 import hs.dialog.GradeDialog
 
 class GradePane(conf: Config, model: Model) extends VBox:
@@ -19,12 +19,12 @@ class GradePane(conf: Config, model: Model) extends VBox:
     cellFactory = (cell, grade) => { cell.text =  grade.year }
 
   val gradeAddButton = new Button:
-    graphic = Images.addImageView
+    graphic = context.addImageView
     prefHeight = 25
     disable = true
 
   val gradeEditButton = new Button:
-    graphic = Images.editImageView
+    graphic = context.editImageView
     prefHeight = 25
     disable = true
 

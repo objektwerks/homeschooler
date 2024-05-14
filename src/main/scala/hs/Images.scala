@@ -2,8 +2,8 @@ package hs
 
 import scalafx.scene.image.{Image, ImageView}
 
-object Images:
-  def appImage = Image( Images.getClass.getResourceAsStream("/images/homeschool.png") )
+object context:
+  def appImage = Image( context.getClass.getResourceAsStream("/images/homeschool.png") )
 
   def addImageView = loadImageView("/images/add.png")
 
@@ -14,7 +14,7 @@ object Images:
   def lineChartImageView = loadImageView("/images/line.chart.png")
 
   def loadImageView(path: String): ImageView = new ImageView:
-    image = Image( Images.getClass.getResourceAsStream(path) )
+    image = Image( context.getClass.getResourceAsStream(path) )
     fitHeight = 25
     fitWidth = 25
     preserveRatio = true

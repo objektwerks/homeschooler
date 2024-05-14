@@ -9,7 +9,7 @@ import hs.dialog.{CourseChartDialog, CourseDialog}
 
 class CoursePane(context: Context, model: Model) extends VBox:
   val courseLabel = new Label:
-    text = context.getString("courses")
+    text = context.courses
 
   val courseListView = new ListView[Course]:
     minHeight = 300
@@ -18,17 +18,17 @@ class CoursePane(context: Context, model: Model) extends VBox:
     selectionModel().selectionMode = SelectionMode.Single
 
   val courseAddButton = new Button:
-    graphic = Images.addImageView
+    graphic = context.addImageView
     prefHeight = 25
     disable = true
 
   val courseEditButton = new Button:
-    graphic = Images.editImageView
+    graphic = context.editImageView
     prefHeight = 25
     disable = true
 
   val courseChartButton = new Button:
-    graphic = Images.barChartImageView
+    graphic = context.barChartImageView
     prefHeight = 25
     disable = true
 

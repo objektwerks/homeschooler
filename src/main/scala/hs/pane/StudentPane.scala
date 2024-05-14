@@ -6,7 +6,7 @@ import scalafx.Includes.*
 import scalafx.scene.control.{Button, Label, ListView}
 import scalafx.scene.layout.{HBox, VBox}
 
-import hs.{Images, Model, Student}
+import hs.{context, Model, Student}
 import hs.dialog.StudentDialog
 
 class StudentPane(conf: Config, model: Model) extends VBox:
@@ -19,11 +19,11 @@ class StudentPane(conf: Config, model: Model) extends VBox:
     cellFactory = (cell, student) => { cell.text =  student.name }
 
   val studentAddButton = new Button:
-    graphic = Images.addImageView
+    graphic = context.addImageView
     prefHeight = 25
 
   val studentEditButton = new Button:
-    graphic = Images.editImageView
+    graphic = context.editImageView
     prefHeight = 25
     disable = true
 

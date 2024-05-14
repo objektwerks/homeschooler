@@ -8,20 +8,22 @@ import slick.basic.DatabaseConfig
 import slick.jdbc.{H2Profile, JdbcProfile}
 
 object App extends JFXApp3:
-  val config = DatabaseConfig.forConfig[JdbcProfile]("repository", ConfigFactory.load("repository.conf"))
-  val repository = Repository(config, H2Profile)
+  val config = ConfigFactory.load("repository.conf")
+  val context = Context(config)
+
+  val dbConfig = DatabaseConfig.forConfig[JdbcProfile]("repository", ConfigFactory.load("repository.conf"))
+  val repository = Repository(dbConfig, H2Profile)
   val model = Model(repository)
 
-  val resources = ConfigFactory.load("resources.conf")
-  val view = View(resources, model)
+  val view = View(context, model)
 
   override def start(): Unit =
     stage = new JFXApp3.PrimaryStage:
       scene = view.sceneGraph
-      title = resources.getString("title")
-      minHeight = resources.getInt("height").toDouble
-      minWidth = resources.getInt("width").toDouble
-      icons.add( Images.appImage )
+      title = context.title
+      minHeight = context.height.toDouble
+      minWidth = context.width.toDouble
+      icons.add( context.appImage )
   
   sys.addShutdownHook:
     repository.close()
