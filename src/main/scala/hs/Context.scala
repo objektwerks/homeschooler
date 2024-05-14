@@ -54,7 +54,7 @@ final class Context(config: Config):
   val students = config.getString("students")
   val saveStudent = config.getString("save-student")
 
-  def appImage = Image( context.getClass.getResourceAsStream("/images/homeschool.png") )
+  def appImage = Image( Image.getClass.getResourceAsStream("/images/homeschool.png") )
 
   def addImageView = loadImageView("/images/add.png")
 
@@ -65,7 +65,7 @@ final class Context(config: Config):
   def lineChartImageView = loadImageView("/images/line.chart.png")
 
   def loadImageView(path: String): ImageView = new ImageView:
-    image = Image( context.getClass.getResourceAsStream(path) )
+    image = Image( Image.getClass.getResourceAsStream(path) )
     fitHeight = 25
     fitWidth = 25
     preserveRatio = true
