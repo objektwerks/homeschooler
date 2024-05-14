@@ -15,6 +15,7 @@ final class Context(config: Config):
   val app = config.getString("app")
   val license = config.getString("license")
   val exit = config.getString("exit")
+  val menu = config.getString("menu")
 
   val started = config.getString("started")
   val completed = config.getString("completed")
