@@ -47,4 +47,4 @@ class CourseDialog(context: Context, course: Course) extends Dialog[Course]:
 
   initOwner(App.stage)
   title = context.course
-  headerText = conf.getString("save-course")
+  headerText = context.saveCourse
