@@ -17,7 +17,7 @@ class StudentDialog(context: Context, student: Student) extends Dialog[Student]:
 
   val controls = List[(String, Region)](
     context.name -> nameTextField,
-    conf.getString("born") -> bornDatePicker
+    context.born -> bornDatePicker
   )
   val controlGridPane = ControlGridPane(controls)
 
