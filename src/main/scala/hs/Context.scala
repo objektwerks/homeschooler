@@ -22,6 +22,8 @@ final class Context(config: Config):
   val completed = config.getString("completed")
   val save = config.getString("save")
 
+  val courseChartCourses = config.getString("course-chart-courses")
+
   def appImage = Image( Images.getClass.getResourceAsStream("/images/homeschool.png") )
 
   def addImageView = loadImageView("/images/add.png")

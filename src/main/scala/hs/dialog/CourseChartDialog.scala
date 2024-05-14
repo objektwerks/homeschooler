@@ -1,16 +1,14 @@
 package hs.dialog
 
-import com.typesafe.config.Config
-
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.chart.{BarChart, CategoryAxis, NumberAxis, XYChart}
 import scalafx.scene.control.{ButtonType, Dialog}
 import scalafx.scene.layout.VBox
 
-import hs.{App, Course, Model}
+import hs.{App, Context, Course, Model}
 
-class CourseChartDialog(conf: Config,
+class CourseChartDialog(context: Context,
                         courses: ObservableBuffer[Course],
                         model: Model) extends Dialog[Unit]:
   val xAxis = CategoryAxis(courses.map(c => c.name).distinct)
