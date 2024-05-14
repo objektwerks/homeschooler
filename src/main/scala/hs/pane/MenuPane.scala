@@ -9,16 +9,16 @@ import hs.{App, Context}
 class MenuPane(context: Context) extends MenuBar:
   val aboutDialog = new Alert(AlertType.Information):
     initOwner(App.stage)
-    title = context.getString("about")
-    headerText = context.getString("developer")
-    contentText = s"${context.getString("app")} ${context.getString("license")}"
+    title = context.title
+    headerText = context.developer
+    contentText = s"${context.app} ${context.license}"
 
-  val aboutMenuItem = new MenuItem(context.getString("about")):
+  val aboutMenuItem = new MenuItem(context.about):
     onAction = { _ => aboutDialog.showAndWait() }
 
   val separator = SeparatorMenuItem()
 
-  val exitMenuItem = new MenuItem(context.getString("exit")):
+  val exitMenuItem = new MenuItem(context.exit):
     onAction = { _ => Platform.exit() }
   
   val menu = new Menu(context.getString("menu")):
