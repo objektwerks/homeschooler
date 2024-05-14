@@ -67,5 +67,5 @@ class AssignmentChartDialog(context: Context, assignments: ObservableBuffer[Assi
   dialog.content = chartBox
 
   initOwner(App.stage)
-  title = conf.getString("assignment-chart")
-  headerText = conf.getString("assignment-scores")
+  title = context.assignmentChart
+  headerText = context.assignmentScores
