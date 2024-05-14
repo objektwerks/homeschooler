@@ -16,10 +16,10 @@ final class Context(config: Config):
   val minScore = config.getString("min-score")
   val maxScore = config.getString("max-score")
   val score = config.getString("score")
-
   val task = config.getString("task")
   val assigned = config.getString("assigned")
   val completed = config.getString("completed")
+  val save = config.getString("save")
 
   def appImage = Image( Images.getClass.getResourceAsStream("/images/homeschool.png") )
 
