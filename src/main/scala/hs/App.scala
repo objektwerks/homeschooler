@@ -24,11 +24,10 @@ object App extends JFXApp3:
       minHeight = context.height.toDouble
       minWidth = context.width.toDouble
       icons.add( context.appImage )
-  
-  sys.addShutdownHook:
-    repository.close()
 
   stage.show()
   println("*** Homeschool app started.")
 
-  override def stopApp(): Unit = println("*** Homeschool stopped.")
+  override def stopApp(): Unit =
+    repository.close()
+    println("*** Homeschool stopped.")
