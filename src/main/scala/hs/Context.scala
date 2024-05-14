@@ -38,6 +38,7 @@ final class Context(config: Config):
 
   val born = config.getString("born")
   val student = config.getString("student")
+  val saveStudent = config.getString("save-student")
 
   def appImage = Image( Images.getClass.getResourceAsStream("/images/homeschool.png") )
 
