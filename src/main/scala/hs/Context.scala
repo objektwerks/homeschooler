@@ -7,6 +7,7 @@ import scala.jdk.CollectionConverters.*
 import scalafx.scene.image.{Image, ImageView}
 
 final class Context(config: Config):
+  val started = config.getString("started")
   val completed = config.getString("completed")
   val save = config.getString("save")
 
@@ -29,8 +30,9 @@ final class Context(config: Config):
   val courseScores = config.getString("course-scores")
   val course = config.getString("course")
   val name = config.getString("name")
-  val started = config.getString("started")
   val saveCourse = config.getString("save-course")
+
+  val year = config.getString("year")
 
   def appImage = Image( Images.getClass.getResourceAsStream("/images/homeschool.png") )
 

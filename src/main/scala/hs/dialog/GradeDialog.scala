@@ -1,16 +1,14 @@
 package hs.dialog
 
-import com.typesafe.config.Config
-
 import scalafx.Includes.*
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.control.{ButtonType, Dialog, DatePicker, TextField}
 import scalafx.scene.layout.Region
 
-import hs.{App, Entity, Grade}
+import hs.{App, Context, Entity, Grade}
 import hs.pane.ControlGridPane
 
-class GradeDialog(conf: Config, grade: Grade) extends Dialog[Grade]:
+class GradeDialog(context: Context, grade: Grade) extends Dialog[Grade]:
   val yearTextField = new TextField:
     text = grade.year
 
