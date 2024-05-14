@@ -18,12 +18,11 @@ class Repository(val config: DatabaseConfig[JdbcProfile],
   val schema = students.schema ++ grades.schema ++ courses.schema ++ assignments.schema
 
   val db = config.db
-
-  def init(): Unit =
-    try
-      await( students.list() ).length
-    catch
-      case NonFatal(_) => createSchema()
+  
+  try
+    await( students.list() ).length
+  catch
+    case NonFatal(_) => createSchema()
 
   def await[T](action: DBIO[T]): T = Await.result(db.run(action), awaitDuration)
 

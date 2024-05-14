@@ -12,7 +12,6 @@ object App extends JFXApp3:
 
   val dbConfig = DatabaseConfig.forConfig[JdbcProfile]("repository", ConfigFactory.load("repository.conf"))
   val repository = Repository(dbConfig, H2Profile)
-  repository.init()
 
   val model = Model(repository)
 
