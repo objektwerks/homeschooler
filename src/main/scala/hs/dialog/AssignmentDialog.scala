@@ -37,7 +37,7 @@ class AssignmentDialog(context: Context, assignment: Assignment) extends Dialog[
   val controlGridPane = ControlGridPane(controls)
 
   val dialog = dialogPane()
-  val saveButtonType = ButtonType(conf.getString("save"), ButtonData.OKDone)
+  val saveButtonType = ButtonType(context.save, ButtonData.OKDone)
   dialog.buttonTypes = List(saveButtonType, ButtonType.Cancel)
   dialog.content = controlGridPane
 
