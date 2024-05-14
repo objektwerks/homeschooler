@@ -12,7 +12,7 @@ class CourseChartDialog(context: Context,
                         courses: ObservableBuffer[Course],
                         model: Model) extends Dialog[Unit]:
   val xAxis = CategoryAxis(courses.map(c => c.name).distinct)
-  xAxis.label = conf.getString("course-chart-courses")
+  xAxis.label = context.courseChartCourses
 
   val yAxis = NumberAxis(axisLabel = conf.getString("course-chart-scores"), lowerBound = 0, upperBound = 100, tickUnit = 10)
   
