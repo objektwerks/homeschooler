@@ -41,5 +41,5 @@ class StudentDialog(context: Context, student: Student) extends Dialog[Student]:
     else null
 
   initOwner(App.stage)
-  title = conf.getString("student")
+  title = context.student
   headerText = conf.getString("save-student")
