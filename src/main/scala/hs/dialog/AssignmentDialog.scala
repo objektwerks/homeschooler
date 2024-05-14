@@ -30,10 +30,10 @@ class AssignmentDialog(context: Context, assignment: Assignment) extends Dialog[
     children = List(scoreSlider, scoreLabel)
 
   val controls = List[(String, Region)](
-    conf.getString("task") -> taskTextField,
-    conf.getString("assigned") -> assignedDatePicker,
-    conf.getString("completed") -> completedDatePicker,
-    conf.getString("score") -> scoreBox)
+    context.task -> taskTextField,
+    context.assigned -> assignedDatePicker,
+    context.completed -> completedDatePicker,
+    context.score -> scoreBox)
   val controlGridPane = ControlGridPane(controls)
 
   val dialog = dialogPane()
