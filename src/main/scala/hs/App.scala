@@ -28,4 +28,4 @@ object App extends JFXApp3:
 
   override def stopApp(): Unit =
     repository.close()
-    println("*** Homeschool stopped.")
+    println("*** Homeschool app stopped.")
