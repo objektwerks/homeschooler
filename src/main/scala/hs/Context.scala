@@ -7,6 +7,8 @@ import scala.jdk.CollectionConverters.*
 import scalafx.scene.image.{Image, ImageView}
 
 final class Context(config: Config):
+  val assignmentChartMonths = config.getString("assignment-chart-months")
+
   def appImage = Image( Images.getClass.getResourceAsStream("/images/homeschool.png") )
 
   def addImageView = loadImageView("/images/add.png")
