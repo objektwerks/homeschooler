@@ -11,6 +11,7 @@ final class Context(config: Config):
   val assignmentChartScores = config.getString("assignment-chart-scores")
   val minScore = config.getString("min-score")
   val maxScore = config.getString("max-score")
+  val score = config.getString("score")
 
   def appImage = Image( Images.getClass.getResourceAsStream("/images/homeschool.png") )
 
