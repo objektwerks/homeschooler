@@ -8,10 +8,10 @@ import slick.basic.DatabaseConfig
 import slick.jdbc.{H2Profile, JdbcProfile}
 
 object App extends JFXApp3:
-  val config = ConfigFactory.load("repository.conf")
+  val config = ConfigFactory.load("resources.conf")
   val context = Context(config)
 
-  val dbConfig = DatabaseConfig.forConfig[JdbcProfile]("repository", config)
+  val dbConfig = DatabaseConfig.forConfig[JdbcProfile]("repository", ConfigFactory.load("repository.conf"))
   val repository = Repository(dbConfig, H2Profile)
   val model = Model(repository)
 
@@ -27,3 +27,8 @@ object App extends JFXApp3:
   
   sys.addShutdownHook:
     repository.close()
+
+  stage.show()
+  println("*** Homeschool app started.")
+
+  override def stopApp(): Unit = println("*** Homeschool stopped.")
