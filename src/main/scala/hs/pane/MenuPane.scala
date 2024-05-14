@@ -21,7 +21,7 @@ class MenuPane(context: Context) extends MenuBar:
   val exitMenuItem = new MenuItem(context.exit):
     onAction = { _ => Platform.exit() }
   
-  val menu = new Menu(context.getString("menu")):
+  val menu = new Menu(context.menu):
     items = List(aboutMenuItem, separator, exitMenuItem)
 
   menus = List(menu)
