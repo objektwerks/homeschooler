@@ -31,14 +31,17 @@ final class Context(config: Config):
   val courseChart = config.getString("course-chart")
   val courseScores = config.getString("course-scores")
   val course = config.getString("course")
+  val courses = config.getString("courses")
   val saveCourse = config.getString("save-course")
 
   val year = config.getString("year")
   val grade = config.getString("grade")
+  val grades = config.getString("grades")
   val saveGrade = config.getString("save-grade")
 
   val born = config.getString("born")
   val student = config.getString("student")
+  val students = config.getString("students")
   val saveStudent = config.getString("save-student")
 
   def appImage = Image( Images.getClass.getResourceAsStream("/images/homeschool.png") )

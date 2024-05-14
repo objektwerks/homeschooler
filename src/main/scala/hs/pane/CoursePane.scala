@@ -1,17 +1,15 @@
 package hs.pane
 
-import com.typesafe.config.Config
-
 import scalafx.Includes.*
 import scalafx.scene.control.{Button, Label, ListView, SelectionMode}
 import scalafx.scene.layout.{HBox, VBox}
 
-import hs.{Course, Images, Model}
+import hs.{Course, Context, Model}
 import hs.dialog.{CourseChartDialog, CourseDialog}
 
-class CoursePane(conf: Config, model: Model) extends VBox:
+class CoursePane(context: Context, model: Model) extends VBox:
   val courseLabel = new Label:
-    text = conf.getString("courses")
+    text = context.getString("courses")
 
   val courseListView = new ListView[Course]:
     minHeight = 300
@@ -64,10 +62,10 @@ class CoursePane(conf: Config, model: Model) extends VBox:
 
   courseEditButton.onAction = { _ => update() }
 
-  courseChartButton.onAction = { _ => CourseChartDialog(conf, model.courseList, model).showAndWait() }
+  courseChartButton.onAction = { _ => CourseChartDialog(context, model.courseList, model).showAndWait() }
 
   def add(course: Course): Unit =
-    CourseDialog(conf, course).showAndWait() match
+    CourseDialog(context, course).showAndWait() match
       case Some(Course(id, gradeid, name, started, completed)) =>
         val newCourse = model.addCourse(
           Course(id, gradeid, name, started, completed)
@@ -78,7 +76,7 @@ class CoursePane(conf: Config, model: Model) extends VBox:
   def update(): Unit =
     val selectedIndex = courseListView.selectionModel().getSelectedIndex
     val course = courseListView.selectionModel().getSelectedItem
-    CourseDialog(conf, course).showAndWait() match
+    CourseDialog(context, course).showAndWait() match
       case Some(Course(id, gradeid, name, started, completed)) =>
         model.updateCourse(
           selectedIndex,
