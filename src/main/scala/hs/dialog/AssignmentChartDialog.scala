@@ -48,7 +48,7 @@ class AssignmentChartDialog(context: Context, assignments: ObservableBuffer[Assi
     text = assignments.map(a => a.score).max.toInt.toString
 
   val scoreLabel = new Label:
-    text = conf.getString("score")
+    text = context.score
 
   val score = new Label:
     text = (assignments.map(a => a.score).sum / assignments.length).toInt.toString
