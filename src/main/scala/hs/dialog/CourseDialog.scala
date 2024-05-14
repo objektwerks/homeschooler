@@ -19,9 +19,9 @@ class CourseDialog(context: Context, course: Course) extends Dialog[Course]:
     value = Entity.toLocalDate(course.completed)
 
   val controls = List[(String, Region)](
-    conf.getString("name") -> nameTextField,
-    conf.getString("started") -> startedDatePicker,
-    conf.getString("completed") -> completedDatePicker
+    context.name -> nameTextField,
+    context.started -> startedDatePicker,
+    context.completed -> completedDatePicker
   )
   val controlGridPane = ControlGridPane(controls)
 
