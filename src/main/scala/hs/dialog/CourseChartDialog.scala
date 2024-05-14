@@ -35,5 +35,5 @@ class CourseChartDialog(context: Context,
   dialog.content = chartBox
 
   initOwner(App.stage)
-  title = conf.getString("course-chart")
+  title = context.courseChart
   headerText = conf.getString("course-scores")
