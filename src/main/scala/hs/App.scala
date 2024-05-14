@@ -8,8 +8,7 @@ import slick.basic.DatabaseConfig
 import slick.jdbc.{H2Profile, JdbcProfile}
 
 object App extends JFXApp3:
-  val config = ConfigFactory.load("resources.conf")
-  val context = Context(config)
+  val context = Context( ConfigFactory.load("app.conf") )
 
   val dbConfig = DatabaseConfig.forConfig[JdbcProfile]("repository", ConfigFactory.load("repository.conf"))
   val repository = Repository(dbConfig, H2Profile)
