@@ -12,11 +12,15 @@ object App extends JFXApp3:
 
   val dbConfig = DatabaseConfig.forConfig[JdbcProfile]("repository", ConfigFactory.load("repository.conf"))
   val repository = Repository(dbConfig, H2Profile)
+  repository.init()
+
   val model = Model(repository)
+
+  val view = View(context, model)
 
   override def start(): Unit =
     stage = new JFXApp3.PrimaryStage:
-      scene = View(context, model).scene
+      scene = view.scene
       title = context.title
       minHeight = context.height.toDouble
       minWidth = context.width.toDouble

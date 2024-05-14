@@ -5,6 +5,7 @@ import java.time.LocalDate
 import scala.concurrent.{Await, Future}
 import scala.concurrent.duration.*
 import scala.language.postfixOps
+import scala.util.control.NonFatal
 
 import slick.basic.DatabaseConfig
 import slick.jdbc.JdbcProfile
@@ -17,6 +18,12 @@ class Repository(val config: DatabaseConfig[JdbcProfile],
   val schema = students.schema ++ grades.schema ++ courses.schema ++ assignments.schema
 
   val db = config.db
+
+  def init(): Unit =
+    try
+      await( students.list() ).length
+    catch
+      case NonFatal(_) => createSchema()
 
   def await[T](action: DBIO[T]): T = Await.result(db.run(action), awaitDuration)
 
