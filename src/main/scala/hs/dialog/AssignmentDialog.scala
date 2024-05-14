@@ -1,16 +1,14 @@
 package hs.dialog
 
-import com.typesafe.config.Config
-
 import scalafx.Includes.*
 import scalafx.scene.control.{ButtonType, Dialog, DatePicker, Label, Slider, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 import scalafx.scene.layout.{HBox, Region}
 
-import hs.{App, Assignment, Entity}
+import hs.{App, Assignment, Context, Entity}
 import hs.pane.ControlGridPane
 
-class AssignmentDialog(conf: Config, assignment: Assignment) extends Dialog[Assignment]:
+class AssignmentDialog(context: Context, assignment: Assignment) extends Dialog[Assignment]:
   val taskTextField = new TextField:
     text = assignment.task
 
