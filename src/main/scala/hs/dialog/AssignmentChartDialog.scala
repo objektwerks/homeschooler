@@ -27,7 +27,7 @@ class AssignmentChartDialog(context: Context, assignments: ObservableBuffer[Assi
   chart.padding = Insets(6)
 
   val series = new XYChart.Series[Number, Number]:
-    name = conf.getString("assignment-chart-score")
+    name = context.assignmentChartScore
 
   assignments foreach { assignment =>
     series.data() += XYChart.Data[Number, Number](assignment.completed.format(dateFormatter).toDouble, assignment.score.toInt)
