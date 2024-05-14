@@ -1,17 +1,15 @@
 package hs.pane
 
-import com.typesafe.config.Config
-
 import scalafx.Includes.*
 import scalafx.scene.control.{Button, Label, ListView}
 import scalafx.scene.layout.{HBox, VBox}
 
-import hs.{context, Model, Student}
+import hs.{Context, Model, Student}
 import hs.dialog.StudentDialog
 
-class StudentPane(conf: Config, model: Model) extends VBox:
+class StudentPane(context: Context, model: Model) extends VBox:
   val studentLabel = new Label:
-    text = conf.getString("students")
+    text = context.students
 
   val studentListView = new ListView[Student]:
     minHeight = 50
@@ -51,7 +49,7 @@ class StudentPane(conf: Config, model: Model) extends VBox:
   studentEditButton.onAction = { _ => update() }
 
   def add(student: Student): Unit =
-    StudentDialog(conf, student).showAndWait() match
+    StudentDialog(context, student).showAndWait() match
       case Some(Student(id, name, born)) =>
         val newStudent = model.addStudent(
           Student(id, name, born)
@@ -62,7 +60,7 @@ class StudentPane(conf: Config, model: Model) extends VBox:
   def update(): Unit =
     val selectedIndex = studentListView.selectionModel().getSelectedIndex
     val student = studentListView.selectionModel().getSelectedItem
-    StudentDialog(conf, student).showAndWait() match
+    StudentDialog(context, student).showAndWait() match
       case Some(Student(id, name, born)) =>
         model.updateStudent(
           selectedIndex,
