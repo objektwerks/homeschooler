@@ -7,6 +7,9 @@ import scala.jdk.CollectionConverters.*
 import scalafx.scene.image.{Image, ImageView}
 
 final class Context(config: Config):
+  val completed = config.getString("completed")
+  val save = config.getString("save")
+  
   val assignmentChartMonths = config.getString("assignment-chart-months")
   val assignmentChartScores = config.getString("assignment-chart-scores")
   val assignmentChartScore = config.getString("assignment-chart-score")
@@ -19,8 +22,6 @@ final class Context(config: Config):
   val score = config.getString("score")
   val task = config.getString("task")
   val assigned = config.getString("assigned")
-  val completed = config.getString("completed")
-  val save = config.getString("save")
 
   val courseChartCourses = config.getString("course-chart-courses")
   val courseChartScores = config.getString("course-chart-scores")
