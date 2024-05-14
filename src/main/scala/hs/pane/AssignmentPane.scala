@@ -9,7 +9,7 @@ import hs.dialog.{AssignmentChartDialog, AssignmentDialog}
 
 class AssignmentPane(context: Context, model: Model) extends VBox:
   val assignmentLabel = new Label:
-    text = conf.getString("assignments")
+    text = context.assignments
 
   val assignmentListView = new ListView[Assignment]:
     minHeight = 300
