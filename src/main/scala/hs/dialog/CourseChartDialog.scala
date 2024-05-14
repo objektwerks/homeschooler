@@ -36,4 +36,4 @@ class CourseChartDialog(context: Context,
 
   initOwner(App.stage)
   title = context.courseChart
-  headerText = conf.getString("course-scores")
+  headerText = context.courseScores
