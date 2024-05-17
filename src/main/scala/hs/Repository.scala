@@ -19,10 +19,14 @@ class Repository(val config: DatabaseConfig[JdbcProfile],
 
   val db = config.db
   
-  try
-    await( students.list() ).length
-  catch
-    case NonFatal(_) => createSchema()
+  def verify(): Repository =
+    try
+      await( students.list() ).length
+      this
+    catch
+      case NonFatal(_) =>
+        createSchema()
+        this
 
   def await[T](action: DBIO[T]): T = Await.result(db.run(action), awaitDuration)
 
