@@ -19,7 +19,7 @@ class Repository(val config: DatabaseConfig[JdbcProfile],
 
   val db = config.db
   
-  def verify(): Repository =
+  def ifAbsentInstall(): Repository =
     try
       await( students.list() ).length
       this
