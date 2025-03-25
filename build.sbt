@@ -1,7 +1,7 @@
 name := "homeschool"
 organization := "objektwerks"
 version := "7.2-SNAPSHOT"
-scalaVersion := "3.7.0-RC1"
+scalaVersion := "3.6.4" // 3.7.0-RC1 breaks ScalaFx!
 libraryDependencies ++= {
   val slickVersion = "3.5.1"
   Seq(
