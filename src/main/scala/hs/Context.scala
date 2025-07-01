@@ -52,7 +52,7 @@ final class Context(config: Config):
   val students = config.getString("students")
   val saveStudent = config.getString("save-student")
 
-  def appImage = Image( Image.getClass.getResourceAsStream("/images/homeschool.png") )
+  def appImage = Image( Image.getClass.getResourceAsStream("/images/icon.png") )
 
   def addImageView = loadImageView("/images/add.png")
 
