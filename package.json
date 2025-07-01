@@ -16,7 +16,7 @@
         "javaVersion": "24",
         "jar": ".assembly/homeschool-8.0.0.jar",
         "javafx": true,
-        "javafxVersion": "24.0.2",
+        "javafxVersion": "24.0.1",
         "title": "Homeschool"
     },
     "dependencies": {
