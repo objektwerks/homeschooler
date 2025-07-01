@@ -19,7 +19,7 @@ object App extends JFXApp3:
       title = context.title
       minHeight = context.height.toDouble
       minWidth = context.width.toDouble
-      icons.add( context.appImage )
+      icons += context.appImage
 
     model.listStudents()
     stage.show()
