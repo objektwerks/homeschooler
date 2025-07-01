@@ -33,20 +33,17 @@ Run
 ---
 1. sbt run
 
-Package
--------
-1. sbt clean test universal:packageBin
-2. verify ./target/universal/homeschool-${version}.zip
-
-Install
--------
-1. unzip ./target/universal/homeschool-${version}.zip
-2. copy unzipped homeschool-${version} directory to ${homeschool.directory}
-3. set executable permissions for ${homeschool.directory}/homeschool-${version}/bin/homeschool
-
-Execute
--------
-1. execute ${homeschool-directory}/homeschool-${version}/bin/homeschool
+Deploy
+------
+1. edit build.sbt ( jarVersion + version )
+2. edit package.json ( version + jdeploy / jar )
+3. edit app.conf ( about > alert > contentText )
+4. sbt clean test assembly copyAssemblyJar
+5. perform github release ( from https://github.com/objektwerks/homeschool )
+6. npm login
+7. jdeploy publish ( to https://www.jdeploy.com/~homeschool )
+8. check email for npm message
+>See [jDeploy Docs](https://www.jdeploy.com/docs/manual/#_getting_started) for details.
 
 License
 -------
