@@ -10,14 +10,14 @@ import scala.util.control.NonFatal
 import slick.basic.DatabaseConfig
 import slick.jdbc.JdbcProfile
 
-final class Repository(val config: DatabaseConfig[JdbcProfile],
+final class Repository(config: DatabaseConfig[JdbcProfile],
                        val profile: JdbcProfile, 
-                       val awaitDuration: Duration = 1 second):
+                       awaitDuration: Duration = 1 second):
   import profile.api.*
 
-  val schema = students.schema ++ grades.schema ++ courses.schema ++ assignments.schema
+  private val schema = students.schema ++ grades.schema ++ courses.schema ++ assignments.schema
 
-  val db = config.db
+  private val db = config.db
   
   def ifAbsentInstall(): Repository =
     try
