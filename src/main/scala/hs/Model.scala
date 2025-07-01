@@ -3,7 +3,7 @@ package hs
 import scalafx.beans.property.IntegerProperty
 import scalafx.collections.ObservableBuffer
 
-class Model(repository: Repository):
+final class Model(repository: Repository):
   import repository.*
 
   val studentList = ObservableBuffer[Student]()
