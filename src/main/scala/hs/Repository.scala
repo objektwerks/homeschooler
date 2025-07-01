@@ -2,7 +2,7 @@ package hs
 
 import java.time.LocalDate
 
-import scala.concurrent.{Await, Future}
+import scala.concurrent.Await
 import scala.concurrent.duration.*
 import scala.language.postfixOps
 import scala.util.control.NonFatal
@@ -32,8 +32,6 @@ final class Repository(config: DatabaseConfig[JdbcProfile],
         this
 
   def await[T](action: DBIO[T]): T = Await.result(db.run(action), awaitDuration)
-
-  def exec[T](action: DBIO[T]): Future[T] = db.run(action)
 
   def close() = db.close()
 
