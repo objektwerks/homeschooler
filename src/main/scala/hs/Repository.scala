@@ -8,11 +8,14 @@ import scala.language.postfixOps
 import scala.util.control.NonFatal
 
 import slick.basic.DatabaseConfig
-import slick.jdbc.JdbcProfile
+import slick.jdbc.{H2Profile, JdbcProfile}
+
+object Repository:
+  val profile = H2Profile
 
 final class Repository(config: DatabaseConfig[JdbcProfile],
-                       val profile: JdbcProfile, 
                        awaitDuration: Duration = 1 second):
+  import Repository.profile
   import profile.api.*
 
   private val schema = students.schema ++ grades.schema ++ courses.schema ++ assignments.schema
