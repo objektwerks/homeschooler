@@ -10,9 +10,9 @@ import scala.util.control.NonFatal
 import slick.basic.DatabaseConfig
 import slick.jdbc.JdbcProfile
 
-class Repository(val config: DatabaseConfig[JdbcProfile],
-                 val profile: JdbcProfile, 
-                 val awaitDuration: Duration = 1 second):
+final class Repository(val config: DatabaseConfig[JdbcProfile],
+                       val profile: JdbcProfile, 
+                       val awaitDuration: Duration = 1 second):
   import profile.api.*
 
   val schema = students.schema ++ grades.schema ++ courses.schema ++ assignments.schema
