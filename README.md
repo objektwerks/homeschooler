@@ -25,6 +25,18 @@ Charts
 1. courses - bar chart ( x = name, y = score, c = name )
 2. assignments - line chart ( x = completed, y = score )
 
+Build
+-----
+1. sbt clean compile
+
+Test
+----
+1. sbt clean test
+
+Run
+---
+1. sbt run
+
 Deploy
 ------
 1. edit build.sbt ( jarVersion + version )
@@ -58,18 +70,6 @@ jDeploy Issues
 2. ***macOS app icon*** not rendered correctly in Dock and Launchpad.
     1. Ensure app icon ( ./icon.png + ./src/main/resources/image/icon.png ) is at least 256x256. 512x512 is recommended.
     2. See objektwerks.ui.App stage.icons, Taskbar and Toolkit code for details.
-
-Build
------
-1. sbt clean compile
-
-Test
-----
-1. sbt clean test
-
-Run
----
-1. sbt run
 
 Assembly
 --------
