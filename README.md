@@ -1,6 +1,6 @@
 Homeschool
 ----------
->Open source homeschool app using ScalaFx, Slic, H2, Ox and Scala 3.
+>Homeschool app using ScalaFx, Slick, H2, Ox and Scala 3.
 
 Object Model
 ------------
