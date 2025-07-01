@@ -13,7 +13,7 @@ class View(context: Context, model: Model):
   val coursePane = new CoursePane(context, model)
   val assignmentPane = new AssignmentPane(context, model)
 
-  val menuPane = new MenuPane(context)
+  val menu = Menu(context)
 
   val westPane = new VBox:
     spacing = 6
@@ -36,7 +36,7 @@ class View(context: Context, model: Model):
     prefWidth = 800
     spacing = 6
     padding = Insets(6)
-    children = List(menuPane, splitPane)
+    children = List(menu, splitPane)
   
   val scene = new Scene:
     root = contentPane
