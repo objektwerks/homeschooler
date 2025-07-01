@@ -21,10 +21,10 @@
     },
     "dependencies": {
         "command-exists-promise": "^2.0.2",
-        "node-fetch": "2.6.7",
-        "tar": "^4.4.8",
+        "node-fetch": "3.3.2",
+        "tar": "7.4.3",
         "yauzl": "^2.10.0",
-        "shelljs": "^0.8.4"
+        "shelljs": "^0.8.5"
     },
     "license": "Apache 2.0",
     "name": "homeschool",
