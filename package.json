@@ -27,12 +27,12 @@
         "shelljs": "^0.8.4"
     },
     "license": "Apache 2.0",
-    "name": "brewmeister",
+    "name": "homeschool",
     "files": [
         "jdeploy-bundle"
     ],
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "homepage": "https://github.com/objektwerks/brewmeister"
+    "homepage": "https://github.com/objektwerks/homeschool"
 }
