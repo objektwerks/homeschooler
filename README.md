@@ -71,13 +71,23 @@ jDeploy Issues
     1. Ensure app icon ( ./icon.png + ./src/main/resources/image/icon.png ) is at least 256x256. 512x512 is recommended.
     2. See objektwerks.ui.App stage.icons, Taskbar and Toolkit code for details.
 
+NPM Versioning
+--------------
+>The ```build.sbt``` **must** contain a ```semver 3-digit``` **version** number.
+
+>See: [Npmjs Semver](https://docs.npmjs.com/about-semantic-versioning)
+
+NPM Registry
+------------
+>Homeschool is deployed to: https://www.npmjs.com/package/homeschool
+
 Assembly
 --------
 1. sbt clean test assembly copyAssemblyJar
 
 Execute
 -------
-1. java -jar .assembly/brewmeister-$version.jar ( or double-click executable jar )
+1. java -jar .assembly/homeschool-$version.jar ( or double-click executable jar )
 
 License
 -------
