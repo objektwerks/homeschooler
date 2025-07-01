@@ -3,7 +3,7 @@
         "homeschool": "jdeploy-bundle/jdeploy.js"
     },
     "author": "Objektwerks",
-    "description": "Beer brewing simulator that allows brewers to build recipes and brew batches using the classic 13-step beer brewing process.",
+    "description": "Homeschool app.",
     "main": "index.js",
     "preferGlobal": true,
     "repository": {
