@@ -14,7 +14,7 @@ object Repository:
   val profile = H2Profile
 
 final class Repository(config: DatabaseConfig[JdbcProfile],
-                       awaitDuration: Duration = 1 second):
+                       awaitDuration: Duration = 3 seconds):
   import Repository.profile
   import profile.api.*
 
