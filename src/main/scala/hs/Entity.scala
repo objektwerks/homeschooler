@@ -2,7 +2,8 @@ package hs
 
 import java.time.LocalDate
 
-sealed trait Entity
+sealed trait Entity:
+  val id: Int
 
 object Entity:
   given Ordering[Student] = Ordering.by[Student, String](s => s.born)
