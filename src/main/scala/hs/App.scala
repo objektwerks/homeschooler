@@ -9,7 +9,6 @@ import slick.jdbc.JdbcProfile
 
 object App extends JFXApp3:
   val context = Context( ConfigFactory.load("app.conf") )
-
   val dbConfig = DatabaseConfig.forConfig[JdbcProfile]("repository", ConfigFactory.load("repository.conf"))
   val repository = Repository(dbConfig).ifAbsentInstall()
   val model = Model(repository)
