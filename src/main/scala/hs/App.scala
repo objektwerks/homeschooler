@@ -1,6 +1,7 @@
 package hs
 
 import com.typesafe.config.ConfigFactory
+import com.typesafe.scalalogging.LazyLogging
 
 import java.awt.{Taskbar, Toolkit}
 import java.awt.Taskbar.Feature
@@ -10,7 +11,9 @@ import scalafx.application.JFXApp3
 import slick.basic.DatabaseConfig
 import slick.jdbc.JdbcProfile
 
-object App extends JFXApp3:
+object App extends JFXApp3 with LazyLogging:
+  logger.info("Starting Homeschool app ...")
+
   val context = Context( ConfigFactory.load("app.conf") )
   val dbConfig = DatabaseConfig.forConfig[JdbcProfile]("repository", ConfigFactory.load("repository.conf"))
   val repository = Repository(dbConfig).ifAbsentInstall()
@@ -33,8 +36,8 @@ object App extends JFXApp3:
 
     model.listStudents()
     stage.show()
-    println("*** Homeschool app started.")
+    logger.info("Homeschool app sarted.")
 
   override def stopApp(): Unit =
     repository.close()
-    println("*** Homeschool app stopped.")
+    logger.info("Homeschool app stopped.")
