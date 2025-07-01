@@ -1,5 +1,6 @@
 package hs
 
+
 import scalafx.Includes.*
 import scalafx.application.Platform
 import scalafx.event.ActionEvent
@@ -11,7 +12,7 @@ final class Menu(context: Context) extends MenuBar:
   val textAreaAbout = new TextArea():
     editable = false
     wrapText = true
-    text = context.aboutAlertContentText
+    text = context.contentText
 
   val gridPaneAbout = new GridPane():
     prefHeight = 120
@@ -19,21 +20,21 @@ final class Menu(context: Context) extends MenuBar:
   gridPaneAbout.add(textAreaAbout, 0, 0)
 
   val menuItemAbout = new MenuItem:
-    text = context.menuAbout
+    text = context.about
     onAction = (_: ActionEvent) =>
       new Alert(AlertType.Information):
         initOwner(App.stage)
-        title = context.windowTitle
-        headerText = context.aboutAlertHeaderText
+        title = context.title
+        headerText = context.headerText
         dialogPane().content = gridPaneAbout
       .showAndWait()
 
   val menuItemExit = new MenuItem:
-    text = context.menuExit
+    text = context.exit
     onAction = (_: ActionEvent) => Platform.exit()
 
   val menuRoot = new MenuRoot():
-    text = context.menuMenu
+    text = context.menu
     items = List(menuItemAbout, SeparatorMenuItem(), menuItemExit)
 
   menus = List(menuRoot)
