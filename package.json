@@ -8,7 +8,7 @@
     "preferGlobal": true,
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/objektwerks/brewmeister.git"
+        "url": "git+https://github.com/objektwerks/homeschool.git"
     },
     "version": "2.7.0",
     "jdeploy": {
