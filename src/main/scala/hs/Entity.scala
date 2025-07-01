@@ -2,9 +2,6 @@ package hs
 
 import java.time.LocalDate
 
-sealed trait Entity:
-  val id: Int
-
 object Entity:
   given Ordering[Student] = Ordering.by[Student, String](s => s.born)
   given Ordering[Grade] = Ordering.by[Grade, String](g => g.started)
@@ -12,6 +9,9 @@ object Entity:
   given Ordering[Assignment] = Ordering.by[Assignment, String](a => a.assigned)
 
   def toLocalDate(date: String): LocalDate = LocalDate.parse(date)
+
+sealed trait Entity:
+  val id: Int
 
 final case class Student(id: Int = 0,
                          name: String = "",
