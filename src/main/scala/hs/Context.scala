@@ -8,15 +8,19 @@ final class Context(config: Config):
   val title = config.getString("title")
   val height = config.getInt("height")
   val width = config.getInt("width")
+
   val about = config.getString("about")
   val developer = config.getString("developer")
+
   val app = config.getString("app")
   val license = config.getString("license")
+
   val exit = config.getString("exit")
   val menu = config.getString("menu")
 
   val started = config.getString("started")
   val completed = config.getString("completed")
+  
   val save = config.getString("save")
   val name = config.getString("name")
 
