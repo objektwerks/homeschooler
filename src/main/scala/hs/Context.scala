@@ -6,14 +6,11 @@ import scalafx.scene.image.{Image, ImageView}
 
 final class Context(config: Config):
   val title = config.getString("title")
+  
   val height = config.getInt("height")
   val width = config.getInt("width")
 
   val menu = config.getString("menu")
-
-  val app = config.getString("app")
-  val license = config.getString("license")
-  val developer = config.getString("developer")
 
   val about = config.getString("about")
   val headerText = config.getString("headerText")
