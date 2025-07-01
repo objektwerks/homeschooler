@@ -2,8 +2,6 @@ package hs
 
 import com.typesafe.config.Config
 
-import scala.jdk.CollectionConverters.*
-
 import scalafx.scene.image.{Image, ImageView}
 
 final class Context(config: Config):
