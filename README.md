@@ -43,7 +43,7 @@ Assembly
 
 Execute
 -------
-1. java -jar .assembly/homeschool-$version.jar ( or double-click executable jar )
+1. java -jar .assembly/homeschool-8.0.0.jar ( or double-click executable jar )
 
 Deploy
 ------
