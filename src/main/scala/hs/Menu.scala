@@ -1,6 +1,5 @@
 package hs
 
-
 import scalafx.Includes.*
 import scalafx.application.Platform
 import scalafx.event.ActionEvent
