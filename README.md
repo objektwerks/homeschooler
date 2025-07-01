@@ -37,6 +37,14 @@ Run
 ---
 1. sbt run
 
+Assembly
+--------
+1. sbt clean test assembly copyAssemblyJar
+
+Execute
+-------
+1. java -jar .assembly/homeschool-$version.jar ( or double-click executable jar )
+
 Deploy
 ------
 1. edit build.sbt ( jarVersion + version )
@@ -58,14 +66,6 @@ jDeploy Install
 5. Edit jDeploy *package.json* as required.
 6. Add *jdeploy* and *jdeploy-bundle* to .gitignore
 >See [jDeploy Docs](https://www.jdeploy.com/docs/manual/#_getting_started) for details.
-
-Assembly
---------
-1. sbt clean test assembly copyAssemblyJar
-
-Execute
--------
-1. java -jar .assembly/homeschool-$version.jar ( or double-click executable jar )
 
 License
 -------
