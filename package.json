@@ -10,14 +10,14 @@
         "type": "git",
         "url": "git+https://github.com/objektwerks/homeschool.git"
     },
-    "version": "2.7.0",
+    "version": "8.0.0",
     "jdeploy": {
         "jdk": false,
-        "javaVersion": "23",
-        "jar": ".assembly/brewmeister-2.7.0.jar",
+        "javaVersion": "24",
+        "jar": ".assembly/homeschool-8.0.0.jar",
         "javafx": true,
-        "javafxVersion": "23.0.2",
-        "title": "Brewmeister"
+        "javafxVersion": "24.0.2",
+        "title": "Homeschool"
     },
     "dependencies": {
         "command-exists-promise": "^2.0.2",
