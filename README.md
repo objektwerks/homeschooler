@@ -75,6 +75,10 @@ jDeploy Issues
     1. Ensure app icon ( ./icon.png + ./src/main/resources/image/icon.png ) is at least 256x256. 512x512 is recommended.
     2. See objektwerks.ui.App stage.icons, Taskbar and Toolkit code for details.
 
+NPM Versioning
+--------------
+>The ```build.sbt``` **must** contain a ```semver 3-digit``` **version** number. See: [Npmjs Semver](https://docs.npmjs.com/about-semantic-versioning)
+
 License
 -------
 >Copyright (c) [2018 - 2025] [Objektwerks]
