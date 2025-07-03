@@ -3,7 +3,7 @@
     <timestamp key="timeStamp" datePattern="yyyyMMdd'T'HHmm"/>
     <appender name="file" class="ch.qos.logback.core.FileAppender">
         <file>${HOME}/.homeschooler/logs/log.${timeStamp}.txt</file>
-        <append>true</append>
+        <append>false</append>
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
