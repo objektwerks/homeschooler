@@ -90,7 +90,7 @@ NPM Versioning
 
 NPM Registry
 ------------
->Homeschool is deployed to: https://www.npmjs.com/package/homeschool
+>Homeschooler is deployed to: https://www.npmjs.com/package/homeschooler
 
 License
 -------
