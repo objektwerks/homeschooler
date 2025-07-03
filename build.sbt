@@ -1,4 +1,4 @@
-name := "homeschool"
+name := "homeschooler"
 organization := "objektwerks"
 version := "9.0.0"
 scalaVersion := "3.7.2-RC1"
