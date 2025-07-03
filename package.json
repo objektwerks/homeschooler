@@ -17,7 +17,7 @@
         "jar": ".assembly/homeschooler-9.0.0.jar",
         "javafx": true,
         "javafxVersion": "24.0.1",
-        "title": "Homeschool"
+        "title": "Homeschooler"
     },
     "dependencies": {
         "command-exists-promise": "^2.0.2",
