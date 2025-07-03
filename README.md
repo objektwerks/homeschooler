@@ -82,7 +82,7 @@ jDeploy Issues
     1. See: [Github Solution](https://github.com/shannah/jdeploy/issues/74)
 2. ***macOS app icon*** not rendered correctly in Dock and Launchpad.
     1. Ensure app icon ( ./icon.png + ./src/main/resources/image/icon.png ) is at least 256x256. 512x512 is recommended.
-    2. See objektwerks.ui.App stage.icons, Taskbar and Toolkit code for details.
+    2. See objektwerks.App stage.icons, Taskbar and Toolkit code for details.
 
 NPM Versioning
 --------------
