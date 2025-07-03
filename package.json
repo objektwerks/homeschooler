@@ -10,11 +10,11 @@
         "type": "git",
         "url": "git+https://github.com/objektwerks/homeschooler.git"
     },
-    "version": "12.0.0",
+    "version": "13.0.0",
     "jdeploy": {
         "jdk": false,
         "javaVersion": "24",
-        "jar": ".assembly/homeschooler-12.0.0.jar",
+        "jar": ".assembly/homeschooler-13.0.0.jar",
         "javafx": true,
         "javafxVersion": "24.0.1",
         "title": "Homeschooler"
