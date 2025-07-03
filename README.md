@@ -1,6 +1,6 @@
 Homeschooler
 ------------
->Homeschool app using ScalaFx, Slick, H2, Ox and Scala 3.
+>Homeschool app using ScalaFx, Slick, H2, Ox, jDeploy and Scala 3.
 
 Install
 -------
