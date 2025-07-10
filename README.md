@@ -52,7 +52,7 @@ Assembly
 
 Execute
 -------
-1. java -jar .assembly/homeschooler-13.0.0.jar ( or double-click executable jar )
+1. java -jar .assembly/homeschooler-14.0.0.jar ( or double-click executable jar )
 
 Deploy
 ------
