@@ -11,11 +11,9 @@ final class Context(config: Config):
   val width = config.getInt("width")
 
   val menu = config.getString("menu")
-
   val about = config.getString("about")
   val headerText = config.getString("headerText")
   val contentText = config.getString("contentText")
-
   val exit = config.getString("exit")
 
   val started = config.getString("started")
