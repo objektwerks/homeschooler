@@ -30,8 +30,7 @@ object App extends JFXApp3 with LazyLogging:
     if Taskbar.isTaskbarSupported() then
       val taskbar = Taskbar.getTaskbar()
       if taskbar.isSupported(Feature.ICON_IMAGE) then
-        val defaultToolkit = Toolkit.getDefaultToolkit()
-        val appIcon = defaultToolkit.getImage(getClass().getResource("/images/icon.png"))
+        val appIcon = Toolkit.getDefaultToolkit.getImage(this.getClass().getResource("/images/icon.png"))
         taskbar.setIconImage(appIcon)
 
     model.listStudents()
