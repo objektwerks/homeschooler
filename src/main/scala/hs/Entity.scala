@@ -15,7 +15,7 @@ sealed trait Entity:
 
 final case class Student(id: Int = 0,
                          name: String = "",
-                         born: String = LocalDate.now.minusYears(7).toString) extends Entity
+                         born: String = LocalDate.now.minusYears(7).toString) extends Entity derives CanEqual
 
 final case class Grade(id: Int = 0,
                        studentid: Int,
