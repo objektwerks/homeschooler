@@ -34,4 +34,4 @@ final case class Assignment(id: Int = 0,
                             task: String = "",
                             assigned: String = LocalDate.now.toString,
                             completed: String = LocalDate.now.toString,
-                            score: Double = 50.0) extends Entity
+                            score: Double = 50.0) extends Entity derives CanEqual
