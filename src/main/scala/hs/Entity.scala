@@ -21,7 +21,7 @@ final case class Grade(id: Int = 0,
                        studentid: Int,
                        year: String = "",
                        started: String = LocalDate.now.toString,
-                       completed: String = LocalDate.now.plusMonths(6).toString) extends Entity
+                       completed: String = LocalDate.now.plusMonths(6).toString) extends Entity derives CanEqual
 
 final case class Course(id: Int = 0,
                         gradeid: Int,
