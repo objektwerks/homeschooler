@@ -1,7 +1,7 @@
 name := "homeschooler"
 organization := "objektwerks"
 version := "16.0.0"
-scalaVersion := "3.8.2-RC1"
+scalaVersion := "3.8.2-RC2"
 libraryDependencies ++= {
   val slickVersion = "3.5.1"
   Seq(
